@@ -237,6 +237,66 @@ canvas.micro.sq { max-width: 620px; margin: 0 auto; }
 .lycard p { margin: 4px 0; font-size: 13px; }
 .formula { margin: 10px 0; padding: 10px 12px; border-left: 3px solid var(--accent); background: #e3b34111; font: 13px var(--f-mono); overflow-x: auto; }
 .ykseg { font: 700 40px var(--f-mono); } .ykseg2 { font: 700 24px var(--f-mono); }
+
+/* ---- 시나리오 실습 (MiniFab형) ---- */
+body.labmode .shell { grid-template-columns: 190px minmax(0, 1fr) 330px; }
+@media (max-width: 1180px) { body.labmode .shell { grid-template-columns: 180px minmax(0, 1fr); } }
+@media (max-width: 760px) { body.labmode .shell { grid-template-columns: minmax(0, 1fr); } }
+.lab-hero { padding: 22px 24px; border-radius: 12px; background: radial-gradient(120% 140% at 0% 0%, #1d3263 0%, #0d1424 60%); border: 1px solid #22345e; }
+.lab-hero small, .lab-top small, .lspec small, .ltut small, .lpar small, .concl small { font: 600 11px var(--f-mono); letter-spacing: .1em; color: #4cc9f0; display: block; }
+.lab-hero h1 { margin: 6px 0 4px; } .lab-hero p { margin: 0; color: var(--mut); }
+.scen-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.scen { position: relative; padding: 16px; border-radius: 10px; background: linear-gradient(180deg, #141c2c, #10151f); border: 1px solid #263450; display: flex; flex-direction: column; gap: 8px; }
+.scen:hover { border-color: #4cc9f0; } .scen h3 { color: var(--fg); text-transform: none; letter-spacing: 0; font-size: 16px; margin: 0; } .scen p { margin: 0; font-size: 13px; color: var(--mut); }
+.stag { align-self: flex-start; font: 600 10px var(--f-mono); padding: 2px 8px; border-radius: 10px; background: #f8514922; color: #ff7b72; border: 1px solid #f8514955; }
+.smini { display: flex; gap: 12px; font: 12px var(--f-mono); color: var(--mut); } .smini b { color: var(--accent); }
+.lab-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 14px; border-radius: 10px; background: #0e1626; border: 1px solid #22345e; }
+.lab-top b { font-size: 15px; } .btn.sm { padding: 5px 10px; font-size: 12px; }
+.lab-steps { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 4px; }
+.ls { flex: 1 0 auto; min-width: 46px; display: flex; align-items: center; gap: 6px; padding: 6px 9px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); font-size: 11px; cursor: pointer; color: var(--mut); }
+.ls i { font: 700 11px var(--f-mono); font-style: normal; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: #1f2733; color: var(--fg); }
+.ls span { white-space: nowrap; max-width: 120px; overflow: hidden; text-overflow: ellipsis; }
+.ls.done i { background: var(--ok); color: #04130a; } .ls.on { border-color: #ff5a4a; color: var(--fg); } .ls.on i { background: #ff5a4a; }
+.lab-head .stepno { font: 600 12px var(--f-mono); color: #ff6b5b; letter-spacing: .06em; } .lab-head h2 { font-size: 24px; margin: 2px 0 0; }
+.lab-stage { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid #22345e; background: #0a1020; aspect-ratio: 16 / 9; }
+.lab-stage svg, .lab-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.eqt { font: 600 18px var(--f-mono); letter-spacing: .25em; fill: #cfd8ea; } .eqs { font: 11px var(--f-mono); letter-spacing: .12em; fill: #6f82a8; }
+.seg7 { font-family: var(--f-mono); font-weight: 700; } .seglab { font: 9px var(--f-mono); fill: #8a97a5; letter-spacing: .08em; }
+.eqlab { font: 600 14px var(--f-ui); fill: #8a97a5; } .eqlab.on { fill: #ffd34d; } .eqwarn { font: 600 12px var(--f-ui); fill: #ff7b72; }
+.lcd2 text { font: 11px var(--f-mono); fill: #e8eeff; }
+.mon, .trace, .sticky { position: absolute; border-radius: 8px; font-size: 12px; }
+.mon { left: 2.5%; top: 16%; width: 21%; min-width: 150px; padding: 8px 10px; background: #0b111ccc; border: 1px solid #2b3a5c; backdrop-filter: blur(3px); }
+.mon small, .trace small { font: 10px var(--f-mono); color: #6f82a8; letter-spacing: .12em; } .mon > b { display: block; font: 700 13px var(--f-mono); margin: 2px 0 4px; color: #ff6b5b; }
+.mon div { display: flex; justify-content: space-between; font: 11px var(--f-mono); color: var(--mut); } .mon div b { color: #ff8a7a; }
+.mon i { display: block; height: 5px; border-radius: 3px; margin-top: 6px; background: linear-gradient(90deg, #ff5a4a var(--p), #283246 var(--p)); }
+.trace { right: 2.5%; top: 16%; width: 24%; min-width: 160px; padding: 8px 10px; background: #0b111ccc; border: 1px solid #2b3a5c; }
+.trace svg { position: static; width: 100%; height: auto; }
+.sticky { right: 2.5%; bottom: 9%; width: 26%; min-width: 170px; padding: 10px 12px; background: #fff3a8; color: #3a3420; transform: rotate(-1.5deg); box-shadow: 0 10px 22px #0008; }
+.sticky b { font-size: 12px; } .sticky p { margin: 4px 0 0; font-size: 12px; } .sticky .tip { color: #8a5a00; border-top: 1px dashed #c9b260; padding-top: 4px; }
+.lstat { position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 14px; font: 12px var(--f-mono); color: #ff8a7a; background: linear-gradient(0deg, #05080ecc, transparent); }
+.lscreen { position: absolute; left: 18.5%; top: 21%; width: 42%; height: 54%; padding: 4px; overflow: hidden; }
+.scr-idle { height: 100%; display: grid; place-items: center; font: 14px var(--f-mono); color: #49e07a; } .scr-kv { padding: 10px; }
+.lspec h3 { text-transform: none; letter-spacing: 0; color: var(--fg); font-size: 16px; margin: 4px 0; }
+.lspec small { color: #ff6b5b !important; } .ltut b { display: block; margin: 4px 0 6px; font-size: 15px; } .ltut p { font-size: 13px; margin: 6px 0; }
+.ltut .std u { text-decoration-color: #ffd34d; text-decoration-thickness: 2px; color: #ffd34d; }
+.lp { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.lp em { display: block; font: normal 10px var(--f-mono); color: #3fb950; } .lp.bad em { color: var(--bad); } .lp.bad input { border-color: var(--bad); }
+.lpi { display: flex; align-items: center; gap: 4px; } .lpi i { font-style: normal; font-size: 11px; color: var(--mut); }
+.lp input[type=number], .lp select { width: 92px; padding: 5px 6px; background: #0b111c; border: 1px solid #2b3a5c; border-radius: 4px; color: var(--fg); }
+.btn.wide { width: 100%; margin-top: 8px; padding: 10px; }
+.kpis2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; } .kpis2 div, .kt { padding: 10px 12px; border-radius: 8px; background: var(--panel2); border: 1px solid var(--line); }
+.kpis2 small, .kt small { display: block; font-size: 11px; color: var(--mut); } .kpis2 b { font: 700 18px var(--f-mono); color: var(--accent); }
+.concl { padding: 16px 18px; border-radius: 10px; border: 1px solid; } .concl h2 { margin: 4px 0 0; font-size: 19px; }
+.concl.ok { background: #3fb95014; border-color: #3fb95066; } .concl.warn { background: #d2992214; border-color: #d2992266; } .concl.bad { background: #f8514914; border-color: #f8514966; }
+.kpis3 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; } @media (max-width: 700px) { .kpis3 { grid-template-columns: 1fr 1fr; } }
+.kt b { display: block; font: 700 24px var(--f-mono); color: var(--fg); } .kt span { font-size: 11px; color: var(--mut); }
+.rmap { width: 100%; max-width: 360px; display: block; margin: 0 auto; }
+.legend2 { display: flex; gap: 12px; justify-content: center; font-size: 12px; margin-top: 6px; } .legend2 span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; }
+.legend2 .g::before { background: #3fb950; } .legend2 .r::before { background: #f85149; } .legend2 .y::before { background: #d29922; } .legend2 .b::before { background: #58a6ff; }
+tr.f-bad td:first-child { color: var(--bad); } tr.f-warn td:first-child { color: var(--warn); } tr.f-ok td:first-child { color: var(--ok); }
+.col { display: flex; flex-direction: column; gap: 6px; }
+.concl p { margin: 6px 0 0; color: var(--fg); opacity: .85; font-size: 14px; }
+.lab-stage.t-tester .trace { display: none; } .lab-stage.t-tester .mon { top: auto; bottom: 9%; }
 </style>
 <header class="top">
   <div class="logo"><i></i>BTO FAB</div>
@@ -521,7 +581,7 @@ const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
 // 기본값 = 우리 실제 레시피 (BTO: Al-Arjan 2016 1/5 배합, 11/11 보고서·실험 일정표)
 const DEFAULT_LOT = {
-  structure: "MFBM", coats: 3,
+  structure: "MFBM", coats: 2,
   baT: 60, stirRpm: 300, ageH: 24,
   bathT: 60, bathMin: 30, conc: 0.28, filter: true, dilution: "없음", sonicMin: 0,
   cleanAce: true, cleanIpa: true, cleanBoil: true, cleanSC1: true, cleanRinse: true, sc1Order: "정순", sc1Min: 10,
@@ -556,7 +616,7 @@ const SKILLS = {
   recipe: ["장비 레시피(PLC) 작성", "스핀코터·퍼니스 시퀀스와 인터록 설정", "장비사 FSE/CE: 레시피·인터록 셋업"],
   physics: ["공정→물성 인과 해석", "두께·결정립·2차상이 C·Pr·Ec를 바꾸는 이유 설명", "공정 엔지니어: 공정 변수와 특성 연결"],
   contact: ["프로브 접촉 판정", "Z 오버드라이브로 open/punch-through 구분", "측정 장비사 AE: 프로빙 트러블슈팅"],
-  baseline: ["측정 경로 분리 진단", "프로브를 띄운 기준선으로 장비 경로와 막 결함 분리", "장비사 AE: 고객 장비 이슈 원인 분리"],
+  baseline: ["측정 경로 분리 진단", "프로브를 띄운 기준선으로 장비 경로와 막 결함 분리", "장비사 AE: 장비 이슈 원인 분리"],
   plc: ["적분시간 트레이드오프", "PLC(적분시간)와 노이즈·측정시간 관계 설정", "측정 장비사 AE: 측정 조건 최적화"],
   yield: ["수율·결함밀도 역산", "패드 수율에서 Poisson 결함밀도 D₀ 계산", "수율/품질 엔지니어"],
   spc: ["SPC·Nelson rule", "관리도로 이상 패드 검출, 재현성(σ) 관리", "양산 공정·품질 엔지니어"],
@@ -677,13 +737,13 @@ STATIONS.brief = {
     stage.innerHTML = `
     <div class="hero">
       <div class="eyebrow">LOT KMU-BTO · 졸-겔 BaTiO₃ 강유전 커패시터</div>
-      <h1>시편 제작 → 전기적 측정 → 수율 산출 → 불량 원인 분석 → 고객 품질 대응</h1>
+      <h1>시편 제작 → 전기적 측정 → 수율 산출 → 불량 원인 분석 → 메모리 특성 예측</h1>
       <p class="lead">기판 세척~Pt 패드 공정 조건 입력 → 막 두께·결정립·결함 산출 → 프로브 스테이션 패드별 접촉 → B1500A·4284A 측정. 11/17·11/19 실측 데이터 및 발생 오류(경로 단락, 전류 클리핑, 바이어스 overflow) 반영.</p>
     </div>
     <div class="grid2">
       <div class="card"><h3>구조 · 코팅 횟수</h3>
         <div class="seg" id="seg-struct">${["MFM", "MFBM", "TiO2"].map(s => `<button data-s="${s}" class="${S.lot.structure === s ? "on" : ""}">${{ MFM: "MFM  Pt/BTO/Pt", MFBM: "MFBM  Pt/TiO₂/BTO/Pt", TiO2: "TiO₂ 단독 (예비 열처리·XRD)" }[s]}</button>`).join("")}</div>
-        <div class="seg" id="seg-coat">${[1, 2, 3, 4, 5].map(n => `<button data-n="${n}" class="${S.lot.coats === n ? "on" : ""}">${n}회</button>`).join("")}</div>
+        <div class="seg" id="seg-coat">${[2, 4, 6, 8].map(n => `<button data-n="${n}" class="${S.lot.coats === n ? "on" : ""}">${n}회</button>`).join("")}</div>
         <div id="brief-kv"></div>
       </div>
       <div class="card"><h3>모드</h3>
@@ -1461,7 +1521,7 @@ STATIONS.yield = {
         Chart.draw($("#spc"), { h: 240, xlabel: "측정 순서", ylabel: "C (nF)", series: [{ pts: cs.map((c, i) => [i + 1, c, flags[i] ? "#f85149" : null]), color: "#4cc9f0", mode: "both", size: 3 }],
           hlines: [{ v: mu, color: "#8b949e", label: "CL" }, { v: mu + 3 * sd, color: "#f85149", label: "UCL +3σ" }, { v: mu - 3 * sd, color: "#f85149", label: "LCL −3σ" }] });
         const spec = f.C * 1e9, cpk = Math.min(spec * 1.2 - mu, mu - spec * 0.8) / (3 * sd);
-        $("#spcmsg").innerHTML = `<p class="mut">σ = ${sd.toFixed(3)} nF (변동계수 ${(100 * sd / mu).toFixed(1)}%) · 고객 규격 예상 C ±20% 기준 Cpk = <b>${cpk.toFixed(2)}</b> ${cpk >= 1.33 ? "(양산 수준)" : "(1.33 미만: 개선 필요)"} · Nelson 위반 ${flags.filter(Boolean).length}점</p>`;
+        $("#spcmsg").innerHTML = `<p class="mut">σ = ${sd.toFixed(3)} nF (변동계수 ${(100 * sd / mu).toFixed(1)}%) · 규격 C ±20% 기준 Cpk = <b>${cpk.toFixed(2)}</b> ${cpk >= 1.33 ? "(양산 수준)" : "(1.33 미만: 개선 필요)"} · Nelson 위반 ${flags.filter(Boolean).length}점</p>`;
       } else $("#spc").innerHTML = `<p class="mut">정상 패드 C 값 4개 이상 확보 시 관리도 표시.</p>`;
     };
     draw();
@@ -1607,8 +1667,7 @@ STATIONS.ref = {
       <tr><td>측정 조건 최적화</td><td>적분시간·레인지·주파수 트레이드오프 결정</td><td>EasyEXPERT PLC, Irange, Osc, Integration</td></tr>
       <tr><td>트러블슈팅</td><td>장비 경로 문제와 시료 문제를 분리</td><td>프로브 띄운 기준선 → 경로 단락 발견 → 지그 교체</td></tr>
       <tr><td>데이터 역추적</td><td>이상값의 원인을 노이즈·접촉·결함까지 추적</td><td>현미경 결함 위치 ↔ 쇼트 패드 대응</td></tr>
-      <tr><td>수율·SPC</td><td>D₀, Pareto, 관리도, Cpk</td><td>수율·SPC 단계</td></tr>
-      <tr><td>고객 대응</td><td>공정 이슈의 데이터 기반 리포트화, 근거 제시</td><td>고객 품질 리포트·질문 대응</td></tr></table></div>`;
+      <tr><td>수율·SPC</td><td>D₀, Pareto, 관리도, Cpk</td><td>수율·SPC 단계</td></tr></table></div>`;
     const ts = Array.from({ length: 40 }, (_, k) => 40 + k * 15);
     const epsOf = (t, dl) => t / (t / f.epsBulk + dl);
     Chart.draw($("#g1"), { h: 250, xlabel: "BTO 두께 (nm)", ylabel: "유효 εr", series: [
@@ -2138,7 +2197,7 @@ const SPLIT_F = [
   ["dil", "졸 희석 (2-ME)", [["0", "없음", { dilution: "없음" }], ["11", "1:1", { dilution: "1:1" }], ["23", "2:3", { dilution: "2:3" }]]],
   ["rpm", "본 회전", [["5000", "5000 rpm", { rpm: 5000 }], ["4500", "4500 rpm", { rpm: 4500 }], ["3000", "3000 rpm", { rpm: 3000 }]]],
   ["age", "숙성", [["24", "24 h", { ageH: 24 }], ["6", "6 h", { ageH: 6 }]]],
-  ["coats", "BTO 코팅 횟수", [["3", "3회", { coats: 3 }], ["2", "2회", { coats: 2 }], ["5", "5회", { coats: 5 }]]],
+  ["coats", "BTO 코팅 횟수", [["2", "2회", { coats: 2 }], ["4", "4회", { coats: 4 }], ["6", "6회", { coats: 6 }], ["8", "8회", { coats: 8 }]]],
   ["hp", "하드베이크", [["150", "150 °C", { hpT: 150 }], ["230", "230 °C", { hpT: 230 }]]],
   ["rh", "후드 습도", [["38", "38 %RH", { rh: 38 }], ["55", "55 %RH", { rh: 55 }]]],
   ["ramp", "승온", [["1", "1 °C/min", { ramp: 1 }], ["5", "5 °C/min", { ramp: 5 }]]],
@@ -2243,7 +2302,7 @@ function pipeSteps() {
   const L = S.lot, s = ["기판 세척 (유기 → SC-1 → DI)"];
   if (L.structure !== "MFM") s.push(`UV (TiO₂ 전) → TiO₂ 코팅 ×${L.tio2Coats} · 건조`, `TiO₂ 열처리 ${L.tio2T} °C ${L.tio2Min}분 (${L.tio2Ramp} °C/min)`);
   if (L.structure === "TiO2") { s.push("XRD 상 확인 (anatase)"); return s; }
-  s.push(`UV (BTO 전) → BTO 코팅 ×${L.coats} · 건조`, `BTO 최종 열처리 ${L.annealT} °C ${L.holdMin}분`, "Pt 상부전극 → 현미경 · XRD · SEM", "프로빙 수율 테스트 → B1500A 측정", "수율·SPC → 메모리 특성 예측 → 고객 리포트");
+  s.push(`UV (BTO 전) → BTO 코팅 ×${L.coats} · 건조`, `BTO 최종 열처리 ${L.annealT} °C ${L.holdMin}분`, "Pt 상부전극 → 현미경 · XRD · SEM", "프로빙 수율 테스트 → B1500A 측정", "수율·SPC → 메모리 특성 예측 → 결과 분석");
   return s;
 }
 function pipeBar() {
@@ -2373,7 +2432,7 @@ STATIONS.spin = {
     stage.innerHTML = `<div class="sthead"><h2>스핀코팅 파이프라인</h2><div class="seg" id="lysel">${layers().map(x => `<button data-l="${x}" class="${x === ly ? "on" : ""}">${LN(x)} 층</button>`).join("")}</div></div>${pipeBar()}
       <div class="grid2"><div class="equip" id="ace"></div><div class="card"><h3>${LN(ly)} 코팅 ${p.coat}/${n}</h3>
         <div class="row"><span class="lamp on">VACUUM</span><span class="lamp on">LID</span><span class="lamp ${L.rh <= PHY.K.rhLimit.v ? "on" : "warn"}">RH ${L.rh}%</span></div>
-        ${ly === "BTO" ? ctl("coats", "BTO 코팅 횟수", 1, 6, 1, "회", "실측") : ctl("tio2Coats", "TiO₂ 코팅 횟수", 1, 3, 1, "회", "실측")}
+        ${ly === "BTO" ? ctl("coats", "BTO 코팅 횟수", 2, 8, 2, "회", "실측") : ctl("tio2Coats", "TiO₂ 코팅 횟수", 1, 3, 1, "회", "실측")}
         <div class="row"><button class="btn" data-pr="99">Prog 99 (1000/5.0/3.0 → 5000/5.0/20.0)</button></div>
         <button class="btn primary" id="spin-run" ${canCoat ? "" : "disabled"}>코팅 ${p.coat + 1}회차 START</button>
         <p class="mut" id="spin-hint">${!canCoat ? (p.ann ? "열처리 완료 층" : ly === "BTO" && layers().includes("TiO2") && !P.TiO2.ann ? "선행: TiO₂ 열처리 (MFBM)" : p.coat >= n ? "코팅 완료 → 50 열처리" : "건조 대기 → 40 건조") : "디스펜스 → 1단 퍼짐 → 2단 박막화"}</p><div id="spin-out"></div></div></div>
@@ -2648,7 +2707,7 @@ STATIONS.memory = {
     stage.innerHTML = `<div class="sthead"><h2>메모리 특성 예측</h2><span class="mut">P–E · PUND 측정 세트 → 2Pr·Ec 도출 → 쓰기·저장 성능 → 상용 메모리 비교 → 공정 개선 방향 ${tag("모델")}</span></div>
       <div class="card"><div class="grid4">
         <label class="ctl"><span class="cl">구조</span><select id="m-st">${["MFM", "MFBM"].map(x => `<option ${M.struct === x ? "selected" : ""}>${x}</option>`).join("")}</select></label>
-        <label class="ctl"><span class="cl">BTO 코팅</span><select id="m-co">${[1, 2, 3, 4, 5].map(x => `<option ${M.coats === x ? "selected" : ""}>${x}</option>`).join("")}</select></label>
+        <label class="ctl"><span class="cl">BTO 코팅</span><select id="m-co">${[2, 4, 6, 8].map(x => `<option ${M.coats === x ? "selected" : ""}>${x}</option>`).join("")}</select></label>
         <label class="ctl"><span class="cl">BTO 열처리</span><select id="m-pr">${["개선", "초기"].map(x => `<option value="${x}" ${M.preset === x ? "selected" : ""}>${x === "개선" ? "750 °C 3단 램프" : "700 °C 1 °C/min"}</option>`).join("")}</select></label>
         <label class="ctl"><span class="cl">PUND 펄스 Vp (V)</span><input type="number" id="m-vp" value="${M.Vp}" step="0.5" min="0.5" max="10"></label></div></div>
       <div class="card"><h3>① 측정 세트 구성</h3><div class="grid3">
@@ -2679,12 +2738,12 @@ STATIONS.memory = {
     const Q = PHY.stackQV(V, f).Q.slice(n), Vv = V.slice(n), qm = (Math.max(...Q) + Math.min(...Q)) / 2;
     Chart.draw($("#m-pe"), { h: 190, xlabel: "V (V)", ylabel: "P (µC/cm²)", series: [{ pts: Vv.map((v, q) => [v, (Q[q] - qm) / A * 1e6]), color: "var(--cyan)", name: `${M.struct}${M.coats}` }] });
     // 개선 경로
-    const sc = [["초기 700 °C · MFM3", { structure: "MFM", coats: 3, ...ANNEAL_PRESET.초기 }], ["개선 750 °C · MFM3", { structure: "MFM", coats: 3, ...ANNEAL_PRESET.개선 }], ["개선 750 °C · MFM2 (박막화)", { structure: "MFM", coats: 2, ...ANNEAL_PRESET.개선 }],
-      ["개선 750 °C · MFBM3 (버퍼)", { structure: "MFBM", coats: 3, ...ANNEAL_PRESET.개선 }], ["800 °C 연장 (외삽)", { structure: "MFM", coats: 3, ...ANNEAL_PRESET.개선, annealT: 800 }]];
+    const sc = [["초기 700 °C · MFM2", { structure: "MFM", coats: 2, ...ANNEAL_PRESET.초기 }], ["개선 750 °C · MFM2", { structure: "MFM", coats: 2, ...ANNEAL_PRESET.개선 }], ["개선 750 °C · MFM4 (후막화)", { structure: "MFM", coats: 4, ...ANNEAL_PRESET.개선 }],
+      ["개선 750 °C · MFBM2 (버퍼)", { structure: "MFBM", coats: 2, ...ANNEAL_PRESET.개선 }], ["800 °C 연장 (외삽)", { structure: "MFM", coats: 2, ...ANNEAL_PRESET.개선, annealT: 800 }]];
     const rows = sc.map(([nm, o]) => { const ff = PHY.solve({ ...S.lot, ...o }), s2 = pundSim(ff, M.Vp, M.tw * 1e-6), tp = ((s2.Q.P - s2.Q.U) - (s2.Q.N - s2.Q.D)) / 2 / A * 1e6, mm = met(ff, tp); return { nm, ff, tp, mm }; });
     Chart.draw($("#m-bar"), { h: 230, xlabel: "공정 조건", ylabel: "2Pr (µC/cm²)", series: [{ pts: rows.map((r, i) => [i + 1, r.tp]), color: "var(--cyan)", mode: "markers", size: 8, name: "2Pr (모델)" }], bands: [{ y: [1.8, 6], color: "#e3b341", opacity: 0.12 }], notes: [{ px: 0.02, py: 0.08, text: "노란 띠: 졸-겔 문헌 2Pr 1.8~6 µC/cm²", anchor: "start", color: "#e3b341" }] });
     $("#m-path").innerHTML = `<table class="plc"><tr><th>#</th><th>조건</th><th>결정립</th><th>2Pr</th><th>Vw</th><th>ΔV@10년</th><th>1 Mb 수율</th></tr>${rows.map((r, i) => `<tr><td>${i + 1}</td><td>${r.nm}</td><td>${fmt(r.ff.grain, 1)} nm</td><td>${fmt(r.tp, 2)}</td><td>${fmt(r.mm.Vw, 1)} V</td><td>${fmt(r.mm.dV10 * 1e3, 0)} mV</td><td>${(100 * r.mm.Ycell).toFixed(1)}%</td></tr>`).join("")}</table>
-      <ul class="steps sm"><li>열처리 온도 ↑ → 결정립 ↑ (크기 효과 완화) · BaCO₃ ↓ → 2Pr ↑, 읽기 ΔV ↑</li><li>박막화 → 쓰기 전압 ↓ (Ec는 t^(−2/3)로 증가, 전압은 감소) · 핀홀 위험 ↑</li><li>TiO₂ 버퍼 → 누설 ↓, 전압 분담으로 쓰기 전압 ↑ · 2Pr ↓</li><li>셀 축소 시 수율은 D₀에 지배 → 세척·UV·습도 관리가 메모리 수율의 핵심 변수</li></ul>`;
+      <ul class="steps sm"><li>열처리 온도 ↑ → 결정립 ↑ (크기 효과 완화) · BaCO₃ ↓ → 2Pr ↑, 읽기 ΔV ↑</li><li>후막화 → 핀홀 감소 · 쓰기 전압 ↑ · 단일 결정화 시 크랙 위험 ↑</li><li>TiO₂ 버퍼 → 누설 ↓, 전압 분담으로 쓰기 전압 ↑ · 2Pr ↓</li><li>셀 축소 시 수율은 D₀에 지배 → 세척·UV·습도 관리가 메모리 수율의 핵심 변수</li></ul>`;
     const bind = (id, key, conv = Number) => { $(id).onchange = e => { M[key] = conv(e.target.value); go("memory"); }; };
     bind("#m-st", "struct", String); bind("#m-co", "coats"); bind("#m-pr", "preset", String); bind("#m-vp", "Vp"); bind("#m-ar", "area"); bind("#m-m", "m");
     earn("memory"); stepDone("memory", `메모리 특성 예측: 2Pr ${fmt(twoPr, 2)} µC/cm², Vw ${fmt(me.Vw, 1)} V`);
@@ -2702,5 +2761,486 @@ STATIONS.xrd.render = function (stage, side) { _xrdR.call(this, stage, side); if
 const _insp2 = STATIONS.inspect.render;
 STATIONS.inspect.render = function (stage, side) { _insp2.call(this, stage, side); $$("figure.ph", side).forEach(x => x.remove()); side.insertAdjacentHTML("beforeend", `<div class="thumbs">${photo("sample_blue", "열처리 후 시편")}${photo("probe_micro", "현미경 관찰")}</div>`); };
 
+// init()은 app8.js 끝에서 호출
+
+/* =====================================================================
+   시나리오 실습 (MiniFab형 공정 센터)
+   시나리오 선택 → STEP별 장비 화면에서 레시피 입력·실행 → 결과 분석
+   ===================================================================== */
+const LAB_COATS = [2, 4, 6, 8];
+const LAB_SCEN = [
+  { id: "std", name: "팀 표준 레시피", tag: "기준", d: "MFM 2회 · 750 °C 3단 램프 · UV O · 전체 세척", o: { structure: "MFM", coats: 2 } },
+  { id: "mfm4", name: "BTO 4회 코팅", tag: "두께", d: "MFM 4회 (약 175 nm) · 750 °C", o: { structure: "MFM", coats: 4 } },
+  { id: "mfm8", name: "BTO 8회 코팅", tag: "두께", d: "MFM 8회 (약 350 nm) · 단일 최종 열처리", o: { structure: "MFM", coats: 8 } },
+  { id: "mfbm", name: "TiO₂ 버퍼 (MFBM)", tag: "구조", d: "TiO₂ 1회 → 450 °C → BTO 2회 → 750 °C", o: { structure: "MFBM", coats: 2 } },
+  { id: "old", name: "초기 열처리 조건", tag: "열처리", d: "700 °C 60분 · 1 °C/min 단일 램프", o: { structure: "MFM", coats: 2, annealPreset: "초기", annealT: 700, holdMin: 60, ramp: 1, rampA: 1, rampB: 1 } },
+  { id: "env", name: "UV 미처리 · 고습", tag: "환경", d: "UV X · 후드 RH 55 %", o: { structure: "MFM", coats: 2, uvBTO: false, uv: false, rh: 55 } },
+  { id: "clean", name: "세척 생략", tag: "세척", d: "아세톤만 · SC-1·IPA·린스 생략", o: { structure: "MFM", coats: 2, cleanIpa: false, cleanBoil: false, cleanSC1: false, cleanRinse: false } },
+  { id: "tio2raw", name: "TiO₂ 원액 코팅", tag: "졸", d: "MFBM · TiO₂ 희석 없음 (0.338 M)", o: { structure: "MFBM", coats: 2, tio2SolMl: 2, tio2MeMl: 0, tio2Sonic: 0 } },
+  { id: "replay", name: "11/19 측정 재현", tag: "측정", d: "MFBM 2회 · 4284A·WGFMU 경로 단락", o: { structure: "MFBM", coats: 2 }, path: true },
+];
+function labS() { return S.lab || (S.lab = { scen: null, i: 0, ran: {}, busy: false, hist: [] }); }
+const labAnn = () => S.lot.annealPreset === "초기" ? "700 °C · 1 °C/min" : `${S.lot.annealT} °C · 3단 램프`;
+
+// ------------------------------------------------------------------ SVG 공통
+const EQDEF = `<defs>
+  <radialGradient id="gBg" cx="50%" cy="35%" r="75%"><stop offset="0" stop-color="#1b2a4a"/><stop offset="1" stop-color="#0a1020"/></radialGradient>
+  <linearGradient id="gFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#101a30"/><stop offset="1" stop-color="#070b14"/></linearGradient>
+  <linearGradient id="gBlue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f63e0"/><stop offset=".55" stop-color="#2a45b8"/><stop offset="1" stop-color="#1a2d80"/></linearGradient>
+  <linearGradient id="gPurple" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a5fc4"/><stop offset="1" stop-color="#33368a"/></linearGradient>
+  <linearGradient id="gMetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4e8ee"/><stop offset=".5" stop-color="#b5bcc6"/><stop offset="1" stop-color="#7d8692"/></linearGradient>
+  <linearGradient id="gSteel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5c6470"/><stop offset=".5" stop-color="#9aa3ae"/><stop offset="1" stop-color="#5c6470"/></linearGradient>
+  <linearGradient id="gGray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9ebee"/><stop offset="1" stop-color="#b9bec6"/></linearGradient>
+  <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(200,230,255,.25)"/><stop offset=".3" stop-color="rgba(255,255,255,.5)"/><stop offset="1" stop-color="rgba(200,230,255,.15)"/></linearGradient>
+  <radialGradient id="gPlate" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f7f4f2"/><stop offset="1" stop-color="#cfcbc8"/></radialGradient>
+  <filter id="fGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="fShadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#000" flood-opacity=".55"/></filter>
+</defs>`;
+const bgScene = (lab, sub) => `<rect width="960" height="540" fill="url(#gBg)"/><path d="M0 400 H960 V540 H0z" fill="url(#gFloor)"/>
+  ${Array.from({ length: 13 }, (_, i) => `<path d="M${i * 80} 400 L${480 + (i * 80 - 480) * 2.2} 540" stroke="#1a2744" stroke-width="1"/>`).join("")}<path d="M0 400 H960" stroke="#22345e"/>
+  <text x="40" y="44" class="eqt">${lab}</text><text x="40" y="64" class="eqs">${sub}</text>`;
+const seg = (x, y, w, h, val, col = "#ff4d3d", lab = "", set = "") => `<g><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="5" fill="#07090c" stroke="#2a2f3a"/>
+  <text x="${x + w - 10}" y="${y + h * 0.74}" text-anchor="end" class="seg7" fill="${col}" style="font-size:${h * 0.62}px;filter:drop-shadow(0 0 6px ${col})">${val}</text>
+  ${lab ? `<text x="${x + 8}" y="${y + 13}" class="seglab">${lab}</text>` : ""}${set ? `<text x="${x + w - 8}" y="${y + 13}" text-anchor="end" class="seglab">${set}</text>` : ""}</g>`;
+const knob = (x, y, a) => `<g transform="translate(${x},${y})"><circle r="22" fill="url(#gMetal)" stroke="#1d2a5a" stroke-width="3"/><circle r="15" fill="#2b3f8f"/><path d="M0 0 L${14 * Math.cos(a)} ${14 * Math.sin(a)}" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g>`;
+const heatLines = (cx, y, n, w, a) => Array.from({ length: n }, (_, i) => { const x = cx - w / 2 + i * w / (n - 1); return `<path d="M${x} ${y} q8 -18 0 -36 q-8 -18 0 -36 q8 -18 0 -36" stroke="rgba(255,90,90,${a})" stroke-width="2" fill="none"/>`; }).join("");
+
+const EQ = {
+  wet(st) {
+    const names = ["아세톤", "IPA", "DI 끓임", "SC-1", "DI 린스"], cols = ["#e8f1ff", "#eef7ff", "#bfe3ff", "#d6f0ff", "#c8e9ff"];
+    return bgScene("WET BENCH", "Solvent · SC-1 (RCA-1) Cleaning Station") + `
+      <rect x="70" y="330" width="820" height="40" rx="6" fill="url(#gSteel)" filter="url(#fShadow)"/><rect x="70" y="370" width="820" height="36" fill="#3a414b"/>
+      ${names.map((n, i) => { const x = 150 + i * 165, on = st.k === i, hot = (i === 2 || i === 3); const lvl = 70;
+        return `<g><rect x="${x - 55}" y="300" width="110" height="30" rx="5" fill="${hot ? "url(#gBlue)" : "#4a525e"}"/>${hot ? `<ellipse cx="${x}" cy="300" rx="52" ry="8" fill="${on ? `rgba(255,${180 - st.T},${120 - st.T / 2},.9)` : "#cfcbc8"}"/>` : ""}
+          <path d="M${x - 40} 150 V292 q0 8 8 8 h64 q8 0 8 -8 V150" fill="url(#gGlass)" stroke="rgba(255,255,255,.55)" stroke-width="2"/>
+          <rect x="${x - 38}" y="${300 - lvl - 50}" width="76" height="${lvl + 42}" rx="4" fill="${cols[i]}" opacity="${on ? .85 : .45}"/>
+          ${on && st.bub ? Array.from({ length: 14 }, (_, q) => `<circle cx="${x - 30 + (q * 17 + st.f * 7) % 60}" cy="${290 - ((q * 23 + st.f * 9) % 90)}" r="${1.5 + q % 3}" fill="#fff" opacity=".8"/>`).join("") : ""}
+          ${on && hot && st.T > 70 ? heatLines(x, 140, 3, 50, .5) : ""}
+          ${on ? `<g transform="translate(${x + st.sh},${180})"><rect x="-10" y="0" width="20" height="44" fill="#cfd6de" stroke="#7a8794"/><path d="M-4 0 L-14 -120 M4 0 L14 -120" stroke="#c0c6cf" stroke-width="4"/></g>` : ""}
+          <text x="${x}" y="430" text-anchor="middle" class="eqlab ${on ? "on" : ""}">${n}</text>${st.skip?.[i] ? `<text x="${x}" y="450" text-anchor="middle" class="eqwarn">생략</text>` : ""}</g>`; }).join("")}`;
+  },
+  stir(st) {
+    const a = st.ang || 0, liq = st.liq || "rgba(230,190,90,.75)";
+    return bgScene("HOT PLATE STIRRER", `${st.title || "Sol Synthesis"} · Two-neck Flask`) + `
+      <g filter="url(#fShadow)"><path d="M300 330 L660 330 L700 420 L260 420 Z" fill="url(#gBlue)"/><rect x="260" y="420" width="440" height="22" rx="4" fill="#15235f"/>
+      <ellipse cx="480" cy="330" rx="180" ry="20" fill="url(#gPlate)"/></g>
+      ${st.bath ? `<path d="M360 210 V312 q0 14 14 14 h212 q14 0 14 -14 V210" fill="rgba(140,180,220,.25)" stroke="rgba(200,220,240,.5)" stroke-width="2"/>` : ""}
+      <rect x="455" y="80" width="30" height="120" rx="6" fill="url(#gGlass)" stroke="rgba(255,255,255,.5)"/><rect x="520" y="140" width="22" height="70" rx="5" fill="url(#gGlass)" stroke="rgba(255,255,255,.5)" transform="rotate(30 531 175)"/>
+      <circle cx="470" cy="262" r="62" fill="url(#gGlass)" stroke="rgba(255,255,255,.6)" stroke-width="2"/><path d="M412 270 a58 58 0 0 0 116 0 z" fill="${liq}"/>
+      <rect x="452" y="300" width="36" height="8" rx="4" fill="#f2f2f2" transform="rotate(${a} 470 304)"/>
+      ${seg(330, 360, 120, 46, st.rpm + "", "#49e07a", "RPM")}${seg(510, 360, 120, 46, st.T.toFixed(0) + "°", "#ff4d3d", "TEMP")}
+      ${knob(300, 395, a / 40)}${knob(660, 395, a / 60)}`;
+  },
+  uv(st) {
+    return bgScene("UV-OZONE CLEANER", "185 / 254 nm · Surface Activation") + `
+      <g filter="url(#fShadow)"><rect x="250" y="120" width="460" height="280" rx="16" fill="url(#gGray)"/><rect x="280" y="150" width="400" height="190" rx="10" fill="#141824"/>
+      ${[0, 1, 2, 3, 4].map(i => `<rect x="${305 + i * 76}" y="168" width="58" height="12" rx="6" fill="${st.on ? "#c9a4ff" : "#3b3f4a"}" ${st.on ? 'filter="url(#fGlow)"' : ""}/>`).join("")}
+      ${st.on ? `<rect x="282" y="180" width="396" height="150" fill="rgba(170,120,255,${0.08 + 0.06 * Math.sin(st.f / 3)})"/>` : ""}
+      <rect x="430" y="290" width="100" height="40" fill="${st.col || "#cfd3d8"}" stroke="#9aa5b1"/><rect x="290" y="345" width="380" height="40" rx="6" fill="#d5d9de"/></g>
+      ${seg(560, 352, 110, 30, st.tm, "#49e07a")}<circle cx="320" cy="365" r="8" fill="${st.on ? "#49e07a" : "#555"}" ${st.on ? 'filter="url(#fGlow)"' : ""}/><text x="336" y="370" class="eqs" fill="#333">${st.on ? "LAMP ON" : "OFF"}</text>`;
+  },
+  spin(st) {
+    const a = st.ang || 0, c = Math.cos(a), s = Math.sin(a), sq = [[-38, -38], [38, -38], [38, 38], [-38, 38]].map(([x, y]) => [480 + x * c - y * s, 250 + (x * s + y * c) * 0.42]);
+    return bgScene("SPIN COATER ACE-200", `${st.ly} Layer · Coat ${st.coat}/${st.n}`) + `
+      <g filter="url(#fShadow)"><path d="M250 270 L710 270 L740 440 L220 440 Z" fill="url(#gPurple)"/>
+      <ellipse cx="480" cy="270" rx="230" ry="62" fill="#262a5e"/><ellipse cx="480" cy="262" rx="200" ry="52" fill="#141733"/><ellipse cx="480" cy="258" rx="176" ry="44" fill="url(#gSteel)" opacity=".35"/>
+      <ellipse cx="480" cy="256" rx="44" ry="16" fill="#2b2f36"/>
+      <polygon points="${sq.map(p => p.join(",")).join(" ")}" fill="${st.col}" stroke="rgba(255,255,255,.6)"/>
+      ${st.drop > 0 ? `<ellipse cx="480" cy="250" rx="${6 + st.drop * 30}" ry="${3 + st.drop * 12}" fill="rgba(240,210,130,${0.7 - st.drop * 0.4})"/>` : ""}
+      ${st.rpm > 1500 ? Array.from({ length: 10 }, (_, i) => { const q = a * 2 + i * 0.63; return `<circle cx="${480 + Math.cos(q) * 150}" cy="${258 + Math.sin(q) * 38}" r="2" fill="rgba(240,210,130,.7)"/>`; }).join("") : ""}</g>
+      <path d="M480 60 V${st.drop > 0 ? 200 : 140}" stroke="#9aa3ae" stroke-width="6"/>${st.drop > 0 && st.drop < 0.6 ? `<circle cx="480" cy="215" r="5" fill="#f0d282"/>` : ""}
+      <rect x="300" y="330" width="230" height="96" rx="6" fill="#2433c9" stroke="#1a2593"/>
+      <g class="lcd2"><text x="312" y="349">Coding Program  Prog:99</text><text x="312" y="366">No  RPM  Ramp Time</text>
+      <text x="312" y="383">0  ${String(st.p[0]).padStart(5)}  ${st.p[1].toFixed(1)}  ${st.p[2].toFixed(1)}</text><text x="312" y="400">1  ${String(st.p[3]).padStart(5)}  ${st.p[4].toFixed(1)}  ${st.p[5].toFixed(1)}</text><text x="312" y="417">2      0  0.0  0.0</text></g>
+      ${seg(545, 336, 130, 48, Math.round(st.rpm) + "", "#49e07a", "RPM")}${seg(545, 392, 130, 34, st.tm, "#ff4d3d")}`;
+  },
+  plate(st) {
+    const hot = clamp((st.T - 25) / 200, 0, 1);
+    if (st.mat) return bgScene("PRE-DRY · HOME MAT", "약 80 °C Pre-bake") + `
+      <g filter="url(#fShadow)"><ellipse cx="480" cy="360" rx="250" ry="70" fill="#2f5fbf"/><rect x="230" y="250" width="500" height="110" rx="55" fill="url(#gBlue)"/>
+      <rect x="270" y="280" width="40" height="56" rx="18" fill="#ff9d42" filter="url(#fGlow)"/><rect x="400" y="268" width="200" height="74" rx="6" fill="#20242c"/>
+      <rect x="455" y="280" width="90" height="50" fill="${st.col}" stroke="#9aa5b1"/></g>${heatLines(500, 260, 4, 120, hot * 1.5)}
+      ${seg(640, 120, 150, 54, st.T.toFixed(0) + "°", "#ff4d3d", "TEMP")}${seg(640, 184, 150, 40, st.tm, "#49e07a", "TIME")}`;
+    return bgScene("DIGITAL HOT PLATE", "Hard Bake · Precision Bake Station") + `
+      <g filter="url(#fShadow)"><path d="M250 300 L710 300 L750 440 L210 440 Z" fill="url(#gBlue)"/><rect x="210" y="440" width="540" height="18" rx="4" fill="#15235f"/>
+      <ellipse cx="480" cy="300" rx="232" ry="40" fill="url(#gPlate)"/><ellipse cx="480" cy="300" rx="232" ry="40" fill="rgba(255,70,60,${hot * 0.55})"/>
+      <ellipse cx="480" cy="298" rx="${80 + hot * 60}" ry="${14 + hot * 10}" fill="rgba(255,90,80,${hot * 0.6})"/>
+      <polygon points="455,290 505,290 515,302 445,302" fill="${st.col}" stroke="rgba(0,0,0,.4)"/></g>${heatLines(480, 280, 7, 300, hot * 0.9)}
+      <text x="300" y="352" fill="#dfe6ff" font-size="16" letter-spacing="3">BTO FAB</text><text x="300" y="368" fill="#9fb0e8" font-size="9" letter-spacing="2">PRECISION HEATER</text>
+      ${seg(430, 335, 120, 50, st.T.toFixed(0).padStart(4, "0"), "#ff4d3d", "T (°C)", "SET " + st.set)}${seg(570, 335, 110, 50, st.tm, "#ff4d3d", "t", "")}
+      ${knob(268, 400, -0.6 + hot * 2)}${knob(700, 400, st.f / 10)}`;
+  },
+  furnace(st) {
+    const glow = clamp((st.T - 25) / 900, 0, 1);
+    return bgScene("TUBE FURNACE · YOKOGAWA UP351", `${st.ly} Anneal · Air`) + `
+      <g filter="url(#fShadow)"><rect x="90" y="190" width="560" height="190" rx="14" fill="url(#gGray)"/>
+      ${[0, 1, 2].map(i => `<rect x="${120 + i * 175}" y="215" width="150" height="140" rx="8" fill="rgba(255,${150 - glow * 90},40,${0.12 + glow * 0.7})" stroke="#9aa0a8"/>`).join("")}
+      <rect x="40" y="276" width="680" height="22" rx="11" fill="${st.T > 950 ? "rgba(255,110,70,.6)" : "rgba(220,240,255,.35)"}" stroke="rgba(255,255,255,.6)"/>
+      <rect x="${345 + st.off * 14}" y="279" width="50" height="14" rx="3" fill="#efe9dc"/><rect x="${355 + st.off * 14}" y="273" width="30" height="7" fill="${st.col}"/>
+      <rect x="700" y="205" width="170" height="235" rx="10" fill="#c9cdd1"/><rect x="712" y="215" width="146" height="120" rx="6" fill="#1d1f22"/></g>
+      ${seg(720, 222, 130, 48, Math.round(st.T) + "", "#49e07a", "PV")}${seg(720, 276, 130, 34, st.sp + "", "#49e07a", "SP")}
+      <text x="720" y="326" class="seglab">${st.segtxt}</text>
+      ${seg(722, 346, 126, 40, (st.T > 30 ? 40 + st.T * 0.12 : 0).toFixed(0).padStart(3, "0"), "#ff4d3d", "V")}${seg(722, 392, 126, 40, (st.T > 30 ? 2 + st.T * 0.012 : 0).toFixed(1), "#ff4d3d", "A")}`;
+  },
+  sputter(st) {
+    return bgScene("DC SPUTTER · Pt", "Shadow Mask Ø750 µm · Ar") + `
+      <g filter="url(#fShadow)"><rect x="300" y="90" width="360" height="320" rx="30" fill="url(#gSteel)"/><circle cx="480" cy="240" r="110" fill="#11141c" stroke="#c0c6cf" stroke-width="10"/>
+      <ellipse cx="480" cy="175" rx="80" ry="14" fill="#9aa3ae"/>${st.on ? `<ellipse cx="480" cy="235" rx="${70 + 6 * Math.sin(st.f / 2)}" ry="55" fill="rgba(200,110,255,.35)" filter="url(#fGlow)"/>` : ""}
+      <rect x="420" y="300" width="120" height="14" fill="#5a5fc4"/>${Array.from({ length: 6 }, (_, i) => `<circle cx="${430 + i * 20}" cy="296" r="5" fill="${st.prog > i / 6 ? "#e9ecf0" : "#3a3f47"}"/>`).join("")}</g>
+      ${seg(700, 150, 160, 46, st.on ? "120W" : "0W", "#49e07a", "DC POWER")}${seg(700, 206, 160, 46, st.on ? "5.0E-3" : "1.0E-6", "#ff4d3d", "PRESS (Torr)")}`;
+  },
+  tester(st) {
+    return bgScene("KEYSIGHT B1500A · 4284A", "EasyEXPERT · WGFMU") + `
+      <g filter="url(#fShadow)"><rect x="140" y="80" width="680" height="350" rx="12" fill="url(#gGray)"/><rect x="170" y="105" width="420" height="300" rx="6" fill="#0d1117" stroke="#555"/>
+      ${Array.from({ length: 6 }, (_, i) => `<rect x="620" y="${110 + i * 48}" width="170" height="38" rx="4" fill="#3d434d"/><text x="632" y="${134 + i * 48}" fill="#cfd6de" font-size="11">${["HRSMU", "HRSMU", "MPSMU", "WGFMU", "WGFMU", "4284A LCR"][i]}</text><circle cx="770" cy="${129 + i * 48}" r="5" fill="${st.act === i ? "#49e07a" : "#555"}" ${st.act === i ? 'filter="url(#fGlow)"' : ""}/>`).join("")}</g>`;
+  },
+};
+
+// ------------------------------------------------------------------ STEP 정의
+function labSteps() {
+  const L = S.lot, st = [];
+  st.push({ id: "clean", g: "기판 준비", name: "기판 세척", eq: "wet",
+    spec: ["Wet Bench · 핫플레이트 2대", "유기 세정(아세톤·IPA) → DI 끓임 → SC-1(NH₄OH+H₂O₂) → DI 린스"], tut: "기판 표면의 유기물·파티클 제거. 잔류물은 졸 젖음 불량 → 핀홀·쇼트로 직결.", std: "아세톤 5분 → IPA 5분 → DI 10분 → SC-1 10분 → DI 린스",
+    params: [["cleanAce", "아세톤 5분", "bool"], ["cleanIpa", "IPA 5분", "bool"], ["cleanBoil", "DI 끓임 10분", "bool"], ["cleanSC1", "SC-1 (60→80 °C)", "bool"], ["sc1Min", "SC-1 침지", "num", 0, 20, 1, "분", [8, 12]], ["cleanRinse", "DI 린스", "bool"]],
+    note: ["SC-1 (RCA-1)", "60 °C NH₄OH 30 mL → 80 °C H₂O₂ 30 mL", "핫플 제거 후 10분 침지"], tip: "H₂O₂ 선투입 시 분해로 산화력 저하",
+    out: () => [["세척 점수", (100 * S.film.cleanScore).toFixed(0) + " %"], ["접촉각 (추정)", S.film.cleanScore === 1 ? "< 10°" : "> 30°"], ["파티클 지수", fmt(S.film.particleIdx, 1)]] });
+  st.push({ id: "sol", g: "기판 준비", name: L.structure === "MFM" ? "BTO 졸 합성" : "BTO · TiO₂ 졸 합성", eq: "stir",
+    spec: ["Hot Plate Stirrer · 투넥 플라스크", "Ba acetate 중탕 용해 → Ti 알콕사이드 혼합 → 숙성"], tut: "Ba acetate 완전 용해와 24 h 숙성이 졸 안정성 결정. TiO₂는 2-ME 희석으로 점도 조절.", std: "BTO 0.28 M · 60 °C 중탕 · 24 h 숙성 / TiO₂ 원액 2 mL + 2-ME 3 mL, 초음파 10분",
+    params: [["bathT", "중탕 온도", "num", 30, 100, 1, "°C", [55, 70]], ["ageH", "숙성", "num", 0, 72, 1, "h", [20, 48]], ...(L.structure !== "MFM" ? [["tio2MeMl", "TiO₂ 2-ME 첨가 (원액 2 mL)", "num", 0, 6, 0.5, "mL", [2, 4]], ["tio2Sonic", "TiO₂ 초음파", "num", 0, 20, 1, "분", [5, 15]]] : [])],
+    note: ["Al-Arjan 2016 1/5 배합", "Ba acetate 0.500 g · 빙초산 3 mL", "2-ME 3 mL · TTIP 0.6 mL · acac 0.292 mL"], tip: "미용해 입자 → comet·핀홀",
+    out: () => [["BTO 용해율", (100 * S.film.dissolved).toFixed(0) + " %"], ["BTO 농도", fmt(S.film.conc, 3) + " M"], ...(L.structure !== "MFM" ? [["TiO₂ 농도", fmt(S.film.tio2Conc, 3) + " M"], ["TiO₂ 점도", fmt(S.film.tio2Visc, 2) + " mPa·s"]] : [])] });
+  for (const ly of layers()) {
+    const T = ly === "TiO2", lt = LN(ly);
+    st.push({ id: "uv" + ly, g: lt + " 층", name: `UV 처리 (${lt} 전)`, eq: "uv", ly,
+      spec: ["UV-Ozone Cleaner", "185/254 nm 조사 → O₃ 생성 → 유기물 산화, 표면 친수화"], tut: "코팅 직전 표면 친수화로 졸 젖음성 확보. 11/07: UV O 시편이 X 대비 간섭색 균일.", std: "UV 10분",
+      params: [[T ? "uvTiO2" : "uvBTO", "UV 처리", "bool"], ["uvMin", "조사 시간", "num", 0, 30, 1, "분", [5, 15]]], note: ["UV-O₃ 표준", "조사 10분 → 즉시 코팅", ""], tip: "처리 후 방치 시 재오염",
+      out: () => [["접촉각", (T ? L.uvTiO2 : L.uvBTO) ? "< 10°" : "40~50°"], ["두께 불균일 σ", fmt(T ? S.film.tio2Unif : S.film.nonUnif, 1) + " %"]] });
+    st.push({ id: "spin" + ly, g: lt + " 층", name: `${lt} 스핀코팅 ×${nCoat(ly)}`, eq: "spin", ly,
+      spec: ["Spin Coater ACE-200", "2단 레시피: 퍼짐(STEP0) → 박막화(STEP1)"], tut: "두께 ∝ 농도 × rpm^(−1/2) (Meyerhofer 1978). 저속은 얼룩, 고습은 핀홀 증가.", std: "Prog 99: 1000 rpm 3 s → 5000 rpm 20 s",
+      params: [[T ? "trpm" : "rpm", "STEP1 회전수", "num", 1000, 8000, 100, "rpm", [4500, 5500]], [T ? "tspinSec" : "spinSec", "STEP1 시간", "num", 5, 60, 1, "s", [15, 30]], ...(T ? [] : [["coats", "코팅 횟수", "sel", LAB_COATS]]), ["rh", "후드 습도", "num", 20, 70, 1, "%", [25, 40]]],
+      note: ["ACE-200 Prog 99", "STEP0 1000 rpm · 5.0 · 3.0 s", "STEP1 5000 rpm · 5.0 · 20.0 s"], tip: "3000 rpm: 얼룩 악화 (실측)",
+      out: () => [["1회 두께", fmt(T ? S.film.tTiO2coat : S.film.tCoat, 1) + " nm"], [`누적 ${nCoat(ly)}회`, fmt(T ? S.film.tTiO2 : S.film.tBTO, 1) + " nm"], ["두께 불균일 σ", fmt(T ? S.film.tio2Unif : S.film.nonUnif, 1) + " %"]] });
+    st.push({ id: "dry" + ly, g: lt + " 층", name: `${lt} 건조 · 하부전극 확보`, eq: "plate", ly,
+      spec: ["Home Mat (예비 건조) · Hot Plate (하드베이크)", "매 코팅 후 반복: 실온 → 예비 건조 → 면봉 → 하드베이크"], tut: "용매를 단계적으로 제거해 건조 응력 완화. 하드베이크 전 에탄올 면봉으로 모서리 Pt 노출.", std: `실온 2분 → 80 °C 2분 → 150 °C ${T ? 10 : 5}분`,
+      params: [[T ? "thpT" : "hpT", "하드베이크 온도", "num", 100, 250, 5, "°C", [140, 160]], [T ? "thpMin" : "hpMin", "하드베이크 시간", "num", 0, 15, 1, "분", T ? [8, 12] : [4, 10]], ["edgeClean", "면봉 하부전극 확보", "bool"]],
+      note: ["건조 표준", "실온 2분 · 홈매트 80 °C 2분", `핫플 150 °C ${T ? 10 : 5}분`], tip: "230 °C: 막 탄화 (실측)",
+      out: () => [["건조 판정", S.film.dryOK ? "정상" : "부족/과열"], ["하부전극", L.edgeClean ? "확보" : "미확보 → 측정 open"]] });
+    st.push({ id: "ann" + ly, g: lt + " 층", name: T ? "TiO₂ 열처리 450 °C" : (layers().length > 1 ? "BTO 최종 열처리" : "BTO 결정화 열처리"), eq: "furnace", ly,
+      spec: ["Tube Furnace · Yokogawa UP351", "다단 프로그램 SP1~SP4 · 자기 보트 장입"], tut: T ? "450 °C에서 anatase 단일상 형성 (팀 XRD 25.5°)." : "열분해(150→600 °C) 저속 + 결정화 구간 분리. 700 °C 초기 조건은 결정성 부족 → 750 °C로 상향.", std: T ? "5 °C/min → 450 °C 60분" : "10 °C/min→150, 2 °C/min→600, 1 °C/min→750, 60분",
+      params: T ? [["tio2T", "열처리 온도", "num", 350, 600, 10, "°C", [430, 470]], ["tio2Min", "유지", "num", 10, 120, 5, "분", [50, 70]], ["unloadT", "인출 온도", "num", 25, 400, 5, "°C", [25, 100]]]
+        : [["annealPreset", "프로파일", "sel", ["개선", "초기"]], ["annealT", "결정화 온도", "num", 600, 850, 10, "°C", [740, 760]], ["holdMin", "유지", "num", 10, 120, 5, "분", [50, 70]], ["unloadT", "인출 온도", "num", 25, 400, 5, "°C", [25, 100]]],
+      note: T ? ["TiO₂ 열처리", "450 °C · 60분 · 5 °C/min", "Air"] : ["BTO 개선 프로파일", "150 / 600 / 750 °C 3단", "750 °C 60분 · Air"], tip: "고온 인출 → 열충격 크랙",
+      out: () => T ? [["상", "anatase (101) 25.5°"], ["TiO₂ 두께", fmt(S.film.tTiO2, 1) + " nm"]] : [["결정립 (Scherrer)", fmt(S.film.grain, 1) + " nm"], ["BaCO₃ 잔류", fmt(S.film.fBaCO3 * 100, 1) + " %"], ["크랙 길이 밀도", fmt(S.film.crackLen, 2) + " mm/mm²"]] });
+  }
+  if (L.structure === "TiO2") return st;
+  st.push({ id: "pt", g: "전극 · 측정", name: "Pt 상부전극 증착", eq: "sputter",
+    spec: ["DC Sputter · Shadow Mask", "Ø750 µm 원형 패드, 피치 1.33 mm"], tut: "섀도 마스크 정렬 후 Pt 증착. 하부 Pt 노출 모서리는 패드 제외.", std: "Ø750 µm · 7×7 격자",
+    params: [["maskAlign", "마스크 정렬 확인", "bool"]], note: ["Pt 패드", "Ø750 µm · A = 4.42×10⁻³ cm²", "하부 Pt: 모서리 노출부"], tip: "정렬 불량 → 패드 겹침",
+    out: () => [["패드 수", S.pads.length + " 개"], ["패드 면적", "4.42×10⁻³ cm²"]] });
+  st.push({ id: "probe", g: "전극 · 측정", name: "프로빙 수율 테스트", eq: "probe",
+    spec: ["Probe Station · HRSMU", "패드별 Z 하강 → 2단자 저항 판정 → 다음 패드"], tut: "전 패드 순회로 쇼트·누설 판정. Y = 정상/측정, D₀ = −ln Y / A (Poisson).", std: "Z 오버드라이브 20~40 µm",
+    params: [["labZ", "Z 오버드라이브", "num", 0, 120, 1, "µm", [20, 40]]], note: ["판정 기준", "< 1 MΩ: Short", "> 50 GΩ: 정상 (측정계 바닥)"], tip: "Z 과다 → 막 관통",
+    out: () => { const r = labYield(); return [["수율 Y", r.n ? (100 * r.Y).toFixed(0) + ` % (${r.good}/${r.n})` : "–"], ["D₀", isFinite(r.D0) ? r.D0.toFixed(1) + " /cm²" : "∞"], ["주 불량", r.top || "-"]]; } });
+  st.push({ id: "meas", g: "전극 · 측정", name: "전기적 특성 측정", eq: "tester",
+    spec: ["B1500A (HRSMU·WGFMU) · 4284A", "C–V 이중 스윕 · P–E 삼각파 · PUND"], tut: "측정 전 프로브 리프트 기준선(open baseline)으로 장비 경로 확인. 경로 단락 시 막과 무관한 저저항 신호.", std: "C–V 10 kHz ±Vmax 왕복 · P–E ≤ 5 V · PLC 1",
+    params: [["labBase", "기준선 점검 (경로 확인·교체)", "bool"], ["labVp", "P–E·PUND 최대 전압", "num", 1, 10, 0.5, "V", [3, 5]]], note: ["측정 표준", "−Vmax 시작 왕복 스윕", "WGFMU ±5 V 한계"], tip: "4284A 바이어스 ±2.3 V 밖 overflow",
+    out: () => { const m = S.lab.meas || {}; return [["유효 εr", fmt(S.film.epsApp, 0)], ["2Pr (PUND)", m.ok ? fmt(m.twoPr, 2) + " µC/cm²" : "측정 불가"], ["겉보기 Vc", fmt(S.film.Vc, 2) + " V"]]; } });
+  return st;
+}
+
+// ------------------------------------------------------------------ 결과 계산
+function labYield() {
+  const dc = S.pads.map(p => S.results.filter(r => r.pad === p.id && r.kind === "DC").at(-1)).filter(Boolean), v = dc.filter(r => r.cls !== "Open"), good = v.filter(r => r.cls === "정상").length, n = v.length;
+  const Y = n ? good / n : NaN, D0 = Y > 0 ? -Math.log(Y) / PHY.AREA : Infinity, cnt = {};
+  S.pads.forEach(p => { const r = dc.find(z => z.pad === p.id); if (r && r.cls !== "정상") { const c = r.cls === "Open" ? "Open" : ({ pinhole: "핀홀", crack: "크랙", particle: "파티클", leaky: "누설", thin: "얇은 얼룩" }[p.kill] || "관통"); cnt[c] = (cnt[c] || 0) + 1; } });
+  const top = Object.entries(cnt).sort((a, b) => b[1] - a[1])[0];
+  return { n, good, Y, D0, cnt, top: top ? `${top[0]} ${top[1]}개` : "", open: dc.length - n };
+}
+const LAB_YC = {};
+function labSimYield(lot) {
+  const key = JSON.stringify(lot); if (LAB_YC[key]) return LAB_YC[key];
+  const sv = { lot: S.lot, film: S.film, pads: S.pads, defects: S.defects, results: S.results, probe: S.probe };
+  S.lot = lot; recompute(); buildPads(); S.results = []; S.probe = { pad: null, z: 30, landed: false }; labProbeAll(); const r = labYield();
+  Object.assign(S, sv); updateTop(); return (LAB_YC[key] = r);
+}
+function labMem(f) {
+  const s = pundSim(f, Math.max(S.lot.labVp || 5, 1), 10e-6), A = PHY.AREA, twoPr = ((s.Q.P - s.Q.U) - (s.Q.N - s.Q.D)) / 2 / A * 1e6;
+  const Ac = 1e-8, Cl = f.C * Ac / A, dV = twoPr * 1e-6 * Ac / (300e-15 + Cl), dV10 = dV * (1 - 0.02 * Math.log10(10 * 3.156e7));
+  return { twoPr, UP: Math.abs(s.Q.U / s.Q.P), dV, dV10, Vw: Math.min(5, 1.5 * f.Vc), s };
+}
+function labProbeAll() {
+  S.results = S.results.filter(r => r.kind !== "DC");
+  for (const p of S.pads) { S.probe.pad = p.id; S.probe.z = S.lot.labZ ?? 30; S.probe.state = landPad(p, S.probe.z); const e = padElectrical(p, "smu");
+    S.results.push({ pad: p.id, kind: "DC", cls: e.open ? "Open" : isFinite(e.Rsh) && e.Rsh < 1e6 ? "Short" : isFinite(e.Rsh) ? "Leaky" : "정상" }); }
+  S.probe.state = null; S.probe.landed = false; updateTop();
+}
+function labMeasure() {
+  const L = S.lot, f = S.film, base = L.labBase !== false;
+  if (base && (S.path.lcrShort || S.path.wgfmuShort)) { S.path.lcrShort = S.path.wgfmuShort = false; log("ok", "기준선 점검: 4284A ~10 Ω, WGFMU ~2.5 Ω 경로 단락 발견 → 지그·케이블 교체"); }
+  const m = labMem(f), shortPath = S.path.lcrShort || S.path.wgfmuShort;
+  S.lab.meas = { ok: !shortPath && L.edgeClean !== false && labYield().good > 0, twoPr: m.twoPr, m, shortPath };
+}
+
+// ------------------------------------------------------------------ 화면
+STATIONS.lab = {
+  render(stage, side) {
+    const B = labS();
+    if (!B.scen) return labPicker(stage, side);
+    if (B.i >= labSteps().length) return labReport(stage, side);
+    labStep(stage, side);
+  }
+};
+function labPicker(stage, side) {
+  stage.innerHTML = `<div class="lab-hero"><small>BTO FAB · 공정 센터</small><h1>시나리오 실습</h1><p>공정 케이스 선택 → STEP별 장비 레시피 입력·실행 → 수율·전기 특성·메모리 성능 결과 분석</p></div>
+    <div class="scen-grid">${LAB_SCEN.map(s => { const f = PHY.solve({ ...DEFAULT_LOT, ...s.o }), y = labSimYield({ ...DEFAULT_LOT, labZ: 30, ...s.o }).Y;
+      return `<div class="scen"><span class="stag">${s.tag}</span><h3>${s.name}</h3><p>${s.d}</p>
+        <div class="smini"><span>BTO <b>${fmt(f.tBTO, 0)} nm</b></span><span>프로빙 수율 <b>${(100 * y).toFixed(0)}%</b></span></div>
+        <div class="row"><button class="btn primary" data-s="${s.id}" data-m="run">STEP 진행</button><button class="btn" data-s="${s.id}" data-m="quick">결과 바로 보기</button></div></div>`; }).join("")}</div>`;
+  side.innerHTML = `<div class="card"><h3>진행 방식</h3><ol class="steps sm"><li>시나리오 선택 (조건 자동 세팅)</li><li>STEP마다 장비 화면 · 튜토리얼 · 레시피 파라미터 확인</li><li>파라미터 수정 가능 (권장 범위 이탈 시 경고)</li><li>실행 → 장비 동작 · 결과 → 다음 STEP</li><li>최종: 결과 분석 (결론 · 원인 · 표준 대비)</li></ol></div>
+    <div class="card"><h3>값 표기</h3><p class="mut">${tag("실측")} 팀 실험값 · ${tag("문헌")} 논문값 · ${tag("가정")} 문헌 범위 내 선택 · ${tag("모델")} 계산값</p></div>`;
+  $$("[data-s]", stage).forEach(b => b.onclick = () => labStart(b.dataset.s, b.dataset.m === "quick"));
+}
+function labStart(id, quick) {
+  const s = LAB_SCEN.find(x => x.id === id);
+  S.lot = { ...DEFAULT_LOT, labZ: 30, labBase: id !== "replay", labVp: 5, ...s.o };
+  resetDownstream(); recompute();
+  S.path.lcrShort = S.path.wgfmuShort = !!s.path; S.mode = s.path ? "replay" : "practice";
+  S.lab = { scen: id, i: 0, ran: {}, busy: false, hist: [] };
+  log("ok", `시나리오: ${s.name} (${s.d})`);
+  if (quick) { labSteps().forEach(st => labApply(st)); S.lab.i = labSteps().length; }
+  go("lab");
+}
+function labApply(st) {          // 애니메이션 없이 STEP 결과 반영
+  const L = S.lot, P = pp();
+  recompute();
+  if (st.id.startsWith("spin")) { P[st.ly].coat = nCoat(st.ly); if (st.ly === "BTO") S.coatDone = L.coats; }
+  if (st.id.startsWith("dry")) P[st.ly].dry = nCoat(st.ly);
+  if (st.id.startsWith("ann")) P[st.ly].ann = true;
+  if (st.id === "pt") buildPads();
+  if (st.id === "probe") labProbeAll();
+  if (st.id === "meas") labMeasure();
+  S.lab.ran[st.id] = true; { const d = { clean: "clean", pt: "pt", probe: "probe" }[st.id]; if (d) S.done[d] = true; }
+}
+function labStep(stage, side) {
+  const B = S.lab, steps = labSteps(), st = steps[B.i], L = S.lot, scen = LAB_SCEN.find(x => x.id === B.scen), ran = B.ran[st.id];
+  stage.innerHTML = `<div class="lab-top"><div><small>BTO FAB · 공정 센터</small><b>${scen.name}</b><span class="mut"> · ${scen.d}</span></div>
+      <div class="row"><button class="btn sm" id="lb-scen">시나리오 변경</button><button class="btn sm" id="lb-quick">결과 바로 보기</button></div></div>
+    <div class="lab-steps">${steps.map((x, k) => `<button class="ls ${k < B.i || B.ran[x.id] ? "done" : k === B.i ? "on" : ""}" data-k="${k}" title="${x.name}"><i>${k + 1}</i><span>${x.name}</span></button>`).join("")}<button class="ls ${B.i >= steps.length ? "on" : ""}" data-k="${steps.length}"><i>✓</i><span>결과 분석</span></button></div>
+    <div class="lab-head"><span class="stepno">STEP ${B.i + 1}/${steps.length} · ${st.g}</span><h2>${st.name}</h2></div>
+    <div class="lab-stage t-${st.eq}" id="lstage">${st.eq === "probe" ? `<canvas id="lmic" width="960" height="540"></canvas>` : `<svg id="leq" viewBox="0 0 960 540" preserveAspectRatio="xMidYMid meet"></svg>`}
+      ${st.eq === "tester" ? `<div class="lscreen" id="lscr"></div>` : ""}
+      <div class="mon" id="lmon"></div><div class="trace" id="ltrace"></div>
+      <div class="sticky"><b>▣ ${st.note[0]}</b><p>${st.note[1]}</p>${st.note[2] ? `<p>${st.note[2]}</p>` : ""}<p class="tip">tip: ${st.tip}</p></div>
+      <div class="lstat" id="lstat"></div></div>
+    <div class="card lres" id="lres"></div>`;
+  side.innerHTML = `<div class="card lspec"><small>장비 스펙</small><h3>${st.spec[0]}</h3><p class="mut">${st.spec[1]}</p></div>
+    <div class="card ltut"><small>튜토리얼</small><b>Step ${B.i + 1}. ${st.name}</b><p>${st.tut}</p><p class="std">표준 ${tag("실측")}: <u>${st.std}</u></p></div>
+    <div class="card lpar"><small>레시피 파라미터</small><div id="lpars"></div>
+      <button class="btn primary wide" id="lrun" ${B.busy ? "disabled" : ""}>${ran ? "다시 실행" : "실행"}</button>
+      <button class="btn wide" id="lnext" ${ran ? "" : "disabled"}>${B.i + 1 >= steps.length ? "결과 분석 ▶" : "다음 STEP ▶"}</button></div>`;
+  const pars = () => {
+    $("#lpars").innerHTML = st.params.map(([k, lab, ty, a, b, stp, u, rec]) => {
+      if (ty === "bool") return `<label class="lp"><span>${lab}</span><input type="checkbox" data-k="${k}" ${L[k] !== false ? "checked" : ""}></label>`;
+      if (ty === "sel") return `<label class="lp"><span>${lab}</span><select data-k="${k}">${a.map(o => `<option ${L[k] == o ? "selected" : ""}>${o}</option>`).join("")}</select></label>`;
+      const v = L[k] ?? 0, bad = rec && (v < rec[0] || v > rec[1]);
+      return `<label class="lp ${bad ? "bad" : ""}"><span>${lab}<em>권장 ${rec[0]}~${rec[1]} ${u}</em></span><span class="lpi"><input type="number" data-k="${k}" value="${v}" min="${a}" max="${b}" step="${stp}"><i>${u}</i></span></label>`;
+    }).join("");
+    $$("#lpars [data-k]").forEach(i => i.onchange = () => {
+      const k = i.dataset.k; L[k] = i.type === "checkbox" ? i.checked : isNaN(+i.value) ? i.value : +i.value;
+      if (k === "annealPreset") Object.assign(L, ANNEAL_PRESET[i.value]);
+      if (k === "uvBTO") L.uv = L.uvBTO;
+      recompute(); B.ran[st.id] = false; pars(); idle(); $("#lnext").disabled = true; $("#lrun").textContent = "실행";
+    });
+  };
+  pars();
+  const col = () => interfColor(st.ly === "TiO2" ? (S.film.tTiO2coat * Math.max(1, pp().TiO2.coat)) : (S.film.tTiO2 || 0) + S.film.tCoat * Math.max(1, pp().BTO.coat));
+  const draw = s => { const e = $("#leq"); if (e) e.innerHTML = EQDEF + EQ[st.eq](s); };
+  const mon = (mode, rows, prog) => { $("#lmon").innerHTML = `<small>▸ MONITOR</small><b class="${mode === "DONE" ? "okt" : mode === "READY" ? "" : "warnt"}">${mode}</b>${rows.map(r => `<div><span>${r[0]}</span><b>${r[1]}</b></div>`).join("")}<i style="--p:${(100 * (prog || 0)).toFixed(0)}%"></i>`; };
+  const trace = (title, pts, ymax, xmax) => { const W = 220, H = 96, P = pts.length ? pts : [[0, 0]]; const xm = xmax || Math.max(1, ...P.map(p => p[0])), ym = ymax || Math.max(1, ...P.map(p => p[1]));
+    $("#ltrace").innerHTML = `<small>▸ ${title}</small><svg viewBox="0 0 ${W} ${H}"><path d="M0 ${H - 1} H${W}" stroke="#2a3a5e"/><polyline points="${P.map(p => `${(p[0] / xm * W).toFixed(1)},${(H - 4 - p[1] / ym * (H - 10)).toFixed(1)}`).join(" ")}" fill="none" stroke="#ff5a4a" stroke-width="2"/>${P.length ? `<circle cx="${(P.at(-1)[0] / xm * W).toFixed(1)}" cy="${(H - 4 - P.at(-1)[1] / ym * (H - 10)).toFixed(1)}" r="4" fill="#ffd34d"/>` : ""}</svg>`; };
+  const stat = t => { $("#lstat").innerHTML = t; };
+  const res = () => { $("#lres").innerHTML = B.ran[st.id] ? `<h3>STEP 결과</h3><div class="kpis2">${st.out().map(r => `<div><small>${r[0]}</small><b>${r[1]}</b></div>`).join("")}</div>` : `<p class="mut">파라미터 확인 후 실행 → 장비 동작 → STEP 결과 표시</p>`; };
+  // 대기 화면
+  const idle = () => {
+    const p = st.ly === "TiO2" ? [L.trpm0, L.tramp0, L.tsec0, L.trpm, L.taccel, L.tspinSec] : [L.rpm0, L.ramp0, L.sec0, L.rpm, L.accel, L.spinSec];
+    const base = { T: 25, rpm: 0, ang: 0, f: 0, k: -1, bub: 0, sh: 0, on: false, tm: "00:00", col: col(), ly: LN(st.ly || "BTO"), coat: pp()[st.ly || "BTO"]?.coat || 0, n: nCoat(st.ly || "BTO"), p, drop: 0, sp: 25, off: L.loadOffset, segtxt: "PRG1 READY", set: L[st.ly === "TiO2" ? "thpT" : "hpT"], prog: 0, skip: [L.cleanAce === false, L.cleanIpa === false, L.cleanBoil === false, L.cleanSC1 === false, L.cleanRinse === false], title: "BTO · TiO₂ Sol", bath: true };
+    if (st.eq === "probe") labMic(); else draw(base);
+    if (st.eq === "tester") labScreen(null);
+    mon("READY", [["Setpoint", "-"], ["Current", "-"], ["Time", "0 / -"]], 0); trace("TRACE", [], 1, 1);
+    stat(ran ? `<span class="okt">● 완료</span> · 재실행 가능` : `● 대기 · ${st.spec[0]}`); res();
+    return base;
+  };
+  const base = idle();
+  $("#lb-scen").onclick = () => { S.lab = null; go("lab"); };
+  $("#lb-quick").onclick = () => { const s2 = labSteps(); for (let k = B.i; k < s2.length; k++) labApply(s2[k]); B.i = s2.length; go("lab"); };
+  $$(".ls").forEach(b => b.onclick = () => { const k = +b.dataset.k; if (k <= B.i || B.ran[labSteps()[k - 1]?.id]) { B.i = Math.min(k, labSteps().length); go("lab"); } });
+  $("#lnext").onclick = () => { B.i++; go("lab"); };
+  $("#lrun").onclick = async () => {
+    B.busy = true; $("#lrun").disabled = true; $("#lnext").disabled = true;
+    recompute();
+    const P = pp(), hist = [], N = 60;
+    const frame = async (k, s, m, tr, ms = 45) => { draw({ ...base, ...s, f: k, col: col() }); mon(m[0], m[1], k / N); trace(tr[0], hist, tr[1], tr[2]); stat(m[2] || ""); await sleep(ms); };
+    if (st.eq === "wet") {
+      const durs = [5, 5, 10, 10, 1], names = ["아세톤", "IPA", "DI 끓임", "SC-1", "DI 린스"]; let t = 0;
+      for (let k = 0; k <= N; k++) { const tt = k / N * 31; let i = 0, acc = 0; while (i < 4 && tt > acc + durs[i]) { acc += durs[i]; i++; } const skip = base.skip[i];
+        const T = i === 2 ? 100 : i === 3 ? (tt - acc < 2 ? 60 : 80) : 25; hist.push([tt, T]);
+        await frame(k, { k: skip ? -1 : i, T, bub: i === 3 && tt - acc > 2, sh: (k % 2 ? 4 : -4) }, ["PROCESS", [["Bath", names[i] + (skip ? " (생략)" : "")], ["Temp", T + " °C"], ["Time", `${tt.toFixed(0)} / 31 min`]], `● ${names[i]} 진행 중`], ["BATH TEMP", 110, 31]); }
+    }
+    if (st.eq === "stir") {
+      for (let k = 0; k <= N; k++) { const T = 25 + (L.bathT - 25) * Math.min(1, k / 20); hist.push([k, T]);
+        await frame(k, { T, rpm: k < 30 ? 300 : 500, ang: k * 40, liq: k < 30 ? "rgba(240,240,235,.6)" : "rgba(230,190,90,.75)", bath: true, title: k < 30 ? "A: Ba acetate + 빙초산" : "A → B 점적 · 숙성" }, ["RAMPING", [["Setpoint", L.bathT + " °C"], ["Current", T.toFixed(0) + " °C"], ["Stir", (k < 30 ? 300 : 500) + " rpm"]], `● ${k < 30 ? "중탕 용해" : "혼합 · 숙성 " + L.ageH + " h"}`], ["BATH TEMP", 100, N]); }
+    }
+    if (st.eq === "uv") {
+      const on = L[st.ly === "TiO2" ? "uvTiO2" : "uvBTO"] !== false;
+      for (let k = 0; k <= N; k++) { const t = k / N * L.uvMin; hist.push([t, on ? 1 : 0]);
+        await frame(k, { on, tm: `${String(Math.floor(t)).padStart(2, "0")}:${String(Math.round((t % 1) * 60)).padStart(2, "0")}` }, [on ? "PROCESS" : "SKIP", [["Lamp", on ? "ON" : "OFF"], ["Time", `${t.toFixed(1)} / ${L.uvMin} min`], ["Target", LN(st.ly) + " 전"]], `● ${on ? "UV-O₃ 조사" : "UV 미처리"}`], ["LAMP", 1.2, L.uvMin || 1]); }
+    }
+    if (st.eq === "spin") {
+      const n = nCoat(st.ly), p = base.p; let ang = 0;
+      for (let c = 1; c <= n; c++) {
+        hist.length = 0; const T = p[2] + p[5] + 3;
+        for (let k = 0; k <= N; k++) { const s = k / N * T; const r = s < p[2] ? p[0] * Math.min(1, s / Math.max(0.5, p[1])) : s < p[2] + p[5] ? p[0] + (p[3] - p[0]) * Math.min(1, (s - p[2]) / Math.max(0.5, p[4])) : Math.max(0, p[3] * (T - s) / 3);
+          ang += r * 0.0009; hist.push([s, r]); P[st.ly].coat = c - 1;
+          await frame(k, { rpm: r, ang, drop: Math.max(0, 1 - s / 1.5), coat: c, tm: s.toFixed(1) + "s" }, ["SPINNING", [["Setpoint", p[3] + " rpm"], ["Current", Math.round(r) + " rpm"], ["Coat", `${c} / ${n}`]], `● 코팅 ${c}/${n} · ${s < p[2] ? "STEP0 퍼짐" : "STEP1 박막화"}`], ["RPM TRACE", p[3] * 1.1, T], 22); }
+        P[st.ly].coat = c; if (st.ly === "BTO") S.coatDone = c;
+      }
+    }
+    if (st.eq === "plate") {
+      const n = nCoat(st.ly), k3 = st.ly === "TiO2" ? "thpT" : "hpT", k4 = st.ly === "TiO2" ? "thpMin" : "hpMin";
+      for (let k = 0; k <= N; k++) { const ph = k < N * 0.35 ? 0 : 1, T = ph ? 25 + (L[k3] - 25) * Math.min(1, (k - N * 0.35) / 10) : 25 + 55 * Math.min(1, k / 6); hist.push([k, T]);
+        const tm = ph ? `${Math.round((k - N * 0.35) / (N * 0.65) * L[k4] * 60)}s` : `${Math.round(k / (N * 0.35) * 120)}s`;
+        await frame(k, { mat: !ph, T, set: L[k3], tm }, [ph ? "BAKING" : "PRE-DRY", [["Setpoint", (ph ? L[k3] : 80) + " °C"], ["Current", T.toFixed(0) + " °C"], ["Cycle", `×${n} 반복`]], `● ${ph ? "하드베이크" : "홈매트 예비 건조"}${k === Math.round(N * 0.35) && L.edgeClean !== false ? " · 면봉 하부전극 확보" : ""}`], ["TEMP", Math.max(250, L[k3] + 20), N], 40); }
+      P[st.ly].dry = n;
+    }
+    if (st.eq === "furnace") {
+      const pr = annealProfile(st.ly), segs = annealSegs(st.ly), tot = pr.pts.at(-1)[0];
+      for (let k = 0; k <= N; k++) { const t = k / N * tot; let T = 25; for (let q = 1; q < pr.pts.length; q++) if (t <= pr.pts[q][0]) { const a = pr.pts[q - 1], b = pr.pts[q]; T = a[1] + (b[1] - a[1]) * (t - a[0]) / Math.max(1e-6, b[0] - a[0]); break; }
+        hist.push([t, T]); const si = segs.findIndex(s => s[0] >= T - 0.5); const sp = si >= 0 ? segs[si][0] : 25;
+        await frame(k, { T, sp, segtxt: t < pr.total ? `PRG1 · 1.SP${si + 1}` : "COOL", off: L.loadOffset }, [t < pr.total ? "RAMPING" : "COOLING", [["Setpoint", sp + " °C"], ["Current", T.toFixed(0) + " °C"], ["Time", `${hm(t)} / ${hm(pr.total)}`]], `● ${t < pr.total ? "프로그램 운전" : "노냉 → " + L.unloadT + " °C 인출"}`], ["PROFILE", 800, tot], 50); }
+      P[st.ly].ann = true;
+    }
+    if (st.eq === "sputter") {
+      buildPads();
+      for (let k = 0; k <= N; k++) { hist.push([k, k < 5 ? k * 24 : 120]); await frame(k, { on: k > 4 && k < N, prog: k / N }, ["DEPOSITION", [["Power", "120 W"], ["Ar", "5 mTorr"], ["Pads", `${Math.round(k / N * S.pads.length)} / ${S.pads.length}`]], "● Pt 증착 · 섀도 마스크"], ["POWER", 140, N]); }
+    }
+    if (st.eq === "probe") {
+      S.results = S.results.filter(r => r.kind !== "DC"); let g = 0, n = 0;
+      for (const p of S.pads) { S.probe.pad = p.id; S.probe.z = L.labZ ?? 30; S.probe.state = landPad(p, S.probe.z); S.probe.landed = true; const e = padElectrical(p, "smu");
+        const cls = e.open ? "Open" : isFinite(e.Rsh) && e.Rsh < 1e6 ? "Short" : isFinite(e.Rsh) ? "Leaky" : "정상"; S.results.push({ pad: p.id, kind: "DC", cls });
+        if (cls !== "Open") { n++; if (cls === "정상") g++; hist.push([n, 100 * g / n]); }
+        labMic(); mon("PROBING", [["Pad", p.id], ["판정", cls], ["Y", n ? (100 * g / n).toFixed(0) + " %" : "-"]], S.pads.indexOf(p) / S.pads.length); trace("누적 수율 %", hist, 100, S.pads.length); stat(`● ${p.id} · ${cls === "Short" ? "쇼트 → Z UP → 다음 패드" : cls}`); await sleep(55); }
+      S.probe.state = null; S.probe.landed = false; updateTop();
+    }
+    if (st.eq === "tester") {
+      labMeasure(); const m = S.lab.meas;
+      for (let k = 0; k <= 3; k++) { draw({ ...base, act: [0, 5, 3, 4][k] }); labScreen(k); mon("MEASURING", [["Test", ["DC 절연", "C–V", "P–E", "PUND"][k]], ["Path", m.shortPath ? "단락" : "정상"], ["Pad", S.pads.find(p => labYieldGood(p.id))?.id || "-"]], (k + 1) / 4); stat(`● ${["HRSMU DC 절연", "4284A C–V 10 kHz 이중 스윕", "WGFMU P–E 삼각파", "WGFMU PUND"][k]}`); await sleep(900); }
+    }
+    B.ran[st.id] = true; B.busy = false;
+    { const d = { clean: "clean", pt: "pt", probe: "probe" }[st.id]; if (d) stepDone(d, `${st.name} 완료`); }
+    log("ok", `STEP ${B.i + 1} ${st.name} 완료`);
+    mon("DONE", [["Status", "완료"], ...st.out().slice(0, 2)], 1); stat(`<span class="okt">● 완료</span>`);
+    res(); $("#lrun").disabled = false; $("#lrun").textContent = "다시 실행"; $("#lnext").disabled = false;
+  };
+}
+const labYieldGood = id => S.results.some(r => r.pad === id && r.kind === "DC" && r.cls === "정상");
+function labMic() {
+  const cv = $("#lmic"); if (!cv || !S.pads.length) return;
+  const p = S.pads.find(q => q.id === S.probe.pad) || S.pads[0];
+  drawMicro(cv, { x: p.x - 2.4, y: p.y - 1.35, w: 4.8, h: 2.7 }, { probe: true, sel: true, labels: true });
+}
+function labScreen(k) {
+  const el = $("#lscr"); if (!el) return;
+  if (k === null) { el.innerHTML = `<div class="scr-idle">EasyEXPERT · READY</div>`; return; }
+  const f = S.film, m = S.lab.meas, sp = m.shortPath;
+  if (k === 0) { el.innerHTML = `<div class="scr-kv">${kv([["DC 절연 (3 V)", labYield().good ? "> 50 GΩ" : "쇼트"], ["4284A 경로", S.path.lcrShort ? "≈ 10 Ω 단락" : "정상"], ["WGFMU 경로", S.path.wgfmuShort ? "≈ 2.5 Ω 단락" : "정상"]])}</div>`; return; }
+  const host = document.createElement("div"); el.innerHTML = ""; el.appendChild(host);
+  const Vm = Math.min(S.lot.labVp || 5, 5);
+  if (k === 1) {
+    const V = [], C = []; for (let q = 0; q <= 40; q++) V.push([-2 + q * 0.1, true]); for (let q = 39; q >= 0; q--) V.push([-2 + q * 0.1, false]);
+    Chart.draw(host, { h: 260, xlabel: "V (V)", ylabel: "C (nF)", series: [{ pts: V.map(([v, r]) => [v, sp ? 0 : PHY.smallSignalC(v, r, f) * 1e9]), color: "#4cc9f0", name: sp ? "경로 단락: C 측정 불가" : "C–V 이중 스윕" }] }); return;
+  }
+  if (k === 2) {
+    const n = 200, V = []; for (let q = 0; q < 2 * n; q++) { const ph = (q / n) % 1; V.push((ph < .25 ? 4 * ph : ph < .75 ? 2 - 4 * ph : 4 * ph - 4) * Vm); }
+    const Q = PHY.stackQV(V, f).Q.slice(n), Vv = V.slice(n), qm = (Math.max(...Q) + Math.min(...Q)) / 2;
+    Chart.draw(host, { h: 260, xlabel: "V (V)", ylabel: "P (µC/cm²)", series: [{ pts: sp ? Vv.map(v => [v, v / 2.5 * 1e-5 / PHY.AREA * 1e6]) : Vv.map((v, q) => [v, (Q[q] - qm) / PHY.AREA * 1e6]), color: "#ffd34d", name: sp ? "저저항 경로 (banana)" : "P–E" }] }); return;
+  }
+  const s = m.m.s; Chart.draw(host, { h: 260, xlabel: "t (µs)", ylabel: "I (mA)", series: [{ pts: s.tr.P, color: "#4cc9f0", name: "P" }, { pts: s.tr.U, color: "#8a97a5", dash: "4 3", name: "U" }] });
+}
+
+// ------------------------------------------------------------------ 결과 분석
+function labReport(stage, side) {
+  const B = S.lab, L = S.lot, f = S.film, scen = LAB_SCEN.find(x => x.id === B.scen), steps = labSteps();
+  if (L.structure === "TiO2") { stage.innerHTML = `<div class="card"><h2>결과 분석 · TiO₂ 단독</h2>${kv([["상", "anatase 단일상 (101) 25.5°", "실측"], ["두께", fmt(f.tTiO2, 1) + " nm", "모델"]])}</div>`; return; }
+  if (!B.meas) labMeasure();
+  const y = labYield(), m = B.meas, mem = m.m, stdLot = { ...DEFAULT_LOT, ...LAB_SCEN[0].o }, fs = PHY.solve(stdLot), ys = splitYield(stdLot).m, yc = splitYield(L).m, ms = labMem(fs);
+  // 원인 분석
+  const F = [];
+  if (f.cleanScore < 1) F.push(["세척", `점수 ${(100 * f.cleanScore).toFixed(0)}%`, "파티클·소수성 잔류 → 핀홀·comet", "bad"]);
+  if (L.uvBTO === false) F.push(["UV 처리", "미처리", "젖음 불량 → 두께 불균일 σ " + fmt(f.nonUnif, 1) + "%", "bad"]);
+  if (L.rh > 40) F.push(["후드 습도", L.rh + " %RH", "알콕사이드 조기 가수분해 → 핀홀 밀도 ↑", "bad"]);
+  if (f.tBTO > PHY.K.hCrack.v) F.push(["누적 두께", fmt(f.tBTO, 0) + " nm", "단일 결정화 시 크랙 (임계 ~200 nm, 가정)", "bad"]);
+  if (L.annealPreset === "초기" || L.annealT < 740) F.push(["열처리", labAnn(), `결정립 ${fmt(f.grain, 1)} nm · BaCO₃ ${fmt(f.fBaCO3 * 100, 1)}% → Pr ↓`, "warn"]);
+  if (L.structure === "MFBM") F.push(["TiO₂ 버퍼", fmt(f.tTiO2, 0) + " nm", `전압 분담 ${(100 * f.shareT).toFixed(0)}% → 겉보기 Vc ↑, 2Pr ↓`, f.tio2Unif > 8 ? "bad" : "warn"]);
+  if (L.structure === "MFBM" && f.tio2Unif > 8) F.push(["TiO₂ 졸", fmt(f.tio2Conc, 3) + " M", "고점도 → TiO₂ 얼룩", "bad"]);
+  if (L.edgeClean === false) F.push(["하부전극", "미확보", "전 패드 open → 측정 불가", "bad"]);
+  if (m.shortPath) F.push(["측정 경로", "단락 (기준선 미점검)", "4284A ~10 Ω · WGFMU ~2.5 Ω → 막과 무관한 저저항 신호", "bad"]);
+  if (m.ok && mem.twoPr < 1) F.push(["분극 반전", "2Pr " + fmt(mem.twoPr, 2) + " µC/cm²", `${L.labVp || 5} V 내 BTO 내부 전계 부족 (TiO₂ 분담 ${(100 * f.shareT).toFixed(0)}%)`, "bad"]);
+  if (!F.length) F.push(["공정 조건", "표준 범위", "주요 이탈 없음", "ok"]);
+  const yS = labSimYield({ ...stdLot, labZ: 30 }), isStd = B.scen === "std", badF = F.find(x => x[0] === "분극 반전") || F.find(x => x[3] === "bad") || F.find(x => x[3] === "warn");
+  const yTxt = y.Y > yS.Y + 0.05 ? "수율 개선" : y.Y >= yS.Y - 0.05 ? "수율 동등" : "수율 저하", pTxt = mem.twoPr >= ms.twoPr * 0.9 ? "분극 동등" : mem.twoPr < 1 ? "분극 반전 미약" : "분극 감소";
+  const lvl = m.shortPath || L.edgeClean === false || mem.twoPr < 1 ? "bad" : yTxt === "수율 저하" || pTxt !== "분극 동등" ? "warn" : "ok";
+  const head = m.shortPath ? "측정 경로 단락: 소자 특성 판정 불가 → 기준선 점검 후 재측정 필요" : L.edgeClean === false ? "하부전극 미확보: 전 패드 open → 측정 불가" :
+    isStd ? `팀 표준 기준선: 수율 ${(100 * y.Y).toFixed(0)}% · 2Pr ${fmt(mem.twoPr, 2)} µC/cm² · 결정립 ${fmt(f.grain, 1)} nm` :
+    yTxt === "수율 동등" && pTxt === "분극 동등" ? `표준 대비 유의차 없음${badF ? " — " + badF[0] + " 영향은 수율 ±5% 이내" : ""}` : `${yTxt} · ${pTxt}${badF ? " — 주요인: " + badF[0] : ""}`;
+  const sub = isStd || m.shortPath ? "" : `수율 ${(100 * y.Y).toFixed(0)}% (표준 ${(100 * yS.Y).toFixed(0)}%) · 2Pr ${fmt(mem.twoPr, 2)} µC/cm² (표준 ${fmt(ms.twoPr, 2)})${badF ? " · " + badF[2] : ""}`;
+  stage.innerHTML = `<div class="lab-top"><div><small>BTO FAB · 결과 분석</small><b>${scen.name}</b><span class="mut"> · ${scen.d}</span></div><div class="row"><button class="btn sm" id="lb-scen">시나리오 변경</button><button class="btn sm" id="lb-back">STEP 다시 보기</button></div></div>
+    <div class="concl ${lvl}"><small>결론</small><h2>${head}</h2>${sub ? `<p>${sub}</p>` : ""}</div>
+    <div class="kpis3">${[["패드 수율", isFinite(y.Y) ? (100 * y.Y).toFixed(0) + "%" : "–", `${y.good}/${y.n} · 95% CI`, "모델"], ["결함밀도 D₀", isFinite(y.D0) ? y.D0.toFixed(1) : "∞", "/cm² (Poisson)", "모델"], ["BTO 두께", fmt(f.tBTO, 0), "nm", "모델"], ["결정립", fmt(f.grain, 1), "nm (Scherrer)", "모델"],
+      ["2Pr (PUND)", m.ok ? fmt(mem.twoPr, 2) : "–", "µC/cm²", "모델"], ["겉보기 Vc", fmt(f.Vc, 2), "V", "모델"], ["유효 εr", fmt(f.epsApp, 0), "", "모델"], ["10년 읽기 ΔV", m.ok ? fmt(mem.dV10 * 1e3, 0) : "–", "mV (1 µm² 셀)", "모델"]]
+      .map(k => `<div class="kt"><small>${k[0]}</small><b>${k[1]}</b><span>${k[2]}</span></div>`).join("")}</div>
+    <div class="grid2"><div class="card"><h3>패드 맵 (프로빙 결과)</h3><div id="rmap"></div><div class="legend2"><span class="g">정상</span><span class="r">쇼트</span><span class="y">누설</span><span class="b">open</span></div></div>
+      <div class="card"><h3>원인 분석</h3><table class="plc"><tr><th>요인</th><th>값</th><th>영향</th></tr>${F.map(x => `<tr class="f-${x[3]}"><td>${x[0]}</td><td>${x[1]}</td><td>${x[2]}</td></tr>`).join("")}</table>
+        <h3 style="margin-top:12px">불량 분류</h3><div id="rpar"></div></div></div>
+    <div class="grid3"><div class="card"><h3>P–E</h3><div id="rpe"></div></div><div class="card"><h3>C–V (10 kHz)</h3><div id="rcv"></div></div><div class="card"><h3>PUND · P/U</h3><div id="rpu"></div></div></div>
+    <div class="grid2"><div class="card"><h3>팀 표준 레시피 대비</h3><table class="plc"><tr><th>항목</th><th>이번 시나리오</th><th>팀 표준</th></tr>
+      ${[["구조 · 코팅", `${L.structure} ${L.coats}회`, `MFM 2회`], ["BTO 두께", fmt(f.tBTO, 0) + " nm", fmt(fs.tBTO, 0) + " nm"], ["열처리", labAnn(), "750 °C · 3단 램프"], ["프로빙 수율", (100 * y.Y).toFixed(0) + " %", (100 * yS.Y).toFixed(0) + " %"], ["결함밀도 D₀", isFinite(y.D0) ? y.D0.toFixed(1) : "∞", isFinite(yS.D0) ? yS.D0.toFixed(1) : "∞"],
+         ["결정립", fmt(f.grain, 1) + " nm", fmt(fs.grain, 1) + " nm"], ["2Pr", fmt(mem.twoPr, 2), fmt(ms.twoPr, 2)], ["쓰기 전압 (1.5·Vc)", fmt(mem.Vw, 1) + " V", fmt(ms.Vw, 1) + " V"], ["10년 ΔV", fmt(mem.dV10 * 1e3, 0) + " mV", fmt(ms.dV10 * 1e3, 0) + " mV"]].map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}</table></div>
+      <div class="card"><h3>다음 실험 제안</h3><ul class="steps sm">${labNext(F, y, m).map(x => `<li>${x}</li>`).join("")}</ul>
+        <h3 style="margin-top:12px">문헌 비교</h3>${kv([["졸-겔 BTO Pr", "0.9~3 µC/cm² (Hosokura 2015)", "문헌"], ["Pt 위 졸-겔 BTO εr", "약 161 (Stawski 2012)", "문헌"], ["750 °C 결정립", "약 25 nm (Bajac 2014)", "문헌"], ["상용 PZT FeRAM", "10¹⁴회 · 151년 (Infineon)", "문헌"]])}</div></div>`;
+  // 패드 맵
+  $("#rmap").innerHTML = `<svg viewBox="0 0 10 10" class="rmap"><rect width="10" height="10" fill="#1d232b"/><rect x="7.6" width="2.4" height="2.4" fill="#5c636d"/>${S.pads.map(p => { const r = S.results.filter(z => z.pad === p.id && z.kind === "DC").at(-1); const c = !r ? "#555" : { 정상: "#3fb950", Short: "#f85149", Leaky: "#d29922", Open: "#58a6ff" }[r.cls]; return `<circle cx="${p.x}" cy="${p.y}" r=".42" fill="${c}"/>`; }).join("")}</svg>`;
+  const mx = Math.max(1, ...Object.values(y.cnt));
+  $("#rpar").innerHTML = Object.keys(y.cnt).length ? `<div class="bars">${Object.entries(y.cnt).sort((a, b) => b[1] - a[1]).map(([k, n]) => `<div class="bar"><span>${k}</span><i style="width:${100 * n / mx}%"></i><b>${n}</b></div>`).join("")}</div>` : `<p class="okt">불량 패드 없음</p>`;
+  const Vm = Math.min(L.labVp || 5, 5), n = 200, V = []; for (let q = 0; q < 2 * n; q++) { const ph = (q / n) % 1; V.push((ph < .25 ? 4 * ph : ph < .75 ? 2 - 4 * ph : 4 * ph - 4) * Vm); }
+  const pe = ff => { const Q = PHY.stackQV(V, ff).Q.slice(n), qm = (Math.max(...Q) + Math.min(...Q)) / 2; return V.slice(n).map((v, q) => [v, (Q[q] - qm) / PHY.AREA * 1e6]); };
+  Chart.draw($("#rpe"), { h: 210, xlabel: "V (V)", ylabel: "P (µC/cm²)", series: [{ pts: m.shortPath ? V.slice(n).map(v => [v, v / 2.5 * 1e-5 / PHY.AREA * 1e6]) : pe(f), color: "#4cc9f0", name: m.shortPath ? "경로 단락" : "이번" }, { pts: pe(fs), color: "#8a97a5", dash: "4 3", name: "팀 표준" }], bands: [{ y: [0.9, 3], color: "#e3b341", opacity: 0.1 }] });
+  const cvp = ff => { const o = []; for (let q = 0; q <= 40; q++) o.push([-2 + q * 0.1, PHY.smallSignalC(-2 + q * 0.1, true, ff) * 1e9]); for (let q = 40; q >= 0; q--) o.push([-2 + q * 0.1, PHY.smallSignalC(-2 + q * 0.1, false, ff) * 1e9]); return o; };
+  Chart.draw($("#rcv"), { h: 210, xlabel: "V (V)", ylabel: "C (nF)", series: [{ pts: m.shortPath ? [[-2, 0], [2, 0]] : cvp(f), color: "#4cc9f0", name: m.shortPath ? "측정 불가" : "이번" }, { pts: cvp(fs), color: "#8a97a5", dash: "4 3", name: "팀 표준" }] });
+  Chart.draw($("#rpu"), { h: 210, xlabel: "t (µs)", ylabel: "I (mA)", series: [{ pts: mem.s.tr.P, color: "#4cc9f0", name: "P (반전)" }, { pts: mem.s.tr.U, color: "#8a97a5", dash: "4 3", name: "U (비반전)" }] });
+  $("#lb-scen").onclick = () => { S.lab = null; go("lab"); };
+  $("#lb-back").onclick = () => { B.i = 0; go("lab"); };
+  side.innerHTML = `<div class="card"><h3>시나리오 조건</h3>${kv([["구조", `${L.structure} · BTO ${L.coats}회`, ""], ["세척", f.cleanScore === 1 ? "전체" : "일부 생략", ""], ["UV", L.uvBTO === false ? "미처리" : "처리", ""], ["후드 습도", L.rh + " %RH", ""], ["스핀", `${L.rpm} rpm · ${L.spinSec} s`, ""], ["하드베이크", `${L.hpT} °C · ${L.hpMin}분`, ""], ["열처리", labAnn(), ""], ["Z 오버드라이브", (L.labZ ?? 30) + " µm", ""]])}</div>
+    <div class="card"><h3>다른 시나리오</h3><div class="col">${LAB_SCEN.filter(s => s.id !== B.scen).slice(0, 5).map(s => `<button class="btn sm" data-q="${s.id}">${s.name} 결과</button>`).join("")}</div></div>`;
+  $$("[data-q]", side).forEach(b => b.onclick = () => labStart(b.dataset.q, true));
+}
+function labNext(F, y, m) {
+  const o = [];
+  if (m.shortPath) o.push("측정 전 프로브 리프트 기준선 점검 → 지그·케이블 교체 후 재측정");
+  F.filter(x => x[3] === "bad").forEach(x => o.push({ 세척: "SC-1 포함 전체 세척 복원", "UV 처리": "코팅 직전 UV 10분", "후드 습도": "RH 40% 미만에서 코팅", "누적 두께": "2~4회마다 중간 열처리 삽입 (층별 결정화)", "TiO₂ 졸": "2-ME 희석(2:3) + 초음파 10분", 하부전극: "하드베이크 전 면봉 모서리 제거", "TiO₂ 버퍼": "TiO₂ 두께 축소로 전압 분담 완화" }[x[0]] || ""));
+  if (y.Y >= 0.7 && !m.shortPath) o.push("PUND 펄스 폭 스윕 → 스위칭 시간 실측", "반복 펄스 피로 · 시간별 보존 측정 → 메모리 모델 가정값 대체");
+  return o.filter(Boolean).slice(0, 5);
+}
+
+// ------------------------------------------------------------------ 라우트 · 초기화
+ROUTE.unshift({ id: "lab", n: "★", t: "시나리오 실습" });
+{ const i = ROUTE.findIndex(r => r.id === "report"); if (i >= 0) ROUTE.splice(i, 1, { id: "analysis", n: "110", t: "결과 분석" }); }
+STATIONS.analysis = { render(stage, side) { const B = labS(); if (!B.scen) { labStart("std", true); return; } B.i = labSteps().length; labReport(stage, side); } };
+SKILLS.report = ["결과 분석", "수율·전기 특성·원인 분석으로 결론 도출", "공정·소자 엔지니어"];
+const _goLab = go;
+go = function (v) { document.body.classList.toggle("labmode", v === "lab" || v === "analysis"); _goLab(v); };
+function init() {
+  recompute(); renderRoute(); go("lab");
+  log("ok", "BTO FAB 시뮬레이터 시작 · 실측 데이터 " + MEAS.files.length + "개 파일 로드");
+}
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 </script>
