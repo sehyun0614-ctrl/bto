@@ -383,6 +383,100 @@ table.gap td.y { color: var(--ok); } table.gap td.n { color: var(--mut); text-al
 .pickprev { padding: 12px; border-radius: 10px; background: #0f1520; border: 1px solid #263450; } .pickprev svg { width: 100%; height: auto; display: block; margin-bottom: 8px; }
 .subh { margin: 18px 0 8px; font-size: 13px; color: var(--mut); text-transform: uppercase; letter-spacing: .1em; }
 .pickgrid > div:first-child { overflow-x: auto; min-width: 0; } .mtab { min-width: 480px; }
+
+/* ===== app13 · 발표 구성 ===== */
+.sb { display: inline-block; font: 600 10.5px var(--f-mono); padding: 2px 7px; border-radius: 99px; border: 1px solid; vertical-align: middle; white-space: nowrap; }
+.sb-t { color: #4cc9f0; border-color: #4cc9f066; background: #4cc9f014; } .sb-c { color: #e3b341; border-color: #e3b34166; background: #e3b34114; }
+.sb-d { color: #c792ea; border-color: #c792ea66; background: #c792ea14; } .sb-m { color: #3fb950; border-color: #3fb95066; background: #3fb95014; }
+.sb-o { color: #8a97a5; border-color: #8a97a566; } .sb-r { color: #80cbc4; border-color: #80cbc466; background: #80cbc410; }
+.p13 { width: 100%; height: auto; display: block; } .p13 .pbg { fill: #0f141a; stroke: var(--line); } .p13 .pg { stroke: #1e252e; } .p13 .pg.z { stroke: #3a424d; }
+.p13 .pt { fill: #8a97a5; font: 10px var(--f-mono); } .p13 .pl { fill: #b8c2cc; font: 11px var(--f-sans, sans-serif); } .p13 .pd { font: 600 11px var(--f-mono); } .p13 .pband { fill: #e3b34112; }
+.stage3 { display: flex; gap: 8px; align-items: stretch; margin: 10px 0 12px; flex-wrap: wrap; }
+.s3 { flex: 1 1 220px; display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; color: var(--fg); text-decoration: none; transition: border-color .2s, transform .2s; }
+.s3:hover { border-color: #4cc9f0; transform: translateY(-2px); } .s3 em { font: 700 20px var(--f-mono); color: #e3b341; font-style: normal; } .s3 b { font-size: 15px; } .s3 span:last-child { display: block; color: var(--mut); font-size: 12px; margin-top: 4px; }
+.s3a { align-self: center; color: #e3b341; font-style: normal; font-size: 20px; } @media (max-width: 760px) { .s3a { display: none; } }
+.tc-top { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 14px; align-items: center; margin-bottom: 10px; } @media (max-width: 900px) { .tc-top { grid-template-columns: 1fr; } }
+.xsec2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; } .xs b { font: 600 13px var(--f-mono); } .xs svg { width: 100%; } .xs .pt { fill: #b8c2cc; font: 11px var(--f-mono); }
+h3.sec { display: flex; align-items: center; gap: 10px; margin: 22px 0 10px; font-size: 17px; scroll-margin-top: 70px; } h3.sec em { font: 700 14px var(--f-mono); font-style: normal; width: 26px; height: 26px; border-radius: 50%; background: #e3b341; color: #0c0f13; display: grid; place-items: center; }
+.tc-ctl { margin-bottom: 12px; } .row.wrap { flex-wrap: wrap; gap: 8px; }
+.tslider { display: flex; align-items: center; gap: 10px; margin-top: 10px; } .tslider input[type=range] { flex: 1; accent-color: #e3b341; } .tslider b { font: 600 13px var(--f-mono); min-width: 70px; color: #e3b341; }
+.tc-read { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 10px; font: 12px var(--f-mono); color: var(--mut); } .tc-read b { color: var(--fg); } .tc-read .ph { color: #e3b341; font-weight: 600; }
+.met4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; } @media (max-width: 1000px) { .met4 { grid-template-columns: 1fr 1fr; } } @media (max-width: 560px) { .met4 { grid-template-columns: 1fr; } }
+.m4 { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; animation: rise .5s both; } .m4h { display: flex; justify-content: space-between; align-items: baseline; } .m4h b { font-size: 14px; } .m4h small { color: var(--mut); font: 11px var(--f-mono); }
+.m4f { font: 12px var(--f-mono); color: #80cbc4; margin: 4px 0 8px; } .m4b { display: grid; grid-template-columns: 52px 1fr 54px; gap: 6px; align-items: center; font: 11px var(--f-mono); margin: 4px 0; }
+.m4b i { height: 12px; background: #1d232b; border-radius: 3px; overflow: hidden; } .m4b em { display: block; height: 100%; border-radius: 3px; animation: grow 1s ease-out both; transform-origin: left; } .m4b b { text-align: right; }
+.m4c { margin-top: 8px; font-size: 12px; color: var(--mut); } .m4c b { color: #e3b341; font: 700 16px var(--f-mono); margin-left: 4px; } .m4m { font-size: 12px; margin: 6px 0 2px; } .m4i { font-size: 12px; color: var(--mut); margin: 0; }
+@keyframes grow { from { transform: scaleX(0); } } @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+.fixnote { border-left: 3px solid #e3b341; background: #e3b3410f; padding: 8px 12px; font-size: 13px; margin-bottom: 12px; }
+.mathbox { font: 18px "Times New Roman", serif; padding: 10px; text-align: center; background: #0f141a; border-radius: 8px; margin-bottom: 10px; }
+.cl { display: block; font-size: 13px; margin: 8px 0; } .cl b { float: right; font: 600 12px var(--f-mono); color: #e3b341; } .cl input { width: 100%; accent-color: #e3b341; }
+.cbig { margin: 10px 0; padding: 10px 14px; border-radius: 8px; background: #e3b34112; border: 1px solid #e3b34155; } .cbig small { color: var(--mut); font-size: 12px; } .cbig b { display: block; font: 700 28px var(--f-mono); color: #e3b341; }
+.rxwrap { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 14px; } @media (max-width: 900px) { .rxwrap { grid-template-columns: 1fr; } }
+.rxsvg { width: 100%; } .rxsvg .pt { fill: #8a97a5; font: 11px var(--f-mono); } .rxsvg .pl { fill: #dce3ea; font: 600 13px var(--f-sans, sans-serif); } .rxsvg .pd { font: 11px var(--f-mono); }
+.rxbox { fill: #151b22; stroke: #3a424d; } .rxdisp { font: 700 34px var(--f-mono); } .rxreg { fill: #0b2530; stroke: #4cc9f0; } .rxreg.off { fill: #111; stroke: #3a424d; } .rxbit { fill: #4cc9f0; font: 700 18px var(--f-mono); }
+.rxcell { fill: #10161d; stroke: #3a424d; } .rxcell.flash { animation: flash .9s; } @keyframes flash { 30% { stroke: #e3b341; fill: #e3b34122; } }
+.led { animation: led 1.6s infinite; } @keyframes led { 50% { opacity: .45; } }
+.flow { stroke-dasharray: 6 6; animation: dash .5s linear infinite; } @keyframes dash { to { stroke-dashoffset: -12; } }
+.rxctl .seg button small { display: block; font: 10px var(--f-mono); opacity: .7; } .rxbtns { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.rxres { min-height: 24px; font-weight: 600; } .okc { color: #3fb950; } .badc { color: #f85149; } .rxres .warn { color: #d29922; }
+.rxlog { font: 12px var(--f-mono); color: var(--mut); padding-left: 18px; margin: 6px 0 0; } .rxlog li:first-child { color: var(--fg); }
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 12px; flex-wrap: wrap; } .tabs button { background: none; border: 0; border-bottom: 2px solid transparent; color: var(--mut); padding: 8px 12px; cursor: pointer; font: inherit; } .tabs button.on { color: var(--fg); border-bottom-color: #e3b341; }
+.srcl { list-style: none; padding: 0; margin: 0; } .srcl li { margin: 6px 0; font-size: 12.5px; }
+.plc.sm td, .plc.sm th { font-size: 11px; }
+/* 영향 지도 */
+.sk-scroll { overflow-x: auto; } .sk { min-width: 860px; width: 100%; display: block; }
+.sk .skh { fill: #e3b341; font: 600 12px var(--f-mono); letter-spacing: .08em; }
+.skn rect { fill: #171d25; stroke: #3a424d; } .skn text { fill: #dce3ea; font: 12px var(--f-sans, sans-serif); pointer-events: none; } .skn { cursor: pointer; transition: opacity .25s; }
+.skn.ks rect { stroke: #8a97a5; } .skn.kv rect { stroke: #4cc9f0aa; } .skn.kr rect { stroke: #e3b341aa; fill: #1f1a0e; } .skn.kc rect { stroke: #c792eaaa; fill: #1a1424; }
+.skn:hover rect, .skn.sel rect { stroke: #fff; stroke-width: 2; } .skn.dim { opacity: .25; }
+.skl { opacity: .55; stroke-dasharray: 3 7; animation: dash 1.2s linear infinite; transition: opacity .25s; } .skl.lit { opacity: .8; } .skl.dim { opacity: .06; } .skl.dash { stroke-dasharray: 8 6; }
+.hm td.hc { text-align: center; font: 12px var(--f-mono); } .hm th small { display: block; color: var(--mut); font-weight: 400; } .hm td small { color: var(--mut); }
+.ic { background: var(--panel2); border-radius: 8px; padding: 10px 12px; } .ic ol { margin: 6px 0 0; padding-left: 18px; font-size: 13px; } .ic small { display: block; color: var(--mut); font: 11px var(--f-mono); }
+/* 우리 진행 */
+.oflow { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; }
+.of { text-align: left; background: var(--panel2); border: 1px solid var(--line); border-left: 3px solid #3fb950; border-radius: 8px; padding: 10px 12px; color: var(--fg); cursor: pointer; font: inherit; animation: rise .5s both; }
+.of:hover { border-color: #3fb950; } .of em { font: 600 11px var(--f-mono); color: #3fb950; font-style: normal; } .of b { display: block; margin: 2px 0 4px; } .of span { font-size: 12px; color: var(--mut); }
+.otab td { vertical-align: top; } .otab td.has { background: #3fb95012; } .otab td b { font: 700 18px var(--f-mono); color: #3fb950; display: block; } .otab small { color: var(--mut); font-size: 11px; }
+.otl { display: flex; gap: 0; overflow-x: auto; padding: 6px 0; } .ote { flex: 1 0 170px; position: relative; padding: 22px 12px 6px; border-top: 2px solid #3a424d; animation: rise .5s both; }
+.ote i { position: absolute; top: -8px; left: 12px; width: 14px; height: 14px; border-radius: 50%; background: #3a424d; border: 2px solid #0c0f13; } .ote.ok i { background: #3fb950; } .ote.warn i { background: #d29922; } .ote.bad i { background: #f85149; }
+.ote small { font: 600 12px var(--f-mono); color: #e3b341; } .ote b { display: block; font-size: 13px; margin: 3px 0; } .ote span { font-size: 12px; color: var(--mut); }
+.mlog { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 6px; } .ml { border-radius: 6px; padding: 6px 8px; font-size: 11px; border-left: 3px solid; background: var(--panel2); animation: rise .4s both; }
+.ml small { font-family: var(--f-mono); color: var(--mut); } .ml b { margin-left: 6px; } .ml span { display: block; } .ml em { font-style: normal; font-size: 10.5px; opacity: .85; }
+.ml.floor { border-color: #3fb950; } .ml.short { border-color: #f85149; } .ml.open { border-color: #58a6ff; } .ml.empty, .ml.nodata { border-color: #d29922; }
+/* 피드백 루프 */
+.loop { width: 100%; max-width: 440px; display: block; margin: auto; } .lp-ring { fill: none; stroke: #262e38; stroke-width: 6; } .lp-run { fill: none; stroke: #e3b341; stroke-width: 6; stroke-dasharray: 90 652; animation: lpr 4.8s linear infinite; transform-origin: 210px 165px; }
+@keyframes lpr { to { stroke-dashoffset: -742; } }
+.lp-n circle { fill: #171d25; stroke: #4cc9f0; stroke-width: 2; animation: lpn 4.8s infinite; } @keyframes lpn { 0%, 12% { fill: #4cc9f033; stroke: #e3b341; } 20%, 100% { fill: #171d25; stroke: #4cc9f0; } }
+.lp-i { fill: #dce3ea; font: 700 18px var(--f-mono); dominant-baseline: middle; } .lp-t { fill: #b8c2cc; font: 12px var(--f-sans, sans-serif); } .lp-c { fill: #e3b341; font: 700 18px var(--f-mono); } .lp-s { fill: #8a97a5; font: 12px var(--f-sans, sans-serif); }
+.rounds { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; } .rd { text-align: left; background: var(--panel2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; color: var(--fg); cursor: pointer; font: inherit; }
+.rd em { font: 600 10.5px var(--f-mono); font-style: normal; padding: 1px 6px; border-radius: 99px; } .rd b { display: block; font-size: 13px; margin-top: 4px; } .rd.on { border-color: #e3b341; box-shadow: 0 0 0 1px #e3b341; }
+.rd.done em { background: #3fb95022; color: #3fb950; } .rd.now em { background: #e3b34122; color: #e3b341; } .rd.next em { background: #58a6ff22; color: #58a6ff; } .rd.opt em { background: #8a97a522; color: #8a97a5; }
+.rdetail { margin-top: 10px; display: grid; gap: 8px; } .rdetail small { font: 600 11px var(--f-mono); color: #4cc9f0; } .rdetail p { margin: 2px 0 0; font-size: 13px; }
+.t1c { width: 100%; } .t1c .pt { fill: #b8c2cc; font: 11px var(--f-mono); } .t1c .pl { fill: #dce3ea; font: 600 12px var(--f-sans, sans-serif); } .t1c .pd { font: 600 12px var(--f-sans, sans-serif); } .pulse { animation: led .6s infinite; }
+.seq { display: grid; gap: 6px; margin-bottom: 10px; } .sq { display: flex; gap: 10px; padding: 8px 10px; border-radius: 8px; background: var(--panel2); border: 1px solid var(--line); transition: all .3s; }
+.sq em { font: 700 14px var(--f-mono); font-style: normal; color: #e3b341; } .sq b { font-size: 13px; } .sq span { display: block; font-size: 12px; color: var(--mut); } .sq small { font: 11px var(--f-mono); color: #80cbc4; }
+.sq.on { border-color: #e3b341; background: #e3b34114; transform: translateX(4px); }
+pre.msg { white-space: pre-wrap; background: #0f141a; border: 1px solid var(--line); border-radius: 8px; padding: 12px; font: 12.5px/1.6 var(--f-mono); color: var(--fg); }
+/* 결론 · 지금 할 일 */
+.bigc { padding: 20px 22px; border-radius: 12px; background: linear-gradient(135deg, #4cc9f014, #e3b34110); border: 1px solid #4cc9f055; margin-bottom: 14px; } .bigc small { font: 600 11px var(--f-mono); color: #4cc9f0; letter-spacing: .1em; }
+.bigc h2 { margin: 6px 0 8px; font-size: 21px; line-height: 1.45; } .bigc p { margin: 0; font-size: 15px; } .bigc p b { color: #e3b341; }
+.gates { display: flex; align-items: stretch; gap: 0; overflow-x: auto; margin-bottom: 14px; padding-bottom: 4px; }
+.gt { flex: 1 0 130px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px; text-align: center; animation: rise .5s both; } .gt i { display: grid; place-items: center; width: 28px; height: 28px; margin: 0 auto 6px; border-radius: 50%; font-style: normal; font-weight: 700; }
+.gt.done i { background: #3fb950; color: #0c0f13; } .gt.block i { background: #f85149; color: #fff; animation: led 1.2s infinite; } .gt.todo i { background: #3a424d; color: var(--fg); } .gt b { display: block; font-size: 13px; } .gt span { font-size: 11px; color: var(--mut); }
+.ga { flex: 0 0 16px; align-self: center; height: 2px; background: #3a424d; }
+.find3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 14px; } @media (max-width: 1000px) { .find3 { grid-template-columns: 1fr; } }
+.fd { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; position: relative; animation: rise .5s both; } .fd em { position: absolute; top: 12px; right: 14px; font: 700 26px var(--f-mono); color: #262e38; font-style: normal; }
+.fd h3 { margin: 0 0 6px; font-size: 15px; } .fd p { font-size: 13px; margin: 0 0 10px; } .so { background: #e3b34112; border-radius: 6px; padding: 8px 10px; font-size: 13px; } .so b { color: #e3b341; }
+.acts td { font-size: 12.5px; vertical-align: top; } .pr { font: 700 11px var(--f-mono); padding: 2px 7px; border-radius: 4px; } .pr.P1 { background: #f8514933; color: #f85149; } .pr.P2 { background: #d2992233; color: #d29922; } .pr.P3 { background: #58a6ff33; color: #58a6ff; }
+.dtree { display: flex; flex-direction: column; align-items: stretch; gap: 4px; } .dn { display: grid; grid-template-columns: 28px 1.2fr 1fr 1.6fr; gap: 10px; align-items: center; background: var(--panel2); border-radius: 8px; padding: 8px 10px; font-size: 13px; }
+.dn em { font: 700 14px var(--f-mono); color: #e3b341; font-style: normal; } .dn .q { color: #4cc9f0; font-family: var(--f-mono); font-size: 12px; } .dn .n { color: var(--mut); font-size: 12px; } .da { text-align: center; color: #3a424d; font-style: normal; font-size: 10px; }
+@media (max-width: 700px) { .dn { grid-template-columns: 24px 1fr; } .dn .q, .dn .n { grid-column: 2; } }
+/* 결과 분석 결론 구조 */
+.c3 { display: grid; grid-template-columns: 1.2fr 1.2fr 1fr; gap: 12px; margin-top: 12px; } @media (max-width: 1000px) { .c3 { grid-template-columns: 1fr; } }
+.c3 > div > small { font: 600 11px var(--f-mono); color: var(--mut); letter-spacing: .06em; display: block; margin-bottom: 6px; } .c3 ol { margin: 0; padding-left: 18px; font-size: 13px; } .c3 ol small { color: var(--mut); }
+.c3 .so b { display: block; font-size: 14px; margin-top: 4px; } .g4s { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; } .g4 { display: grid; grid-template-columns: 10px 1fr; column-gap: 6px; font-size: 12px; background: #0f141a; padding: 6px 8px; border-radius: 6px; }
+.g4 i { width: 10px; height: 10px; border-radius: 50%; margin-top: 3px; grid-row: span 2; } .g4.ok i { background: #3fb950; } .g4.warn i { background: #d29922; } .g4.bad i { background: #f85149; } .g4 span { color: var(--mut); font: 11px var(--f-mono); }
+.lg13 { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--mut); margin-top: 8px; } .lg13 i { display: inline-block; width: 18px; height: 5px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
 </style>
 <header class="top">
   <div class="logo"><i></i>BTO FAB</div>
@@ -694,7 +788,7 @@ const DEFAULT_LOT = {
   dryRT: 2, homematT: 80, homematMin: 2, hpT: 150, hpMin: 5, edgeClean: true,
   tdryRT: 2, thomematT: 80, thomematMin: 2, thpT: 150, thpMin: 10,
   tio2T: 450, tio2Min: 60, tio2Ramp: 5,
-  annealPreset: "개선", rampA: 10, rampB: 2, annealT: 750, holdMin: 60, ramp: 1, atm: "air", loadOffset: 0, unloadT: 50,
+  annealPreset: "개선", rampA: 10, rampB: 1.5, annealT: 750, holdMin: 60, ramp: 1, atm: "air", loadOffset: 0, unloadT: 50,
   maskAlign: true,
 };
 const S = {
@@ -2145,7 +2239,7 @@ STATIONS.furnace.render = function (stage, side) {
     if (k === "reset") log("warn", "RESET: 프로그램 정지");
     show(); loadv();
   });
-  side.insertAdjacentHTML("beforeend", `<div class="card"><h3>퍼니스 메모 ${tag("실측")}</h3><ul class="steps"><li>Air · RT→150 °C 10 °C/min → 600 °C 2 °C/min → 750 °C 1 °C/min · 750 °C 60분</li><li>시편은 자기 보트에 올려 장입·인출</li><li>1000 °C에서 석영관이 붉게 보임</li><li>V·A는 약 30 °C부터 표시</li></ul></div>`);
+  side.insertAdjacentHTML("beforeend", `<div class="card"><h3>퍼니스 메모 ${tag("실측")}</h3><ul class="steps"><li>Air · RT→150 °C 10 °C/min → 600 °C 1.5 °C/min → 750 °C 1 °C/min · 750 °C 60분</li><li>시편은 자기 보트에 올려 장입·인출</li><li>1000 °C에서 석영관이 붉게 보임</li><li>V·A는 약 30 °C부터 표시</li></ul></div>`);
 };
 
 // ------------------------------------------------------------------ 72 XRD + HighScore
@@ -2293,7 +2387,7 @@ STATIONS.sem = {
 const SPLIT_F = [
   ["clean", "기판 세척", [["full", "전체 수행", {}], ["noSC1", "SC-1 생략", { cleanSC1: false }], ["none", "아세톤만", { cleanIpa: false, cleanBoil: false, cleanSC1: false, cleanRinse: false }]]],
   ["uv", "UV 처리 (BTO)", [["o", "UV O", { uvBTO: true }], ["x", "UV X", { uvBTO: false }]]],
-  ["anneal", "BTO 열처리", [["new", "750 °C 60분 3단 램프", { annealPreset: "개선", annealT: 750, holdMin: 60, ramp: 1, rampA: 10, rampB: 2 }], ["old", "700 °C 60분 1 °C/min", { annealPreset: "초기", annealT: 700, holdMin: 60, ramp: 1, rampA: 1, rampB: 1 }]]],
+  ["anneal", "BTO 열처리", [["new", "750 °C 60분 3단 램프", { annealPreset: "개선", annealT: 750, holdMin: 60, ramp: 1, rampA: 10, rampB: 1.5 }], ["old", "700 °C 60분 1 °C/min", { annealPreset: "초기", annealT: 700, holdMin: 60, ramp: 1, rampA: 1, rampB: 1 }]]],
   ["tdil", "TiO₂ 졸:2-ME", [["25", "2:3 (0.135 M)", { tio2SolMl: 2, tio2MeMl: 3 }], ["11", "1:1 (0.169 M)", { tio2SolMl: 2, tio2MeMl: 2 }], ["0", "원액 (0.338 M)", { tio2SolMl: 2, tio2MeMl: 0 }]]],
   ["dil", "졸 희석 (2-ME)", [["0", "없음", { dilution: "없음" }], ["11", "1:1", { dilution: "1:1" }], ["23", "2:3", { dilution: "2:3" }]]],
   ["rpm", "본 회전", [["5000", "5000 rpm", { rpm: 5000 }], ["4500", "4500 rpm", { rpm: 4500 }], ["3000", "3000 rpm", { rpm: 3000 }]]],
@@ -2642,7 +2736,7 @@ STATIONS.predry = {
 
 // ------------------------------------------------------------------ 50 열처리 (층별 다단 프로파일)
 const ANNEAL_PRESET = {
-  개선: { annealPreset: "개선", rampA: 10, rampB: 2, ramp: 1, annealT: 750, holdMin: 60 },
+  개선: { annealPreset: "개선", rampA: 10, rampB: 1.5, ramp: 1, annealT: 750, holdMin: 60 },
   초기: { annealPreset: "초기", rampA: 1, rampB: 1, ramp: 1, annealT: 700, holdMin: 60 },
 };
 function annealSegs(ly) {
@@ -2733,7 +2827,7 @@ STATIONS.furnace = {
       if (ly === "TiO2") { log("ok", `TiO₂ ${L.tio2T} °C ${L.tio2Min}분 열처리 완료 → anatase`); if (L.structure === "TiO2") stepDone("furnace", "TiO₂ 단독 예비 열처리 완료"); else go("uv"); }
       else { stepDone("furnace", `BTO ${L.annealT} °C ${L.holdMin}분: 결정립 ${fmt(S.film.grain, 1)} nm, BaCO₃ ${fmt(S.film.fBaCO3 * 100, 1)}%`); earn("physics"); go("furnace"); }
     };
-    side.innerHTML = `<div class="card"><h3>실제 진행 조건 (참조)</h3>${kv([["BTO 개선", "RT→150 °C 10 °C/min → 600 °C 2 °C/min → 750 °C 1 °C/min, 60분", "실측"], ["BTO 초기", "700 °C 60분, 1 °C/min → 결정성 부족", "실측"], ["TiO₂", "450 °C 60분, 5 °C/min", "실측"], ["MFBM", "TiO₂ 열처리 후 BTO 코팅, 최종 열처리는 BTO 조건", "실측"], ["분위기", "Air", "실측"]])}</div>
+    side.innerHTML = `<div class="card"><h3>실제 진행 조건 (참조)</h3>${kv([["BTO 개선", "RT→150 °C 10 °C/min → 600 °C 1.5 °C/min → 750 °C 1 °C/min, 60분", "실측"], ["BTO 초기", "700 °C 60분, 1 °C/min → 결정성 부족", "실측"], ["TiO₂", "450 °C 60분, 5 °C/min", "실측"], ["MFBM", "TiO₂ 열처리 후 BTO 코팅, 최종 열처리는 BTO 조건", "실측"], ["분위기", "Air", "실측"]])}</div>
       <div class="card"><h3>문헌 근거</h3><ul class="steps sm"><li>열분해(~300~600 °C)를 느리게, 결정화 구간을 분리하는 다단 프로파일 → 유기물 잔류·크랙 감소 (Schwartz, Chem. Mater. 9, 2325, 1997)</li><li>졸-겔 BTO: 중간상 BaCO₃가 고온에서 TiO₂와 반응해 페로브스카이트 형성 → 저온일수록 BaCO₃ 잔류</li><li>750 °C Pt 기판 BTO 결정립 약 25 nm (Bajac et al., 2014)</li></ul></div>
       <div class="card"><h3>PLC 인터록</h3><p class="mut">도어·가스·열전대 입력(X0~X2) 정상 시에만 히터(Y0) ON, 미충족 시 알람(Y1).</p></div>`;
   }
@@ -3031,7 +3125,7 @@ function labSteps() {
       note: ["건조 표준", "실온 2분 · 홈매트 80 °C 2분", `핫플 150 °C ${T ? 10 : 5}분`], tip: "230 °C: 막 탄화 (실측)",
       out: () => [["건조 판정", S.film.dryOK ? "정상" : "부족/과열"], ["하부전극", L.edgeClean ? "확보" : "미확보 → 측정 open"]] });
     st.push({ id: "ann" + ly, g: lt + " 층", name: T ? "TiO₂ 열처리 450 °C" : (layers().length > 1 ? "BTO 최종 열처리" : "BTO 결정화 열처리"), eq: "furnace", ly,
-      spec: ["Tube Furnace · Yokogawa UP351", "다단 프로그램 SP1~SP4 · 자기 보트 장입"], tut: T ? "450 °C에서 anatase 단일상 형성 (팀 XRD 25.5°)." : "열분해(150→600 °C) 저속 + 결정화 구간 분리. 700 °C 초기 조건은 결정성 부족 → 750 °C로 상향.", std: T ? "5 °C/min → 450 °C 60분" : "10 °C/min→150, 2 °C/min→600, 1 °C/min→750, 60분",
+      spec: ["Tube Furnace · Yokogawa UP351", "다단 프로그램 SP1~SP4 · 자기 보트 장입"], tut: T ? "450 °C에서 anatase 단일상 형성 (팀 XRD 25.5°)." : "열분해(150→600 °C) 저속 + 결정화 구간 분리. 700 °C 초기 조건은 결정성 부족 → 750 °C로 상향.", std: T ? "5 °C/min → 450 °C 60분" : "10 °C/min→150, 1.5 °C/min→600, 1 °C/min→750, 60분",
       params: T ? [["tio2T", "열처리 온도", "num", 350, 600, 10, "°C", [430, 470]], ["tio2Min", "유지", "num", 10, 120, 5, "분", [50, 70]], ["unloadT", "인출 온도", "num", 25, 400, 5, "°C", [25, 100]]]
         : [["annealPreset", "프로파일", "sel", ["개선", "초기"]], ["annealT", "결정화 온도", "num", 600, 850, 10, "°C", [740, 760]], ["holdMin", "유지", "num", 10, 120, 5, "분", [50, 70]], ["unloadT", "인출 온도", "num", 25, 400, 5, "°C", [25, 100]]],
       note: T ? ["TiO₂ 열처리", "450 °C · 60분 · 5 °C/min", "Air"] : ["BTO 개선 프로파일", "150 / 600 / 750 °C 3단", "750 °C 60분 · Air"], tip: "고온 인출 → 열충격 크랙",
@@ -3983,7 +4077,7 @@ labSteps = function () {
       note: ["1 사이클", "Prog 99 · 실온 2분 · 80 °C 2분", `면봉 → 하드베이크 150 °C ${T ? 10 : 5}분`], tip: "230 °C 하드베이크: 막 탄화",
       out: () => { const f = S.film; return [["1회 두께", fmt(T ? f.tTiO2coat : f.tCoat, 1) + " nm"], [`누적 ${nCoat(ly)}회`, fmt(T ? f.tTiO2 : f.tBTO, 1) + " nm"], ["사이클 시간", `${nCoat(ly)} × ${(0.5 + 2 + 2 + 0.5 + S.lot[T ? "thpMin" : "hpMin"]).toFixed(1)}분`], ["두께 불균일 σ", fmt(T ? f.tio2Unif : f.nonUnif, 1) + " %"]]; } });
   }
-  out.forEach(st => { if (st.id === "annBTO") { st.name = layers().length > 1 ? "최종 열처리 (TiO₂ + BTO · BTO 조건)" : "BTO 최종 열처리"; st.std = "RT→150 °C 10 °C/min → 600 °C 2 °C/min → 750 °C 1 °C/min · 60분 유지 · 노냉"; st.note = ["BTO 최종 열처리", "150 / 600 / 750 °C 3단 램프", "750 °C 60분 · Air · 노냉"]; }
+  out.forEach(st => { if (st.id === "annBTO") { st.name = layers().length > 1 ? "최종 열처리 (TiO₂ + BTO · BTO 조건)" : "BTO 최종 열처리"; st.std = "RT→150 °C 10 °C/min → 600 °C 1.5 °C/min → 750 °C 1 °C/min · 60분 유지 · 노냉"; st.note = ["BTO 최종 열처리", "150 / 600 / 750 °C 3단 램프", "750 °C 60분 · Air · 노냉"]; }
     if (st.id === "annTiO2") { st.name = "TiO₂ 열처리 450 °C 60분"; st.std = "RT→450 °C 5 °C/min · 60분 유지 · 노냉"; st.note = ["TiO₂ 열처리", "5 °C/min → 450 °C", "60분 유지 · 이후 BTO 적층"]; } });
   return out;
 };
@@ -4134,6 +4228,452 @@ labReport = function (stage, side) {
     <div class="card"><h3>XRD 상 분석 (팀 결과)</h3><table class="plc"><tr><th>2θ</th><th>상</th><th>판정</th></tr><tr><td>~25.5°</td><td>anatase (101)</td><td class="okt">확실</td></tr><tr><td>~38° · ~48°</td><td>anatase (004) · (200)</td><td>노이즈 수준</td></tr><tr><td>27.4°</td><td>rutile (110)</td><td>없음</td></tr></table>
       <div class="row"><button class="btn" onclick="go('xrd')">XRD · HighScore 분석 ▶</button><button class="btn" onclick="S.pick={structure:'MFBM',coats:4,ann:'개선',uv:true};S.lab=null;go('lab')">MFBM4로 이어서 ▶</button></div></div>`;
   side.innerHTML = "";
+};
+
+// init: app13.js
+
+/* =====================================================================
+   app13 · 발표 구성
+   P1 우리 실제 진행  P2 공정변수 영향 지도  P3 TCAD 3단계 (소자 특성 → 읽기 신호 → 수신기 복원)
+   P4 Sentaurus 피드백 과정  P5 결론 · 지금 할 일   + 결과 분석 결론 구조화
+   ===================================================================== */
+const SRCB = { tcad: ["TCAD 결과", "sb-t"], calc: ["가정 기반 계산", "sb-c"], demo: ["응용 시연", "sb-d"], meas: ["실측", "sb-m"], model: ["앱 모델", "sb-o"], read: ["판독 데이터 계산", "sb-r"] };
+const sb = k => `<span class="sb ${SRCB[k][1]}">${SRCB[k][0]}</span>`;
+const svgEsc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+
+// ------------------------------------------------------------------ 라우트: 발표 흐름 P1~P5
+{ const k = ROUTE.findIndex(r => r.id === "tcad"); if (k >= 0) ROUTE.splice(k, 1);
+  const i = ROUTE.findIndex(r => r.id === "lab");
+  ROUTE.splice(i + 1, 0, { id: "ours", n: "P1", t: "우리 실제 진행 기록" }, { id: "impact", n: "P2", t: "공정변수 → 결론 영향 지도" }, { id: "tcad", n: "P3", t: "TCAD 3단계 비교" }, { id: "tcadloop", n: "P4", t: "Sentaurus 피드백 과정" }, { id: "next", n: "P5", t: "결론 · 지금 할 일" }); }
+
+// ------------------------------------------------------------------ 공통: 간단 SVG 플롯 (마커·띠·경로색 지원)
+function plot13(o) {
+  const W = o.w || 460, H = o.h || 230, m = { l: 48, r: 12, t: 14, b: 34 }, pw = W - m.l - m.r, ph = H - m.t - m.b;
+  const X = v => m.l + (v - o.xr[0]) / (o.xr[1] - o.xr[0]) * pw, Y = v => m.t + ph - (v - o.yr[0]) / (o.yr[1] - o.yr[0]) * ph;
+  const tk = (r, n = 5) => { const s = (r[1] - r[0]) / n, mg = Math.pow(10, Math.floor(Math.log10(s))), st = [1, 2, 2.5, 5, 10].map(x => x * mg).find(x => (r[1] - r[0]) / x <= n + .5); const a = []; for (let v = Math.ceil(r[0] / st) * st; v <= r[1] + 1e-9; v += st) a.push(+v.toPrecision(10)); return a; };
+  let s = `<svg viewBox="0 0 ${W} ${H}" class="p13" role="img"><rect x="${m.l}" y="${m.t}" width="${pw}" height="${ph}" class="pbg"/>`;
+  if (o.band) s += `<rect x="${X(o.band[0])}" y="${m.t}" width="${X(o.band[1]) - X(o.band[0])}" height="${ph}" class="pband"/>`;
+  tk(o.xr).forEach(v => s += `<line x1="${X(v)}" x2="${X(v)}" y1="${m.t}" y2="${m.t + ph}" class="pg"/><text x="${X(v)}" y="${H - 18}" class="pt" text-anchor="middle">${v}</text>`);
+  tk(o.yr, 4).forEach(v => s += `<line x1="${m.l}" x2="${m.l + pw}" y1="${Y(v)}" y2="${Y(v)}" class="pg${v === 0 ? " z" : ""}"/><text x="${m.l - 5}" y="${Y(v) + 3}" class="pt" text-anchor="end">${v}</text>`);
+  s += `<text x="${m.l + pw / 2}" y="${H - 3}" class="pl" text-anchor="middle">${o.xl}</text><text x="11" y="${m.t + ph / 2}" class="pl" text-anchor="middle" transform="rotate(-90 11 ${m.t + ph / 2})">${o.yl}</text>`;
+  s += `<clipPath id="${o.id}c"><rect x="${m.l}" y="${m.t}" width="${pw}" height="${ph}"/></clipPath><g clip-path="url(#${o.id}c)">`;
+  (o.vl || []).forEach(v => s += `<line x1="${X(v.x)}" x2="${X(v.x)}" y1="${m.t}" y2="${m.t + ph}" stroke="${v.c || "#e3b341"}" stroke-dasharray="4 3" stroke-width="1.2"/>`);
+  (o.lines || []).forEach(L => { if (L.pts.length < 2) return; s += `<path d="M${L.pts.map(p => X(p[0]).toFixed(1) + "," + Y(p[1]).toFixed(1)).join("L")}" fill="none" stroke="${L.c}" stroke-width="${L.w || 1.8}" ${L.d ? `stroke-dasharray="${L.d}"` : ""} opacity="${L.op ?? 1}" ${L.mk ? `marker-mid="url(#${o.id}a${L.mk})"` : ""}/>`; });
+  (o.arrows || []).forEach(a => { const x1 = X(a[0][0]), y1 = Y(a[0][1]), x2 = X(a[1][0]), y2 = Y(a[1][1]), an = Math.atan2(y2 - y1, x2 - x1); s += `<path d="M${x2},${y2} l${(-8 * Math.cos(an - .45)).toFixed(1)},${(-8 * Math.sin(an - .45)).toFixed(1)} M${x2},${y2} l${(-8 * Math.cos(an + .45)).toFixed(1)},${(-8 * Math.sin(an + .45)).toFixed(1)}" stroke="${a[2]}" stroke-width="2" fill="none"/>`; });
+  (o.dots || []).forEach(d => s += `<circle cx="${X(d.x)}" cy="${Y(d.y)}" r="${d.r || 5}" fill="${d.c}" stroke="#0c0f13" stroke-width="1.5"/>${d.t ? `<text x="${X(d.x) + 8}" y="${Y(d.y) - 7}" class="pd" fill="${d.c}">${d.t}</text>` : ""}`);
+  s += `</g>`;
+  if (o.leg) s += o.leg.map((l, i) => `<g transform="translate(${m.l + 8 + i * (o.legW || 92)},${m.t + 6})"><rect width="12" height="3" y="4" fill="${l[1]}"/><text x="16" y="9" class="pt">${l[0]}</text></g>`).join("");
+  return s + `</svg>`;
+}
+
+// ------------------------------------------------------------------ TCAD 판독 데이터 → 공통 시간축
+const TC_COL = { MFM4: "#4cc9f0", MFBM4: "#f0a35e" }, TC_NM = { MFM4: "MFM4", MFBM4: "MFBM4 (MFIM)" };
+function tcSeries(k) {
+  S._ts = S._ts || {}; if (S._ts[k]) return S._ts[k];
+  const q = TCAD.q[k], i = TCAD.i[k], qt = q.map(p => p[0]), qy = q.map(p => p[1]), it = i.map(p => p[0]), iy = i.map(p => p[1]);
+  const T = []; for (let n = 0; n <= 600; n++) T.push(n / 100);
+  const Q = T.map(t => interp(qt, qy, t)), I = T.map(t => interp(it, iy, t)), V = T.map(VofT);
+  return (S._ts[k] = { T, Q, I, V, at: (arr, t) => interp(T, arr, t) });
+}
+const TC_RANGE = { init: [0, 1, "초기 분극 (0–1 ms)"], rep: [1, 5, "반복 1주기 (1–5 ms)"], all: [0, 6, "전체 (0–6 ms)"] };
+function tcMetrics(k, rg) {
+  const d = tcSeries(k), [a, b] = TC_RANGE[rg], idx = d.T.map((t, j) => j).filter(j => d.T[j] >= a - 1e-9 && d.T[j] <= b + 1e-9);
+  const Qs = idx.map(j => d.Q[j]), Is = idx.map(j => Math.abs(d.I[j]));
+  let E = 0; for (let n = 1; n < idx.length; n++) { const j = idx[n], h = idx[n - 1]; E += 0.5 * (d.V[j] * d.I[j] + d.V[h] * d.I[h]) * (d.T[j] - d.T[h]); } // V·pA·ms = fJ
+  const qDn = d.at(d.Q, 2), qUp = d.at(d.Q, 4);
+  return { dQ: Math.max(...Qs) - Math.min(...Qs), q0: rg === "init" ? NaN : Math.abs(qDn - qUp), qDn, qUp, ipk: Math.max(...Is), E, rep: d.at(d.Q, 5) - d.at(d.Q, 1) };
+}
+// I ≈ dQ/dt 일치도 (전류 구성 확인용)
+function tcDisp(k) {
+  const d = tcSeries(k), r = []; for (let j = 5; j < d.T.length - 5; j++) { if (Math.abs(d.T[j] - 1) < .05 || Math.abs(d.T[j] - 3) < .05 || Math.abs(d.T[j] - 5) < .05) continue; r.push([d.I[j], (d.Q[j + 5] - d.Q[j - 5]) / (d.T[j + 5] - d.T[j - 5])]); }
+  const num = Math.sqrt(r.reduce((s, [a, b]) => s + (a - b) ** 2, 0) / r.length), den = Math.max(...r.map(x => Math.abs(x[0])));
+  return 100 * num / den;
+}
+// 같은 반복 주기에서 전압 V의 증가/감소 경로 Q (시간 역산 후 선형 보간)
+function tcQatV(k, v) { const d = tcSeries(k); return { dn: d.at(d.Q, 1 + (4 - v) / 4), up: d.at(d.Q, 3 + (v + 4) / 4) }; }
+
+// ------------------------------------------------------------------ P3 · TCAD 3단계
+const _tcadOld = STATIONS.tcad.render;
+STATIONS.tcad = {
+  render(stage, side) {
+    const U = S.tc3 || (S.tc3 = { t: 2.0, rg: "rep", foc: "both", vs: 0, tab: "meas", q0: 0, q1: NaN, cbl: 100, play: false });
+    const M = { MFM4: tcMetrics("MFM4", U.rg), MFBM4: tcMetrics("MFBM4", U.rg) };
+    if (!isFinite(U.q1)) U.q1 = +tcMetrics("MFM4", "rep").q0.toFixed(1);
+    stage.innerHTML = `<div class="sthead"><h2>TCAD 3단계 비교 · MFM4 vs MFBM4</h2><span class="mut">버퍼층(TiO₂) 하나만 다른 두 구조 · 동일 ±4 V 삼각파 · 팀원 Sentaurus 결과 (그래프 판독) · MFBM = 피드백 문서의 MFIM</span></div>
+      <div class="stage3">${[["1", "소자 특성 분석", "tcad", "버퍼 삽입으로 전하·전류 응답이 어떻게 변하는가"], ["2", "메모리 읽기 신호 추정", "calc", "전달 전하·비트라인 용량을 가정한 민감도"], ["3", "수신기 설정 복원 시연", "demo", "이 메모리가 수신기에서 맡을 역할"]].map(x => `<a href="#tc-s${x[0]}" class="s3"><em>${x[0]}</em><div><b>${x[1]}</b> ${sb(x[2])}<span>${x[3]}</span></div></a>`).join('<i class="s3a">→</i>')}</div>
+      <div class="card tc-top"><div class="xsec2">${tcXsec("MFM4")}${tcXsec("MFBM4")}</div>
+        <div class="tc-cond">${kv([["공통 인가 전압", "0 → +4 → −4 → +4 → 0 V (램프 1 ms)", "가정"], ["BTO", "175.2 nm (4회) · εr 40 · Pr 2 · Ps 4 µC/cm² · Ec 27 kV/cm", "가정"], ["TiO₂ (MFBM)", "32.69 nm · εr 34", "가정"], ["면적", "1 µm² (Q·εr 역산)", "모델"]])}<p class="mut">결함·계면·누설 없는 이상 소자 해석. 실제 제작 시편 측정과 직접 일치도를 계산하지 않음.</p></div></div>
+
+      <h3 class="sec" id="tc-s1"><em>1</em>소자 특성 분석 ${sb("tcad")}</h3>
+      <div class="card tc-ctl"><div class="row wrap">
+        <div class="seg" id="tc-foc">${[["both", "두 구조"], ["MFM4", "MFM4 강조"], ["MFBM4", "MFBM4 강조"]].map(x => `<button data-v="${x[0]}" class="${U.foc === x[0] ? "on" : ""}">${x[1]}</button>`).join("")}</div>
+        <div class="seg" id="tc-rg">${Object.entries(TC_RANGE).map(([k, v]) => `<button data-v="${k}" class="${U.rg === k ? "on" : ""}">${v[2]}</button>`).join("")}</div></div>
+        <div class="row tslider"><button class="btn sm primary" id="tc-play">${U.play ? "❚❚ 정지" : "▶ 재생"}</button><span>시점 t</span><input type="range" id="tc-t" min="0" max="6" step="0.01" value="${U.t}"><b id="tc-tv"></b></div>
+        <div class="tc-read" id="tc-read"></div></div>
+      <div class="grid2"><div class="card"><h3>V–t · 공통 인가 파형 ${sb("tcad")}</h3><div id="tc-vt"></div></div><div class="card"><h3>Q–t · 단자 전하</h3><div id="tc-qt2"></div></div></div>
+      <div class="grid2"><div class="card"><h3>I–t · 단자 전류 (TotalCurrent)</h3><div id="tc-it2"></div></div>
+        <div class="card"><h3>Q–V · 전하 이력 <small class="mut">색 = 전압 증가/감소 경로 (저장 0/1 아님)</small></h3><div id="tc-qv2"></div>
+          <div class="row tslider"><span>전압 선택</span><input type="range" id="tc-vs" min="-4" max="4" step="0.05" value="${U.vs}"><b id="tc-vsv"></b></div><div id="tc-vsr"></div></div></div>
+
+      <h3 class="sec">정량 비교 · ${TC_RANGE[U.rg][2]} ${sb("read")}</h3>
+      <div class="met4">${tcMetricCards(M, U.rg)}</div>
+      <div class="grid2"><div class="card"><h3>전류 구성 확인 ${sb("read")}</h3>${tcCurCard()}</div>
+        <div class="card"><h3>반복 상태 확인 ${sb("read")}</h3>${tcRepCard()}</div></div>
+
+      <h3 class="sec" id="tc-s2"><em>2</em>메모리 읽기 신호 추정 ${sb("calc")}</h3>
+      <div class="card"><div class="fixnote">전달 전하와 비트라인 부하를 가정한 민감도 계산입니다. 실제 1T1C 회로 해석 결과가 아닙니다.</div><div id="tc-calc"></div></div>
+
+      <h3 class="sec" id="tc-s3"><em>3</em>수신기 설정 복원 시연 ${sb("demo")}</h3>
+      <div class="card"><div class="fixnote">이상적 비휘발성 메모리를 가정한 응용 시연. 채널 복원 성공은 제작 소자의 보존성 검증이 아님.</div><div id="rx"></div></div>
+
+      <h3 class="sec">확인 범위 · 근거</h3>
+      <div class="card"><div class="tabs" id="tc-tabs">${[["meas", "실측 I–V / C–V"], ["src", "계산식 · 조건 · 출처"], ["ver", "해석기 검증 (앱 엔진 재현)"]].map(x => `<button data-v="${x[0]}" class="${U.tab === x[0] ? "on" : ""}">${x[1]}</button>`).join("")}</div><div id="tc-tab"></div></div>`;
+    const draw = () => tcDraw(U);
+    draw(); tcCalc(U); rxDemo();
+    $("#tc-t").oninput = e => { U.t = +e.target.value; draw(); };
+    $("#tc-vs").oninput = e => { U.vs = +e.target.value; draw(); };
+    $$("#tc-foc button").forEach(b => b.onclick = () => { U.foc = b.dataset.v; $$("#tc-foc button").forEach(x => x.classList.toggle("on", x === b)); draw(); });
+    $$("#tc-rg button").forEach(b => b.onclick = () => { U.rg = b.dataset.v; U.play = false; go("tcad"); });
+    $("#tc-play").onclick = () => { U.play = !U.play; $("#tc-play").textContent = U.play ? "❚❚ 정지" : "▶ 재생"; if (U.play) { if (U.t >= 5.99) U.t = 0; let last = performance.now(); const step = now => { if (!U.play || S.view !== "tcad" || !$("#tc-t")) { U.play = false; return; } U.t = Math.min(6, U.t + (now - last) / 1000); last = now; $("#tc-t").value = U.t; draw(); if (U.t >= 6) { U.play = false; $("#tc-play").textContent = "▶ 재생"; return; } requestAnimationFrame(step); }; requestAnimationFrame(step); } };
+    const tab = () => { const h = $("#tc-tab"); if (U.tab === "meas") tcMeasTab(h); else if (U.tab === "src") tcSrcTab(h); else { h.innerHTML = `<div id="tv-st"></div><div id="tv-sd" class="grid2"></div>`; _tcadOld($("#tv-st"), $("#tv-sd")); } };
+    $$("#tc-tabs button").forEach(b => b.onclick = () => { U.tab = b.dataset.v; $$("#tc-tabs button").forEach(x => x.classList.toggle("on", x === b)); tab(); });
+    tab();
+    earn("tcad"); stepDone("tcad", "TCAD 3단계 비교");
+    const mm = tcMetrics("MFM4", "rep"), bb = tcMetrics("MFBM4", "rep"), ch = (a, b) => (100 * (b - a) / a).toFixed(0);
+    side.innerHTML = `<div class="card"><h3>이 화면의 숫자 출처</h3><ul class="srcl"><li>${sb("tcad")} Sentaurus 원 결과 (Q–t, I–t)</li><li>${sb("read")} 판독 데이터로 계산한 지표</li><li>${sb("calc")} 사용자가 정한 가정으로 계산</li><li>${sb("demo")} 이상 메모리 가정 시연</li></ul></div>
+      <div class="card"><h3>요약 (반복 1주기)</h3>${kv([["전하 변화폭", `${ch(mm.dQ, bb.dQ)}%`, "TCAD"], ["0 V 전하 이력 차이", `${ch(mm.q0, bb.q0)}%`, "TCAD"], ["피크 단자 전류", `${ch(mm.ipk, bb.ipk)}%`, "TCAD"], ["주기당 단자 순에너지", `${ch(mm.E, bb.E)}%`, "TCAD"]])}<p class="mut">값은 MFM4 대비 변화율. 감소가 곧 성능 향상은 아님 — 이력 차이 감소는 읽기 신호 감소, 전류·에너지 감소는 구동 부담 감소.</p></div>
+      <div class="card"><h3>하지 않는 것</h3><ul class="steps sm"><li>전압 크기·주파수를 바꿔 기존 파형을 늘리거나 줄이지 않음</li><li>TCAD 변위전류와 실측 DC 전류의 일치도 계산 안 함</li><li>Q–V 경로를 저장된 0/1로 표시하지 않음</li></ul></div>`;
+  }
+};
+function tcXsec(k) {
+  const B = k === "MFBM4", ly = [["Pt (상부)", "#c9ced6", 10], ["BTO 175 nm", "#4cc9f0", 52]].concat(B ? [["TiO₂ 33 nm", "#f0a35e", 16]] : []).concat([["Pt (하부)", "#c9ced6", 10]]);
+  let y = 14, s = "";
+  ly.forEach(l => { s += `<rect x="30" y="${y}" width="150" height="${l[2]}" fill="${l[1]}" opacity=".9"/><text x="188" y="${y + l[2] / 2 + 4}" class="pt">${l[0]}</text>`; y += l[2]; });
+  return `<div class="xs"><b style="color:${TC_COL[k]}">${TC_NM[k]}</b><svg viewBox="0 0 270 ${y + 10}">${s}<path d="M22,14 V${y}" stroke="#e3b341" stroke-width="2"/><text x="6" y="${(14 + y) / 2}" class="pt" fill="#e3b341">V</text></svg></div>`;
+}
+function tcDraw(U) {
+  const ks = ["MFM4", "MFBM4"], op = k => U.foc === "both" || U.foc === k ? 1 : .22, d = { MFM4: tcSeries("MFM4"), MFBM4: tcSeries("MFBM4") }, rg = TC_RANGE[U.rg], t = U.t;
+  const ts = (k, arr) => d[k].T.map((x, j) => [x, d[k][arr][j]]);
+  const dots = arr => ks.map(k => ({ x: t, y: d[k].at(d[k][arr], t), c: TC_COL[k], r: op(k) < 1 ? 3 : 5 }));
+  const leg = ks.map(k => [TC_NM[k], TC_COL[k]]);
+  $("#tc-tv").textContent = `${t.toFixed(2)} ms`;
+  $("#tc-vt").innerHTML = plot13({ id: "vt", xr: [0, 6], yr: [-5, 5], xl: "t (ms)", yl: "V (V)", band: rg, vl: [{ x: t }], lines: ks.map((k, n) => ({ pts: ts(k, "V"), c: TC_COL[k], w: n ? 1.4 : 3, d: n ? "6 4" : "", op: .9 })), dots: [{ x: t, y: VofT(t), c: "#e3b341" }], leg: [["MFM4 · MFBM4 동일 파형 (파형 정의 재구성)", "#e3b341"]], legW: 300 });
+  $("#tc-qt2").innerHTML = plot13({ id: "qt", xr: [0, 6], yr: [-55, 55], xl: "t (ms)", yl: "Q (fC)", band: rg, vl: [{ x: t }], lines: ks.map(k => ({ pts: ts(k, "Q"), c: TC_COL[k], op: op(k) })), dots: dots("Q"), leg });
+  $("#tc-it2").innerHTML = plot13({ id: "it", xr: [0, 6], yr: [-210, 210], xl: "t (ms)", yl: "I (pA)", band: rg, vl: [{ x: t }], lines: ks.map(k => ({ pts: ts(k, "I"), c: TC_COL[k], op: op(k) })), dots: dots("I"), leg });
+  // Q–V: 반복 주기 경로별 색 (감소 경로 1–3 ms, 증가 경로 3–5 ms), 초기 구간은 점선
+  const lines = [], arrows = [];
+  ks.forEach(k => {
+    const o = op(k), dk = d[k], seg = (a, b) => dk.T.map((x, j) => [x, j]).filter(([x]) => x >= a && x <= b).map(([, j]) => [dk.V[j], dk.Q[j]]);
+    const foc = U.foc === k || (U.foc === "both" && k === "MFM4");
+    const cDn = foc ? "#58a6ff" : TC_COL[k], cUp = foc ? "#f778ba" : TC_COL[k];
+    lines.push({ pts: seg(0, 1), c: TC_COL[k], d: "3 3", w: 1.2, op: o * .8 }, { pts: seg(1, 3), c: cDn, op: o, w: foc ? 2.4 : 1.6 }, { pts: seg(3, 5), c: cUp, op: o, w: foc ? 2.4 : 1.6 }, { pts: seg(5, 6), c: TC_COL[k], d: "3 3", w: 1.2, op: o * .6 });
+    if (foc || U.foc === "both") { const a = j => [dk.V[j], dk.Q[j]], ix = t => Math.round(t * 100); arrows.push([a(ix(1.9)), a(ix(2.05)), cDn], [a(ix(3.95)), a(ix(4.1)), cUp]); }
+  });
+  const vsDots = []; ks.forEach(k => { const r = tcQatV(k, U.vs); vsDots.push({ x: U.vs, y: r.dn, c: "#58a6ff", r: op(k) < 1 ? 3 : 5 }, { x: U.vs, y: r.up, c: "#f778ba", r: op(k) < 1 ? 3 : 5 }); });
+  $("#tc-qv2").innerHTML = plot13({ id: "qv", xr: [-4.5, 4.5], yr: [-55, 55], xl: "V (V)", yl: "Q (fC)", vl: [{ x: U.vs, c: "#8a97a5" }], lines, arrows, dots: [...vsDots, ...ks.map(k => ({ x: VofT(t), y: d[k].at(d[k].Q, t), c: "#e3b341", r: op(k) < 1 ? 3 : 6 }))], leg: [["감소 경로 (+4→−4)", "#58a6ff"], ["증가 경로 (−4→+4)", "#f778ba"], ["초기·종료", "#8a97a5"]], legW: 128 });
+  $("#tc-vsv").textContent = `${U.vs.toFixed(2)} V`;
+  $("#tc-vsr").innerHTML = `<table class="plc"><tr><th>V = ${U.vs.toFixed(2)} V</th><th>감소 경로 Q↓</th><th>증가 경로 Q↑</th><th>|Q↓ − Q↑|</th></tr>${ks.map(k => { const r = tcQatV(k, U.vs); return `<tr><td style="color:${TC_COL[k]}">${TC_NM[k]}</td><td>${r.dn.toFixed(1)} fC</td><td>${r.up.toFixed(1)} fC</td><td><b>${Math.abs(r.dn - r.up).toFixed(1)} fC</b></td></tr>`; }).join("")}</table><p class="mut">방법: 반복 주기(1–5 ms)에서 V(t)를 시간으로 역산 → 각 경로의 Q(t) 선형 보간.</p>`;
+  const ph = t < 1 ? "초기 분극 (0→+4 V)" : t < 3 ? "감소 경로 (+4→−4 V)" : t < 5 ? "증가 경로 (−4→+4 V)" : "종료 (+4→0 V)";
+  $("#tc-read").innerHTML = `<span class="ph">${ph}</span><span>V <b>${VofT(t).toFixed(2)} V</b></span>${ks.map(k => `<span style="color:${TC_COL[k]}">${TC_NM[k]} · Q <b>${d[k].at(d[k].Q, t).toFixed(1)} fC</b> · I <b>${d[k].at(d[k].I, t).toFixed(1)} pA</b></span>`).join("")}`;
+}
+function tcMetricCards(M, rg) {
+  const a = M.MFM4, b = M.MFBM4, rows = [
+    ["전하 변화폭", "dQ", "fC", `Q<sub>max</sub> − Q<sub>min</sub>`, "주어진 삼각파에서 단자 전하가 움직이는 전체 범위", "감소: TiO₂가 전압을 나눠 가져 BTO에 걸리는 전계 감소"],
+    ["0 V 전하 이력 차이", "q0", "fC", `|Q<sub>↑</sub>(0) − Q<sub>↓</sub>(0)|`, "0 V에서 지나온 경로에 따라 남는 전하 차이", "작아지면 같은 조건의 읽기 신호 후보도 작아짐"],
+    ["피크 단자 전류", "ipk", "pA", `max |I(t)|`, "해당 파형에서의 최대 순간 전류", "작아지면 구동 회로 전류 부담 감소, 동시에 반전 응답 약화 신호"],
+    ["단자 순에너지", "E", "fJ", `∫ V(t)·I(t) dt`, "선택 구간 동안 소자 단자로 들어간 순에너지", "히스테리시스 손실에 해당. 작을수록 주기당 소모 적음"]];
+  return rows.map(r => {
+    const va = a[r[1]], vb = b[r[1]], ok = isFinite(va) && isFinite(vb), mx = ok ? Math.max(Math.abs(va), Math.abs(vb)) || 1 : 1, chg = ok && va ? 100 * (vb - va) / Math.abs(va) : NaN;
+    return `<div class="m4"><div class="m4h"><b>${r[0]}</b><small>[${r[2]}]</small></div><div class="m4f">${r[3]}</div>
+      ${ok ? [["MFM4", va], ["MFBM4", vb]].map(([k, v]) => `<div class="m4b"><span>${k}</span><i><em style="width:${(100 * Math.abs(v) / mx).toFixed(1)}%;background:${TC_COL[k]}"></em></i><b>${v.toFixed(r[1] === "ipk" || r[1] === "E" ? 1 : 2)}</b></div>`).join("") : `<p class="mut">초기 구간에는 0 V 가지 쌍이 없음 → 반복 1주기 선택</p>`}
+      <div class="m4c">MFM 대비 변화율 <b>${isFinite(chg) ? (chg > 0 ? "+" : "") + chg.toFixed(1) + "%" : "–"}</b></div><p class="m4m">${r[4]}</p><p class="m4i">${r[5]}</p></div>`;
+  }).join("");
+}
+function tcCurCard() {
+  const e1 = tcDisp("MFM4"), e2 = tcDisp("MFBM4");
+  return `<p>원본 열(Total / Displacement / eCurrent / hCurrent) 미수령 → 판독 데이터로 <b>I ≈ dQ/dt</b> 대조.</p>${kv([["MFM4 · |I − dQ/dt| RMS / 피크", e1.toFixed(1) + " %", "모델"], ["MFBM4 · |I − dQ/dt| RMS / 피크", e2.toFixed(1) + " %", "모델"]])}
+    <p class="mut">${Math.max(e1, e2) < 15 ? "단자 전류는 단자 전하 변화로 대부분 설명됨 → 변위(분극 반전 포함) 전류 성분이 주도." : "차이가 큼 → 전도 성분(e/h) 기여 가능, 원본 열로 확인 필요."} 꺾임점(1·3·5 ms) 제외. 성분별 확정은 P4 R2 요청 항목.</p>`;
+}
+function tcRepCard() {
+  const r = k => { const d = tcSeries(k); return [d.at(d.Q, 1), d.at(d.Q, 5)]; }, [a1, a5] = r("MFM4"), [b1, b5] = r("MFBM4");
+  return `<table class="plc"><tr><th>+4 V 같은 위상</th><th>t = 1 ms</th><th>t = 5 ms</th><th>차이</th></tr>
+    <tr><td style="color:${TC_COL.MFM4}">MFM4</td><td>${a1.toFixed(1)} fC</td><td>${a5.toFixed(1)} fC</td><td><b>${(100 * (a5 - a1) / a1).toFixed(1)}%</b></td></tr>
+    <tr><td style="color:${TC_COL.MFBM4}">MFBM4</td><td>${b1.toFixed(1)} fC</td><td>${b5.toFixed(1)} fC</td><td><b>${(100 * (b5 - b1) / b1).toFixed(1)}%</b></td></tr></table>
+    <p class="mut">한 주기 뒤 같은 +4 V에서 전하가 ${Math.max(Math.abs(a5 - a1) / a1, Math.abs(b5 - b1) / b1) < 0.05 ? "5% 이내로 일치 → 초기 분극 이후 반복 상태 도달." : "다름 → 첫 주기 영향 남음, 비교는 반복 주기 기준."} 지표 비교 기본값 = 반복 1주기.</p>`;
+}
+// ---- ② 읽기 신호 민감도 계산기
+function tcCalc(U) {
+  const h = $("#tc-calc"), ref = k => +tcMetrics(k, "rep").q0.toFixed(1);
+  const draw = () => {
+    const dq = Math.abs(U.q1 - U.q0), dv = dq / U.cbl, pts = []; for (let n = 0; n <= 80; n++) { const c = 10 * Math.pow(100, n / 80); pts.push([Math.log10(c), 1000 * dq / c]); }
+    const rf = ["MFM4", "MFBM4"].map(k => { const q = ref(k), p = []; for (let n = 0; n <= 80; n++) { const c = 10 * Math.pow(100, n / 80); p.push([Math.log10(c), 1000 * q / c]); } return { pts: p, c: TC_COL[k], d: "5 4", w: 1.2, op: .7 }; });
+    $("#cc-out").innerHTML = `<div class="cbig"><small>예상 전압 분리량 |q₁ − q₀| / C<sub>BL</sub></small><b>${(1000 * dv).toFixed(0)} mV</b></div>${kv([["상태 0 전압 변화 q₀/C_BL", (1000 * U.q0 / U.cbl).toFixed(0) + " mV", "가정"], ["상태 1 전압 변화 q₁/C_BL", (1000 * U.q1 / U.cbl).toFixed(0) + " mV", "가정"]])}`;
+    $("#cc-plot").innerHTML = plot13({ id: "cc", w: 520, h: 240, xr: [1, 3], yr: [0, Math.max(50, 1000 * Math.max(dq, ref("MFM4")) / 10 * 1.05)], xl: "log₁₀ C_BL (fF)   10 → 1000 fF", yl: "ΔV (mV)", lines: [...rf, { pts, c: "#e3b341", w: 2.6 }], dots: [{ x: Math.log10(U.cbl), y: 1000 * dv, c: "#e3b341", t: `${U.cbl} fF` }], leg: [["사용자 가정", "#e3b341"], ["MFM4 0 V 이력차 대입", TC_COL.MFM4], ["MFBM4 대입", TC_COL.MFBM4]], legW: 150 });
+    $("#cc-q0v").textContent = U.q0.toFixed(1) + " fC"; $("#cc-q1v").textContent = U.q1.toFixed(1) + " fC"; $("#cc-cv").textContent = U.cbl + " fF";
+  };
+  h.innerHTML = `<div class="grid2"><div><div class="mathbox">Δ<i>V</i> = <span class="frac"><span>|<i>q</i><sub>1</sub> − <i>q</i><sub>0</sub>|</span><span><i>C</i><sub>BL</sub></span></span></div>
+      <label class="cl">상태 0 전달 전하 q₀ <b id="cc-q0v"></b><input type="range" id="cc-q0" min="0" max="60" step="0.5" value="${U.q0}"></label>
+      <label class="cl">상태 1 전달 전하 q₁ <b id="cc-q1v"></b><input type="range" id="cc-q1" min="0" max="60" step="0.5" value="${U.q1}"></label>
+      <label class="cl">비트라인 용량 C<sub>BL</sub> <b id="cc-cv"></b><input type="range" id="cc-c" min="10" max="1000" step="10" value="${U.cbl}"></label>
+      <div class="row wrap"><button class="btn sm" data-ref="MFM4">q₁−q₀ = MFM4 0 V 이력차 (${ref("MFM4")} fC)</button><button class="btn sm" data-ref="MFBM4">MFBM4 (${ref("MFBM4")} fC)</button></div>
+      <div id="cc-out"></div></div><div><div id="cc-plot"></div><p class="mut">TCAD 0 V 이력 차이를 전달 전하 차이로 대입하는 것은 <b>가정</b>. 실제 전달 전하는 WL/PL 펄스·트랜지스터·C<sub>BL</sub>이 함께 정함 → P4 R3 회로 해석으로 확인. 이 값으로 MFM/MFBM의 판독 성능 우위를 결정하지 않음.</p></div></div>`;
+  $("#cc-q0").oninput = e => { U.q0 = +e.target.value; draw(); }; $("#cc-q1").oninput = e => { U.q1 = +e.target.value; draw(); }; $("#cc-c").oninput = e => { U.cbl = +e.target.value; draw(); };
+  $$("[data-ref]", h).forEach(b => b.onclick = () => { U.q0 = 0; U.q1 = ref(b.dataset.ref); $("#cc-q0").value = 0; $("#cc-q1").value = U.q1; draw(); });
+  draw();
+}
+// ---- ③ 수신기 설정 복원 시연
+function rxDemo() {
+  const R = S.rx || (S.rx = { ch: 1, reg: [0, 1], mem: null, pw: true, saved: null, rest: null, log: [] });
+  const CH = [["CH1", [0, 0]], ["CH2", [0, 1]], ["CH3", [1, 0]], ["CH4", [1, 1]]], code = b => b ? b.join("") : "––";
+  const lg = m => { R.log.unshift(m); R.log = R.log.slice(0, 6); };
+  const h = $("#rx");
+  const draw = (anim) => {
+    const cell = (b, i) => { const on = b !== null && b !== undefined; return `<g transform="translate(${360 + i * 92},70)"><rect width="74" height="96" rx="8" class="rxcell ${anim === "w" ? "flash" : ""}"/><text x="37" y="16" class="pt" text-anchor="middle">bit ${1 - i}</text>
+      <rect x="17" y="30" width="40" height="6" fill="#c9ced6"/><rect x="17" y="36" width="40" height="30" fill="#4cc9f033"/><rect x="17" y="66" width="40" height="6" fill="#c9ced6"/>
+      ${on ? `<path d="M37 ${b ? 62 : 40} V${b ? 40 : 62}" stroke="${b ? "#f778ba" : "#58a6ff"}" stroke-width="3" marker-end="url(#rxa${b})"/>` : ""}<text x="37" y="88" class="pd" text-anchor="middle" fill="#dce3ea">${on ? (b ? "1 (P↑)" : "0 (P↓)") : "비어 있음"}</text></g>`; };
+    const ch = R.pw && R.reg ? CH.findIndex(c => code(c[1]) === code(R.reg)) : -1;
+    h.innerHTML = `<div class="rxwrap"><svg viewBox="0 0 600 230" class="rxsvg"><defs>${[0, 1].map(b => `<marker id="rxa${b}" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${b ? "#f778ba" : "#58a6ff"}"/></marker>`).join("")}</defs>
+      <rect x="10" y="20" width="300" height="190" rx="12" class="rxbox"/><text x="24" y="42" class="pl">수신기</text><circle cx="290" cy="38" r="7" fill="${R.pw ? "#3fb950" : "#3a424d"}" class="${R.pw ? "led" : ""}"/><text x="276" y="42" class="pt" text-anchor="end">${R.pw ? "ON" : "OFF"}</text>
+      <rect x="28" y="56" width="264" height="64" rx="6" fill="${R.pw ? "#0b2530" : "#111"}"/><text x="160" y="98" text-anchor="middle" class="rxdisp" fill="${R.pw ? "#4cc9f0" : "#333"}">${R.pw && ch >= 0 ? CH[ch][0] : R.pw ? "—" : ""}</text>
+      <text x="28" y="146" class="pt">제어 레지스터 (휘발성)</text>${[0, 1].map(i => `<rect x="${28 + i * 46}" y="154" width="40" height="36" rx="5" class="rxreg ${R.pw && R.reg ? "" : "off"}"/><text x="${48 + i * 46}" y="178" text-anchor="middle" class="rxbit">${R.pw && R.reg ? R.reg[i] : "–"}</text>`).join("")}
+      <text x="130" y="178" class="pt">코드 ${R.pw && R.reg ? code(R.reg) : "초기화됨"}</text>
+      <path d="M310 120 H360" stroke="${anim ? "#e3b341" : "#3a424d"}" stroke-width="3" ${anim ? 'class="flow"' : ""}/><text x="335" y="112" class="pt" text-anchor="middle">${anim === "r" ? "← 복원" : anim === "w" ? "저장 →" : ""}</text>
+      <text x="360" y="58" class="pl">강유전 메모리 블록 (비휘발성 가정)</text>${[0, 1].map(i => cell(R.mem ? R.mem[i] : null, i)).join("")}</svg>
+      <div class="rxctl"><div class="seg" id="rx-ch">${CH.map(([n, b], i) => `<button data-i="${i}" ${R.pw ? "" : "disabled"} class="${R.pw && code(R.reg) === code(b) ? "on" : ""}">${n}<small>${code(b)}</small></button>`).join("")}</div>
+        <div class="rxbtns"><button class="btn" id="rx-save" ${R.pw ? "" : "disabled"}>① 저장</button><button class="btn" id="rx-off" ${R.pw ? "" : "disabled"}>② 전원 OFF</button><button class="btn" id="rx-on" ${R.pw ? "disabled" : ""}>③ 전원 ON · 복원</button><button class="btn primary" id="rx-chk">④ 결과 확인</button></div>
+        <div class="rxres" id="rx-res">${R.chk || ""}</div><ol class="rxlog">${R.log.map(l => `<li>${l}</li>`).join("")}</ol></div></div>`;
+    $$("#rx-ch button", h).forEach(b => b.onclick = () => { R.reg = [...CH[+b.dataset.i][1]]; R.chk = ""; lg(`채널 선택 ${CH[+b.dataset.i][0]} → 코드 ${code(R.reg)}`); draw(); });
+    $("#rx-save").onclick = () => { R.mem = [...R.reg]; R.saved = [...R.reg]; R.chk = ""; lg(`저장: 메모리 블록에 ${code(R.mem)} 기록`); draw("w"); setTimeout(() => draw(), 900); };
+    $("#rx-off").onclick = () => { R.pw = false; R.reg = null; R.chk = ""; lg("전원 OFF: 제어 레지스터 초기화, 메모리 블록 유지"); draw(); };
+    $("#rx-on").onclick = () => { R.pw = true; R.reg = R.mem ? [...R.mem] : null; R.rest = R.reg ? [...R.reg] : null; R.chk = ""; lg(R.mem ? `전원 ON · 복원: ${code(R.mem)} → ${CH.find(c => code(c[1]) === code(R.mem))[0]}` : "전원 ON: 저장된 코드 없음 → 기본값"); draw("r"); setTimeout(() => draw(), 900); };
+    $("#rx-chk").onclick = () => { R.chk = !R.saved ? `<span class="warn">저장 이력 없음 → ① 저장 먼저</span>` : !R.rest ? `<span class="warn">복원 이력 없음 → ② 전원 OFF → ③ 전원 ON</span>` : code(R.saved) === code(R.rest) ? `<span class="okc">✓ 일치 · 저장 ${code(R.saved)} = 복원 ${code(R.rest)}</span>` : `<span class="badc">✗ 불일치 · 저장 ${code(R.saved)} ≠ 복원 ${code(R.rest)}</span>`; draw(); };
+  };
+  draw();
+}
+function tcMeasTab(h) {
+  const F = MEAS.files.filter(f => f.data && (f.kind === "IV" || f.kind === "CV"));
+  const iv = F.filter(f => f.kind === "IV"), cv = F.filter(f => f.kind === "CV" && f.data.some(r => r[1] !== null));
+  const pal = ["#4cc9f0", "#f0a35e", "#a5d6a7", "#f778ba", "#e3b341", "#b39ddb", "#80cbc4", "#ef9a9a"];
+  h.innerHTML = `<p class="mut">실측은 제작 소자의 전기 응답, TCAD는 가정 구조의 분극·전하 응답 — 역할이 달라 직접 일치도 계산 안 함. 11/19 B1500A(HRSMU) · 4284A 원시 CSV.</p>
+    <div class="grid2"><div><h4>I–V (부호 포함, HRSMU) ${sb("meas")}</h4><div id="mt-iv"></div><table class="plc sm"><tr><th>시편</th><th>스윕</th><th>컴플라이언스</th><th>판정</th></tr>${iv.map(f => `<tr><td>${f.sample}</td><td>${f.params["Measurement.Primary.Start"]}~${f.params["Measurement.Primary.Stop"]} V</td><td>${f.params["Measurement.Primary.Compliance"]} A</td><td>${f.msg}</td></tr>`).join("")}</table></div>
+      <div><h4>C–V · D–V (4284A, Cp–D) ${sb("meas")}</h4><div id="mt-cv"></div><div id="mt-dv"></div><p class="mut">|D| ≫ 1 · Rp ~10 Ω = 경로 단락형, C ~1.2 pF = 미접촉. 막의 강유전 C–V로 해석 불가 (P5 재측정 항목).</p></div></div>
+    <p class="mut">면적 확인 후 J–V 환산: 패드 Ø750 µm (4.42×10⁻³ cm²). 지연·스텝 시간은 CSV 헤더 기준.</p>`;
+  Chart.draw($("#mt-iv"), { h: 240, xlabel: "V (V)", ylabel: "I (pA)", series: iv.map((f, i) => ({ pts: f.data.map(r => [r[0], r[1] * 1e12]), color: pal[i % 8], name: `${f.sample} ${f.time.slice(0, 5)}` })) });
+  Chart.draw($("#mt-cv"), { h: 170, xlabel: "V (V)", ylabel: "Cp (pF)", ylog: true, series: cv.map((f, i) => ({ pts: f.data.filter(r => r[1] > 0).map(r => [r[0], r[1] * 1e12]), color: pal[i % 8], name: `${f.sample} ${f.time.slice(0, 5)}` })) });
+  Chart.draw($("#mt-dv"), { h: 170, xlabel: "V (V)", ylabel: "|D|", ylog: true, series: cv.map((f, i) => ({ pts: f.data.filter(r => r[2] !== null && Math.abs(r[2]) > 0).map(r => [r[0], Math.abs(r[2])]), color: pal[i % 8], name: f.sample })) });
+}
+function tcSrcTab(h) {
+  h.innerHTML = `<div class="grid2"><div>${eqCard("전하 변화폭", "Δ<i>Q</i> = <i>Q</i><sub>max</sub> − <i>Q</i><sub>min</sub>", "선택 구간의 Q(t) 최댓값 − 최솟값")}${eqCard("0 V 전하 이력 차이", "|<i>Q</i><sub>↑</sub>(0) − <i>Q</i><sub>↓</sub>(0)|", "반복 주기: Q↓(0)=Q(2 ms), Q↑(0)=Q(4 ms)")}
+      ${eqCard("피크 단자 전류", "max |<i>I</i>(<i>t</i>)|", "선택 구간 TotalCurrent 판독값")}${eqCard("주기당 단자 순에너지", "<i>E</i> = ∫<sub><i>t</i>₀</sub><sup><i>t</i>₀+<i>T</i></sup> <i>V</i>(<i>t</i>) <i>I</i>(<i>t</i>) d<i>t</i>", "사다리꼴 적분 · V·pA·ms = fJ")}
+      ${eqCard("변화율", "<span class=\"frac\"><span><i>X</i><sub>MFBM</sub> − <i>X</i><sub>MFM</sub></span><span><i>X</i><sub>MFM</sub></span></span> × 100 %", "‘개선율’이 아닌 MFM 대비 변화율")}</div>
+    <div>${kv([["데이터", "Sentaurus Q–t, I–t 그래프 판독 (MFM4 404점, MFBM4 404점)", "TCAD"], ["V(t)", "파형 정의(0→+4→−4→+4→0 V, 1 ms 램프)로 재구성 · 원시 V 열 수령 시 교체", "가정"], ["시간 격자", "0.01 ms 균일 재표본 (선형 보간)", "모델"], ["판독 해상도", "약 0.07 fC · 0.5 pA", "모델"], ["읽기 신호 계산기", "q₀, q₁, C_BL 모두 사용자 가정", "가정"], ["수신기 시연", "2비트 코드 · 이상 비휘발성 가정", "가정"]])}
+      <h4>참고 문헌</h4><ul class="steps sm"><li>Sheikholeslami & Gulak, Proc. IEEE 88, 667 (2000) — FeRAM 1T1C 읽기 동작</li><li>Scott, <i>Ferroelectric Memories</i>, Springer (2000)</li><li>Hosokura et al., 2015 — 졸-겔 BTO Pr 0.9~3 µC/cm²</li><li>Stawski et al., TSF 520, 4394 (2012) — Pt 위 졸-겔 BTO εr</li></ul></div></div>`;
+}
+
+// ------------------------------------------------------------------ P2 · 공정변수 → 결론 영향 지도
+const IMP_STEP = ["졸 합성", "TiO₂ 졸", "세척", "UV", "후드 환경", "코팅 사이클", "최종 열처리", "전기 측정"];
+const IMP_VAR = [
+  ["졸 합성", "conc", "BTO 몰농도", 0.20, 0.35, "M", v => v],
+  ["졸 합성", "ageH", "졸 숙성 시간", 0, 48, "h", v => v],
+  ["TiO₂ 졸", "tio2MeMl", "2-ME 희석량", 1, 5, "mL", v => v, "MFBM"],
+  ["세척", "cleanSC1", "SC-1 세척", false, true, "", v => v ? "수행" : "생략"],
+  ["세척", "airGun", "N₂ 건조", false, true, "", v => v ? "수행" : "생략"],
+  ["UV", "uv", "UV 처리 (1회)", false, true, "", v => v ? "수행" : "생략"],
+  ["후드 환경", "rh", "후드 습도", 55, 30, "%RH", v => v],
+  ["코팅 사이클", "rpm", "주 회전수", 3000, 6000, "rpm", v => v],
+  ["코팅 사이클", "coats", "BTO 코팅 횟수", 2, 8, "회", v => v],
+  ["코팅 사이클", "hpMin", "하드베이크 시간", 2, 10, "분", v => v],
+  ["최종 열처리", "annealT", "결정화 온도", 700, 750, "°C", v => v],
+  ["최종 열처리", "holdMin", "유지 시간", 30, 90, "분", v => v],
+];
+const IMP_RES = [["t", "막 두께", "nm"], ["g", "결정립", "nm"], ["e", "유효 εr", ""], ["p", "2Pr", "µC/cm²"], ["vc", "겉보기 Vc", "V"], ["y", "패드 수율", "%p"]];
+const IMP_CON = [["C1", "막 형성 품질", ["t", "g"]], ["C2", "절연 · 수율", ["y"]], ["C3", "분극 · 읽기 신호", ["p", "e"]], ["C4", "쓰기 전압", ["vc", "t"]], ["C5", "측정 신뢰성", []]];
+function impEval(l) { const f = PHY.solve(l), s = pundSim(f, 5, 10e-6), pT = f.nonUnif > 5 ? (f.nonUnif - 5) * 0.025 : 0; return { t: f.tBTO + f.tTiO2, g: f.grain, e: f.epsApp, p: ((s.Q.P - s.Q.U) - (s.Q.N - s.Q.D)) / 2 / PHY.AREA * 1e6, vc: f.Vc, y: 100 * f.Yfilm * (1 - pT) }; }
+function impCalc(st) {
+  S._imp = S._imp || {}; if (S._imp[st]) return S._imp[st];
+  const base = { ...DEFAULT_LOT, structure: st, coats: 4, ...ANNEAL_PRESET["개선"] }, b0 = impEval(base), E = {};
+  IMP_VAR.forEach(v => { if (v[7] && v[7] !== st) return; const lo = v[1] === "annealT" ? { ...base, ...ANNEAL_PRESET["초기"] } : { ...base, [v[1]]: v[3] }, hi = v[1] === "annealT" ? base : { ...base, [v[1]]: v[4] }; const a = impEval(lo), c = impEval(hi); E[v[1]] = Object.fromEntries(IMP_RES.map(([k]) => [k, c[k] - a[k]])); });
+  const mx = Object.fromEntries(IMP_RES.map(([k]) => [k, Math.max(1e-9, ...Object.values(E).map(e => Math.abs(e[k])))]));
+  return (S._imp[st] = { base, b0, E, mx });
+}
+STATIONS.impact = {
+  render(stage, side) {
+    const U = S.impU || (S.impU = { st: "MFM", sel: null });
+    const C = impCalc(U.st), vars = IMP_VAR.filter(v => !v[7] || v[7] === U.st);
+    stage.innerHTML = `<div class="sthead"><h2>공정변수 → 결론 영향 지도</h2><span class="mut">공정 단계 → 공정 변수 → 물성·결과 → 결론 항목 · 선 굵기 = 결과별 상대 영향 (변수를 실험 범위 끝↔끝으로 바꿀 때 변화량) ${tag("모델")}</span></div>
+      <div class="row wrap"><div class="seg" id="im-st">${["MFM", "MFBM"].map(s => `<button data-v="${s}" class="${U.st === s ? "on" : ""}">${s}4 기준</button>`).join("")}</div><span class="mut">노드를 누르면 연결 경로만 강조 · 다시 누르면 해제</span></div>
+      <div class="card sk-wrap"><div class="sk-scroll"><svg viewBox="0 0 1000 520" class="sk" id="sk"></svg></div>
+        <div class="lg13"><span><i style="background:#4cc9f0"></i>결과 증가</span><span><i style="background:#f0a35e"></i>결과 감소</span><span><i style="background:#58a6ff;height:2px"></i>실측 진단 (정성)</span><span><i style="background:#8a97a5"></i>결과 → 결론 연결</span></div><p class="mut">색은 방향만 표시. 좋고 나쁨은 결과마다 다름 (두께 ↑ → Vc ↑·수율 ↓, 결정립 ↑ → 2Pr ↑).</p></div>
+      <div class="card"><h3>영향 행렬 · 변화량 (낮은 값 → 높은 값)</h3><div class="sk-scroll"><table class="plc hm"><tr><th>공정 단계</th><th>변수 (범위)</th><th>우리 값</th>${IMP_RES.map(r => `<th>${r[1]}<small>${r[2]}</small></th>`).join("")}</tr>
+        ${vars.map(v => `<tr data-k="${v[1]}"><td>${v[0]}</td><td>${v[2]} <small>${v[6](v[3])}→${v[6](v[4])} ${v[5]}</small></td><td><b>${v[6](v[1] === "annealT" ? 750 : DEFAULT_LOT[v[1]] ?? (v[1] === "coats" ? 4 : "-"))}</b></td>${IMP_RES.map(([k]) => { const x = C.E[v[1]][k], n = Math.abs(x) / C.mx[k]; return `<td class="hc" style="background:${x > 0 ? `rgba(76,201,240,${(n * .55).toFixed(2)})` : `rgba(240,163,94,${(n * .55).toFixed(2)})`}">${Math.abs(x) < 0.005 ? "·" : (x > 0 ? "+" : "") + x.toFixed(k === "t" || k === "e" ? 0 : k === "y" ? 1 : 2)}</td>`; }).join("")}</tr>`).join("")}</table></div>
+        <p class="mut">기준 ${U.st}4 · 우리 공정 조건 · 2Pr은 ±5 V PUND 계산. "·" = 모델상 영향 없음 (예: 세척·UV는 결함 → 수율 경로로만 작동).</p></div>
+      <div class="card"><h3>결론 항목별 주 원인 (현재 모델)</h3><div class="grid3" id="im-con"></div></div>`;
+    impSankey(U, C, vars); impCon(U, C, vars);
+    $$("#im-st button").forEach(b => b.onclick = () => { U.st = b.dataset.v; U.sel = null; go("impact"); });
+    impSide(side, U, C, vars); earn("physics");
+  }
+};
+function impSankey(U, C, vars) {
+  const sv = $("#sk"), cols = [20, 255, 545, 790], W = [170, 200, 150, 190], H = 26;
+  const steps = IMP_STEP.filter(s => s === "전기 측정" || vars.some(v => v[0] === s));
+  const lay = (arr, x, w) => { const gap = Math.min(40, (500 - arr.length * H) / Math.max(1, arr.length - 1) + H), y0 = (520 - ((arr.length - 1) * gap + H)) / 2; return arr.map((a, i) => ({ ...a, x, w, y: y0 + i * gap })); };
+  const N1 = lay(steps.map(s => ({ id: "s:" + s, t: s })), cols[0], W[0]), N2 = lay([...vars.map(v => ({ id: "v:" + v[1], t: v[2], st: v[0] })), { id: "v:path", t: "측정 경로 기준선", st: "전기 측정" }], cols[1], W[1]);
+  const N3 = lay(IMP_RES.map(r => ({ id: "r:" + r[0], t: r[1], k: r[0] })), cols[2], W[2]), N4 = lay(IMP_CON.map(c => ({ id: "c:" + c[0], t: `${c[0]} ${c[1]}`, k: c[0] })), cols[3], W[3]);
+  const all = [...N1, ...N2, ...N3, ...N4], P = id => all.find(n => n.id === id), L = [];
+  N2.forEach(n => L.push({ a: "s:" + n.st, b: n.id, w: 1.5, c: "#5c6673" }));
+  vars.forEach(v => IMP_RES.forEach(([k]) => { const x = C.E[v[1]][k], r = Math.abs(x) / C.mx[k]; if (r > 0.06) L.push({ a: "v:" + v[1], b: "r:" + k, w: 1 + 9 * r, c: x > 0 ? "#4cc9f0" : "#f0a35e", tip: `${v[2]} → ${IMP_RES.find(q => q[0] === k)[1]}: ${(x > 0 ? "+" : "") + x.toFixed(2)}` }); }));
+  IMP_CON.forEach(c => c[2].forEach(k => L.push({ a: "r:" + k, b: "c:" + c[0], w: 3, c: "#8a97a5" })));
+  L.push({ a: "v:path", b: "c:C5", w: 6, c: "#58a6ff", dash: true, tip: "11/19 실측: 4284A ~10 Ω, WGFMU ≤2.9 Ω 경로 단락" });
+  // 선택 경로
+  let on = null; if (U.sel) { on = new Set([U.sel]); let grow = true; while (grow) { grow = false; L.forEach(l => { if (on.has(l.a) && !on.has(l.b) && !(U.sel.startsWith("c:") || U.sel.startsWith("r:"))) { on.add(l.b); grow = true; } if (on.has(l.b) && !on.has(l.a) && !(U.sel.startsWith("s:") || U.sel.startsWith("v:"))) { on.add(l.a); grow = true; } }); }
+    if (U.sel.startsWith("r:")) L.forEach(l => { if (l.a === U.sel) on.add(l.b); }); if (U.sel.startsWith("v:")) L.forEach(l => { if (l.b === U.sel) on.add(l.a); }); }
+  const lit = l => !on || (on.has(l.a) && on.has(l.b));
+  let s = [["공정 단계", 0], ["공정 변수", 1], ["물성 · 결과", 2], ["결론 항목", 3]].map(([t, i]) => `<text x="${cols[i]}" y="14" class="skh">${t}</text>`).join("");
+  s += L.map(l => { const a = P(l.a), b = P(l.b); if (!a || !b) return ""; const x1 = a.x + a.w, y1 = a.y + H / 2, x2 = b.x, y2 = b.y + H / 2, mx = (x1 + x2) / 2; return `<path d="M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}" stroke="${l.c}" stroke-width="${l.w.toFixed(1)}" fill="none" class="skl ${lit(l) ? "lit" : "dim"} ${l.dash ? "dash" : ""}">${l.tip ? `<title>${svgEsc(l.tip)}</title>` : ""}</path>`; }).join("");
+  s += all.map(n => `<g class="skn ${!on || on.has(n.id) ? "" : "dim"} ${U.sel === n.id ? "sel" : ""} k${n.id[0]}" data-id="${n.id}" transform="translate(${n.x},${n.y})"><rect width="${n.w}" height="${H}" rx="6"/><text x="10" y="17">${svgEsc(n.t)}</text></g>`).join("");
+  sv.innerHTML = s;
+  $$(".skn", sv).forEach(g => g.onclick = () => { U.sel = U.sel === g.dataset.id ? null : g.dataset.id; impSankey(U, C, vars); impSide($("#side"), U, C, vars); });
+}
+function impCon(U, C, vars) {
+  $("#im-con").innerHTML = IMP_CON.map(c => {
+    if (!c[2].length) return `<div class="ic"><b>${c[0]} ${c[1]}</b><ol><li>측정 경로 기준선 (11/19 실측 단락) ${tag("실측")}</li></ol><p class="mut">공정 변수 아님 → 측정 전 기준선 점검으로 해결.</p></div>`;
+    const sc = vars.map(v => [v, c[2].reduce((s, k) => s + Math.abs(C.E[v[1]][k]) / C.mx[k], 0)]).filter(x => x[1] > 0.06).sort((a, b) => b[1] - a[1]).slice(0, 3);
+    return `<div class="ic"><b>${c[0]} ${c[1]}</b><ol>${sc.map(([v]) => `<li>${v[0]} · <b>${v[2]}</b> <small>${c[2].map(k => { const x = C.E[v[1]][k]; return Math.abs(x) > 0.005 ? `${IMP_RES.find(r => r[0] === k)[1]} ${(x > 0 ? "+" : "") + x.toFixed(k === "t" || k === "e" ? 0 : 2)}` : ""; }).filter(Boolean).join(" · ")}</small></li>`).join("")}</ol></div>`;
+  }).join("");
+}
+function impSide(side, U, C, vars) {
+  const sel = U.sel, b0 = C.b0;
+  let body = `<p class="mut">노드를 선택하면 상세 표시.</p>${kv(IMP_RES.map(([k, n, u]) => [`${U.st}4 ${n}`, `${fmt(b0[k], k === "t" || k === "e" ? 0 : k === "y" ? 0 : 2)} ${u === "%p" ? "%" : u}`, "모델"]))}`;
+  if (sel && sel.startsWith("v:") && sel !== "v:path") { const v = IMP_VAR.find(x => "v:" + x[1] === sel); body = `<h4>${v[0]} · ${v[2]}</h4>${kv([["실험 범위", `${v[6](v[3])} → ${v[6](v[4])} ${v[5]}`, "가정"], ["우리 값", `${v[6](v[1] === "annealT" ? 750 : DEFAULT_LOT[v[1]] ?? 4)} ${v[5]}`, "실측"]])}<div class="bars">${IMP_RES.map(([k, n]) => { const x = C.E[v[1]][k], r = Math.abs(x) / C.mx[k]; return `<div class="bar"><span>${n}</span><i style="width:${(100 * r).toFixed(0)}%;background:${x > 0 ? "#4cc9f0" : "#f0a35e"}"></i><b>${Math.abs(x) < .005 ? "·" : (x > 0 ? "+" : "") + x.toFixed(2)}</b></div>`; }).join("")}</div><p class="mut">막대 길이 = 결과별 최대 영향 변수 대비 비율.</p>`; }
+  else if (sel === "v:path") body = `<h4>전기 측정 · 측정 경로 기준선</h4><p>11/19 측정 19개 중 저항 경로 판정 다수: 4284A Rp ~10 Ω, WGFMU R ≤2.9 Ω (1.15 mA 클리핑), 미접촉 C ~1.2 pF. 막 공정과 무관하게 C5 측정 신뢰성을 결정.</p><button class="btn sm" onclick="go('diag')">R0 실측 오류 분석 ▶</button>`;
+  else if (sel && sel.startsWith("r:")) { const k = sel.slice(2), n = IMP_RES.find(r => r[0] === k); body = `<h4>${n[1]}에 영향 준 변수</h4><div class="bars">${vars.map(v => [v, C.E[v[1]][k]]).filter(x => Math.abs(x[1]) > .005).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).map(([v, x]) => `<div class="bar"><span>${v[2]}</span><i style="width:${(100 * Math.abs(x) / C.mx[k]).toFixed(0)}%;background:${x > 0 ? "#4cc9f0" : "#f0a35e"}"></i><b>${(x > 0 ? "+" : "") + x.toFixed(2)}</b></div>`).join("")}</div>`; }
+  else if (sel && sel.startsWith("c:")) { const c = IMP_CON.find(x => "c:" + x[0] === sel); body = `<h4>${c[0]} ${c[1]}</h4><p>${{ C1: "두께는 몰농도·회전수·코팅 횟수, 결정립은 결정화 온도·유지 시간으로 결정.", C2: "수율은 결함 경로(세척·UV·습도·숙성) + 두께·하드베이크(크랙)로 결정.", C3: "2Pr은 결정립(열처리)과 TiO₂ 전압 분담(MFBM)으로 결정.", C4: "Vc는 BTO 두께와 TiO₂ 분담으로 결정.", C5: "측정 경로 단락이 해결되기 전에는 C2·C3 실측 판정 불가." }[c[0]]}</p>`; }
+  else if (sel && sel.startsWith("s:")) body = `<h4>${sel.slice(2)}</h4><p>이 단계의 변수: ${IMP_VAR.filter(v => v[0] === sel.slice(2)).map(v => v[2]).join(", ") || "측정 경로 기준선"}</p>`;
+  side.innerHTML = `<div class="card"><h3>선택 상세</h3>${body}</div><div class="card"><h3>읽는 법</h3><ol class="steps sm"><li>왼쪽 공정 단계에서 출발</li><li>선 굵기 = 그 결과를 가장 크게 바꾸는 변수일수록 굵음</li><li>오른쪽 결론 항목에서 거꾸로 누르면 원인 경로 추적</li></ol></div>`;
+}
+
+// ------------------------------------------------------------------ P1 · 우리 실제 진행 기록
+STATIONS.ours = {
+  render(stage, side) {
+    const F = MEAS.files, samples = ["MFM2", "MFM4", "MFM6", "MFM8", "MFBM2", "MFBM4", "MFBM6", "MFBM8"];
+    const cnt = s => { const f = F.filter(x => x.sample === s); return { n: f.length, iv: f.filter(x => x.kind === "IV").length, cv: f.filter(x => x.kind === "CV").length, pe: f.filter(x => x.kind === "PE").length }; };
+    const flow = [["졸 합성", "BTO 0.28 M · TiO₂ 졸 + 2-ME 희석(점도 조정)", "sol"], ["기판 세척", "아세톤 5분 → IPA 5분 → DI 끓임 10분 → SC-1 10분 → DI 세척 → N₂ 건조", "clean"], ["UV 처리", "코팅 전 1회 (MFM·MFBM 공통)", "uv"], ["TiO₂ 코팅 (MFBM)", "Prog 99 · 1회 고정 → 450 °C 60분 (5 °C/min)", "tio2"], ["BTO 코팅 사이클", "Prog 99 (1000/5/3 → 5000/5/20) → 실온 2분 → 80 °C 2분 → 면봉 → 하드베이크 · 2/4/6/8회", "spin"], ["최종 열처리", "RT→150 °C 10 °C/min → 600 °C 1.5 °C/min → 750 °C 1 °C/min · 60분", "furnace"], ["Pt 상부전극", "Ø750 µm 패드", "pt"], ["구조 분석", "XRD 700 vs 750 °C · SEM 단면", "xrd"], ["전기 측정", "B1500A HRSMU · WGFMU · 4284A", "b1500"]];
+    const evs = [["11/11", "XRD · 700 °C 60분 시편", "이차상 피크 다수 → 결정성 부족", "warn"], ["11/13", "XRD · 750 °C 3단 램프 시편", "이차상 피크 감소 → 750 °C 채택", "ok"], ["SEM", "3회 코팅 단면 131.37 nm", "1회당 43.8 nm → 4회 175 nm (TCAD 입력 두께)", "ok"], ["11/17", "R17-103 패드 I–V", "+312 µA @ +0.75 V 반전 피크 후보 · 비대칭 −984 µA", "warn"], ["11/19", "MFM·MFBM 2~8회 I–V / C–V / P–E", "HRSMU 39–67 GΩ(절연 또는 미접촉) · 4284A·WGFMU 단락형", "bad"], ["TCAD R1", "팀원 Sentaurus MFM4 / MFBM4", "Q–t · I–t 수령 → 앱 엔진 재현 오차 ≤2.6%", "ok"]];
+    stage.innerHTML = `<div class="sthead"><h2>우리 실제 진행 기록</h2><span class="mut">팀이 실제로 수행한 공정 · 측정 · 결과만 정리 ${tag("실측")} · 시뮬레이터 계산값은 이 화면에 없음</span></div>
+      <div class="card"><h3>실제 공정 흐름</h3><div class="oflow">${flow.map((x, i) => `<button class="of" data-go="${x[2]}" style="animation-delay:${i * 90}ms"><em>${String(i).padStart(2, "0")}</em><b>${x[0]}</b><span>${x[1]}</span></button>`).join("")}</div></div>
+      <div class="grid2"><div class="card"><h3>제작 · 측정 시편 현황 (11/19 CSV 기준)</h3><div class="sk-scroll"><table class="mtab otab"><tr><th></th>${[2, 4, 6, 8].map(n => `<th>${n}회</th>`).join("")}</tr>
+        ${["MFM", "MFBM"].map(st => `<tr><th>${st}</th>${[2, 4, 6, 8].map(n => { const c = cnt(st + n); return `<td class="${c.n ? "has" : ""}">${c.n ? `<b>${c.n}</b><small>${[c.iv && "I–V " + c.iv, c.cv && "C–V " + c.cv, c.pe && "P–E " + c.pe].filter(Boolean).join(" · ")}</small>` : `<small>측정 기록 없음</small>`}</td>`; }).join("")}</tr>`).join("")}
+        <tr><th>TiO₂ 단독</th><td colspan="4" class="has"><small>450 °C 60분 · XRD 상 확인용</small></td></tr></table></div>
+        <p class="mut">MFM2·MFM8은 측정 CSV 없음 → 시뮬레이터에서 "시뮬레이션"으로 표시. 측정 미기재 PATTERN 파일 ${F.filter(f => f.sample.includes("미기재")).length}개는 MFBM2 추정.</p></div>
+        <div class="card"><h3>XRD · 700 vs 750 °C ${tag("실측")}</h3><div id="o-xrd"></div><p class="mut">700 °C: 이차상 추정 피크 다수 · 750 °C: 피크 정리 → 결정화 온도 상향의 근거.</p></div></div>
+      <div class="card"><h3>진행 타임라인</h3><div class="otl">${evs.map((e, i) => `<div class="ote ${e[3]}" style="animation-delay:${i * 140}ms"><i></i><small>${e[0]}</small><b>${e[1]}</b><span>${e[2]}</span></div>`).join("")}</div></div>
+      <div class="card"><h3>11/19 측정 로그 · 파일별 판정 ${tag("실측")}</h3><div class="mlog">${F.map((f, i) => `<div class="ml ${f.status}" style="animation-delay:${i * 40}ms" title="${svgEsc(f.file)}"><small>${f.time.slice(0, 5)}</small><b>${f.kind}</b><span>${f.sample.replace(" (MFBM2 추정)", "*")}</span><em>${{ floor: "절연/미접촉", short: "단락형", open: "미접촉", empty: "빈 파일", nodata: "측정값 없음" }[f.status] || f.status}</em></div>`).join("")}</div>
+        <div class="legend2"><span class="g">절연 또는 미접촉 (GΩ)</span><span class="r">단락형 (Ω)</span><span class="b">미접촉 (pF)</span><span class="y">빈 파일 · 측정값 없음</span></div></div>`;
+    Chart.draw($("#o-xrd"), { h: 220, xlabel: "2θ (°)", ylabel: "강도 (a.u.)", series: [{ pts: MEAS.xrd.BTO700.map(p => [p[0], p[1] + 1500]), color: "#8b9db3", name: "700 °C (11/11) +오프셋", width: 1 }, { pts: MEAS.xrd.BTO750C, color: "#e3b341", name: "750 °C (11/13)", width: 1 }] });
+    $$("[data-go]", stage).forEach(b => b.onclick = () => go(b.dataset.go));
+    const st = s => F.filter(f => f.status === s).length;
+    side.innerHTML = `<div class="card"><h3>11/19 측정 요약</h3>${kv([["CSV 파일", F.length + "개", "실측"], ["절연 또는 미접촉 (HRSMU)", st("floor") + "개", "실측"], ["단락형 (4284A · WGFMU)", st("short") + "개", "실측"], ["미접촉 (C ~1.2 pF)", st("open") + "개", "실측"], ["빈 파일 · 측정값 없음", st("empty") + st("nodata") + "개", "실측"]])}<button class="btn sm" onclick="go('diag')">R0 오류 원인 분석 ▶</button></div>
+      <div class="card"><h3>공정 조건 변경 이력</h3><ul class="steps sm"><li>BTO 결정화 700 °C → 750 °C (XRD 결정성 부족)</li><li>승온 1 °C/min 단일 → 10 / 1.5 / 1 °C/min 3단</li><li>TiO₂ 졸 2-ME 희석으로 점도 조정</li></ul></div>`;
+  }
+};
+
+// ------------------------------------------------------------------ P4 · Sentaurus 피드백 과정
+STATIONS.tcadloop = {
+  render(stage, side) {
+    const U = S.tl || (S.tl = { r: 1, k: 0 });
+    const loop = ["요청 정의", "구조 · 물성 입력", "Sentaurus 해석", "결과 수신", "앱 재현 · 검증", "피드백 정리"];
+    const m = tcMetrics("MFM4", "rep"), b = tcMetrics("MFBM4", "rep"), C = tcadCompare(), err = Math.max(...["MFM4", "MFBM4"].flatMap(k => [Math.abs(C[k].eq), Math.abs(C[k].ei)]));
+    const R = [
+      { id: 1, st: "done", t: "R1 · 이상 소자 응답 비교", req: "MFM4 / MFBM4 동일 ±4 V 삼각파 Q–t, I–t", inp: "BTO 175.2 nm (SEM 기반) · TiO₂ 32.69 nm · εr 40/34 · Pr 2 · Ps 4 · Ec 27", out: "Q–t · I–t 그래프 · 최대값 표 (MFM4 Imax 193.9 pA, Qmax 48.1 fC / MFBM4 30.6 pA, 27.5 fC)", chk: `그래프 판독 → 앱 엔진 동일 입력 재현 · 최대값 오차 ${err.toFixed(1)}% · 경향 일치 (TiO₂ 분담 → 반전 약화)`, fb: ["원시 CSV(V·Q·Total/Displacement/e/h 열) 요청", "BTO εr 40은 문헌(~161) 대비 낮음 → 민감도 확인 요청", "지표 비교 구간을 반복 1주기로 통일"] },
+      { id: 2, st: "now", t: "R2 · 원본 데이터 · 지표 4개", req: "원시 CSV + 전류 성분 열 + 반복 주기 지표", inp: "R1과 동일 입력 (조건 고정)", out: `전하 변화폭 · 0 V 이력 차이 · 피크 전류 · 주기당 에너지 (현재 판독값: MFBM4 0 V 이력차 MFM 대비 ${(100 * (b.q0 - m.q0) / m.q0).toFixed(0)}%)`, chk: "판독값 → 원본값 교체 후 지표 재계산 · 전류 성분으로 변위/전도 구분", fb: ["V–t 원시 열로 파형 동일성 확인", "TotalCurrent = Displacement + e + h 대조", "εr 40 / 161 두 경우 비교 (선택)"] },
+      { id: 3, st: "next", t: "R3 · 1T1C 읽기 회로 비교", req: "같은 회로에서 커패시터만 교체", inp: "WL/PL 펄스 · 액세스 트랜지스터 · C_BL · 기준전압", out: "V_BL,0(t), V_BL,1(t) · 커패시터 전압·전류", chk: "읽기 신호 |V_BL,1 − V_BL,0| · 판독 여유 · 읽기+복원 ∫VI dt", fb: ["두 구조의 읽기 파형 1장 + 지표 비교표 1개", "읽기 신호 ↔ 에너지 상충관계를 회로 수준에서 판단"] },
+      { id: 4, st: "opt", t: "R4 · 실측 반영 재해석 (선택)", req: "재측정 성공 시 실측 εr · Pr · Ec 반영", inp: "재측정 C–V · PUND 결과", out: "실측 물성 기반 Q–V", chk: "실측 P–E와 같은 지표로 비교", fb: ["재측정 완료 후 진행"] }];
+    const cur = R.find(r => r.id === U.r);
+    stage.innerHTML = `<div class="sthead"><h2>Sentaurus 피드백 과정</h2><span class="mut">팀원(TCAD 담당)과 요청 → 해석 → 검증 → 피드백을 반복하는 방식 · 라운드별 산출물과 다음 요청</span></div>
+      <div class="grid2"><div class="card"><h3>피드백 루프</h3><svg viewBox="0 0 420 330" class="loop" id="tl-loop">${(() => { let s = `<circle cx="210" cy="165" r="118" class="lp-ring"/><circle cx="210" cy="165" r="118" class="lp-run" transform="rotate(-100 210 165)"/>`; loop.forEach((t, i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / 6, x = 210 + 118 * Math.cos(a), y = 165 + 118 * Math.sin(a); s += `<g class="lp-n" data-i="${i}" transform="translate(${x},${y})" style="animation-delay:${i * 0.8}s"><circle r="30"/><text y="-2" text-anchor="middle" class="lp-i">${i + 1}</text><text y="46" text-anchor="middle" class="lp-t">${t}</text></g>`; }); return s + `<text x="210" y="160" text-anchor="middle" class="lp-c">${cur.t.split("·")[0]}</text><text x="210" y="180" text-anchor="middle" class="lp-s">${{ done: "완료", now: "요청 중", next: "예정", opt: "선택" }[cur.st]}</text>`; })()}</svg></div>
+        <div class="card"><h3>라운드</h3><div class="rounds">${R.map(r => `<button class="rd ${r.st} ${r.id === U.r ? "on" : ""}" data-r="${r.id}"><em>${{ done: "완료", now: "요청 중", next: "예정", opt: "선택" }[r.st]}</em><b>${r.t}</b></button>`).join("")}</div>
+          <div class="rdetail">${[["① 요청", cur.req], ["② 입력", cur.inp], ["③④ 결과", cur.out], ["⑤ 검증", cur.chk]].map(x => `<div><small>${x[0]}</small><p>${x[1]}</p></div>`).join("")}<div><small>⑥ 피드백 · 다음 요청</small><ul class="steps sm">${cur.fb.map(f => `<li>${f}</li>`).join("")}</ul></div></div></div></div>
+      <div class="card"><h3>R3 읽기 회로 시뮬레이션 설계 · 1T1C</h3><div class="grid2"><div><svg viewBox="0 0 420 260" class="t1c" id="t1c"></svg></div>
+        <div><div class="seq" id="t1-seq">${[["상태 준비", "반대 방향 쓰기 펄스로 두 초기 상태 준비", "쓰기 전압 · 전류 · 초기 상태"], ["대기", "동일 대기 조건", "읽기 직전 상태"], ["읽기", "두 상태에 같은 WL/PL 펄스", "V_BL,0(t) · V_BL,1(t)"], ["판독", "같은 시점 · 기준전압으로 판정", "전압 분리량 · 기준 대비 여유"], ["복원", "읽기로 상태가 바뀌면 재기록", "복원 후 상태 · 복원 포함 에너지"]].map((x, i) => `<div class="sq" data-i="${i}"><em>${i + 1}</em><div><b>${x[0]}</b><span>${x[1]}</span><small>저장: ${x[2]}</small></div></div>`).join("")}</div>
+          <button class="btn sm primary" id="t1-play">▶ 동작 순서 재생</button></div></div></div>
+      <div class="card"><h3>팀원 전달용 요청 정리 (R2 · R3)</h3><pre class="msg" id="tl-msg">[TCAD R2 요청]
+1. MFM4 / MFBM4 원시 CSV: time, V, Q, TotalCurrent, DisplacementCurrent, eCurrent, hCurrent
+2. 조건 고정: R1과 동일 입력 · 동일 ±4 V 삼각파 (램프 1 ms)
+3. 지표 구간: 반복 1주기 (1–5 ms) 기준
+
+[TCAD R3 요청 · 가능 시]
+1. 1T1C 회로에서 커패시터만 MFM4 / MFBM4로 교체
+2. 순서: 상태 준비 → 대기 → 읽기 (같은 WL/PL 펄스) → 판독 → 복원
+3. 결과: V_BL,0(t), V_BL,1(t), 커패시터 V·I, 읽기·복원 구간 전원별 ∫VI dt
+4. 그림: 두 구조 읽기 파형 1장 + 지표 비교표 1개</pre><button class="btn sm" id="tl-copy">복사</button></div>`;
+    $$(".rd", stage).forEach(x => x.onclick = () => { U.r = +x.dataset.r; go("tcadloop"); });
+    $("#tl-copy").onclick = () => { try { navigator.clipboard.writeText($("#tl-msg").textContent); $("#tl-copy").textContent = "복사됨 ✓"; } catch (e) { } };
+    t1cDraw(-1); $("#t1-play").onclick = () => { let i = 0; const tick = () => { if (S.view !== "tcadloop" || !$("#t1c")) return; t1cDraw(i); $$("#t1-seq .sq").forEach((q, j) => q.classList.toggle("on", j === i)); if (++i < 5) setTimeout(tick, 1300); else setTimeout(() => { if ($("#t1c")) { t1cDraw(-1); $$("#t1-seq .sq").forEach(q => q.classList.remove("on")); } }, 1500); }; tick(); };
+    side.innerHTML = `<div class="card"><h3>역할 분담</h3>${kv([["TCAD 해석", "팀원 (Sentaurus)", ""], ["판독 · 재현 · 지표", "시뮬레이터 (이 앱)", ""], ["실측 · 공정", "팀 전체", ""]])}</div>
+      <div class="card"><h3>우선순위</h3><ol class="steps sm"><li><b>① TCAD 그래프 · 지표 비교</b> — 현재 데이터로 완료 (P3)</li><li><b>② 채널 저장 · 복원 시연</b> — 이상 메모리 가정 완료 (P3)</li><li><b>③ 실제 읽기 회로 비교</b> — R3 요청</li></ol><p class="mut">①②만으로 발표 결과물 확보, ③ 완료 시 메모리 성능 분석까지 확장.</p></div>`;
+  }
+};
+function t1cDraw(ph) {
+  const sv = $("#t1c"); if (!sv) return;
+  const act = (i, c) => ph === i ? c : "#5c6673", wl = ph === 0 || ph === 2 || ph === 4, pl = ph === 0 || ph === 2 || ph === 4;
+  sv.innerHTML = `<text x="10" y="18" class="pl">1T1C FeRAM 셀 (개념도)</text>
+    <line x1="70" y1="40" x2="70" y2="230" stroke="${ph >= 2 ? "#e3b341" : "#8a97a5"}" stroke-width="3"/><text x="58" y="250" class="pt">BL</text>
+    <line x1="20" y1="90" x2="400" y2="90" stroke="${wl ? "#4cc9f0" : "#8a97a5"}" stroke-width="3" class="${wl ? "pulse" : ""}"/><text x="370" y="82" class="pt">WL</text>
+    <path d="M70 130 H130 M130 110 V150 M140 110 V150 M140 120 H190 M140 140 H170" stroke="#dce3ea" stroke-width="2" fill="none"/><line x1="135" y1="90" x2="135" y2="110" stroke="${wl ? "#4cc9f0" : "#8a97a5"}" stroke-width="2"/>
+    <path d="M190 120 V160" stroke="#dce3ea" stroke-width="2"/><rect x="170" y="160" width="40" height="7" fill="#c9ced6"/><rect x="170" y="167" width="40" height="18" fill="${act(2, "#f778ba")}55"/><rect x="170" y="185" width="40" height="7" fill="#c9ced6"/><text x="218" y="180" class="pt">Cferro (MFM4 / MFBM4 교체)</text>
+    <path d="M190 192 V215 H400" stroke="${pl ? "#f0a35e" : "#8a97a5"}" stroke-width="3" fill="none" class="${pl ? "pulse" : ""}"/><text x="370" y="208" class="pt">PL</text>
+    <path d="M70 200 H40 M40 192 V208 M32 192 V208" stroke="#dce3ea" stroke-width="2" fill="none"/><text x="4" y="230" class="pt">C_BL</text>
+    <path d="M70 50 H250 L290 35 V65 Z" stroke="${act(3, "#3fb950")}" stroke-width="2" fill="${ph === 3 ? "#3fb95033" : "none"}"/><text x="258" y="54" class="pt">SA</text><text x="300" y="54" class="pt">V_ref</text>
+    <text x="250" y="140" class="pd" fill="#e3b341">${["① 상태 준비: 쓰기 펄스", "② 대기", "③ 읽기: WL·PL 펄스 → BL 전하 전달", "④ 판독: V_BL vs V_ref", "⑤ 복원: 재기록"][ph] || "▶ 재생으로 동작 순서 확인"}</text>`;
+}
+
+// ------------------------------------------------------------------ P5 · 결론 · 지금 할 일
+STATIONS.next = {
+  render(stage, side) {
+    const m = tcMetrics("MFM4", "rep"), b = tcMetrics("MFBM4", "rep"), ch = (x, y) => (100 * (y - x) / x).toFixed(0);
+    const F = MEAS.files, nFloor = F.filter(f => f.status === "floor").length, nShort = F.filter(f => f.status === "short").length;
+    const gates = [["졸 · 막 공정", "done", "MFM · MFBM 2~8회 제작"], ["구조 분석", "done", "XRD 750 °C · SEM 43.8 nm/회"], ["전기 측정", "block", "측정 경로 단락 → 판정 불가"], ["TCAD 소자 비교", "done", "R1 · 지표 4개"], ["응용 시연", "done", "이상 메모리 가정"], ["읽기 회로", "todo", "R3 요청"]];
+    const finds = [
+      ["막은 만들어졌다", `XRD: 750 °C에서 이차상 피크 감소, SEM: 1회 43.8 nm (4회 175 nm). 11/19 HRSMU ${nFloor}개 측정이 39–67 GΩ → 막 관통 단락 증거 없음.`, "meas", "단, GΩ은 미접촉과도 구분 안 됨 → 접촉 확인(C 측정)과 함께 재측정"],
+      ["전기 특성은 아직 판정 불가", `4284A · WGFMU ${nShort}개 파일이 수 Ω 단락형, 일부 C ~1.2 pF 미접촉. 같은 시편이 HRSMU에선 절연 → 막이 아니라 측정 경로 문제.`, "meas", "프로브를 띄운 기준선 점검 → 지그·케이블 교체 → C–V · PUND 재측정"],
+      ["TiO₂ 버퍼 = 신호 ↓ · 부담 ↓ 상충", `이상 소자(TCAD)에서 MFBM4는 MFM4 대비 0 V 전하 이력 차이 ${ch(m.q0, b.q0)}%, 피크 전류 ${ch(m.ipk, b.ipk)}%, 주기당 에너지 ${ch(m.E, b.E)}%.`, "tcad", "버퍼는 누설 억제용, 대가는 읽기 신호 감소 → 회로(R3)에서 판독 여유로 최종 판단"]];
+    const acts = [
+      ["P1", "측정 경로 기준선 점검 · 재측정", "팀", "프로브 리프트 상태 R > 1 GΩ, 접촉 시 C ≈ 수 nF (εr ~160 · Ø750 µm · 175 nm 기준)", "MFM4 · MFBM4 C–V, PUND 실측값", "C2·C3 실측 판정 가능"],
+      ["P1", "TCAD R2 원본 CSV 수령", "팀원", "V·Q·전류 성분 열 포함", "지표 4개 원본값 · 전류 성분", "P3 판독값 → 원본값 교체"],
+      ["P2", "발표용 결과물 확정", "팀", "P3 ① 지표 비교 + ③ 복원 시연 화면", "그래프 4장 + 지표 표 + 시연", "발표 핵심 결과"],
+      ["P3", "TCAD R3 1T1C 읽기 회로", "팀원", "같은 회로 · 커패시터만 교체", "읽기 파형 1장 + 지표표", "읽기 신호 ↔ 에너지 상충 회로 수준 판단"],
+      ["P3", "재측정 성공 시 공정 Split", "팀", "결정화 온도 · 코팅 횟수 · UV", "수율 · 2Pr 실측 비교", "P2 영향 지도 검증"]];
+    stage.innerHTML = `<div class="sthead"><h2>결론 · 지금 할 일</h2><span class="mut">현재까지 확인된 것 · 아직 모르는 것 · 다음 행동</span></div>
+      <div class="bigc"><small>한 줄 결론</small><h2>BTO 막 공정과 구조는 확보 · 전기 특성은 측정 경로 문제로 미판정 · TCAD상 TiO₂ 버퍼는 읽기 신호를 줄이는 대신 구동 부담을 줄임</h2><p>→ 지금 할 일: <b>측정 경로 기준선 점검 후 MFM4 / MFBM4 재측정</b>, 동시에 <b>TCAD 원본 CSV(R2) 수령</b></p></div>
+      <div class="gates">${gates.map((g, i) => `<div class="gt ${g[1]}" style="animation-delay:${i * 120}ms"><i>${{ done: "✓", block: "!", todo: "…" }[g[1]]}</i><b>${g[0]}</b><span>${g[2]}</span></div>`).join('<em class="ga"></em>')}</div>
+      <div class="find3">${finds.map((x, i) => `<div class="fd"><em>${i + 1}</em><h3>${x[0]} ${sb(x[2])}</h3><p>${x[1]}</p><div class="so"><b>그래서 →</b> ${x[3]}</div></div>`).join("")}</div>
+      <div class="card"><h3>다음 행동 (우선순위)</h3><div class="sk-scroll"><table class="plc acts"><tr><th>순위</th><th>할 일</th><th>담당</th><th>완료 조건</th><th>산출물</th><th>열리는 것</th></tr>${acts.map(a => `<tr><td><span class="pr ${a[0]}">${a[0]}</span></td><td><b>${a[1]}</b></td><td>${a[2]}</td><td>${a[3]}</td><td>${a[4]}</td><td>${a[5]}</td></tr>`).join("")}</table></div></div>
+      <div class="card"><h3>재측정 판단 순서</h3><div class="dtree">${[["프로브 띄움 · 기준선", "R > 1 GΩ ?", "아니오 → 지그 · 케이블 · 척 교체"], ["패드 접촉 · C 측정 (1 kHz)", "C ≫ 1.2 pF (nF 수준) ?", "아니오 → 미접촉: Z 오버드라이브 · 패드 재확인"], ["D (손실) 확인", "D < 0.1 ?", "아니오 → 누설 · 단락 패드: 다른 패드"], ["I–V (±Vc 이하)", "누설 < 1 µA ?", "아니오 → 해당 패드 제외"], ["PUND · P–E", "2Pr 산출", "→ P3 TCAD · P2 모델과 비교"]].map((x, i) => `<div class="dn"><em>${i + 1}</em><b>${x[0]}</b><span class="q">${x[1]}</span><span class="n">${x[2]}</span></div>`).join('<i class="da">▼</i>')}</div></div>`;
+    side.innerHTML = `<div class="card"><h3>발표에서 말할 문장</h3><ol class="steps sm"><li>“졸-겔 BTO 막은 750 °C 3단 열처리로 결정성을 개선했고 두께는 1회 43.8 nm로 제어된다.”</li><li>“11/19 전기 측정 이상은 막이 아닌 측정 경로 단락으로 진단했다.”</li><li>“TCAD상 TiO₂ 버퍼는 피크 전류를 ${Math.abs(ch(m.ipk, b.ipk))}% 줄이지만 0 V 이력 차이도 ${Math.abs(ch(m.q0, b.q0))}% 줄인다 — 읽기 회로에서 최종 판단한다.”</li></ol></div>
+      <div class="card"><h3>바로가기</h3><div class="col"><button class="btn sm" onclick="go('ours')">P1 우리 실제 진행</button><button class="btn sm" onclick="go('impact')">P2 영향 지도</button><button class="btn sm" onclick="go('tcad')">P3 TCAD 3단계</button><button class="btn sm" onclick="go('tcadloop')">P4 Sentaurus 피드백</button><button class="btn sm" onclick="go('diag')">R0 실측 오류 분석</button></div></div>`;
+  }
+};
+
+// ------------------------------------------------------------------ 결과 분석 결론 구조화: 판정 · 근거 · 그래서
+const _labRep13 = labReport;
+labReport = function (stage, side) {
+  _labRep13(stage, side);
+  const L = S.lot; if (L.structure === "TiO2") return;
+  const box = $(".concl", stage); if (!box || !S.lab || !S.lab.meas) return;
+  const y = labYield(), m = S.lab.meas, mem = m.m, f = S.film;
+  const std = { ...DEFAULT_LOT, ...LAB_SCEN[0].o };
+  // 표준 대비 공정 변수 기여 (하나씩 표준값으로 되돌려 Δ)
+  const keys = [["structure", "구조 (TiO₂ 버퍼)"], ["coats", "BTO 코팅 횟수"], ["annealT", "결정화 열처리", ["annealPreset", "rampA", "rampB", "ramp", "holdMin"]], ["uv", "UV 처리"], ["rh", "후드 습도"], ["cleanSC1", "SC-1 세척"], ["airGun", "N₂ 건조"], ["conc", "BTO 몰농도"], ["rpm", "회전수"], ["edgeClean", "하부전극 면봉"]];
+  const b0 = impEval(L), con = [];
+  keys.forEach(([k, n, grp]) => { if (L[k] === std[k]) return; const alt = { ...L, [k]: std[k] }; (grp || []).forEach(g => alt[g] = std[g]); const a = impEval(alt); con.push({ n, from: L[k], to: std[k], dy: b0.y - a.y, dp: b0.p - a.p, dv: b0.vc - a.vc }); });
+  con.sort((a, c) => (Math.abs(c.dy) / 10 + Math.abs(c.dp)) - (Math.abs(a.dy) / 10 + Math.abs(a.dp)));
+  const gate = (n, st, v) => `<div class="g4 ${st}"><i></i><b>${n}</b><span>${v}</span></div>`;
+  const gates = [gate("막 형성", f.tBTO > PHY.K.hCrack.v ? "warn" : "ok", `${fmt(f.tBTO, 0)} nm · 결정립 ${fmt(f.grain, 1)} nm`), gate("절연 · 수율", y.Y >= .7 ? "ok" : y.Y >= .4 ? "warn" : "bad", `${isFinite(y.Y) ? (100 * y.Y).toFixed(0) : "–"}% (${y.good}/${y.n})`), gate("분극 신호", !m.ok ? "bad" : mem.twoPr >= 2 ? "ok" : mem.twoPr >= 1 ? "warn" : "bad", m.ok ? `2Pr ${fmt(mem.twoPr, 2)} µC/cm²` : "측정 불가"), gate("측정 신뢰성", m.shortPath ? "bad" : "ok", m.shortPath ? "경로 단락" : "기준선 정상")];
+  const nxt = labNext([], y, m)[0];
+  const why = con.length ? con.slice(0, 3).map(c => `<li><b>${c.n}</b> ${typeof c.from === "boolean" ? (c.from ? "O" : "X") : c.from} <small>(표준 ${typeof c.to === "boolean" ? (c.to ? "O" : "X") : c.to})</small> → 수율 ${c.dy >= 0 ? "+" : ""}${c.dy.toFixed(0)}%p · 2Pr ${c.dp >= 0 ? "+" : ""}${c.dp.toFixed(2)}</li>`).join("") : `<li>팀 표준 조건 그대로 → 결과는 기준선. 변수별 영향은 P2 영향 지도</li>`;
+  const act = m.shortPath ? "프로브 리프트 기준선 점검 → 지그·케이블 교체 → 재측정" : L.edgeClean === false ? "매 사이클 에탄올 면봉으로 하부 Pt 확보" : con[0] && (con[0].dy < -3 || con[0].dp < -0.2) ? `${con[0].n} → 표준(${typeof con[0].to === "boolean" ? (con[0].to ? "O" : "X") : con[0].to})으로 되돌림 → 수율 ${(-con[0].dy).toFixed(0) > 0 ? "+" : ""}${(-con[0].dy).toFixed(0)}%p 예상` : nxt || "PUND 펄스 폭 스윕 · 보존 측정으로 메모리 가정값 대체";
+  const h2 = $("h2", box); if (con.length && h2 && /주요인: /.test(h2.textContent)) h2.textContent = h2.textContent.replace(/주요인: .*/, "주요인: " + con[0].n);
+  box.insertAdjacentHTML("beforeend", `<div class="c3"><div><small>판정</small><div class="g4s">${gates.join("")}</div></div><div><small>원인 · 표준 대비 기여 ${tag("모델")}</small><ol>${why}</ol></div><div class="so"><small>그래서 → 다음 행동</small><b>${act}</b></div></div>`);
 };
 
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
