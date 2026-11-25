@@ -590,6 +590,83 @@ span.rvk.rv.on { background:linear-gradient(transparent 62%, rgba(227,179,65,.35
 #presbar button { background:#1b2430; color:#e6edf3; border:1px solid #2d3a48; border-radius:999px; padding:5px 12px; cursor:pointer; font-size:12px; white-space:nowrap; }
 #presbar button:hover { border-color:#4cc9f0; }
 body.pres #presbar { zoom:.8; }
+
+/* ---------- app19/20 : FA · 공정 개선 · 벤치마크 ---------- */
+.fahero h2 { font-size:20px; }
+.faflow { display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin:12px 0; }
+.faflow > div { display:flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; border:1px solid var(--line); background:var(--panel); color:var(--mut); font-size:13px; }
+.faflow > div b { width:22px; height:22px; border-radius:50%; display:grid; place-items:center; background:#262e38; font:700 12px var(--f-mono); }
+.faflow > div.done { color:#3fb950; border-color:#3fb95066; } .faflow > div.done b { background:#3fb950; color:#0c0f13; }
+.faflow > div.on { color:#fff; border-color:#4cc9f0; background:#4cc9f014; box-shadow:0 0 0 3px #4cc9f022; } .faflow > div.on b { background:#4cc9f0; color:#0c0f13; }
+.faflow > i { color:#8a97a5; font-style:normal; }
+.fagrid { display:grid; grid-template-columns:1fr 1fr; gap:14px; } @media (max-width:1000px){ .fagrid { grid-template-columns:1fr; } }
+.faw { width:100%; max-width:300px; display:block; margin:0 auto; }
+.fap { stroke:#0c0f13; stroke-width:2; } .fap.ok { fill:#3fb950; } .fap.alarm { fill:#f85149; } .fap.na { fill:#5c6673; }
+.faring { fill:none; stroke:#f85149; stroke-width:2; stroke-dasharray:4 3; animation:farot 3s linear infinite; transform-origin:center; transform-box:fill-box; }
+@keyframes farot { to { transform:rotate(360deg); } }
+.fapt { font:600 8px var(--f-mono); fill:#0c0f13; text-anchor:middle; }
+.falg { display:flex; gap:14px; justify-content:center; font-size:12px; color:var(--mut); margin:4px 0 8px; } .falg i { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; vertical-align:-1px; }
+.falg i.ok { background:#3fb950; } .falg i.alarm { background:#f85149; } .falg i.na { background:#5c6673; }
+.fat { display:grid; grid-template-columns:1fr; gap:6px; }
+.fab { text-align:left; background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:9px 12px; color:var(--fg); cursor:pointer; font:inherit; display:grid; grid-template-columns:1fr auto; gap:0 10px; }
+.fab b { font-size:13.5px; } .fab em { font:normal 11px var(--f-mono); color:#4cc9f0; text-align:right; } .fab small { grid-column:1 / 3; color:var(--mut); font-size:12px; }
+.fab:hover:not(:disabled) { border-color:#4cc9f0; } .fab.done { border-color:#3fb950; background:#3fb95010; } .fab.done small { color:#3fb950; } .fab:disabled { opacity:.45; cursor:default; }
+.fares { display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:12px; }
+.faro { background:#0f141a; border:1px solid var(--line); border-radius:10px; padding:10px 12px; animation:rise .4s both; }
+.farh b { display:block; color:#4cc9f0; font-size:13px; } .farh span { font:12.5px var(--f-mono); color:var(--fg); }
+.fan { margin:6px 0 0; font-size:13px; color:#e3b341; } .fana { font:12.5px var(--f-mono); color:#f85149; padding:6px 0; }
+.fam { display:grid; grid-template-columns:70px 1fr 110px; align-items:center; gap:8px; margin:6px 0; } .fam span { font-size:12.5px; color:var(--mut); } .fam b { font:600 12.5px var(--f-mono); text-align:right; }
+.fab2 { display:flex; gap:30px; height:110px; align-items:flex-end; justify-content:center; margin-top:8px; } .fab2 div { display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end; width:60px; }
+.fab2 i { width:40px; background:#5c6673; border-radius:4px 4px 0 0; transition:height .6s; } .fab2 i.up { background:#3fb950; } .fab2 span { font-size:11.5px; color:var(--mut); margin-top:4px; }
+.faempty { padding:26px; text-align:center; color:var(--mut); border:1px dashed var(--line); border-radius:10px; }
+.facand { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.fac { padding:10px 12px; border-radius:8px; border:1px solid var(--line); transition:all .35s; } .fac b { display:block; } .fac span { font-size:12px; display:block; } .fac small { font-size:11px; }
+.fac.in { background:#4cc9f014; border-color:#4cc9f0; } .fac.in span { color:#4cc9f0; } .fac.sus span { color:#e3b341; font-weight:700; } .fac.out { opacity:.45; } .fac.out b { text-decoration:line-through; } .fac.out span { color:#f85149; }
+.fadisp { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.fad { text-align:left; background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:9px 12px; color:var(--fg); cursor:pointer; font:inherit; }
+.fad b { display:block; font-size:13.5px; } .fad span { display:block; font-size:12px; color:#4cc9f0; } .fad small { font-size:11px; }
+.fad:hover:not(:disabled) { border-color:#e3b341; } .fad.hold { grid-column:1 / 3; border-style:dashed; } .fad:disabled { opacity:.5; cursor:default; }
+.fafb { margin-top:8px; padding:10px 12px; border-radius:8px; background:#4cc9f00f; border-left:3px solid #4cc9f0; } .fafb b { display:block; font-size:12.5px; color:#4cc9f0; } .fafb span { display:block; font-size:13px; margin:2px 0 6px; }
+.fafb.proc { border-left-color:#e3b341; background:#e3b3410f; } .fafb.proc b { color:#e3b341; } .fafb.bad { border-left-color:#f85149; background:#f851490f; } .fafb.bad b { color:#f85149; }
+.fakpi, .kpig { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:10px; margin-bottom:8px; }
+.fakpi div, .kpc { background:#0f141a; border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+.fakpi b, .kpc b { display:block; font:700 24px var(--f-mono); color:#4cc9f0; } .fakpi span, .kpc small { display:block; font-size:12.5px; } .fakpi small, .kpc span { display:block; color:var(--mut); font-size:11.5px; }
+.kpc em { display:block; font-style:normal; font-size:11px; color:#3fb950; margin-top:2px; } .kpc.oos { border-color:#e3b34188; } .kpc.oos b { color:#e3b341; } .kpc.oos em { color:#e3b341; }
+.kpc.weak { border-color:#f85149; box-shadow:0 0 0 2px #f8514922; } .kpc.weak b { color:#f85149; }
+.recl { display:flex; flex-direction:column; gap:8px; margin-bottom:8px; }
+.rec { display:flex; gap:10px; align-items:center; justify-content:space-between; padding:9px 12px; border:1px solid var(--line); border-radius:8px; background:var(--panel2); }
+.rec b { display:block; font-size:13.5px; } .rec .g { display:block; color:#3fb950; font:600 12px var(--f-mono); } .rec small { display:block; color:var(--mut); font-size:11.5px; }
+.lnk { background:none; border:0; color:#4cc9f0; cursor:pointer; font:inherit; font-size:12px; padding:0; text-decoration:underline; }
+.airec li .lnk { display:block; margin-top:3px; } .airec li .lit { display:block; color:var(--mut); font-size:11.5px; }
+.fabprog { position:relative; height:22px; background:#0f141a; border:1px solid var(--line); border-radius:6px; margin-top:8px; overflow:hidden; } .fabprog:empty { display:none; }
+.fabprog i { position:absolute; inset:0 auto 0 0; background:linear-gradient(90deg,#4cc9f055,#4cc9f0aa); transition:width .25s; } .fabprog span { position:relative; font:11.5px var(--f-mono); padding:0 8px; line-height:22px; }
+.spin { display:inline-block; animation:farot 1s linear infinite; }
+.cmpT td small { display:block; font-size:10.5px; } .cmpT td.up { color:#3fb950; } .cmpT td.dn { color:#f85149; } .cmpT tr.base td { color:var(--mut); } .cmpT tr.best td { background:#3fb95012; }
+small.up { color:#3fb950; } small.dn, td.dn { color:#f85149; }
+.tradeoff { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:10px; margin-top:10px; }
+.tradeoff > div { background:#0f141a; border:1px solid var(--line); border-radius:8px; padding:10px 12px; } .tradeoff b { display:block; font-size:13px; } .tradeoff span { display:block; font-size:12.5px; } .tradeoff .g { color:#3fb950; } .tradeoff .r { color:#f85149; } .tradeoff small { display:block; color:var(--mut); font-size:11.5px; margin-top:4px; }
+.impcta .cta4 { display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; margin:8px 0 12px; } @media (max-width:900px){ .impcta .cta4 { grid-template-columns:1fr 1fr; } }
+.cta4 div { background:#0f141a; border:1px solid var(--line); border-radius:10px; padding:10px 12px; } .cta4 small { color:#e3b341; font:600 11px var(--f-mono); } .cta4 b { display:block; font-size:15px; margin:2px 0; } .cta4 span { font-size:12px; color:var(--mut); }
+.bigcharts { display:flex; flex-direction:column; gap:14px; }
+.bchg { display:grid; grid-template-columns:minmax(0, 1.5fr) minmax(0, 1fr); gap:18px; align-items:start; } @media (max-width:900px){ .bchg { grid-template-columns:1fr; } }
+.bchx p { margin:0 0 8px; line-height:1.6; } .bchx > b { display:block; color:#4cc9f0; font-size:12.5px; margin-top:6px; } .bchx ul { margin:4px 0 8px; padding-left:18px; } .bchx li { margin:4px 0; font-size:13px; line-height:1.55; }
+.bleg { display:flex; flex-direction:column; gap:3px; font-size:12.5px; margin:6px 0; } .bleg b { color:#4cc9f0; font-size:12.5px; } .bleg i { display:inline-block; width:26px; margin-right:8px; vertical-align:middle; }
+.r3res { margin-top:14px; border-top:1px solid var(--line); padding-top:12px; animation:rise .5s both; } .r3res h4 { margin:0 0 8px; color:#3fb950; }
+sup.cite { color:#4cc9f0; font-size:10px; margin-left:2px; }
+.reflist { padding-left:22px; font-size:12.5px; line-height:1.6; } .reflist.sm { font-size:11.5px; }
+#presbar #pb-1, #presbar #pb-2 { border-color:#e3b341; color:#e3b341; }
+.hm { min-height:calc(100vh - 220px); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:30px 10px; }
+.hm-logo { font:700 15px var(--f-mono); letter-spacing:.3em; color:var(--accent); display:flex; align-items:center; gap:10px; } .hm-logo i { width:12px; height:12px; background:var(--accent); border-radius:3px; box-shadow:0 0 14px var(--accent); }
+.hm h1 { font-size:40px; line-height:1.25; margin:18px 0 10px; letter-spacing:-.01em; } .hm h1 span { color:#4cc9f0; }
+.hm-sub { color:var(--mut); font-size:15px; margin:0 0 30px; }
+.hm-tiles { display:grid; grid-template-columns:repeat(4, minmax(0, 200px)); gap:14px; width:100%; justify-content:center; }
+@media (max-width:900px){ .hm-tiles { grid-template-columns:repeat(2, minmax(0, 1fr)); } .hm h1 { font-size:28px; } }
+.hm-t { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:22px 16px; color:var(--fg); cursor:pointer; font:inherit; display:flex; flex-direction:column; align-items:center; gap:6px; transition:transform .2s, border-color .2s, box-shadow .2s; }
+.hm-t em { font-style:normal; font-size:26px; color:#4cc9f0; } .hm-t b { font-size:17px; } .hm-t span { font-size:12px; color:var(--mut); }
+.hm-t:hover { transform:translateY(-4px); border-color:#4cc9f0; box-shadow:0 10px 30px #4cc9f022; }
+.hm-t.primary { background:linear-gradient(160deg,#4cc9f022,#12171d); border-color:#4cc9f0; } .hm-t.primary em { color:var(--accent); }
+.hm-row { display:flex; gap:10px; margin-top:22px; flex-wrap:wrap; justify-content:center; }
+.hm-note { margin-top:34px; font-size:11.5px; color:#6b7683; line-height:1.7; }
 </style>
 <header class="top">
   <div class="logo"><i></i>BTO FAB</div>
@@ -2206,7 +2283,7 @@ padElectrical = function (p, instr) {
 /* =====================================================================
    기판 세척 · 퍼니스(Yokogawa·장입/인출) · XRD(HighScore) · SEM(ImageJ) · Split · 리포트 보강
    ===================================================================== */
-const sleep = ms => new Promise(r => setTimeout(r, ms));
+const sleep = ms => new Promise(r => setTimeout(r, ms * (window.SPD || 1)));
 SKILLS.clean = ["기판 세척 (유기·SC-1)", "아세톤→IPA→끓는 DI→SC-1→DI 린스 순서와 이유", "공정 엔지니어: 웻 클리닝·안전"];
 
 // ------------------------------------------------------------------ 05 기판 세척
@@ -4002,7 +4079,7 @@ labStep = function (stage, side) {
   const lgo = $("#lgo");
   const next = () => $("#actb") ? ["조작", $("#actb").textContent.replace(/^▶\s*조작:\s*/, "").trim(), () => $("#actb").click()] : !B.ran[st.id] ? ["실행", st.name, () => $("#lrun").click()] : [B.i + 1 >= steps.length ? "결과" : "다음", B.i + 1 >= steps.length ? "결과 분석 보기" : `${B.i + 2}. ${steps[B.i + 1].name}`, () => $("#lnext").click()];
   const paint = () => { if (!document.body.contains(lgo)) return clearInterval(tk); const [a, b] = next(); lgo.innerHTML = `<small>${B.busy ? "진행 중" : a}</small><b>${B.busy ? "장비 동작 중…" : b}</b><i>▶</i>`; lgo.disabled = !!B.busy || ($("#actb") && $("#actb").disabled);
-    if (B.auto && !B.busy && !lgo.disabled && !B._autoWait) { B._autoWait = true; setTimeout(() => { B._autoWait = false; if (document.body.contains(lgo) && B.auto && !B.busy) next()[2](); }, B.ran[st.id] ? 2200 : 1400); } };
+    if (B.auto && !B.busy && !lgo.disabled && !B._autoWait) { B._autoWait = true; setTimeout(() => { B._autoWait = false; if (document.body.contains(lgo) && B.auto && !B.busy) next()[2](); }, (B.ran[st.id] ? 2200 : 1400) * (window.SPD || 1)); } };
   const tk = setInterval(paint, 250); paint();
   lgo.onclick = () => next()[2]();
   $("#lauto").onchange = e => { B.auto = e.target.checked; paint(); };
@@ -5648,7 +5725,7 @@ renderRoute = function () {
 
 // ------------------------------------------------------------------ 발표 모드: 전체 흐름 자동 시연 + 핵심 문장 강조
 const PT = { on: false, run: 0, pause: false, skip: false, label: "" };
-const presWait = async (ms, id) => { let t = 0; while (t < ms) { if (PT.run !== id) throw "stop"; if (PT.skip) { PT.skip = false; return; } await sleep(100); if (!PT.pause) t += 100; } };
+const presWait = async (ms, id) => { let t = 0; while (t < ms) { if (PT.run !== id) throw "stop"; if (PT.skip) { PT.skip = false; return; } await new Promise(r => setTimeout(r, 100)); if (!PT.pause) t += 100; } };
 async function presReveal(id, gap = 1500) {
   const els = $$("#stage .rvk, #stage .bigc h2, #stage .concl h2, #stage .lead").filter(e => !e.closest(".rvk") || e.classList.contains("rvk")).filter((e, i, a) => !a.some(o => o !== e && o.contains(e) && !o.classList.contains("rvk")));
   const uniq = [...new Set(els)].slice(0, 10); uniq.forEach(e => e.classList.add("rv"));
@@ -5667,7 +5744,7 @@ async function presTour() {
     await step("home", "1/6 · 작품 소개", 5000, true);
     // 가상 공정: MFBM 4회 전체 공정을 자동 진행
     presBar("2/6 · 가상 공정 실습: MFBM 4회 전 공정 자동 진행"); labStart("mfbm"); S.lab.auto = true; go("lab");
-    let t = 0; while (S.view === "lab" && t < 360000) { if (S.lab.i >= labSteps().length) { await presWait(3000, id); break; } if (PT.run !== id) throw "stop"; if (PT.skip) { PT.skip = false; labStart("mfbm", true); break; } S.lab.auto = !PT.pause; await sleep(250); t += 250; }
+    let t = 0; while (S.view === "lab" && t < 360000) { if (S.lab.i >= labSteps().length) { await presWait(3000, id); break; } if (PT.run !== id) throw "stop"; if (PT.skip) { PT.skip = false; labStart("mfbm", true); break; } S.lab.auto = !PT.pause; await new Promise(r => setTimeout(r, 250)); t += 250; }
     S.lab.auto = false;
     await step("analysis", "3/6 · 결과 분석", 8000, false);
     await step("select", "4/6 · 구조 선정: TiO₂ 버퍼를 얼마나 얇게", 10000, true);
@@ -5680,5 +5757,401 @@ function presStop() { PT.run++; PT.on = false; PT.pause = false; if (S.lab) S.la
 presMode = function (on) { if (on) { PT.on = true; PT.pause = false; document.body.classList.add("pres"); presTour(); } else presStop(); };
 
 { const _i = init; init = function () { try { localStorage.removeItem("btoPres"); } catch (e) { } _i(); const b = $(".presb"); if (b) { b.textContent = "발표 모드"; b.title = "전체 공정을 자동으로 진행하고 결론을 차례로 강조합니다"; } }; }
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+
+/* =====================================================================
+   app19 · 측정 진단 과제 → '측정 이상 판정 (FA · Lot 처분)' 스테이션으로 재구성
+   실제 팹 흐름: 이상 감지 → 원인 분석(검사) → 처분 결정 → 공정 피드백
+   ===================================================================== */
+const FA_ACT = {
+  open: { act: "재착지 후 재측정", who: "측정 담당", fb: "공정 변경 없음 · 프로브 Z 오버드라이브 +20 µm, 패드 표면 오염 확인", proc: false },
+  path: { act: "장비 점검 · 측정값 무효", who: "장비 담당", fb: "공정 변경 없음 · 4284A 지그·케이블 점검, 리프트 기준선 기록 후 재측정", proc: false },
+  film: { act: "공정 조치 · 결함 기록", who: "공정 담당", fb: "세정 강화 · 코팅 중 RH ≤ 40% · 졸 0.2 µm 여과 · 승온 속도 ↓ (크랙)", proc: true },
+  good: { act: "합격 · 다음 측정 진행", who: "측정 담당", fb: "공정 변경 없음 · P–E / PUND 측정으로 진행", proc: false },
+  hold: { act: "Hold · 추가 근거 후 재판정", who: "측정 담당", fb: "공정·장비 모두 보류 · 부족한 검사를 먼저 수행", proc: false },
+};
+const FA_TESTS = {
+  dc: { eq: "Keysight B1500A · HRSMU", why: "막을 관통하는 DC 누설 경로가 있는지" },
+  cv: { eq: "HP 4284A LCR · 1 kHz", why: "커패시터답게 C ≈ nF, 손실 D < 0.1 인지" },
+  lift: { eq: "4284A · 프로브 들어올림", why: "시편 없이도 저저항이면 장비 경로 문제" },
+  reprobe: { eq: "프로브 스테이션 · Z +20 µm", why: "다시 눌렀을 때 C가 오르면 접촉 문제" },
+  other: { eq: "4284A · 패드 B2, D4", why: "이 패드만의 문제인지, 전체 문제인지" },
+};
+const FA_WRONG = {
+  film: "멀쩡한 코팅·세정 조건을 바꾸고 Lot을 다시 만듦 (약 2일 · 졸·기판 소모)",
+  good: "이상 시편을 정상으로 넘겨 이후 분극 데이터가 오염됨",
+  open: "원인이 아닌 접촉만 반복 조정 · 시간 소모",
+  path: "장비만 점검하고 실제 막 결함을 놓침",
+};
+const lg = v => Math.log10(Math.max(v, 1e-30));
+function faMeter(lbl, v, lo, hi, okLo, okHi, txt) {
+  const W = 300, x = u => 10 + (lg(u) - lg(lo)) / (lg(hi) - lg(lo)) * (W - 20), vx = Math.max(10, Math.min(W - 10, x(v)));
+  const ok = v >= okLo && v <= okHi;
+  return `<div class="fam"><span>${lbl}</span><svg viewBox="0 0 ${W} 34"><rect x="10" y="12" width="${W - 20}" height="8" rx="4" fill="#262e38"/><rect x="${x(okLo)}" y="12" width="${x(okHi) - x(okLo)}" height="8" rx="4" fill="#3fb95055"/>
+    <text x="10" y="32" class="pt">${sci(lo, 0)}</text><text x="${W - 10}" y="32" class="pt" text-anchor="end">${sci(hi, 0)}</text><text x="${(x(okLo) + x(okHi)) / 2}" y="9" class="pt" text-anchor="middle" fill="#3fb950">정상 범위</text>
+    <circle cx="${vx}" cy="16" r="6.5" fill="${ok ? "#3fb950" : "#f85149"}" stroke="#0c0f13" stroke-width="2"/></svg><b class="${ok ? "okc" : "badc"}">${txt}</b></div>`;
+}
+function faChart(t, o) {
+  if (!o) return "";
+  if (t === "dc") { const pts = []; for (let v = -1; v <= 1.0001; v += 0.04) pts.push([+v.toFixed(2), lg(Math.min(1e-2, Math.abs(v) / o.R + 1e-13))]);
+    return plot13({ id: "fa-iv" + Math.random().toString(36).slice(2, 6), w: 360, h: 190, xr: [-1, 1], yr: [-14, -2], xl: "V (V)", yl: "log|I| (A)", lines: [{ pts, c: o.R < 1e6 ? "#f85149" : "#4cc9f0", w: 2.2 }, { pts: [[-1, -12.7], [1, -12.7]], c: "#8a97a5", d: "4 4", w: 1 }], leg: [["측정", o.R < 1e6 ? "#f85149" : "#4cc9f0"], ["측정계 바닥", "#8a97a5"]], legW: 90 })
+      + `<p class="fan">${o.R < 1e6 ? "→ 큰 DC 전류: 막을 관통하는 경로가 있다" : "→ 전류가 측정계 바닥 근처: 막을 관통하는 DC 경로는 없다"}</p>`; }
+  if (t === "cv") { const hasC = o.C !== undefined;
+    return (hasC ? faMeter("Cp", o.C, 1e-13, 1e-7, 3e-10, 3e-9, `${o.C < 1e-10 ? (o.C * 1e12).toFixed(2) + " pF" : (o.C * 1e9).toFixed(2) + " nF"}`) : `<div class="fam"><span>Cp</span><div class="fana">측정 불가 · Rp ≈ ${fmt(o.Rp, 1)} Ω (저임피던스)</div></div>`)
+      + faMeter("손실 D", o.D, 1e-3, 1e5, 1e-3, 0.1, `D ≈ ${o.D < 10 ? o.D.toFixed(3) : sci(o.D, 0)}`)
+      + `<p class="fan">${hasC && o.C < 1e-10 ? "→ pF 수준: 전극과 닿지 않은 공기 용량에 가깝다" : hasC ? "→ nF·저손실: 커패시터로 정상 동작" : "→ AC로는 거의 단락: 막 또는 측정 경로 중 하나"}</p>`; }
+  if (t === "lift") return faMeter("R (프로브 띄움)", o.R, 1, 1e13, 1e9, 1e13, o.R < 1e6 ? `${o.R.toFixed(1)} Ω` : "> 1 TΩ (open)") + `<p class="fan">${o.R < 1e6 ? "→ 시편이 없어도 저저항: 원인은 장비 경로" : "→ 기준선 정상: 장비 경로는 깨끗하다"}</p>`;
+  if (t === "reprobe") return `<div class="fab2"><div><i style="height:${o.rise ? 12 : 60}%"></i><span>재착지 전</span></div><div><i style="height:${o.rise ? 85 : 60}%" class="${o.rise ? "up" : ""}"></i><span>재착지 후</span></div></div><p class="fan">${o.rise ? "→ 다시 누르자 C 상승: 접촉 불량이었다" : "→ 변화 없음: 접촉 문제는 아니다"}</p>`;
+  if (t === "other") return `<p class="fan">${o.allLow ? "→ 다른 패드도 같은 이상: 이 패드가 아니라 공통 원인 (장비 쪽 의심)" : "→ 다른 패드는 정상: 이 패드만의 국소 문제"}</p>`;
+  return "";
+}
+function faWafer(C) {
+  const rows = "ABCDE", st = id => { if (id === "C3") return "alarm"; if ((id === "B2" || id === "D4") && C.obs.other) return C.obs.other.allLow ? "alarm" : "ok"; return C.real ? "na" : (id.charCodeAt(0) + +id[1]) % 4 ? "ok" : "na"; };
+  let s = `<svg viewBox="0 0 260 250" class="faw"><defs><linearGradient id="fawg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3a4452"/><stop offset="1" stop-color="#232a33"/></linearGradient></defs>
+    <rect x="20" y="16" width="220" height="220" rx="6" fill="url(#fawg)" stroke="#4a5665"/><text x="130" y="248" class="pt" text-anchor="middle">Pt/Si 기판 · 상부 Pt 패드 Ø750 µm</text>`;
+  for (let r = 0; r < 5; r++) for (let c = 0; c < 5; c++) { const id = rows[r] + (c + 1), x = 46 + c * 42, y = 42 + r * 42, k = st(id);
+    s += `<circle cx="${x}" cy="${y}" r="13" class="fap ${k}"/>${id === "C3" ? `<circle cx="${x}" cy="${y}" r="19" class="faring"/>` : ""}<text x="${x}" y="${y + 3.5}" class="fapt">${id}</text>`; }
+  s += `<path d="M 150 6 L 135 32 L 133 40" stroke="#c9d1d9" stroke-width="2" fill="none"/><circle cx="133" cy="41" r="2" fill="#c9d1d9"/></svg>`;
+  return s + `<div class="falg"><span><i class="ok"></i>정상</span><span><i class="alarm"></i>이상</span><span><i class="na"></i>미측정</span></div>`;
+}
+STATIONS.dx = {
+  render(stage, side) {
+    if (!S.dx || !S.dx.case) { S.dx = { log: [] }; dxNew(); }
+    const D = S.dx, C = D.case, r = PHY.rng(C.seed + 99), cand = dxCandidates(C.obs);
+    const realObs = { dc: { R: 5e10, txt: "HRSMU: R ≈ 39–67 GΩ (측정계 바닥 근처)" }, cv: { Rp: 9.5, D: 1e4, txt: "4284A: |D| ≈ 10⁴, Rp ≈ 9–10 Ω" }, lift: null, reprobe: null, other: { allLow: true, txt: "다른 시편 4개도 4284A Rp ≈ 10 Ω" } };
+    const mins = C.used.reduce((a, k) => a + DX_TESTS.find(x => x[0] === k)[2], 0), stage_ = C.res ? 4 : C.used.length ? 2 : 1;
+    const why = k => { const o = C.obs, w = [];
+      if (k === "film" && o.dc && isHiR(o.dc)) w.push("DC 고저항");
+      if (k === "open" && o.cv && !isPF(o.cv)) w.push("C가 pF 아님"); if (k === "good" && o.cv && !isNF(o.cv)) w.push("C·D 비정상");
+      if (k === "path" && o.lift && o.lift.R >= 1e6) w.push("기준선 정상"); if (k === "open" && o.reprobe && !o.reprobe.rise) w.push("재착지 변화 없음");
+      if (k === "path" && o.other && !o.other.allLow) w.push("다른 패드 정상"); if ((k === "open" || k === "good" || k === "film") && o.dc && o.cv && isHiR(o.dc) && isLowZ(o.cv)) w.push("DC 고저항인데 AC 단락");
+      if ((k === "good" || k === "open") && o.cv && isLowZ(o.cv)) w.push("AC 저임피던스"); return [...new Set(w)].join(" · "); };
+    const vlab = k => k === "path" && C.real ? "측정 경로 문제 의심" : (DX_STATES[k] || { nm: "판정 보류" }).nm;
+    stage.innerHTML = `<div class="sthead"><h2>측정 이상 판정 · Lot 처분</h2><span class="mut">실제 팹의 불량 분석(FA) 흐름을 축소한 과제 ${sb("model")}</span></div>
+      <div class="bigc fahero"><small>이 화면이 말하려는 것</small><h2>측정값이 이상하다고 바로 공정을 바꾸면, 멀쩡한 공정을 망칠 수 있습니다.</h2>
+        <p>먼저 <b>소자 문제인지, 측정 경로 문제인지</b>를 검사로 가린 뒤 <b>공정 조치 · 재측정 · 장비 점검 · 보류</b> 중 하나로 처분합니다. 저희가 11/19 측정에서 실제로 겪은 일이며, 근거가 부족하면 ‘보류’가 올바른 처분입니다.</p></div>
+      <div class="faflow">${["이상 감지", "원인 검사", "후보 좁히기", "처분 · 공정 피드백"].map((s, i) => `<div class="${i + 1 < stage_ ? "done" : i + 1 === stage_ ? "on" : ""}"><b>${i + 1}</b>${s}</div>`).join("<i>→</i>")}</div>
+      <div class="fagrid">
+        <div class="card"><h3>① 이상 감지 · ${C.real ? "실제 11/19 MFBM4" : `Lot KMU-BTO · 사례 #${(D.log || []).length + 1}`}</h3>${faWafer(C)}
+          ${kv([["시편", C.real ? "MFBM4 (TiO₂ 버퍼 + BTO 4회)" : "MFM4 (BTO 4회)", ""], ["알람 패드", "C3", ""], ["알람 내용", "C–D 측정 이상 (스펙: Cp ≈ 1 nF, D < 0.1)", ""], ["누적 검사 시간", `${mins}분`, ""]])}</div>
+        <div class="card"><h3>② 원인 검사 · 장비 선택</h3><p class="mut">${C.real ? "실측 기록이 있는 검사만 선택할 수 있습니다. 최소 1개 이상 검사해야 처분할 수 있습니다." : "검사마다 시간이 듭니다. 필요한 것만 고르세요. 다시 누르면 취소됩니다."}</p>
+          <div class="fat">${DX_TESTS.map(([k, nm, cost]) => { const done = C.obs[k] !== undefined, na = C.real && realObs[k] === null; return `<button class="fab ${done ? "done" : ""}" data-t="${k}" ${(C.res && !done) || na ? "disabled" : ""}><b>${nm}</b><em>${FA_TESTS[k].eq}</em><small>${na ? "실측 기록 없음" : done ? "✓ 완료 · 다시 눌러 취소" : `${cost}분 · ${FA_TESTS[k].why}`}</small></button>`; }).join("")}</div></div>
+      </div>
+      <div class="card"><h3>③ 측정 결과 화면</h3>${C.used.length ? `<div class="fares">${C.used.map(k => `<div class="faro"><div class="farh"><b>${DX_TESTS.find(x => x[0] === k)[1]}</b><span>${C.obs[k].txt}</span></div>${faChart(k, C.obs[k])}</div>`).join("")}</div>` : `<div class="faempty">검사를 고르면 장비 결과 화면(I–V 곡선, C·D 스펙 미터, 기준선)이 여기에 나타납니다.</div>`}</div>
+      <div class="fagrid">
+        <div class="card"><h3>④ 후보 원인 · 관측만으로 자동 좁히기</h3><div class="facand">${Object.entries(DX_STATES).map(([k, v]) => { const inn = cand.includes(k), sus = inn && k === "path" && !C.obs.lift; return `<div class="fac ${inn ? "in" : "out"} ${sus ? "sus" : ""}"><b>${k === "path" && C.real ? "측정 경로 문제" : v.nm}</b><span>${inn ? (sus ? "의심 (확정 아님)" : C.real ? "가능 (의심)" : "가능") : "배제 · " + (why(k) || "관측 불일치")}</span><small>${v.why}</small></div>`; }).join("")}</div>
+          <p class="mut">판정 엔진은 숨겨진 정답을 보지 않고 관측값만으로 후보를 좁힙니다.</p></div>
+        <div class="card"><h3>⑤ 처분 결정 (Disposition)</h3><div class="fadisp">${DX_VERDICT.map(([k]) => `<button class="fad ${k === "hold" ? "hold" : ""}" data-v="${k}" ${C.res ? "disabled" : ""}><b>${FA_ACT[k].act}</b><span>판단: ${vlab(k)}</span><small>담당: ${FA_ACT[k].who}</small></button>`).join("")}</div>
+          <div id="dx-res">${C.res ? C.res.html : ""}</div>
+          <div class="row wrap" style="margin-top:10px"><button class="btn primary" id="dx-new">새 사례</button><button class="btn" id="dx-real">실제 11/19 사례</button></div></div>
+      </div>
+      <div class="card"><h3>판정 품질 KPI (이번 세션)</h3><div id="dx-stat"></div></div>`;
+    $$(".fab", stage).forEach(b => b.onclick = () => { const t = b.dataset.t;
+      if (C.obs[t] !== undefined) { if (C.res) return; delete C.obs[t]; C.used = C.used.filter(x => x !== t); return go("dx"); }
+      C.obs[t] = C.real ? realObs[t] : dxObserve(C.st, t, r); C.used.push(t); go("dx"); });
+    const fbHtml = (k, extra) => { const a = FA_ACT[k]; return `<div class="fafb ${a.proc ? "proc" : ""}"><b>공정 피드백</b><span>${a.fb}</span>${a.proc ? `<button class="btn sm" onclick="go('lab')">가상 공정 실습에서 조건 조정 ▶</button>` : ""}${extra || ""}</div>`; };
+    $$(".fad", stage).forEach(b => b.onclick = () => {
+      const v = b.dataset.v, n = C.used.length;
+      if (!n) { $("#dx-res").innerHTML = `<div class="concl warn"><small>처분 불가</small><h2>검사 없이 처분할 수 없습니다.</h2><p>최소 1개 검사로 관측 근거를 확보하세요.${C.real ? " 이 사례는 HRSMU DC와 4284A C–D 비교가 출발점입니다." : ""}</p></div>`; return; }
+      let ok, h, p, fb;
+      if (C.real) {
+        const both = !!(C.obs.dc && C.obs.cv);
+        if (v === "hold") { ok = true; h = "Hold: 타당한 처분"; p = "관측은 장비 경로 문제를 의심하게 하지만, 리프트 기준선과 지그 교체 전후 기록이 없어 원인을 확정할 수 없습니다. 실제로도 장비별 응답 차이 → 측정 범위 상한 포화 확인 → 소자 응답 판정 보류로 처리했습니다."; fb = fbHtml("hold"); }
+        else if (v === "path") { ok = both; h = both ? "‘측정 경로 문제 의심’까지 타당 (확정 아님)" : "근거 부족: 두 장비 비교가 필요합니다"; p = both ? "같은 시편이 HRSMU에서는 수십 GΩ, 4284A에서는 약 10 Ω → 소자보다 측정 경로를 먼저 의심합니다. 리프트 기준선이 없으므로 ‘단락 확정’은 과잉 판정입니다." : "HRSMU DC I–V와 4284A C–D를 모두 확인해야 ‘장비별 응답 차이’를 근거로 들 수 있습니다."; fb = fbHtml("path"); }
+        else { ok = false; h = "관측 근거와 맞지 않는 처분"; p = v === "film" ? "HRSMU DC가 고저항이므로 막 관통 단락으로 보기 어렵습니다." : v === "good" ? "4284A가 저임피던스·고손실이므로 정상으로 넘길 수 없습니다." : "재착지 기록이 없고 C가 pF가 아니므로 미접촉 근거가 없습니다."; fb = `<div class="fafb bad"><b>이 처분을 했다면</b><span>${FA_WRONG[v]}</span></div>`; }
+        C.res = { ok, html: `<div class="concl ${ok ? "ok" : "warn"}"><small>실제 사례 해설 · 검사 ${n}개 · ${mins}분</small><h2>${h}</h2><p>${p}</p></div>${fb}` };
+        (D.log = D.log || []).push({ real: true, st: "path?", v, ok, enough: false, n }); return go("dx");
+      }
+      const enough = dxEnough(C.st, C.obs), truth = DX_STATES[C.st].nm;
+      if (v === "hold") { ok = !enough; h = ok ? "근거가 부족한 상태의 Hold: 타당" : "근거가 충분했는데 보류했습니다"; }
+      else if (v === C.st) { ok = enough; h = enough ? "근거가 충분한 정답 처분" : "정답이지만 근거 부족 (부분 정답)"; }
+      else { ok = false; h = `오판 · 관측과 맞는 후보: ${cand.map(k => DX_STATES[k].nm).join(", ") || "없음"}`; }
+      const need = DX_NEED[C.st].map(s => s.map(t => DX_TESTS.find(x => x[0] === t)[1]).join(" + ")).join(" 또는 ");
+      fb = v !== "hold" && v !== C.st ? `<div class="fafb bad"><b>이 처분의 비용</b><span>${FA_WRONG[v]}</span></div>${fbHtml(C.st, "<small>(올바른 처분이었다면)</small>")}` : fbHtml(v === "hold" ? C.st : v, v === "hold" ? "<small>(원인 확정 후 할 일)</small>" : "");
+      C.res = { ok, html: `<div class="concl ${ok ? "ok" : v === C.st ? "warn" : "bad"}"><small>숨겨진 원인: ${truth} (${DX_STATES[C.st].why}) · 검사 ${n}개 · ${mins}분</small><h2>${h}</h2><p>확정에 필요한 최소 근거: ${need}</p></div>${fb}` };
+      (D.log = D.log || []).push({ st: C.st, v, ok, enough, n, mins, partial: v === C.st && !enough, dxOK: v === C.st && enough, holdOK: v === "hold" && ok, wrongProc: v === "film" && C.st !== "film" }); go("dx");
+    });
+    $("#dx-new").onclick = () => { dxNew(); go("dx"); }; $("#dx-real").onclick = () => { dxNew(true); go("dx"); };
+    const L = (D.log || []).filter(x => !x.real), pct = (a, b) => b ? (100 * a / b).toFixed(0) + "%" : "–";
+    const tiles = [["원인 진단 성공률", pct(L.filter(x => x.dxOK).length, L.length), "근거 충분 + 정답"], ["보류 타당도", pct(L.filter(x => x.holdOK).length, L.filter(x => x.v === "hold").length), "보류 중 타당한 비율"], ["잘못된 공정 변경", L.filter(x => x.wrongProc).length + "건", "막 결함이 아닌데 공정 조치"], ["평균 검사 시간", L.length ? (L.reduce((a, x) => a + (x.mins || 0), 0) / L.length).toFixed(1) + "분" : "–", "적을수록 효율적"]];
+    $("#dx-stat").innerHTML = `<div class="fakpi">${tiles.map(t => `<div><b>${t[1]}</b><span>${t[0]}</span><small>${t[2]}</small></div>`).join("")}</div><p class="mut">사례 ${L.length}건 · 산업에서는 이 지표를 ‘오판으로 인한 공정 변경’과 ‘판정 리드타임’으로 관리합니다. 교육 효과 평가의 측정 도구로도 씁니다.</p>`;
+    side.innerHTML = `<div class="card"><h3>판정 규칙 (관측 기반)</h3><table class="plc sm"><tr><th>원인</th><th>확정에 필요한 근거</th></tr>
+      <tr><td>미접촉</td><td>C ≈ pF + 재착지 후 nF로 상승</td></tr><tr><td>측정 경로</td><td>리프트 기준선에서도 저저항 (없으면 ‘의심’)</td></tr><tr><td>막 결함</td><td>기준선 정상 + 이 패드에서 저저항</td></tr><tr><td>정상</td><td>DC 고저항 + C ≈ nF, D &lt; 0.1</td></tr><tr><td>보류</td><td>위 근거가 없을 때</td></tr></table></div>
+      <div class="card"><h3>산업 가상팹과의 대응</h3><ul class="steps sm"><li>알람 → FA 의뢰 → Lot 처분(Hold/Release/Scrap)</li><li>측정 시스템 신뢰성 확인(MSA)을 공정 판단보다 먼저</li><li>처분마다 담당(공정·장비·측정)이 다름</li></ul></div>
+      <div class="card"><h3>11/19 실제로 배운 것</h3><p class="mut">같은 시편이 장비마다 다르게 보였고, 측정 범위 상한 포화를 확인한 뒤 판정을 보류했습니다. 이 과제는 그 판단 과정을 다른 사람도 따라 해 보게 만든 것입니다.</p></div>`;
+  }
+};
+
+
+
+/* =====================================================================
+   app20 · 공정 개선(양산관리) 워크플로 · 문헌 벤치마크 · 결과 그래프 확대 설명
+          · R3 읽기 회로 결과 · AI 추천 → 비교 예상 분석 · 발표 모드 2구간(45초 × 2)
+   ===================================================================== */
+
+// ------------------------------------------------------------------ 문헌 데이터베이스 (대표값 · 원문 확인 필요)
+const FLIT = {
+  hayashi: "Hayashi et al., Jpn. J. Appl. Phys. 32, 4092 (1993) — 졸-겔 BaTiO₃ 박막",
+  stawski: "Stawski et al., Thin Solid Films 520, 4394 (2012) — Pt 위 졸-겔 BTO 유전율",
+  hosokura: "Hosokura et al. (2015) — 졸-겔 BTO 박막 분극",
+  bajac: "Bajac et al. (2014) — 졸-겔 BTO 결정자 크기",
+  frey: "Frey & Payne, Phys. Rev. B 54, 3158 (1996) — BaTiO₃ 결정립 크기 효과",
+  arlt: "Arlt, Hennings & de With, J. Appl. Phys. 58, 1619 (1985) — 미세 결정립 BaTiO₃ 유전 특성",
+  dawber: "Dawber, Rabe & Scott, Rev. Mod. Phys. 77, 1083 (2005) — 강유전 박막 물리",
+  setter: "Setter et al., J. Appl. Phys. 100, 051606 (2006) — 강유전 박막 재료·응용 리뷰",
+  damj: "Damjanovic, Rep. Prog. Phys. 61, 1267 (1998) — 강유전 박막·세라믹 특성",
+  tag: "Tagantsev & Gerra, J. Appl. Phys. 100, 051607 (2006) — 계면층과 분극 응답",
+  junq: "Junquera & Ghosez, Nature 422, 506 (2003) — 강유전 임계 두께",
+  scott88: "Scott et al., J. Appl. Phys. 64, 787 (1988) — 박막 스위칭 동역학 (PUND)",
+  scott89: "Scott & Paz de Araujo, Science 246, 1400 (1989) — 강유전 메모리",
+  sheik: "Sheikholeslami & Gulak, Proc. IEEE 88, 667 (2000) — FeRAM 회로 기술",
+  mikol: "Mikolajick et al., J. Appl. Phys. 129, 100901 (2021) — 차세대 강유전 소재의 반도체 집적",
+  boscke: "Böscke et al., Appl. Phys. Lett. 99, 102903 (2011) — HfO₂ 강유전성",
+  izy: "Izyumskaya et al., Crit. Rev. Solid State Mater. Sci. 32, 111 (2007) — PZT 박막",
+  araujo: "de Araujo et al., Nature 374, 627 (1995) — SBT 피로 내성",
+  zhang: "Zhang et al., Nanomaterials 15, 1797 (2025) — TiO₂ 버퍼 (포스터 인용)",
+  meyer: "Meyerhofer, J. Appl. Phys. 49, 3993 (1978) — 스핀 코팅 두께 ∝ ω^−1/2",
+  brinker: "Brinker & Scherer, Sol-Gel Science (Academic Press, 1990) — 가수분해·축합과 습도",
+  vig: "Vig, J. Vac. Sci. Technol. A 3, 1027 (1985) — UV/오존 표면 세정",
+  jedec: "JEDEC JESD22-A117 — 비휘발성 메모리 내구성·보존 시험 방법",
+};
+const FLK = Object.keys(FLIT), litN = k => FLK.indexOf(k) + 1, cite = (...k) => `<sup class="cite">[${k.map(litN).join(",")}]</sup>`;
+// 지표별 문헌 범위 (본 연구 값과 대조)
+const BENCH = [
+  { k: "Pr", nm: "잔류분극 Pr", unit: "µC/cm²", lo: 0.9, hi: 5, src: ["hosokura", "hayashi"], ours: "모델 가정 2 (실측 없음)", note: "에피택셜 BTO는 더 큼 · 졸-겔 다결정은 낮음" },
+  { k: "Ec", nm: "항전계 Ec", unit: "kV/cm", lo: 30, hi: 100, src: ["hayashi", "setter"], ours: "TCAD 가정 27", note: "가정값이 문헌 하한 아래 → 탈분극 상한 9 nm는 보수적 하한" },
+  { k: "eps", nm: "유전율 εr", unit: "", lo: 100, hi: 400, src: ["stawski", "arlt"], ours: "TCAD 가정 40", note: "가정값이 문헌보다 낮음 → 신호·전압 분담 계산에 영향" },
+  { k: "grain", nm: "결정자 크기", unit: "nm", lo: 10, hi: 30, src: ["bajac", "frey"], ours: "실측 11.2 (XRD)", note: "수십 nm 이하에서 정방정성·강유전성 감소 보고 → Pr 실측 필요" },
+  { k: "PrPZT", nm: "비교: PZT Pr", unit: "µC/cm²", lo: 15, hi: 40, src: ["izy"], ours: "–", note: "BTO 대비 약 10배 · 납 포함" },
+  { k: "HfO", nm: "비교: HfO₂ 두께", unit: "nm", lo: 5, hi: 15, src: ["boscke", "mikol"], ours: "–", note: "CMOS 집적 주류 · 고항전계" },
+];
+// 공정 변수별 문헌 근거
+const KNOB_LIT = {
+  coats: ["두께가 얇을수록 크기 효과·누설 증가, 두꺼우면 크랙 위험", ["dawber", "setter"]],
+  annealT: ["졸-겔 BTO 결정화 700–800 °C 범위 · 800 °C 초과는 Pt/Ti 하부전극 열화 위험(확인 필요)", ["hayashi", "bajac"]],
+  holdMin: ["유지 시간 ↑ → 결정립 성장, 크기 효과 완화 방향", ["frey", "arlt"]],
+  uvMin: ["UV/오존으로 유기 오염 제거 → 젖음·균일도 개선", ["vig"]],
+  rh: ["알콕사이드 졸은 습도에 따라 가수분해 속도가 바뀌어 결함·불균일 발생", ["brinker"]],
+  rpm: ["스핀 두께 ∝ 회전수^−1/2 · 고속일수록 얇고 균일", ["meyer"]],
+  hpT: ["열분해 부족 시 유기물·BaCO₃ 중간상 잔류", ["hayashi"]],
+  conc: ["졸 농도 ↑ → 층당 두께 ↑, 크랙·불균일 위험", ["meyer", "brinker"]],
+  tio2MeMl: ["희석 ↑ → TiO₂ 두께 ↓ → 탈분극 완화·신호 회복", ["tag", "zhang"]],
+  trpm: ["회전수 ↑ → TiO₂ 두께 ↓", ["meyer", "zhang"]],
+};
+
+// ------------------------------------------------------------------ 공정 개선 (양산관리 · 레시피 변경 관리)
+const KPI_SPEC = 80;   // 내부 관리 기준 (가정): 지표 점수 80 이상
+function impEval2(L) { const r = aiScore(L), f = r.f; let tw = NaN; try { tw = labMem(f).twoPr; } catch (e) { } return { ...r, twoPr: tw, L }; }
+function impKnobOpts(L) { const o = []; AI_KNOBS.forEach(([k, nm, vals, u]) => vals(L).forEach(v => { if (v !== L[k]) o.push({ k, nm, v, from: u(L[k]), to: u(v) }); })); return o; }
+function impRecs(L, base) {
+  const weak = base.m.reduce((a, x) => x[2] < a[2] ? x : a);
+  return impKnobOpts(L).map(o => { const r = aiScore({ ...L, [o.k]: o.v }); const d = r.m.map((x, i) => x[2] - base.m[i][2]);
+    return { ...o, dW: d[base.m.indexOf(weak)], dT: r.tot - base.tot, gains: d.map((x, i) => [base.m[i][1], x]).filter(x => x[1] > 2), loss: d.map((x, i) => [base.m[i][1], x]).filter(x => x[1] < -2) }; })
+    .filter(o => o.dW > 0.5 || o.dT > 0.5).sort((a, b) => (b.dW + b.dT) - (a.dW + a.dT)).slice(0, 6);
+}
+function impState() {
+  if (!S.imp || !S.imp.base) { const L = { ...S.lot }; S.imp = { base: L, b: impEval2(L), exps: [], ecn: S.imp?.ecn || [], hist: S.imp?.hist || [{ n: "기준", tot: aiScore(L).tot }] }; }
+  return S.imp;
+}
+function labJump(k) {
+  const pre = { uvMin: "uv", rh: "spin", rpm: "spin", coats: "spin", conc: "sol", hpT: "dry", annealT: "ann", holdMin: "ann", tio2MeMl: "sol", trpm: "spin" }[k] || "sol";
+  const st = labSteps(); let i = st.findIndex(s => s.id.startsWith(pre) && (!s.ly || (k === "trpm" ? s.ly !== "BTO" : s.ly === "BTO")));
+  if (i < 0) i = st.findIndex(s => s.id.startsWith(pre)); const B = labS(); if (!B.scen) labStart("std", true); B.i = Math.max(0, i); go("lab");
+}
+const peCurve = f => { const n = 200, V = []; for (let q = 0; q < 2 * n; q++) { const ph = (q / n) % 1; V.push((ph < .25 ? 4 * ph : ph < .75 ? 2 - 4 * ph : 4 * ph - 4) * 5); } const Q = PHY.stackQV(V, f).Q.slice(n), qm = (Math.max(...Q) + Math.min(...Q)) / 2; return V.slice(n).map((v, q) => [v, (Q[q] - qm) / PHY.AREA * 1e6]); };
+const dcls = d => d > 2 ? "up" : d < -2 ? "dn" : "";
+STATIONS.improve = {
+  render(stage, side) {
+    const I = impState(), B = I.b, weak = B.m.reduce((a, x) => x[2] < a[2] ? x : a), recs = impRecs(I.base, B), L = I.base;
+    const done = I.exps.filter(e => e.res), stg = I.exps.length === 0 ? 2 : done.length < I.exps.length ? 3 : 5;
+    const best = done.filter(e => !e.res.loss.some(x => x[1] < -5)).sort((a, b) => b.res.dT - a.res.dT)[0] || done.sort((a, b) => b.res.dT - a.res.dT)[0];
+    stage.innerHTML = `<div class="sthead"><h2>공정 개선 · 레시피 변경 관리</h2><span class="mut">양산관리 흐름: KPI 이탈 → 원인 변수 추천 → 변수 하나씩 실험 → 비교 → 변경 승인(ECN) ${sb("model")}</span></div>
+      <div class="faflow">${["KPI 이탈 확인", "원인 변수 추천", "변수별 실험", "비교 분석", "레시피 변경 결정"].map((s, i) => `<div class="${i + 1 < stg ? "done" : i + 1 === stg ? "on" : ""}"><b>${i + 1}</b>${s}</div>`).join("<i>→</i>")}</div>
+      <div class="card"><h3>① KPI 현황 · 기준 레시피 ${L.structure} ${L.coats}회 · ${L.annealT} °C · RH ${L.rh}% · UV ${L.uvMin}분</h3>
+        <div class="kpig">${B.m.map(x => `<div class="kpc ${x[2] < KPI_SPEC ? "oos" : ""} ${x === weak ? "weak" : ""}"><small>${x[1]}</small><b>${x[2].toFixed(0)}</b><span>${x[3]}</span><em>${x[2] < KPI_SPEC ? "관리 기준 미달" : "기준 충족"}</em></div>`).join("")}</div>
+        <p class="mut">관리 기준(가정): 지표 점수 ${KPI_SPEC} 이상 · 종합 ${B.tot.toFixed(0)} · 가장 큰 이탈 <b>${weak[1]}</b> (${weak[3]})</p></div>
+      <div class="fagrid"><div class="card"><h3>② 원인 변수 추천 (자동 민감도 분석)</h3>
+          ${recs.length ? `<div class="recl">${recs.map((r, i) => { const inE = I.exps.some(e => e.k === r.k && e.v === r.v), kl = KNOB_LIT[r.k]; return `<div class="rec"><div><b>${i + 1}. ${r.nm}: ${r.from} → ${r.to}</b><span class="g">${weak[1]} ${r.dW >= 0 ? "+" : ""}${r.dW.toFixed(0)} · 종합 ${r.dT >= 0 ? "+" : ""}${r.dT.toFixed(1)} (예상)</span>${kl ? `<small>근거: ${kl[0]} ${cite(...kl[1])}</small>` : ""}</div><button class="btn sm ${inE ? "" : "primary"}" data-add="${i}" ${inE ? "disabled" : ""}>${inE ? "계획됨" : "실험 추가"}</button></div>`; }).join("")}</div>
+             <button class="btn sm" id="imp-addall">추천 상위 3개 모두 실험 계획에 추가</button>` : `<p class="mut">한 단계 변경으로 개선되는 변수가 없습니다. 현재 레시피가 모델 안에서 국소 최적입니다.</p>`}</div>
+        <div class="card"><h3>③ 실험 계획 · 변수 하나씩 (OFAT)</h3>
+          ${I.exps.length ? `<table class="plc sm"><tr><th>Lot</th><th>변경 변수</th><th>상태</th><th></th></tr>${I.exps.map((e, i) => `<tr><td>E${i + 1}</td><td><b>${e.nm}</b> ${e.from} → ${e.to}</td><td class="est" id="est${i}">${e.res ? "✓ 완료" : "대기"}</td><td><button class="lnk" data-jump="${e.k}">공정 화면</button> <button class="lnk" data-del="${i}">삭제</button></td></tr>`).join("")}</table>
+            <div class="row wrap" style="margin-top:8px"><button class="btn primary" id="imp-run" ${done.length === I.exps.length ? "disabled" : ""}>▶ 가상 제작 · 측정 실행</button><button class="btn sm" id="imp-clear">계획 비우기</button></div>
+            <div class="fabprog" id="imp-prog"></div>` : `<div class="faempty">왼쪽 추천에서 ‘실험 추가’를 누르세요. 다른 변수는 기준 레시피로 고정하고 한 번에 하나만 바꿉니다.</div>`}
+          <p class="mut">수동 실험: <select id="imp-k">${AI_KNOBS.filter(k => k[2](L).length).map(k => `<option value="${k[0]}">${k[1]}</option>`).join("")}</select> <select id="imp-v"></select> <button class="btn sm" id="imp-man">추가</button></p></div></div>
+      ${done.length ? `<div class="card"><h3>④ 비교 분석 · 기준 Lot 대비</h3><div class="sk-scroll"><table class="plc cmpT"><tr><th>Lot</th><th>변경</th>${B.m.map(x => `<th>${x[1]}</th>`).join("")}<th>2Pr</th><th>종합</th><th>판정</th></tr>
+          <tr class="base"><td>기준</td><td>현 레시피</td>${B.m.map(x => `<td>${x[2].toFixed(0)}</td>`).join("")}<td>${fmt(B.twoPr, 2)}</td><td><b>${B.tot.toFixed(1)}</b></td><td>–</td></tr>
+          ${I.exps.map((e, i) => e.res ? `<tr class="${e === best ? "best" : ""}"><td>E${i + 1}</td><td>${e.nm} ${e.to}</td>${e.res.r.m.map((x, j) => { const d = x[2] - B.m[j][2]; return `<td class="${dcls(d)}">${x[2].toFixed(0)}${Math.abs(d) > 0.5 ? `<small>${d > 0 ? "+" : ""}${d.toFixed(0)}</small>` : ""}</td>`; }).join("")}<td>${fmt(e.res.r.twoPr, 2)}</td><td><b>${e.res.r.tot.toFixed(1)}</b><small class="${dcls(e.res.dT * 3)}">${e.res.dT >= 0 ? "+" : ""}${e.res.dT.toFixed(1)}</small></td><td>${e.res.verdict}</td></tr>` : "").join("")}</table></div>
+        <div class="fagrid"><div><h4>Lot별 종합 점수 (관리도 형식)</h4><div id="imp-cc"></div></div><div><h4>P–E 비교: 기준 vs ${best ? `E${I.exps.indexOf(best) + 1}` : "–"}</h4><div id="imp-pe"></div></div></div>
+        <div class="tradeoff">${done.map(e => `<div><b>E${I.exps.indexOf(e) + 1} · ${e.nm} ${e.from} → ${e.to}</b><span class="g">얻는 것: ${e.res.gains.map(x => `${x[0]} +${x[1].toFixed(0)}`).join(", ") || "없음"}</span><span class="r">잃는 것: ${e.res.loss.map(x => `${x[0]} ${x[1].toFixed(0)}`).join(", ") || "거의 없음"}</span>${KNOB_LIT[e.k] ? `<small>${KNOB_LIT[e.k][0]} ${cite(...KNOB_LIT[e.k][1])}</small>` : ""}</div>`).join("")}</div></div>
+      <div class="bigc"><small>⑤ 결론 · 레시피 변경 결정</small>${best && best.res.dT > 0.3 ? `<h2>${RV(`‘${best.nm}’을(를) ${best.from} → ${best.to}로 바꾸는 것이 가장 효과적입니다.`)}</h2>
+          <p>종합 ${B.tot.toFixed(1)} → ${best.res.r.tot.toFixed(1)} (${best.res.dT >= 0 ? "+" : ""}${best.res.dT.toFixed(1)}) · 개선 ${best.res.gains.map(x => x[0]).join(", ") || "–"} · 대가 ${best.res.loss.map(x => x[0]).join(", ") || "없음 (모델 기준)"}. 실제 적용 전 같은 조건 3 Lot 이상으로 재현성을 확인하세요.</p>
+          <div class="row wrap"><button class="btn primary" id="imp-ecn">변경 승인 (ECN 발행 · 레시피 반영)</button><button class="btn" id="imp-hold">보류 · 추가 실험</button></div>` : `<h2>개선 효과가 있는 변경이 없습니다.</h2><p>현 레시피를 유지하고 다른 변수를 시험하세요.</p>`}</div>` : ""}
+      ${I.ecn.length ? `<div class="card"><h3>변경 이력 (ECN)</h3><table class="plc sm"><tr><th>번호</th><th>변경</th><th>종합 점수</th><th>사유</th></tr>${I.ecn.map(e => `<tr><td>${e.no}</td><td>${e.ch}</td><td>${e.a.toFixed(1)} → ${e.b.toFixed(1)}</td><td>${e.why}</td></tr>`).join("")}</table><div id="imp-hist"></div></div>` : ""}`;
+    // 이벤트
+    $$("[data-add]", stage).forEach(b => b.onclick = () => { const r = recs[+b.dataset.add]; I.exps.push({ k: r.k, nm: r.nm, v: r.v, from: r.from, to: r.to }); go("improve"); });
+    $("#imp-addall") && ($("#imp-addall").onclick = () => { recs.slice(0, 3).forEach(r => { if (!I.exps.some(e => e.k === r.k && e.v === r.v)) I.exps.push({ k: r.k, nm: r.nm, v: r.v, from: r.from, to: r.to }); }); go("improve"); });
+    $$("[data-del]", stage).forEach(b => b.onclick = () => { I.exps.splice(+b.dataset.del, 1); go("improve"); });
+    $$("[data-jump]", stage).forEach(b => b.onclick = () => labJump(b.dataset.jump));
+    $("#imp-clear") && ($("#imp-clear").onclick = () => { I.exps = []; go("improve"); });
+    const ks = $("#imp-k"), vs = $("#imp-v"), fillV = () => { const kn = AI_KNOBS.find(x => x[0] === ks.value); vs.innerHTML = kn[2](L).map(v => `<option value="${v}">${kn[3](v)}</option>`).join(""); };
+    if (ks) { fillV(); ks.onchange = fillV; $("#imp-man").onclick = () => { const kn = AI_KNOBS.find(x => x[0] === ks.value), v = +vs.value; I.exps.push({ k: kn[0], nm: kn[1], v, from: kn[3](L[kn[0]]), to: kn[3](v) }); go("improve"); }; }
+    $("#imp-run") && ($("#imp-run").onclick = async () => { $("#imp-run").disabled = true;
+      for (let i = 0; i < I.exps.length; i++) { const e = I.exps[i]; if (e.res) continue;
+        for (const s of ["졸·코팅", "열처리", "전극", "측정"]) { const el = $("#est" + i); if (el) el.innerHTML = `<span class="spin">◐</span> ${s}`; const p = $("#imp-prog"); if (p) p.innerHTML = `<i style="width:${100 * (i + ["졸·코팅", "열처리", "전극", "측정"].indexOf(s) / 4 + 0.25) / I.exps.length}%"></i><span>E${i + 1} ${e.nm} ${e.to} · ${s}</span>`; await new Promise(r => setTimeout(r, 260)); }
+        const r = impEval2({ ...L, [e.k]: e.v }), d = r.m.map((x, j) => x[2] - B.m[j][2]), gains = d.map((x, j) => [B.m[j][1], x]).filter(x => x[1] > 2), loss = d.map((x, j) => [B.m[j][1], x]).filter(x => x[1] < -2), dT = r.tot - B.tot;
+        e.res = { r, dT, gains, loss, verdict: dT > 0.3 && !loss.length ? `<span class="okc">개선</span>` : dT > 0.3 ? `<span class="warn">trade-off</span>` : `<span class="badc">악화/무효</span>` }; }
+      go("improve"); });
+    if (done.length) {
+      const pts = [[0, B.tot], ...I.exps.map((e, i) => e.res ? [i + 1, e.res.r.tot] : null).filter(Boolean)];
+      $("#imp-cc").innerHTML = plot13({ id: "impcc", w: 420, h: 220, xr: [-0.5, I.exps.length + 0.5], yr: [Math.max(0, Math.min(...pts.map(p => p[1])) - 10), 100], xl: "Lot (0 = 기준)", yl: "종합 점수", lines: [{ pts, c: "#4cc9f0", w: 2 }, { pts: [[-0.5, B.tot], [I.exps.length + 0.5, B.tot]], c: "#8a97a5", d: "4 4", w: 1 }, { pts: [[-0.5, KPI_SPEC], [I.exps.length + 0.5, KPI_SPEC]], c: "#3fb950", d: "6 3", w: 1.2 }], dots: pts.map(p => ({ x: p[0], y: p[1], c: p[1] > B.tot + 0.3 ? "#3fb950" : p[0] ? "#f85149" : "#e3b341", t: p[0] ? "E" + p[0] : "기준" })), leg: [["기준선", "#8a97a5"], ["관리 기준", "#3fb950"]], legW: 90 });
+      if (best) Chart.draw($("#imp-pe"), { h: 220, xlabel: "V (V)", ylabel: "P (µC/cm²)", series: [{ pts: peCurve(B.f), color: "#8a97a5", dash: "4 3", name: "기준" }, { pts: peCurve(best.res.r.f), color: "#4cc9f0", name: "E" + (I.exps.indexOf(best) + 1) }], bands: [{ y: [0.9, 3], color: "#e3b341", opacity: 0.1 }] });
+      $("#imp-ecn") && ($("#imp-ecn").onclick = () => { const no = "ECN-" + String(I.ecn.length + 1).padStart(3, "0"), nl = { ...L, [best.k]: best.v };
+        I.ecn.push({ no, ch: `${best.nm} ${best.from} → ${best.to}`, a: B.tot, b: best.res.r.tot, why: `개선: ${best.res.gains.map(x => x[0]).join(", ") || "종합"}` }); I.hist.push({ n: no, tot: best.res.r.tot });
+        S.lot = nl; recompute(); log("ok", `${no} 승인: ${best.nm} ${best.from} → ${best.to}`); S.imp = { ecn: I.ecn, hist: I.hist }; go("improve"); });
+      $("#imp-hold") && ($("#imp-hold").onclick = () => { log("warn", "레시피 변경 보류 · 추가 실험"); });
+    }
+    if (I.ecn.length && $("#imp-hist")) $("#imp-hist").innerHTML = plot13({ id: "imph", w: 520, h: 180, xr: [-0.3, I.hist.length - 0.7], yr: [Math.max(0, Math.min(...I.hist.map(h => h.tot)) - 5), 100], xl: "변경 차수", yl: "종합 점수", lines: [{ pts: I.hist.map((h, i) => [i, h.tot]), c: "#3fb950", w: 2.2 }], dots: I.hist.map((h, i) => ({ x: i, y: h.tot, c: "#3fb950", t: h.n })) });
+    side.innerHTML = `<div class="card"><h3>양산관리 규칙</h3><ol class="steps sm"><li>한 번에 한 변수만 변경 (OFAT)</li><li>기준 Lot과 같은 조건에서 비교</li><li>개선 + 대가를 함께 기록</li><li>승인된 변경만 레시피에 반영 (ECN)</li><li>반영 후 다시 KPI 확인 → 다음 개선</li></ol></div>
+      <div class="card"><h3>주의</h3><p class="mut">결과는 앱의 가정 모델 예측입니다. 실제 공정 변경 전에는 같은 조건 3 Lot 이상 실측과 문헌 범위 확인이 필요합니다.</p><button class="btn sm" onclick="go('bench')">문헌 벤치마크 보기</button></div>
+      <div class="card"><h3>근거 문헌</h3><ol class="reflist sm">${[...new Set(Object.values(KNOB_LIT).flatMap(x => x[1]))].map(k => `<li value="${litN(k)}">${FLIT[k]}</li>`).join("")}</ol></div>`;
+  }
+};
+{ const i = ROUTE.findIndex(r => r.id === "ai"); ROUTE.splice(i + 1, 0, { id: "improve", n: "QC", t: "공정 개선 (레시피 변경)" }); NAV_GROUPS[1][1].splice(NAV_GROUPS[1][1].indexOf("ai") + 1, 0, "improve");
+  const j = ROUTE.findIndex(r => r.id === "select"); ROUTE.splice(j + 1, 0, { id: "bench", n: "LIT", t: "문헌 벤치마크 · 신뢰성" }); const g3 = NAV_GROUPS[3][1]; g3.splice(g3.indexOf("select") + 1, 0, "bench"); }
+
+// 결과 분석: 4문항 주관식 → 공정 개선 진입
+{ const _r = labReport; labReport = function (stage, side) { _r(stage, side);
+  const rf = $(".refl", stage); if (!rf || S.lot.structure === "TiO2") return;
+  const b = aiScore(S.lot), weak = b.m.reduce((a, x) => x[2] < a[2] ? x : a), rec = impRecs(S.lot, b)[0];
+  rf.className = "card impcta"; rf.innerHTML = `<h3>실습 정리 · 무엇이 안 되었고, 무엇을 바꿀까</h3>
+    <div class="cta4"><div><small>① 관찰</small><b>종합 ${b.tot.toFixed(0)}점</b><span>${b.m.filter(x => x[2] < KPI_SPEC).map(x => x[1]).join(", ") || "기준 미달 없음"}</span></div>
+      <div><small>② 원인 의심</small><b>${weak[1]}</b><span>${weak[3]}</span></div>
+      <div><small>③ 추천 변수</small><b>${rec ? `${rec.nm}` : "–"}</b><span>${rec ? `${rec.from} → ${rec.to} · 예상 +${rec.dT.toFixed(1)}` : "개선 변수 없음"}</span></div>
+      <div><small>④ 다음 조치</small><b>변수별 실험 → 비교 → 승인</b><span>공정 개선 화면에서 진행</span></div></div>
+    <div class="row wrap"><button class="btn primary" id="cta-imp">공정 개선 시작 ▶</button><button class="btn sm" id="cta-ai">자동 분석 리포트</button></div>`;
+  $("#cta-imp").onclick = () => { S.imp = { ecn: S.imp?.ecn, hist: S.imp?.hist }; impState(); if (rec) S.imp.exps.push({ k: rec.k, nm: rec.nm, v: rec.v, from: rec.from, to: rec.to }); go("improve"); };
+  $("#cta-ai").onclick = () => go("ai");
+}; }
+
+// AI 리포트: '1순위 조건으로 다시 만들기' → 추천 조건 비교 예상 분석
+{ const _r = STATIONS.ai.render; STATIONS.ai.render = function (stage, side) { _r.call(this, stage, side);
+  const A = aiAnalyze(), ap = $("#ai-apply", stage);
+  $$(".airec li", stage).forEach((li, i) => { const r = A.rec[i]; if (!r) return; const kl = KNOB_LIT[r.k]; li.insertAdjacentHTML("beforeend", `${kl ? `<small class="lit">근거: ${kl[0]} ${cite(...kl[1])}</small>` : ""}<button class="lnk" data-cmp="${i}">이 조건 비교 예상 분석 보기 ▶</button>`); });
+  const go2 = list => { S.imp = { ecn: S.imp?.ecn, hist: S.imp?.hist }; const I = impState(); list.forEach(r => I.exps.push({ k: r.k, nm: r.nm, v: AI_KNOBS.find(x => x[0] === r.k)[2]({ ...S.lot }).find(v => AI_KNOBS.find(x => x[0] === r.k)[3](v) === r.to), from: r.from, to: r.to })); S._impAuto = true; go("improve"); };
+  $$("[data-cmp]", stage).forEach(b => b.onclick = () => go2([A.rec[+b.dataset.cmp]]));
+  if (ap) { ap.textContent = `AI 추천 조건 ${A.rec.length}개 비교 예상 분석 보기 ▶`; ap.onclick = () => go2(A.rec); }
+  const c = document.createElement("div"); c.className = "card"; c.innerHTML = `<h3>6. 문헌 대비 위치</h3>${benchTable(true)}<button class="btn sm" onclick="go('bench')">문헌 벤치마크 전체 ▶</button>`;
+  $(".bigc", stage)?.before(c);
+}; }
+{ const _r = STATIONS.improve.render; STATIONS.improve.render = function (stage, side) { _r.call(this, stage, side); if (S._impAuto) { S._impAuto = false; setTimeout(() => $("#imp-run")?.click(), 400); } }; }
+
+// ------------------------------------------------------------------ 문헌 벤치마크 · 신뢰성
+function benchTable(short) {
+  const rows = short ? BENCH.slice(0, 4) : BENCH;
+  return `<div class="sk-scroll"><table class="plc sm"><tr><th>지표</th><th>문헌 범위</th><th>본 연구</th><th>해석</th></tr>${rows.map(b => `<tr><td>${b.nm}</td><td>${b.lo}–${b.hi} ${b.unit} ${cite(...b.src)}</td><td>${b.ours}</td><td>${b.note}</td></tr>`).join("")}</table></div>`;
+}
+STATIONS.bench = {
+  render(stage, side) {
+    const f = PHY.solve({ ...S.lot }), checks = [
+      ["결정자 크기", `${fmt(f.grain, 1)} nm (모델) · 11.2 nm (XRD 실측)`, f.grain >= 10 ? "warn" : "bad", "문헌 범위 하한 근처. BaTiO₃는 결정립이 작아지면 정방정성과 강유전성이 줄어든다고 보고됨 → 분극은 PUND로 실측해야 함", ["frey", "arlt"]],
+      ["Ec 가정", "27 kV/cm (TCAD 입력)", "warn", "문헌 30–100 kV/cm보다 낮음 → 탈분극 상한 9.04 nm는 보수적 값, 문헌 Ec면 10–39 nm", ["hayashi", "setter", "tag"]],
+      ["εr 가정", "BTO 40 · TiO₂ 34", "warn", "Pt 위 졸-겔 BTO 문헌 εr(100–400)보다 낮음 → 실측 C–V로 교체 필요", ["stawski", "arlt"]],
+      ["Pr 가정", "2 µC/cm²", "ok", "졸-겔 BTO 문헌 범위(약 1–5) 안", ["hosokura", "hayashi"]],
+      ["두께-신호 경향", "TiO₂ ↑ → 신호 ↓", "ok", "직렬 유전층·탈분극 이론과 같은 방향", ["tag", "dawber", "junq"]],
+      ["스윕 전류", "+2 V에서 6.5–8.6 nA/cm²", "warn", "정상상태 누설이 아님(변위 전류 포함) → 문헌 누설값과 직접 비교 불가", ["scott88", "setter"]],
+      ["메모리 신뢰성", "미측정", "bad", "산업 기준은 내구성·보존 시험을 표준 절차로 수행", ["jedec", "scott89"]],
+    ];
+    const ind = [["읽기 신호", "BL 전압 간격 MFM 175.67 / MFBM 27.57 mV (모델)", "감지 증폭기 오프셋·잡음을 넘는 여유 필요", "MFBM은 여유가 작을 수 있음 → 얇은 버퍼 필요", ["sheik"]],
+      ["동작 전압", "±4 V 측정 (TCAD Vc 약 0.5–1 V)", "상용 FeRAM은 저전압 구동", "Ec 실측 후 판단", ["setter", "mikol"]],
+      ["내구성", "미측정", "상용 PZT FeRAM 약 10¹²–10¹⁴회", "반복 펄스 피로 시험 필요", ["araujo", "scott89"]],
+      ["보존", "미측정", "표준 시험 절차(고온 가속)", "시간별 PUND로 보존 측정", ["jedec"]],
+      ["집적성", "Pt/Si · 750 °C", "산업은 저온·CMOS 호환 HfO₂로 이동", "무연·저비용 응용을 겨냥", ["boscke", "mikol"]]];
+    stage.innerHTML = `<div class="sthead"><h2>문헌 벤치마크 · 신뢰성 점검</h2><span class="mut">앱의 가정·모델 값을 강유전체 문헌 범위와 산업 기준에 대조 ${sb("calc")}</span></div>
+      <div class="bigc"><small>이 화면이 말하려는 것</small><h2>${RV("모델 수치가 문헌 범위 안에 있는지, 밖이라면 어느 방향으로 틀릴 수 있는지를 먼저 확인합니다.")}</h2><p>범위 밖 가정(Ec·εr)은 결론의 방향을 바꾸지 않지만 크기를 바꿉니다. 그래서 수치는 ‘경향’으로, 판단은 ‘실측으로 확인할 항목’으로 정리합니다.</p></div>
+      <div class="card"><h3>1. 재료 물성 · 문헌 범위 대비</h3>${benchTable(false)}</div>
+      <div class="card"><h3>2. 모델·가정 신뢰성 자동 점검</h3><table class="plc"><tr><th>항목</th><th>값</th><th>판정</th><th>근거</th></tr>${checks.map(c => `<tr><td>${c[0]}</td><td>${c[1]}</td><td><span class="${c[2] === "ok" ? "okc" : c[2] === "warn" ? "warn" : "badc"}">${c[2] === "ok" ? "문헌 일치" : c[2] === "warn" ? "주의" : "측정 필요"}</span></td><td>${c[3]} ${cite(...c[4])}</td></tr>`).join("")}</table></div>
+      <div class="card"><h3>3. 산업(FeRAM) 기준 대비</h3><table class="plc"><tr><th>항목</th><th>본 연구</th><th>산업 기준</th><th>다음 조치</th></tr>${ind.map(c => `<tr><td>${c[0]}</td><td>${c[1]}</td><td>${c[2]} ${cite(...c[4])}</td><td>${c[3]}</td></tr>`).join("")}</table></div>
+      <div class="card"><h3>4. 산업 수준 신뢰성을 위해 필요한 것</h3><ol class="steps sm"><li>측정 시스템 신뢰성(MSA): 리프트 기준선·반복 측정 편차를 먼저 기록</li><li>조건당 3 Lot × 다수 패드 → 평균·편차·수율 신뢰구간</li><li>PUND로 순수 스위칭 전하 분리 ${cite("scott88")}</li><li>정상상태 누설(J–E)을 같은 전계에서 문헌과 비교</li><li>내구성·보존을 표준 절차로 시험 ${cite("jedec")}</li></ol></div>
+      <div class="card"><h3>참고 문헌 (${FLK.length}편)</h3><ol class="reflist">${FLK.map(k => `<li>${FLIT[k]}</li>`).join("")}</ol><p class="mut">대표값은 여러 문헌의 보고 범위를 모은 것이며 기판·두께·전극·측정 조건에 따라 달라집니다. 서지와 수치는 원문으로 다시 확인하세요.</p></div>`;
+    side.innerHTML = `<div class="card"><h3>읽는 법</h3><ul class="steps sm"><li><span class="okc">문헌 일치</span> 범위 안</li><li><span class="warn">주의</span> 범위 밖 가정 · 방향은 유지</li><li><span class="badc">측정 필요</span> 근거 없음</li></ul></div>
+      <div class="card"><h3>핵심 한 줄</h3><p>결정자 11.2 nm는 크기 효과 영역 → <b>Pr 실측(PUND)</b>이 가장 우선입니다.</p></div>`;
+  }
+};
+
+// ------------------------------------------------------------------ 결과 분석 그래프 확대 + 설명
+const GEX = {
+  rpe: ["P–E 이력 곡선", "전압을 ±로 천천히 왕복하며, 단위 면적당 전하(분극)를 그린 곡선입니다.", ["0 V에서 위·아래 두 값의 차이 = <b>2Pr</b> (메모리가 기억하는 신호)", "곡선이 꺾여 뒤집히는 전압 = <b>항전압 Vc</b> (쓰기에 필요한 전압)", "고리가 넓고 각질수록 좋은 강유전체 · 납작하면 유전체에 가까움", "노란 띠 = 졸-겔 BTO 문헌 Pr 범위 0.9–3 µC/cm²"], ["hosokura", "damj"]],
+  rcv: ["C–V 나비 곡선 (10 kHz)", "직류 전압을 왕복하면서 작은 교류 신호로 정전용량을 잽니다.", ["분극이 뒤집히는 전압 근처에서 C가 최대 → <b>두 봉우리(나비 모양)</b>가 강유전성의 증거", "봉우리 위치 ≈ ±Vc · 좌우가 어긋나면 임프린트(한쪽 상태 선호)", "봉우리가 낮고 평평하면 스위칭이 약함", "회색 점선 = 표준 조건"], ["setter", "damj"]],
+  rpu: ["PUND 펄스 응답", "같은 방향 펄스를 두 번 줍니다. 첫 펄스(P)는 분극 반전 + 충전, 두 번째(U)는 이미 반전되어 충전만 일어납니다.", ["<b>P − U</b> = 누설·유전 성분을 뺀 <b>순수 스위칭 전하</b>", "P와 U의 차이가 클수록 진짜 강유전 스위칭", "누설이 크면 P–E가 부풀어 보여도 P−U는 작음 → P–E만으로 판단하지 않는 이유"], ["scott88"]],
+};
+{ const _cd = Chart.draw; Chart.draw = function (host, cfg) {
+  if (host && GEX[host.id] && host.closest(".grid3")) {
+    const g = host.closest(".grid3"), wrap = document.createElement("div"); wrap.className = "bigcharts";
+    ["rpe", "rcv", "rpu"].forEach(id => { const h = document.getElementById(id); if (!h) return; const E = GEX[id], c = document.createElement("div"); c.className = "card bch";
+      c.innerHTML = `<h3>${E[0]}</h3><div class="bchg"><div class="bchp"></div><div class="bchx" id="${id}-x"><p>${E[1]}</p><b>읽는 법</b><ul>${E[2].map(x => `<li>${x}</li>`).join("")}</ul><div class="bleg"></div><small>근거 ${cite(...E[3])}</small></div></div>`;
+      c.querySelector(".bchp").appendChild(h); wrap.appendChild(c); });
+    g.replaceWith(wrap);
+  }
+  if (host && GEX[host.id]) { const lg = host.closest(".bch")?.querySelector(".bleg");
+    if (lg) lg.innerHTML = `<b>범례</b>${cfg.series.filter(s => s.name).map(s => `<span><i style="border-top:3px ${s.dash ? "dashed" : "solid"} ${s.color}"></i>${s.name}</span>`).join("")}`;
+    cfg = { ...cfg, h: 300, series: cfg.series.map(s => ({ ...s, name: undefined })) }; }
+  return _cd.call(this, host, cfg);
+}; }
+
+// ------------------------------------------------------------------ R3 읽기 회로: 재생 후 결과 분석
+{ const _r = STATIONS.tcadloop.render; STATIONS.tcadloop.render = function (stage, side) { _r.call(this, stage, side);
+  const pb = $("#t1-play", stage); if (!pb) return;
+  const card = pb.closest(".card"); card.insertAdjacentHTML("beforeend", `<div id="t1-res"></div>`);
+  const o = pb.onclick; pb.onclick = () => { $("#t1-res").innerHTML = `<p class="mut">동작 순서 재생 중… 완료되면 읽기 결과 분석이 나타납니다.</p>`; o(); setTimeout(r3Result, 5 * 1300 + 200); };
+  if (S.r3Done) r3Result();
+}; }
+function r3Result() {
+  const el = $("#t1-res"); if (!el) return; S.r3Done = true;
+  const tau = 0.12, T = []; for (let t = 0; t <= 0.7001; t += 0.01) T.push(+t.toFixed(2));
+  const w = g => T.map(t => [t, g * (1 - Math.exp(-t / tau))]);
+  const P = POSTER, off = 30;
+  el.innerHTML = `<div class="r3res"><h4>읽기 결과 분석 (ngspice · 포스터 최종값)</h4><div class="fagrid"><div><div id="r3p"></div><p class="mut">곡선 모양은 개념 파형(시정수 가정)이며, 0.7 ms 끝값만 포스터 ngspice 결과입니다.</p></div>
+    <div><table class="plc"><tr><th>구조</th><th>두 상태 BL 전압 간격</th><th>MFM 대비</th></tr><tr><td>MFM (BTO 298.8 nm)</td><td><b>${P.bl[0]} mV</b></td><td>기준</td></tr><tr><td>MFBM (실측 두께)</td><td><b>${P.bl[1]} mV</b></td><td class="dn">${P.bl[2]}%</td></tr><tr><td>BTO 211.91 고정 · TiO₂ 0 nm</td><td>${P.blFix[0]} mV</td><td>–</td></tr><tr><td>BTO 211.91 고정 · TiO₂ 32.69 nm</td><td>${P.blFix[1]} mV</td><td class="dn">${P.blFix[2]}%</td></tr></table>
+      <div class="concl warn"><small>해석</small><h2>버퍼를 넣으면 감지 여유가 크게 줄어듭니다.</h2><p>감지 증폭기가 구분하려면 간격이 오프셋·잡음보다 충분히 커야 합니다 ${cite("sheik")}. 예를 들어 오프셋을 ${off} mV로 가정하면 MFM은 여유가 크고, MFBM(${P.bl[1]} mV)은 여유가 거의 없습니다 → 얇은 버퍼(≤ 9 nm) 검증이 필요한 이유.</p></div></div></div></div>`;
+  Chart.draw($("#r3p"), { h: 240, xlabel: "읽기 시간 (ms)", ylabel: "BL 전압 간격 (mV)", series: [{ pts: w(P.bl[0]), color: "#4cc9f0", name: "MFM" }, { pts: w(P.bl[1]), color: "#f778ba", name: "MFBM" }, { pts: [[0, off], [0.7, off]], color: "#e3b341", dash: "5 4", name: "가정 오프셋 30 mV" }], legendLeft: true });
+}
+
+// ------------------------------------------------------------------ 발표 모드: 45초 × 2 구간
+async function presSeg(seg) {
+  const id = ++PT.run, step = async (v, txt, ms, rev, gap) => { presBar(txt); go(v); window.scrollTo(0, 0); if (rev) await presReveal(id, gap || 1100); await presWait(ms, id); };
+  try {
+    if (seg === 1) {
+      presBar("① 공정 순서 시연 · 45초"); window.SPD = 0.33; labStart("mfbm"); S.lab.auto = true; go("lab");
+      let t = 0; while (S.view === "lab" && t < 60000) { if (PT.run !== id) throw "stop"; if (PT.skip) { PT.skip = false; break; } if (S.lab.i >= labSteps().length) break; S.lab.auto = !PT.pause; await new Promise(r => setTimeout(r, 250)); t += 250; }
+      window.SPD = 1; S.lab.auto = false; await step("analysis", "① 결과 분석", 4000, false);
+      presBar("① 공정 시연 완료 · ② 버튼으로 결과 시연");
+    } else {
+      await step("select", "② 구조 선정: TiO₂ 버퍼를 얼마나 얇게", 7000, true, 1300);
+      go("tcadloop"); presBar("② 1T1C 읽기 회로 결과"); r3Result(); $("#t1-res")?.scrollIntoView({ behavior: "smooth", block: "center" }); await presWait(11000, id);
+      await step("improve", "② 공정 개선: 추천 변수 → 비교 → 결정", 0, false); S._impAuto = false; impState(); if (!S.imp.exps.length) { const r = impRecs(S.imp.base, S.imp.b).slice(0, 2); r.forEach(x => S.imp.exps.push({ k: x.k, nm: x.nm, v: x.v, from: x.from, to: x.to })); go("improve"); }
+      $("#imp-run")?.click(); await presWait(7000, id); $(".bigc", $("#stage"))?.scrollIntoView({ behavior: "smooth", block: "center" }); await presWait(8000, id);
+      presBar("② 결과 시연 완료"); aiEnd();
+    }
+  } catch (e) { if (e !== "stop") console.error(e); window.SPD = 1; }
+}
+presBar = (orig => function (txt) { orig(txt); const b = $("#presbar"); if (b && !$("#pb-1", b)) { b.querySelector("b").insertAdjacentHTML("beforebegin", `<button id="pb-1">① 공정 45초</button><button id="pb-2">② 결과 45초</button>`); $("#pb-1").onclick = () => presSeg(1); $("#pb-2").onclick = () => presSeg(2); } })(presBar);
+presMode = function (on) { if (on) { PT.on = true; PT.pause = false; document.body.classList.add("pres"); presBar("구간을 고르세요: ① 공정 순서 · ② 시뮬레이션 결과"); } else { window.SPD = 1; presStop(); } };
+
+// ------------------------------------------------------------------ 첫 화면: 짧고 직관적으로
+STATIONS.home = {
+  render(stage, side) {
+    const T = [["lab", "◎", "공정 실습", "졸 합성부터 측정까지 가상 제작", "primary"], ["dx", "⚠", "측정 이상 판정", "소자 문제? 장비 문제? 가려내기", ""], ["improve", "↗", "공정 개선", "추천 변수 실험 → 레시피 결정", ""], ["select", "◆", "연구 결과", "TiO₂ 버퍼, 얼마나 얇게?", ""]];
+    stage.innerHTML = `<div class="hm"><div class="hm-logo"><i></i>BTO FAB</div>
+      <h1>무연 강유전체 커패시터<br><span>가상 공정·측정 실습</span></h1>
+      <p class="hm-sub">공정 조건을 바꿔 만들고, 측정을 판단하고, 레시피를 개선합니다.</p>
+      <div class="hm-tiles">${T.map(t => `<button class="hm-t ${t[4]}" data-go="${t[0]}"><em>${t[1]}</em><b>${t[2]}</b><span>${t[3]}</span></button>`).join("")}</div>
+      <div class="hm-row"><button class="btn" id="hm-pres">▶ 발표 모드</button><button class="btn" data-go="ai">자동 분석 리포트</button><button class="btn" data-go="final">대회 제출 점검</button></div>
+      <p class="hm-note">가정 모델로 공정 변수의 영향을 비교하고, 추가로 필요한 측정을 판단하는 도구입니다 · 학습된 AI·실시간 ngspice 없음 · 수치마다 실측/문헌/모델/가정 표기<br>국민대학교 · 팀 분극곰</p></div>`;
+    $$("[data-go]", stage).forEach(b => b.onclick = () => { if (b.dataset.go === "lab" && !labS().scen) { S.lab = null; } go(b.dataset.go); });
+    $("#hm-pres").onclick = () => presMode(true);
+    side.innerHTML = "";
+  }
+};
+
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 </script>
