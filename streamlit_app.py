@@ -16,4 +16,4 @@ st.markdown("""<style>
 </style>""", unsafe_allow_html=True)
 
 html = (Path(__file__).parent / "index.html").read_text(encoding="utf-8")
-components.html(html, height=2200, scrolling=True)
+components.html(html, height=920, scrolling=True)
