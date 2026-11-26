@@ -731,6 +731,11 @@ sup.cite { color:#4cc9f0; font-size:10px; margin-left:2px; }
 .dmlk > div { display:grid; grid-template-columns:150px 1fr 50px; gap:8px; align-items:center; margin:8px 0; font-size:12.5px; } .dmlk > div.on span { color:#4cc9f0; font-weight:700; } .dmlk b { font:600 12px var(--f-mono); text-align:right; }
 .dmrec { border-color:#e3b341; }
 #dm-cmp .cpr { grid-template-columns:84px minmax(70px,1fr) 32px 74px; } #dm-cmp .cpb { min-width:70px; }
+.hm-pres { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:22px; }
+.hm-pb { display:flex; flex-direction:column; align-items:center; gap:2px; min-width:230px; padding:14px 22px; border-radius:14px; border:1.5px solid #e3b341; background:#e3b34114; color:var(--fg); cursor:pointer; font:inherit; transition:transform .2s, box-shadow .2s; }
+.hm-pb em { font-style:normal; font:700 13px var(--f-mono); color:#e3b341; } .hm-pb b { font-size:18px; } .hm-pb span { font-size:12px; color:var(--mut); }
+.hm-pb.two { border-color:#4cc9f0; background:#4cc9f014; } .hm-pb.two em { color:#4cc9f0; }
+.hm-pb:hover { transform:translateY(-3px); box-shadow:0 8px 24px #0006; }
 </style>
 <header class="top">
   <div class="logo"><i></i>BTO FAB</div>
@@ -6789,6 +6794,13 @@ presSeg = (orig => async function (seg) {
     presBar("② 결과 시연 완료");
   } catch (e) { if (e !== "stop") console.error(e); }
 })(presSeg);
+
+// ---- 첫 화면: 발표용 자동 버튼을 바로 노출
+{ const _r = STATIONS.home.render; STATIONS.home.render = function (stage, side) { _r.call(this, stage, side);
+  const row = $(".hm-row", stage); if (!row) return;
+  row.insertAdjacentHTML("beforebegin", `<div class="hm-pres"><button class="hm-pb" data-seg="1"><em>▶ ①</em><b>공정 45초</b><span>MFBM 4회 전 공정 자동 진행</span></button><button class="hm-pb two" data-seg="2"><em>▶ ②</em><b>결과 45초</b><span>변수 바꿔 전후 비교 → 추천 조건</span></button></div>`);
+  $$(".hm-pb", stage).forEach(b => b.onclick = () => { presMode(true); presSeg(+b.dataset.seg); });
+  const hp = $("#hm-pres", stage); if (hp) hp.textContent = "발표 모드 (구간 선택)"; }; }
 
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 </script>
