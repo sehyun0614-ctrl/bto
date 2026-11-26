@@ -720,6 +720,17 @@ sup.cite { color:#4cc9f0; font-size:10px; margin-left:2px; }
 .spch span { font:600 10.5px var(--f-mono); padding:1px 7px; border-radius:9px; } .spch .kpp { background:#f8514922; color:#ff7b7b; } .spch .aux { background:#5c667333; color:#8a97a5; }
 .kph i.k100 { color:#e3b341; } .pnote { font-size:12px !important; margin-top:6px; }
 .whyb { border-color:#3fb95088; } .whyb p { font-size:13px; line-height:1.6; margin:6px 0; }
+.dmchips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+.dmc { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 14px; color:var(--fg); cursor:pointer; font:inherit; text-align:left; transition:all .3s; }
+.dmc b { display:block; font-size:14px; } .dmc span { font-size:11.5px; color:var(--mut); }
+.dmc.on { border-color:#4cc9f0; background:#4cc9f018; box-shadow:0 0 0 3px #4cc9f022; } .dmc.rec { border-color:#e3b341; } .dmc.rec.on { background:#e3b34120; box-shadow:0 0 0 3px #e3b34133; } .dmc.rec b { color:#e3b341; }
+.dmc.hid { display:none; } .dmc.clicking { animation:dmclk .65s ease; } @keyframes dmclk { 0% { transform:scale(1); } 40% { transform:scale(.93); box-shadow:0 0 0 8px #4cc9f044; } 100% { transform:scale(1); } }
+.dmhead { display:grid; grid-template-columns:1.4fr repeat(4, 1fr); gap:10px; margin-bottom:12px; } @media (max-width:900px){ .dmhead { grid-template-columns:1fr 1fr; } }
+.dmhead div { background:#0f141a; border:1px solid var(--line); border-radius:10px; padding:10px 12px; } .dmhead small { color:#8a97a5; font-size:11px; } .dmhead b { display:block; font:700 20px var(--f-mono); }
+.dmhead.rec div:first-child { border-color:#e3b341; } .dmhead.rec div:first-child b { color:#e3b341; }
+.dmlk > div { display:grid; grid-template-columns:150px 1fr 50px; gap:8px; align-items:center; margin:8px 0; font-size:12.5px; } .dmlk > div.on span { color:#4cc9f0; font-weight:700; } .dmlk b { font:600 12px var(--f-mono); text-align:right; }
+.dmrec { border-color:#e3b341; }
+#dm-cmp .cpr { grid-template-columns:84px minmax(70px,1fr) 32px 74px; } #dm-cmp .cpb { min-width:70px; }
 </style>
 <header class="top">
   <div class="logo"><i></i>BTO FAB</div>
@@ -6630,7 +6641,7 @@ FLK.push("slawek", "budi", "bakken", "konsago", "omot", "he23", "zhangT1");
 const ZH = [[0, 4.67e-6], [4, 2.01e-6], [8, 1.36e-6], [15, 6.09e-7], [40, 1.23e-7]];
 function jRel(t) { if (t <= 0) return 1; const L = ZH.map(([x, y]) => [x, Math.log10(y / ZH[0][1])]); for (let i = 1; i < L.length; i++) if (t <= L[i][0]) { const [x0, y0] = L[i - 1], [x1, y1] = L[i]; return Math.pow(10, y0 + (y1 - y0) * (t - x0) / (x1 - x0)); } return Math.pow(10, L[L.length - 1][1]); }
 lkScore = function (L, f) { if (L.structure !== "MFBM") return { s: 40, d: "버퍼 없음 → 누설 억제층 없음 (기준 40점)" };
-  const t = f.tTiO2 || 0, red = 1 - jRel(t), sc = 40 + 40 * Math.log2(1 / jRel(t)) - (t < 3 ? (3 - t) * 15 : 0);
+  const t = f.tTiO2 || 0, rj = jRel(t), red = 1 - rj, sc = (rj >= 0.5 ? 40 + 40 * Math.log2(1 / rj) : 80 + 20 * Math.log(0.5 / rj) / Math.log(5)) - (t < 3 ? (3 - t) * 15 : 0);
   return { s: Math.max(0, Math.min(100, sc)), d: `TiO₂ ${fmt(t, 1)} nm → 누설 약 ${(100 * red).toFixed(0)}% 감소 예상 (Zhang 2025 BST 상대값 · 미측정)${t < 3 ? " · 연속막 위험" : ""}` }; };
 const LK_MIN = (() => { let lo = 0, hi = 8; for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2; jRel(m) <= 0.5 ? hi = m : lo = m; } return hi; })();
 KPI_HOW.lk = [`누설 50% 이상 감소 (TiO₂ ≥ 약 ${LK_MIN.toFixed(1)} nm)`, "TiO₂ 두께(희석·회전수) · 구조 · 연속막 품질", ["zhangT1", "tag"]];
@@ -6692,7 +6703,7 @@ const KPI_100 = {
   pol: ["Pr ≥ 2 µC/cm²", "TCAD 입력 가정값 (문헌 졸-겔 BTO는 최대 8 보고)", "‘모델 가정을 만족’ 수준이지 ‘우수’가 아님"],
   drv: ["항전압 Vc ≤ 1 V", "±4 V 측정 조건에서 잡은 가정", "Vc 1 V = 100점, 4 V = 0점 직선"],
   sig: ["BL 전압 간격 ≥ 125 mV (100 mV = 80점)", "감지 오프셋 30 mV 가정의 약 3배 · 포스터 ngspice 2점 보정", "감지회로가 0과 1을 구분할 여유"],
-  lk: ["MFM 대비 누설 약 65% 이상 감소 (50% 감소 = 80점)", "Zhang 2025 Table 1 상대값 (BST)", "누설이 절반으로 줄 때마다 +40점"],
+  lk: ["MFM 대비 누설 90% 이상 감소 (50% 감소 = 80점)", "Zhang 2025 Table 1 상대값 (BST)", "50%까지는 절반마다 +40점, 그 이상은 완만하게 증가"],
 };
 function kpi100Card() {
   const nm = { cry: "결정성", uni: "두께 균일도", yld: "결함·수율", pol: "분극", drv: "구동 전압 여유", sig: "읽기 신호", lk: "누설 억제" };
@@ -6717,6 +6728,67 @@ FLK.push("zhangOri");
     <p>버퍼의 역할은 누설을 줄이는 것만이 아닙니다. 문헌에서는 <b>얇은 아나타제 TiO₂(15 nm 이하)가 위 박막의 결정 방향을 한쪽으로 정렬(우선배향)시키고 결정립을 키워</b>, 유전율이 503 → 920(8 nm)으로 오르고 누설은 약 1/3로 줄었습니다 ${cite("zhangOri")}.</p>
     <p>이 효과가 BTO에서도 나타나 <b>분극까지 늘어나는 두께가 있는지</b> 찾는 것이 이 연구의 목적 중 하나입니다. 그래서 질문은 ‘넣을까 말까’가 아니라 ‘신호를 잃지 않으면서 결정성 이득을 얻는 두께’입니다.</p>
     <p class="mut">주의: 해당 문헌은 상유전체 BST(PLD 증착)라 분극 증가는 직접 보고되지 않았습니다. BTO에서의 분극 효과는 저희가 확인할 가설입니다.</p></div>`); }; }
+
+// =====================================================================
+// 결과 시연 45초: 대표 케이스 자동 클릭 → 변수별 비교 → 추천 → trade-off · 전기적 특성 예상
+// =====================================================================
+const DEMO_OPTS = [
+  { id: "base", nm: "현재 MFBM", sub: "TiO₂ 희석 3 mL · 0.135 M", set: null },
+  { id: "d12", nm: "TiO₂ 희석 12 mL", sub: "0.048 M", set: { tio2MeMl: 12 }, cn: ["TiO₂ 졸 희석", "3 mL", "12 mL"] },
+  { id: "d30", nm: "TiO₂ 희석 30 mL", sub: "0.021 M · 너무 얇게", set: { tio2MeMl: 30 }, cn: ["TiO₂ 졸 희석", "3 mL", "30 mL"] },
+  { id: "mfm", nm: "버퍼 제거 (MFM)", sub: "비교 기준", set: { structure: "MFM" }, cn: ["구조", "MFBM", "MFM"] },
+  { id: "d20", nm: "★ 추천: TiO₂ 희석 20 mL", sub: "0.031 M", set: { tio2MeMl: 20 }, rec: true, cn: ["TiO₂ 졸 희석", "3 mL (0.135 M)", "20 mL (0.031 M)"] },
+];
+function demoBase() { if (S.lot.structure !== "MFBM") labStart("mfbm", true); return { ...S.lot, tio2MeMl: 3, trpm: 5000 }; }
+function demoEval(L0, o) { const L = o.set ? { ...L0, ...o.set } : L0, r = aiScore(L), t = L.structure === "MFBM" ? r.f.tTiO2 : 0; return { o, L, r, t, gap: r.gap.v, lkRed: L.structure === "MFBM" ? 100 * (1 - jRel(t)) : 0 }; }
+STATIONS.demo = {
+  render(stage, side) {
+    const D = S.demo || (S.demo = { sel: "base", seen: ["base"], recShown: false }), L0 = demoBase(), E = DEMO_OPTS.map(o => demoEval(L0, o)), B = E[0], C = E.find(e => e.o.id === D.sel), rec = E.find(e => e.o.rec);
+    const visible = E.filter(e => D.seen.includes(e.o.id) || (e.o.rec && D.recShown));
+    stage.innerHTML = `<div class="sthead"><h2>결과 시연 · 어떤 변수를 바꾸면 어떻게 되나</h2><span class="mut">MFBM 4회 기준 · 가정 모델 예측 ${sb("model")}</span><button class="btn sm primary" id="dm-auto" style="margin-left:auto">▶ 45초 자동 시연</button></div>
+      <div class="dmchips">${DEMO_OPTS.map(o => `<button class="dmc ${o.rec ? "rec" : ""} ${D.sel === o.id ? "on" : ""} ${o.rec && !D.recShown ? "hid" : ""}" data-dm="${o.id}"><b>${o.nm}</b><span>${o.sub}</span></button>`).join("")}</div>
+      <div class="dmhead ${C.o.rec ? "rec" : ""}"><div><small>선택</small><b>${C.o.nm}</b></div><div><small>TiO₂ 두께</small><b>${C.t ? C.t.toFixed(1) + " nm" : "없음"}</b></div><div><small>읽기 신호 (BL)</small><b class="${C.gap >= SIG_REQ ? "okc" : "badc"}">${C.gap.toFixed(0)} mV</b></div><div><small>누설 감소 (MFM 대비)</small><b class="${C.lkRed >= 50 ? "okc" : "badc"}">${C.lkRed.toFixed(0)}%</b></div><div><small>종합</small><b>${C.r.tot.toFixed(1)}</b></div></div>
+      <div class="fagrid"><div class="card"><h3>Trade-off 지도 · 신호 vs 누설 감소</h3><div id="dm-map"></div><p class="mut">초록 영역 = 두 기준을 모두 만족 (BL ≥ ${SIG_REQ} mV · 누설 50% 이상 감소). 누설은 Zhang 2025 상대값 ${cite("zhangT1")}.</p></div>
+        <div class="card"><h3>전기적 특성 예상 · 읽기 신호</h3><div id="dm-bl"></div><p class="mut">곡선 모양은 개념 파형, 끝값은 포스터 ngspice 보정값입니다.</p></div></div>
+      <div class="fagrid"><div class="card"><h3>전기적 특성 예상 · P–E 이력</h3><div id="dm-pe"></div></div>
+        <div class="card"><h3>누설 전류 예상 (MFM = 1)</h3><div class="dmlk">${visible.map(e => { const j = e.L.structure === "MFBM" ? jRel(e.t) : 1; return `<div class="${e.o.id === D.sel ? "on" : ""}"><span>${e.o.nm.replace("★ 추천: ", "★ ")}</span><div class="aibt"><i style="width:${(100 * j).toFixed(0)}%;background:${j <= 0.5 ? "#3fb950" : "#f85149"}"></i></div><b>×${j.toFixed(2)}</b></div>`; }).join("")}</div><p class="mut">짧을수록 누설이 적음. 0.5 이하(초록)가 기준.</p></div></div>
+      <div class="card" id="dm-cmp"><h3>전과 비교 · 현재 MFBM → ${C.o.nm}</h3>${C.o.id === "base" ? `<p class="mut">변수를 선택하면 기존 소자와 나란히 비교합니다.</p>` : cmpPanel({ k: "__combo", v: C.o.set, nm: C.o.cn[0], from: C.o.cn[1], to: C.o.cn[2] }, L0)}</div>
+      ${D.recShown ? `<div class="bigc dmrec"><small>추천</small><h2>${RV(`TiO₂ 졸을 20 mL로 희석(0.031 M)하면 TiO₂ 약 ${rec.t.toFixed(1)} nm에서 두 기준을 모두 만족합니다.`)}</h2>
+        <p><b>얻는 것</b> 읽기 신호 ${B.gap.toFixed(0)} → ${rec.gap.toFixed(0)} mV · 구동 전압 여유 ${B.r.m.find(x => x[0] === "drv")[2].toFixed(0)} → ${rec.r.m.find(x => x[0] === "drv")[2].toFixed(0)}점 &nbsp; <b>잃는 것</b> 누설 감소 폭 ${B.lkRed.toFixed(0)}% → ${rec.lkRed.toFixed(0)}% (그래도 절반 이상 유지). 더 얇은 30 mL는 신호는 크지만 누설 감소 폭이 더 줄고 3 nm 연속막 한계에 가까워지며, 버퍼를 빼면(MFM) 신호는 최대지만 누설 억제가 사라집니다.</p><p class="mut">종합 점수만 보면 30 mL가 조금 높지만, 추천 규칙은 ‘두 기준을 넘는 범위에서 버퍼를 가장 두껍게 남기는 조건’입니다. 누설 억제 여유와 연속막 여유를 지키기 위해서입니다.</p></div>` : ""}`;
+    // trade-off 지도
+    const pts = visible.map(e => ({ x: e.lkRed, y: e.gap, e }));
+    $("#dm-map").innerHTML = plot13({ id: "dmmap", w: 460, h: 250, xr: [-5, 100], yr: [0, 240], xl: "누설 감소 (MFM 대비, %)", yl: "BL 전압 간격 (mV)", band: [50, 100],
+      lines: [{ pts: [[-5, SIG_REQ], [100, SIG_REQ]], c: "#3fb950", d: "5 4", w: 1.2 }, { pts: [[50, 0], [50, 240]], c: "#3fb950", d: "5 4", w: 1.2 }],
+      dots: pts.map(p => ({ x: p.x, y: p.y, c: p.e.o.rec ? "#e3b341" : p.e.o.id === "base" ? "#8a97a5" : p.e.o.id === D.sel ? "#4cc9f0" : "#5c8aa5", r: p.e.o.id === D.sel ? 7 : 5, t: p.e.o.id === "base" ? "현재" : p.e.o.id === "mfm" ? "MFM" : p.e.o.rec ? "★ 추천" : p.e.o.set.tio2MeMl + " mL" })) });
+    // BL 파형
+    const T = []; for (let t = 0; t <= 0.7001; t += 0.01) T.push(+t.toFixed(2)); const w = g => T.map(t => [t, g * (1 - Math.exp(-t / 0.12))]);
+    Chart.draw($("#dm-bl"), { h: 230, xlabel: "읽기 시간 (ms)", ylabel: "BL 간격 (mV)", legendLeft: true, series: [{ pts: w(B.gap), color: "#8a97a5", dash: "4 3", name: "현재 MFBM" }, ...(C.o.id !== "base" ? [{ pts: w(C.gap), color: C.o.rec ? "#e3b341" : "#4cc9f0", name: C.o.nm.replace("★ 추천: ", "") }] : []), { pts: [[0, SIG_REQ], [0.7, SIG_REQ]], color: "#3fb950", dash: "6 3", name: `기준 ${SIG_REQ} mV` }] });
+    Chart.draw($("#dm-pe"), { h: 230, xlabel: "V (V)", ylabel: "P (µC/cm²)", legendLeft: true, series: [{ pts: peCurve(B.r.f), color: "#8a97a5", dash: "4 3", name: "현재 MFBM" }, ...(C.o.id !== "base" ? [{ pts: peCurve(C.r.f), color: C.o.rec ? "#e3b341" : "#4cc9f0", name: C.o.nm.replace("★ 추천: ", "") }] : [])] });
+    $$("[data-dm]", stage).forEach(b => b.onclick = () => { const id = b.dataset.dm; D.sel = id; if (!D.seen.includes(id)) D.seen.push(id); if (DEMO_OPTS.find(o => o.id === id).rec) D.recShown = true; go("demo"); });
+    $("#dm-auto").onclick = () => { presMode(true); presSeg(2); };
+    side.innerHTML = `<div class="card"><h3>보는 순서</h3><ol class="steps sm"><li>현재 MFBM: 신호가 기준 미달</li><li>TiO₂를 조금씩 얇게 → 신호 회복</li><li>너무 얇게 / 버퍼 제거 → 누설 억제 손실</li><li>두 기준을 모두 만족하는 점 = 추천</li></ol></div>
+      <div class="card"><h3>근거</h3><p class="mut">두께 변화 법칙 ${cite("slawek")} · 누설 상대값 ${cite("zhangT1")} · 읽기 신호 ngspice 2점 보정 · 탈분극 ${cite("tag")}</p></div>`;
+  }
+};
+{ const g3 = NAV_GROUPS[3][1]; ROUTE.splice(ROUTE.findIndex(r => r.id === "select") + 1, 0, { id: "demo", n: "45s", t: "결과 시연 (변수별 비교)" }); g3.splice(g3.indexOf("select") + 1, 0, "demo"); }
+// 클릭 연출
+async function demoClick(id, pid) { const b = document.querySelector(`[data-dm="${id}"]`); if (!b) return; b.classList.remove("hid"); b.classList.add("clicking"); b.scrollIntoView({ behavior: "smooth", block: "center" }); await presWait(650, pid); b.click(); }
+presSeg = (orig => async function (seg) {
+  if (seg !== 2) return orig(seg);
+  const id = ++PT.run;
+  try {
+    S.demo = { sel: "base", seen: ["base"], recShown: false }; go("demo"); window.scrollTo(0, 0);
+    presBar("② 결과 · 현재 MFBM: 읽기 신호가 기준에 못 미침"); await presWait(5000, id);
+    presBar("② TiO₂를 조금 얇게 (희석 12 mL)"); await demoClick("d12", id); await presWait(7000, id);
+    presBar("② 더 얇게 (희석 30 mL) → 신호↑ 대신 누설 억제↓"); await demoClick("d30", id); await presWait(7000, id);
+    presBar("② 버퍼 제거 (MFM) → 신호 최대, 누설 억제 없음"); await demoClick("mfm", id); await presWait(6000, id);
+    presBar("② 두 기준을 모두 만족하는 조건을 추천합니다"); S.demo.recShown = true; go("demo"); await presWait(2500, id);
+    presBar("② ★ 추천 조건 적용: 전과 비교 · trade-off · 전기적 특성"); await demoClick("d20", id); await presWait(3500, id);
+    $("#dm-cmp")?.scrollIntoView({ behavior: "smooth", block: "start" }); await presWait(5000, id);
+    $(".dmrec")?.scrollIntoView({ behavior: "smooth", block: "center" }); await presReveal(id, 900); await presWait(3000, id);
+    presBar("② 결과 시연 완료");
+  } catch (e) { if (e !== "stop") console.error(e); }
+})(presSeg);
 
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 </script>
