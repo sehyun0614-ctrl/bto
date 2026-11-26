@@ -698,6 +698,21 @@ sup.cite { color:#4cc9f0; font-size:10px; margin-left:2px; }
 .todo.kpn { border-color:#e3b341; margin-top:10px; }
 .kpig.flash .kpc { animation:kfl 1.6s ease 2; } @keyframes kfl { 50% { box-shadow:0 0 0 3px #3fb95066; } }
 .kpc .kpv b { display:inline; font-size:13px !important; color:inherit !important; }
+.cmpov { align-items:flex-start; overflow:auto; }
+.cmpbox { max-width:1100px; width:100%; margin:30px auto; background:#11161d; border:1px solid #4cc9f0; border-radius:16px; padding:22px 24px; color:#e6edf3; }
+.cmph { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; } .cmph small { color:#e3b341; font:600 12px var(--f-mono); } .cmph h2 { margin:4px 0 0; font-size:22px; }
+.cmpi { border:1px solid var(--line); border-radius:12px; margin:10px 0; background:#0f141a; } .cmpi.open { border-color:#4cc9f0; }
+.cmpt { display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:center; padding:12px 14px; }
+.cmpt .no { font:700 13px var(--f-mono); color:#0c0f13; background:#4cc9f0; border-radius:8px; padding:6px 10px; white-space:nowrap; }
+.cmpt b { font-size:15px; } .cmpt p { margin:3px 0; font-size:13.5px; } .cmpt p em { font-style:normal; color:#e3b341; font-weight:600; } .cmpt small { color:var(--mut); font-size:11.5px; }
+.cmpd:empty { display:none; } .cmpd { padding:0 14px 14px; animation:rise .35s both; }
+.cpg { display:grid; grid-template-columns:1fr 1fr; gap:14px; } @media (max-width:800px){ .cpg { grid-template-columns:1fr; } .cmpt { grid-template-columns:1fr; } }
+.cpc { background:#151b23; border:1px solid var(--line); border-radius:10px; padding:12px 14px; } .cpc.new { border-color:#4cc9f066; } .cpc h4 { margin:0; font-size:14px; } .cpc.new h4 { color:#4cc9f0; } .cpc > p { margin:2px 0 8px; font-size:12px; }
+.cpr { display:grid; grid-template-columns:90px 1fr 34px 78px; gap:2px 8px; align-items:center; margin:7px 0; } .cpr span { font-size:12.5px; } .cpr b { font:700 13.5px var(--f-mono); text-align:right; }
+.cpr small { grid-column:2 / 5; font-size:11px; color:var(--mut); margin-top:-2px; }
+.cpb { height:8px; background:#262e38; border-radius:4px; overflow:hidden; } .cpb i { display:block; height:100%; border-radius:4px; }
+.cpr em, .cpt em { font-style:normal; font:700 12px var(--f-mono); } em.inc { color:#ff5b5b; } em.dec { color:#58a6ff; } em.eq { color:#6b7683; font-weight:500; }
+.cpt { margin-top:8px; padding-top:8px; border-top:1px solid var(--line); font-size:13px; } .cpt b { font:700 20px var(--f-mono); margin:0 6px; }
 </style>
 <header class="top">
   <div class="logo"><i></i>BTO FAB</div>
@@ -6365,6 +6380,36 @@ function bindSig(stage, I) {
 }; }
 // 승인 직후 맨 위 KPI로 스크롤 + 강조
 { const _g = go; go = function (v) { const was = S.imp?.ecn?.length || 0; _g(v); if (v === "improve" && (S.imp?.ecn?.length || 0) > (S._ecnSeen || 0)) { S._ecnSeen = S.imp.ecn.length; window.scrollTo(0, 0); $("#stage")?.scrollTo?.(0, 0); $(".kpig")?.classList.add("flash"); } }; }
+
+// ---- 자동 분석 리포트: 추천 조건 비교 예상 분석 (좌: 기존 소자 / 우: 변경 소자)
+const KSTEP = { tio2MeMl: "TiO₂ 졸 합성", trpm: "TiO₂ 스핀 코팅", coats: "BTO 스핀 코팅", rpm: "BTO 스핀 코팅", conc: "BTO 졸 합성", rh: "BTO 코팅 환경", uv: "UV-오존 처리", uvMin: "UV-오존 처리", hpT: "건조 · 하드베이크", annealT: "BTO 결정화 열처리", holdMin: "BTO 결정화 열처리", annealPreset: "BTO 결정화 열처리" };
+{ const _a = aiAnalyze; aiAnalyze = function () { const A = _a(), seen = new Set(); A.rec = impRecs({ ...S.lot }, A.base).filter(r => seen.has(r.k) ? false : (seen.add(r.k), true)).slice(0, 4); return A; }; }
+function recVerb(r, L) { const a = L[r.k], b = r.v; if (typeof a === "number" && typeof b === "number") return b > a ? "늘리기" : "줄이기"; return "바꾸기"; }
+function cmpPanel(r, L0) {
+  const A = aiScore(L0), B = aiScore(knobApply(L0, r.k, r.v));
+  const row = (x, y) => { const d = y ? y[2] - x[2] : 0; return `<div class="cpr"><span>${x[1]}</span><div class="cpb"><i style="width:${(y || x)[2].toFixed(0)}%;background:${(y || x)[2] >= 80 ? "#3fb950" : (y || x)[2] >= 60 ? "#e3b341" : "#f85149"}"></i></div><b>${(y || x)[2].toFixed(0)}</b>${y ? `<em class="${d > 0.5 ? "inc" : d < -0.5 ? "dec" : "eq"}">${Math.abs(d) <= 0.5 ? "변화 없음" : `${d > 0 ? "+" : "−"}${Math.abs(d).toFixed(0)} ${d > 0 ? "증가" : "감소"}`}</em>` : ""}<small>${(y || x)[3]}</small></div>`; };
+  const dT = B.tot - A.tot;
+  return `<div class="cpg"><div class="cpc"><h4>기존 소자</h4><p class="mut">${L0.structure} · 현 레시피</p>${A.m.map(x => row(x)).join("")}<div class="cpt">종합 <b>${A.tot.toFixed(1)}</b></div></div>
+    <div class="cpc new"><h4>변수 바꾼 소자 (예상)</h4><p class="mut">${r.nm}: ${r.from} → ${r.to}</p>${A.m.map((x, i) => row(x, B.m[i])).join("")}<div class="cpt">종합 <b>${B.tot.toFixed(1)}</b> <em class="${dT > 0.05 ? "inc" : dT < -0.05 ? "dec" : "eq"}">${dT >= 0 ? "+" : "−"}${Math.abs(dT).toFixed(1)} ${dT >= 0 ? "증가" : "감소"}</em></div></div></div>
+    <p class="mut">빨간 글씨 = 점수 증가 · 파란 글씨 = 점수 감소 · 가정 모델 예측이며 실측이 아닙니다.</p>`;
+}
+function aiCmpModal(recs, focus) {
+  const L0 = { ...S.lot }, ov = document.createElement("div"); ov.className = "endov cmpov";
+  ov.innerHTML = `<div class="cmpbox"><div class="cmph"><div><small>AI 추천 조건 비교 예상 분석</small><h2>추천 조건 ${recs.length}개</h2></div><button class="btn" id="cmp-x">닫기 ✕</button></div>
+    ${recs.map((r, i) => `<div class="cmpi ${i === focus ? "open" : ""}" data-i="${i}"><div class="cmpt"><span class="no">조건 ${i + 1}</span><div><b>${r.nm} ${recVerb(r, L0)}</b><p>→ <em>${KSTEP[r.k] || "공정"}</em> 단계에서 <b>${r.from}</b>을(를) <b>${r.to}</b>(으)로 바꾼다</p>${KNOB_LIT[r.k] ? `<small>근거: ${KNOB_LIT[r.k][0]} ${cite(...KNOB_LIT[r.k][1])}</small>` : ""}</div>
+      <button class="btn sm primary" data-open="${i}">${i === focus ? "접기 ▲" : "공정 변수 교체 시 예상 결과값 확인하기 ▼"}</button></div><div class="cmpd">${i === focus ? cmpPanel(r, L0) : ""}</div></div>`).join("")}
+    <div class="row wrap" style="margin-top:12px;justify-content:flex-end"><button class="btn" id="cmp-imp">공정 개선에서 실제로 실험하기 ▶</button></div></div>`;
+  document.body.appendChild(ov);
+  ov.onclick = e => { if (e.target === ov) ov.remove(); };
+  $("#cmp-x", ov).onclick = () => ov.remove();
+  $$("[data-open]", ov).forEach(b => b.onclick = () => { const i = +b.dataset.open, it = b.closest(".cmpi"), d = it.querySelector(".cmpd"), op = it.classList.toggle("open"); d.innerHTML = op ? cmpPanel(recs[i], L0) : ""; b.textContent = op ? "접기 ▲" : "공정 변수 교체 시 예상 결과값 확인하기 ▼"; });
+  $("#cmp-imp", ov).onclick = () => { ov.remove(); S.imp = { ecn: S.imp?.ecn, hist: S.imp?.hist }; const I = impState(); recs.forEach(r => I.exps.push({ k: r.k, nm: r.nm, v: r.v, from: r.from, to: r.to })); S._impAuto = true; go("improve"); };
+}
+{ const _r = STATIONS.ai.render; STATIONS.ai.render = function (stage, side) { _r.call(this, stage, side);
+  const recs = aiAnalyze().rec, ap = $("#ai-apply", stage);
+  if (ap) { ap.textContent = `AI 추천 조건 ${recs.length}개 비교 예상 분석 보기 ▶`; ap.onclick = () => aiCmpModal(recs, -1); }
+  $$("[data-cmp]", stage).forEach(b => { b.textContent = "공정 변수 교체 시 예상 결과값 확인하기 ▶"; b.onclick = () => aiCmpModal(recs, +b.dataset.cmp); });
+}; }
 
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 </script>
