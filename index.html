@@ -718,6 +718,8 @@ sup.cite { color:#4cc9f0; font-size:10px; margin-left:2px; }
 .spcc { background:#0f141a; border:1px solid var(--line); border-radius:10px; padding:8px 10px; }
 .spch { display:flex; flex-wrap:wrap; gap:4px 8px; align-items:baseline; } .spch b { font-size:13.5px; } .spch small { width:100%; color:var(--mut); font-size:11px; }
 .spch span { font:600 10.5px var(--f-mono); padding:1px 7px; border-radius:9px; } .spch .kpp { background:#f8514922; color:#ff7b7b; } .spch .aux { background:#5c667333; color:#8a97a5; }
+.kph i.k100 { color:#e3b341; } .pnote { font-size:12px !important; margin-top:6px; }
+.whyb { border-color:#3fb95088; } .whyb p { font-size:13px; line-height:1.6; margin:6px 0; }
 </style>
 <header class="top">
   <div class="logo"><i></i>BTO FAB</div>
@@ -4490,6 +4492,14 @@ labReport = function (stage, side) {
 
 // init: app13.js
 
+
+const dyTxt = dy => Math.abs(dy) < 0.5 ? "수율 변화 없음" : `수율 ${dy > 0 ? "+" : "−"}${Math.abs(dy).toFixed(0)}%p`;
+const tvTxt = v => typeof v === "boolean" ? (v ? "O" : "X") : v;
+function actTxt(c) {
+  const dy = -c.dy, dp = -c.dp, eff = `${dyTxt(dy)}${Math.abs(dp) >= 0.05 ? ` · 2Pr ${dp > 0 ? "+" : "−"}${Math.abs(dp).toFixed(2)} µC/cm² 회복` : ""}`;
+  if (/구조|버퍼/.test(c.n)) return `TiO₂ 버퍼는 일부러 넣은 설계 변수 → 없애기보다 <b>더 얇게</b> 하는 것이 다음 행동입니다 (공정 개선에서 두께 조합 탐색). 참고로 버퍼를 빼면(MFM) ${eff} 예상이지만 누설을 막는 층이 사라집니다.`;
+  return `${c.n}을(를) 표준(${tvTxt(c.to)})으로 되돌리면 ${eff} 예상`;
+}
 /* =====================================================================
    app13 · 발표 구성
    P1 실제 실험 기록  P2 공정변수 영향 지도  P3 TCAD 3단계 (소자 특성 → 읽기 신호 → 수신기 복원)
@@ -4928,8 +4938,8 @@ labReport = function (stage, side) {
   const gate = (n, st, v) => `<div class="g4 ${st}"><i></i><b>${n}</b><span>${v}</span></div>`;
   const gates = [gate("막 형성", f.tBTO > PHY.K.hCrack.v ? "warn" : "ok", `${fmt(f.tBTO, 0)} nm · 결정자 ${fmt(f.grain, 1)} nm`), gate("절연 · 수율", !isFinite(y.Y) ? "warn" : y.Y >= .7 ? "ok" : y.Y >= .4 ? "warn" : "bad", `${isFinite(y.Y) ? (100 * y.Y).toFixed(0) + "% (" + y.good + "/" + y.n + ")" : "판정 보류 (기준선·C 미확인)"}`), gate("분극 신호", !m.ok ? "bad" : mem.twoPr >= 2 ? "ok" : mem.twoPr >= 1 ? "warn" : "bad", m.ok ? `2Pr ${fmt(mem.twoPr, 2)} µC/cm²` : "측정 불가"), gate("측정 신뢰성", m.shortPath ? "bad" : "ok", m.shortPath ? "경로 단락" : "기준선 정상")];
   const nxt = labNext([], y, m)[0];
-  const why = con.length ? con.slice(0, 3).map(c => `<li><b>${c.n}</b> ${typeof c.from === "boolean" ? (c.from ? "O" : "X") : c.from} <small>(표준 ${typeof c.to === "boolean" ? (c.to ? "O" : "X") : c.to})</small> → 수율 ${c.dy >= 0 ? "+" : ""}${c.dy.toFixed(0)}%p · 2Pr ${c.dp >= 0 ? "+" : ""}${c.dp.toFixed(2)}</li>`).join("") : `<li>표준 조건 그대로 → 결과는 기준선. 변수별 영향은 P2 영향 지도</li>`;
-  const act = m.shortPath ? "프로브 리프트 기준선 점검 → 지그·케이블 교체 → 재측정" : L.edgeClean === false ? "매 사이클 에탄올 면봉으로 하부 Pt 확보" : con[0] && (con[0].dy < -3 || con[0].dp < -0.2) ? `${con[0].n} → 표준(${typeof con[0].to === "boolean" ? (con[0].to ? "O" : "X") : con[0].to})으로 되돌림 → 수율 ${(-con[0].dy).toFixed(0) > 0 ? "+" : ""}${(-con[0].dy).toFixed(0)}%p 예상` : nxt || "PUND 펄스 폭 스윕 · 보존 측정으로 메모리 가정값 대체";
+  const why = con.length ? con.slice(0, 3).map(c => `<li><b>${c.n}</b> ${typeof c.from === "boolean" ? (c.from ? "O" : "X") : c.from} <small>(표준 ${typeof c.to === "boolean" ? (c.to ? "O" : "X") : c.to})</small> → ${dyTxt(c.dy)} · 2Pr ${c.dp >= 0 ? "+" : ""}${c.dp.toFixed(2)} µC/cm²</li>`).join("") : `<li>표준 조건 그대로 → 결과는 기준선. 변수별 영향은 P2 영향 지도</li>`;
+  const act = m.shortPath ? "프로브 리프트 기준선 점검 → 지그·케이블 교체 → 재측정" : L.edgeClean === false ? "매 사이클 에탄올 면봉으로 하부 Pt 확보" : con[0] && (con[0].dy < -3 || con[0].dp < -0.2) ? actTxt(con[0]) : nxt || "PUND 펄스 폭 스윕 · 보존 측정으로 메모리 가정값 대체";
   const h2 = $("h2", box); if (con.length && h2 && /주요인: /.test(h2.textContent)) h2.textContent = h2.textContent.replace(/주요인: .*/, "주요인: " + con[0].n);
   box.insertAdjacentHTML("beforeend", `<div class="c3"><div><small>판정</small><div class="g4s">${gates.join("")}</div></div><div><small>원인 · 표준 대비 기여 ${tag("모델")}</small><ol>${why}</ol></div><div class="so"><small>그래서 → 다음 행동</small><b>${act}</b></div></div>`);
 };
@@ -6657,6 +6667,56 @@ function slawekCheck() {
     <div class="concl warn"><small>문헌이 알려 준 가장 중요한 점</small><h2>TiO₂ 두께의 ‘변화 법칙’은 문헌과 맞지만, 절대 두께는 졸 종류에 따라 크게 다를 수 있습니다.</h2><p>Sławek의 졸(Ti(acac)₂(OiPr)₂/부탄올, Si 기판)로 환산하면 같은 농도·회전수에서 약 ${K.lit.toFixed(0)} nm인데, 포스터는 32.69 nm로 가정했습니다. 전구체·용매가 달라 그대로 대입할 수는 없지만, 실제 TiO₂가 더 얇다면 이미 9 nm 공정 창 근처일 수 있습니다. 또 BTO를 750 °C로 굽는 동안 TiO₂가 치밀화·루틸화되면 두께는 줄고 유전율은 커져, 둘 다 신호 손실을 줄이는 방향입니다 → <b>Si 증인 시편의 TiO₂ 두께(타원편광) 측정이 후속 측정 1순위</b>입니다.</p></div>
     <p class="mut">문헌별 시편 적층·기판·전구체가 본 연구와 다르므로, 정량 값은 변화 방향·탐색 범위의 참고로만 씁니다. 그래프에서 읽은 값은 쓰지 않고 본문·표 수치만 사용했습니다.</p>`;
   $$(".card", stage)[2]?.after(c); }; }
+
+// =====================================================================
+// 추가 문헌 4편 (Gust 1997 · Stawski 2012 · Chandra 2002 · Dawber 2005) + 100점 기준 + %p 설명
+// =====================================================================
+Object.assign(FLIT, {
+  chandra: "Chandra, Dawber, Littlewood & Scott, arXiv:cond-mat/0206014 (2002) — 박막 항전계의 두께 의존 Ec ∝ d^−2/3 (Kay–Dunn)",
+  stawskiL: "Stawski et al., Thin Solid Films 520, 4394 (2012), Fig. 1 — 층수와 열처리 후 두께가 선형 관계, 같은 층수에서 Pt 208 nm · SRO 201 nm",
+  dawberR: "Dawber, Rabe & Scott, arXiv:cond-mat/0503372 (Rev. Mod. Phys. 77, 1083, 2005) — 계면 dead layer의 직렬 커패시터 모델 · 1T-1C/2T-2C FeRAM, 파괴적 읽기 후 재쓰기",
+});
+FLK.push("chandra", "stawskiL", "dawberR");
+LIT_TREND.push({ nm: "BTO 두께 88 → 350 nm (항전계)", a: { coats: 2 }, b: { coats: 8 }, m: f => f.Ec, u: "Ec kV/cm", exp: -1, claim: "박막 항전계는 두께가 얇을수록 커짐 (Ec ∝ d^−2/3)", src: ["chandra"] });
+{ const _r = STATIONS.bench.render; STATIONS.bench.render = function (stage, side) { _r.call(this, stage, side);
+  const L = { ...S.lot, structure: "MFM" }, a = PHY.solve({ ...L, coats: 2 }), b = PHY.solve({ ...L, coats: 8 }), nE = Math.log(b.Ec / a.Ec) / Math.log(b.tBTO / a.tBTO), nT = Math.log(b.tBTO / a.tBTO) / Math.log(4);
+  const tb = $$("#stage table.plc").find(t => /회전수 지수/.test(t.textContent)); tb && tb.insertAdjacentHTML("beforeend", `<tr><td>BTO 항전계 – 두께 지수</td><td>Ec ∝ d<sup>${nE.toFixed(2)}</sup></td><td>Kay–Dunn d<sup>−2/3</sup> (−0.67) ${cite("chandra")}</td><td><span class="okc">✓ 일치</span></td></tr>
+    <tr><td>BTO 층수 – 두께</td><td>t ∝ 층수<sup>${nT.toFixed(2)}</sup> (층당 약 ${(a.tBTO / 2).toFixed(0)} nm)</td><td>선형 관계 ${cite("stawskiL")}</td><td><span class="okc">✓ 일치</span></td></tr>
+    <tr><td>버퍼 = 직렬 유전층</td><td>탈분극 계산에 직렬 커패시터 모델 사용</td><td>계면 dead layer를 직렬 커패시터로 다루는 표준 모델 ${cite("dawberR", "tag")}</td><td><span class="okc">모델 근거</span></td></tr>
+    <tr><td>BTO 결정화 온도</td><td>750 °C 3단 (결정자 11.2 nm)</td><td>약 735 °C 결정화, 750 °C 1 h 결정립 20–60 nm ${cite("gust")}</td><td><span class="okc">조건 근거</span></td></tr>`); }; }
+// ---- 지표별 100점 기준 · 출처 · 원리
+const KPI_100 = {
+  cry: ["결정자 ≥ 11.2 nm, BaCO₃ ≤ 1%", "본 연구 XRD 실측 최고값 (750 °C 3단)", "우리가 실제로 만든 최고 결정성을 만점으로 둠"],
+  uni: ["두께 불균일 ≤ 3%", "가정 (스핀 코팅 일반 관리 수준)", "3%를 넘는 1%p마다 8점 감점"],
+  yld: ["막 수율 100%", "정의상 최대", "결함 모델의 수율을 그대로 점수로"],
+  pol: ["Pr ≥ 2 µC/cm²", "TCAD 입력 가정값 (문헌 졸-겔 BTO는 최대 8 보고)", "‘모델 가정을 만족’ 수준이지 ‘우수’가 아님"],
+  drv: ["항전압 Vc ≤ 1 V", "±4 V 측정 조건에서 잡은 가정", "Vc 1 V = 100점, 4 V = 0점 직선"],
+  sig: ["BL 전압 간격 ≥ 125 mV (100 mV = 80점)", "감지 오프셋 30 mV 가정의 약 3배 · 포스터 ngspice 2점 보정", "감지회로가 0과 1을 구분할 여유"],
+  lk: ["MFM 대비 누설 약 65% 이상 감소 (50% 감소 = 80점)", "Zhang 2025 Table 1 상대값 (BST)", "누설이 절반으로 줄 때마다 +40점"],
+};
+function kpi100Card() {
+  const nm = { cry: "결정성", uni: "두께 균일도", yld: "결함·수율", pol: "분극", drv: "구동 전압 여유", sig: "읽기 신호", lk: "누설 억제" };
+  return `<div class="card"><h3>점수 읽는 법 · 100점은 무엇인가</h3><p>점수는 ‘이론상 최고’가 아니라 <b>저희가 정한 충족 기준에 얼마나 도달했는지(기준 충족도)</b>입니다. 기준을 넘으면 100에서 멈추고, 80점이 관리 기준선입니다. 판단은 점수가 아니라 옆에 적힌 실제 값(nm, mV, %)으로 합니다.</p>
+    <table class="plc sm"><tr><th>지표</th><th>100점 = </th><th>기준의 출처</th><th>원리</th></tr>${Object.entries(KPI_100).map(([k, v]) => `<tr><td>${nm[k]}</td><td>${v[0]}</td><td>${v[1]}</td><td>${v[2]}</td></tr>`).join("")}</table>
+    <p class="mut">종합 점수는 7개 지표의 단순 평균입니다(가중치 동일 · 가정). 실제 양산에서는 제품 사양에 따라 가중치를 정합니다.</p></div>`;
+}
+{ const _r = STATIONS.ai.render; STATIONS.ai.render = function (stage, side) { _r.call(this, stage, side); const g = $$(".grid2", stage)[0]; g && g.insertAdjacentHTML("beforebegin", kpi100Card()); }; }
+{ const _r = STATIONS.improve.render; STATIONS.improve.render = function (stage, side) { _r.call(this, stage, side); const I = impState();
+  $$(".kpc", stage).forEach((c, i) => { const k = I.b.m[i] && I.b.m[i][0], v = KPI_100[k]; const h = c.querySelector(".kph"); if (v && h) h.insertAdjacentHTML("beforeend", `<span>100점 기준</span><i class="k100">${v[0]} · ${v[1]}</i>`); });
+  const kc = $(".kpig", stage); kc && kc.insertAdjacentHTML("beforebegin", `<p class="mut">점수 = 기준 충족도 (100 = 충족 기준 도달, 80 = 관리선). 각 카드 아래에 100점 기준과 출처를 적었습니다.</p>`); }; }
+// ---- 결과 분석: %p 설명
+{ const _r = labReport; labReport = function (stage, side) { _r(stage, side); const c = $$(".concl", stage).find(x => /%p|수율 변화 없음/.test(x.textContent)); c && c.insertAdjacentHTML("beforeend", `<p class="mut pnote">‘%p’(퍼센트포인트)는 % 값끼리의 차이입니다. 예: 수율 63% → 65%면 +2%p. ‘수율 변화 없음’은 이 변수가 수율에는 영향이 없고 분극에만 영향을 준다는 뜻입니다.</p>`); }; }
+// ---- 마무리: FeRAM은 한 줄만
+{ const _e = aiEnd; aiEnd = function (A) { const ov = _e(A); const p = ov.querySelector(".endc p"); if (p) p.innerHTML = "TiO₂ 버퍼는 누설 억제와 읽기 신호 감소의 trade-off를 지닌 설계 변수입니다. 32.69 nm에서의 신호 비용(−84.3%)을 모델로 정량화했고, 다음 단계는 약 9 nm 이하 얇은 버퍼의 누설 이득을 실측하는 것입니다."; const m = ov.querySelector(".endbox > p.mut"); if (m) m.insertAdjacentHTML("beforebegin", `<p class="mut" style="margin-top:-4px">이 검증이 끝나면 같은 커패시터를 FeRAM(1T1C) 셀에 연결해 읽기 여유를 확인하는 것이 장기 목표입니다.</p>`); return ov; }; }
+
+// ---- 구조 선정: "버퍼 없는 게 신호가 제일 좋은데 왜 넣나?"
+Object.assign(FLIT, { zhangOri: "Zhang et al., Nanomaterials 15, 1797 (2025) — 15 nm 이하 아나타제 TiO₂ 버퍼가 BST를 (111) 우선배향으로 바꾸고 결정립 성장·핵생성 밀도↑, 응력↓ · εr 503 → 920 (8 nm) · 누설 4.67e-6 → 1.36e-6 A/cm²" });
+FLK.push("zhangOri");
+{ const _r = STATIONS.select.render; STATIONS.select.render = function (stage, side) { _r.call(this, stage, side);
+  side.insertAdjacentHTML("afterbegin", `<div class="card whyb"><h3>“버퍼가 없을 때 신호가 제일 좋은데 왜 넣나요?”</h3>
+    <p>버퍼의 역할은 누설을 줄이는 것만이 아닙니다. 문헌에서는 <b>얇은 아나타제 TiO₂(15 nm 이하)가 위 박막의 결정 방향을 한쪽으로 정렬(우선배향)시키고 결정립을 키워</b>, 유전율이 503 → 920(8 nm)으로 오르고 누설은 약 1/3로 줄었습니다 ${cite("zhangOri")}.</p>
+    <p>이 효과가 BTO에서도 나타나 <b>분극까지 늘어나는 두께가 있는지</b> 찾는 것이 이 연구의 목적 중 하나입니다. 그래서 질문은 ‘넣을까 말까’가 아니라 ‘신호를 잃지 않으면서 결정성 이득을 얻는 두께’입니다.</p>
+    <p class="mut">주의: 해당 문헌은 상유전체 BST(PLD 증착)라 분극 증가는 직접 보고되지 않았습니다. BTO에서의 분극 효과는 저희가 확인할 가설입니다.</p></div>`); }; }
 
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 </script>
