@@ -667,6 +667,15 @@ sup.cite { color:#4cc9f0; font-size:10px; margin-left:2px; }
 .hm-t.primary { background:linear-gradient(160deg,#4cc9f022,#12171d); border-color:#4cc9f0; } .hm-t.primary em { color:var(--accent); }
 .hm-row { display:flex; gap:10px; margin-top:22px; flex-wrap:wrap; justify-content:center; }
 .hm-note { margin-top:34px; font-size:11.5px; color:#6b7683; line-height:1.7; }
+.krv { display:grid; grid-template-columns:repeat(auto-fit, minmax(330px, 1fr)); gap:12px; }
+.krc { background:#0f141a; border:1px solid var(--line); border-radius:10px; padding:10px 12px; } .krc h4 { margin:0 0 6px; color:#e3b341; font-size:13px; }
+.krr { display:grid; grid-template-columns:1fr 1.2fr; gap:4px 10px; align-items:center; padding:7px 0; border-top:1px dashed var(--line); } .krr:first-of-type { border-top:0; }
+.krr b { display:block; font-size:13px; } .krr span { font-size:11.5px; color:var(--mut); }
+.krv2 em { display:block; font-style:normal; font-size:12.5px; font-weight:600; } .krv2 em.g { color:#3fb950; } .krv2 small { display:block; font-size:11px; color:var(--mut); }
+.krr .krs { grid-column:1; background:var(--panel2); color:var(--fg); border:1px solid var(--line); border-radius:6px; padding:3px 6px; font-size:12px; } .krr .btn { grid-column:2; justify-self:start; }
+.krr.imp { } .krr.keep b { color:var(--fg); }
+.lvh { display:flex; align-items:baseline; gap:10px; margin-bottom:8px; } .lvh b { font:700 28px var(--f-mono); color:#3fb950; } .lvh span { color:var(--mut); }
+.todo.litok { border-color:#3fb950; }
 </style>
 <header class="top">
   <div class="logo"><i></i>BTO FAB</div>
@@ -4072,7 +4081,7 @@ labStep = function (stage, side) {
     };
   }
   // 선행 STEP 안내 (미래 STEP 클릭 시)
-  $$(".ls").forEach(b => { const k = +b.dataset.k, o = b.onclick; b.onclick = () => { const prev = steps.slice(0, Math.min(k, steps.length)).find(x => !B.ran[x.id]); if (k > B.i && prev) { labToast(`선행 STEP 필요: ${steps.indexOf(prev) + 1}. ${prev.name}`, () => { B.i = steps.indexOf(prev); go("lab"); }); return; } o && o(); }; });
+  $$(".ls").forEach(b => { const k = +b.dataset.k, o = b.onclick; b.onclick = () => { const prev = steps.slice(0, Math.min(k, steps.length)).find(x => !B.ran[x.id]); if (k > B.i && prev) { steps.slice(0, Math.min(k, steps.length)).forEach(x => { if (!B.ran[x.id]) { try { labApply(x); } catch (e) { } B.ran[x.id] = true; } }); log("info", `STEP ${k + 1}로 이동 · 앞 STEP은 기본 조건으로 자동 완료`); } o && o(); }; });
   // 단일 진행 버튼
   const par = $(".lpar"); if (!par) return;
   par.insertAdjacentHTML("afterbegin", `<button class="btn go" id="lgo"></button><label class="auto"><input type="checkbox" id="lauto" ${B.auto ? "checked" : ""}> 자동 진행 (조작 → 실행 → 다음 STEP)</label>`);
@@ -5891,10 +5900,14 @@ STATIONS.dx = {
 
 // ------------------------------------------------------------------ 문헌 데이터베이스 (대표값 · 원문 확인 필요)
 const FLIT = {
-  hayashi: "Hayashi et al., Jpn. J. Appl. Phys. 32, 4092 (1993) — 졸-겔 BaTiO₃ 박막",
-  stawski: "Stawski et al., Thin Solid Films 520, 4394 (2012) — Pt 위 졸-겔 BTO 유전율",
-  hosokura: "Hosokura et al. (2015) — 졸-겔 BTO 박막 분극",
-  bajac: "Bajac et al. (2014) — 졸-겔 BTO 결정자 크기",
+  hayashi: "Hayashi, Ohji, Hirohara, Fukunaga & Maiwa, Jpn. J. Appl. Phys. 32, 4092 (1993) — 졸-겔 BTO, 650 °C · Pr 8 µC/cm² · Ec 25 kV/cm · εr 800–1000 · 결정립 약 50 nm (두께 0.5 µm)",
+  stawski: "Stawski et al., Thin Solid Films 520, 4394 (2012) — Pt/Ti/Si 위 졸-겔 BTO 201 nm: εr 161, Ec 120 kV/cm (PFM), 800 °C",
+  gust: "Gust, Evans, Momoda & Mecartney, J. Am. Ceram. Soc. 80, 2828 (1997) — 졸-겔 BTO 결정화: 약 600 °C 탄산염 중간상, 약 735 °C BTO 결정화, 750 °C 1 h 결정립 20–60 nm",
+  kamal: "Kamalasanan, Kumar & Chandra, J. Appl. Phys. 74, 5679 (1993) — 졸-겔 BTO, 다결정화에 750 °C 2 h 필요",
+  tan: "Tan et al., Sci. Rep. 5, 9953 (2015) — BaTiO₃ 결정립 크기 효과: εr은 약 1 µm에서 최대, 결함 영향이 작으면 Pr은 결정립과 함께 증가",
+  appleby: "Appleby et al., J. Appl. Phys. 116, 124105 (2014) — BTO 박막(160–380 nm): 입방·정방 혼재로 Pr 낮음, 두께 증가 시 Pr 증가",
+  vorot: "Vorotilov, Petrovsky & Vasiljev, J. Sol-Gel Sci. Technol. 5, 173 (1995) — 졸-겔 스핀 코팅: 회전수·온도가 두께·균일도의 주요 인자",
+  sathy: "Sathyamurthy, Kim, Aytug & Paranthaman, Chem. Mater. 18, 5829 (2006) — 코팅 중 상대습도가 졸-겔 막 결정화에 영향",
   frey: "Frey & Payne, Phys. Rev. B 54, 3158 (1996) — BaTiO₃ 결정립 크기 효과",
   arlt: "Arlt, Hennings & de With, J. Appl. Phys. 58, 1619 (1985) — 미세 결정립 BaTiO₃ 유전 특성",
   dawber: "Dawber, Rabe & Scott, Rev. Mod. Phys. 77, 1083 (2005) — 강유전 박막 물리",
@@ -5918,17 +5931,17 @@ const FLIT = {
 const FLK = Object.keys(FLIT), litN = k => FLK.indexOf(k) + 1, cite = (...k) => `<sup class="cite">[${k.map(litN).join(",")}]</sup>`;
 // 지표별 문헌 범위 (본 연구 값과 대조)
 const BENCH = [
-  { k: "Pr", nm: "잔류분극 Pr", unit: "µC/cm²", lo: 0.9, hi: 5, src: ["hosokura", "hayashi"], ours: "모델 가정 2 (실측 없음)", note: "에피택셜 BTO는 더 큼 · 졸-겔 다결정은 낮음" },
-  { k: "Ec", nm: "항전계 Ec", unit: "kV/cm", lo: 30, hi: 100, src: ["hayashi", "setter"], ours: "TCAD 가정 27", note: "가정값이 문헌 하한 아래 → 탈분극 상한 9 nm는 보수적 하한" },
-  { k: "eps", nm: "유전율 εr", unit: "", lo: 100, hi: 400, src: ["stawski", "arlt"], ours: "TCAD 가정 40", note: "가정값이 문헌보다 낮음 → 신호·전압 분담 계산에 영향" },
-  { k: "grain", nm: "결정자 크기", unit: "nm", lo: 10, hi: 30, src: ["bajac", "frey"], ours: "실측 11.2 (XRD)", note: "수십 nm 이하에서 정방정성·강유전성 감소 보고 → Pr 실측 필요" },
-  { k: "PrPZT", nm: "비교: PZT Pr", unit: "µC/cm²", lo: 15, hi: 40, src: ["izy"], ours: "–", note: "BTO 대비 약 10배 · 납 포함" },
+  { k: "Pr", nm: "잔류분극 Pr", unit: "µC/cm²", lo: "", hi: 8, src: ["hayashi", "appleby"], ours: "모델 가정 2 (실측 없음)", note: "0.5 µm·결정립 50 nm에서 8 → 결정자 11.2 nm인 본 시편은 더 낮을 가능성 (크기 효과)" },
+  { k: "Ec", nm: "항전계 Ec", unit: "kV/cm", lo: 25, hi: 120, src: ["hayashi", "stawski"], ours: "TCAD 가정 27", note: "가정값이 문헌 하한(25) 근처 → 탈분극 상한 9 nm는 보수적 값, Ec가 클수록 상한 증가" },
+  { k: "eps", nm: "유전율 εr", unit: "", lo: 161, hi: 1000, src: ["stawski", "hayashi"], ours: "TCAD 가정 40", note: "가정값이 문헌보다 낮음 → C–V 실측으로 교체 필요 (전압 분담·신호 크기 변화)" },
+  { k: "grain", nm: "결정립 크기", unit: "nm", lo: 20, hi: 60, src: ["gust", "hayashi"], ours: "XRD 결정자 11.2 (실측)", note: "TEM 결정립과 XRD 결정자는 다른 척도 · 작을수록 강유전성 감소 [Frey, Tan]" },
+  { k: "PrPZT", nm: "비교: PZT Pr", unit: "µC/cm²", lo: 15, hi: 40, src: ["izy"], ours: "–", note: "BTO 문헌값(최대 8)보다 수 배 큼 · 납 포함" },
   { k: "HfO", nm: "비교: HfO₂ 두께", unit: "nm", lo: 5, hi: 15, src: ["boscke", "mikol"], ours: "–", note: "CMOS 집적 주류 · 고항전계" },
 ];
 // 공정 변수별 문헌 근거
 const KNOB_LIT = {
   coats: ["두께가 얇을수록 크기 효과·누설 증가, 두꺼우면 크랙 위험", ["dawber", "setter"]],
-  annealT: ["졸-겔 BTO 결정화 700–800 °C 범위 · 800 °C 초과는 Pt/Ti 하부전극 열화 위험(확인 필요)", ["hayashi", "bajac"]],
+  annealT: ["졸-겔 BTO 결정화 700–800 °C 범위 · 800 °C 초과는 Pt/Ti 하부전극 열화 위험(확인 필요)", ["gust", "kamal"]],
   holdMin: ["유지 시간 ↑ → 결정립 성장, 크기 효과 완화 방향", ["frey", "arlt"]],
   uvMin: ["UV/오존으로 유기 오염 제거 → 젖음·균일도 개선", ["vig"]],
   rh: ["알콕사이드 졸은 습도에 따라 가수분해 속도가 바뀌어 결함·불균일 발생", ["brinker"]],
@@ -5945,7 +5958,7 @@ function impEval2(L) { const r = aiScore(L), f = r.f; let tw = NaN; try { tw = l
 function impKnobOpts(L) { const o = []; AI_KNOBS.forEach(([k, nm, vals, u]) => vals(L).forEach(v => { if (v !== L[k]) o.push({ k, nm, v, from: u(L[k]), to: u(v) }); })); return o; }
 function impRecs(L, base) {
   const weak = base.m.reduce((a, x) => x[2] < a[2] ? x : a);
-  return impKnobOpts(L).map(o => { const r = aiScore({ ...L, [o.k]: o.v }); const d = r.m.map((x, i) => x[2] - base.m[i][2]);
+  return impKnobOpts(L).map(o => { const r = aiScore(knobApply(L, o.k, o.v)); const d = r.m.map((x, i) => x[2] - base.m[i][2]);
     return { ...o, dW: d[base.m.indexOf(weak)], dT: r.tot - base.tot, gains: d.map((x, i) => [base.m[i][1], x]).filter(x => x[1] > 2), loss: d.map((x, i) => [base.m[i][1], x]).filter(x => x[1] < -2) }; })
     .filter(o => o.dW > 0.5 || o.dT > 0.5).sort((a, b) => (b.dW + b.dT) - (a.dW + a.dT)).slice(0, 6);
 }
@@ -5998,14 +6011,14 @@ STATIONS.improve = {
     $("#imp-run") && ($("#imp-run").onclick = async () => { $("#imp-run").disabled = true;
       for (let i = 0; i < I.exps.length; i++) { const e = I.exps[i]; if (e.res) continue;
         for (const s of ["졸·코팅", "열처리", "전극", "측정"]) { const el = $("#est" + i); if (el) el.innerHTML = `<span class="spin">◐</span> ${s}`; const p = $("#imp-prog"); if (p) p.innerHTML = `<i style="width:${100 * (i + ["졸·코팅", "열처리", "전극", "측정"].indexOf(s) / 4 + 0.25) / I.exps.length}%"></i><span>E${i + 1} ${e.nm} ${e.to} · ${s}</span>`; await new Promise(r => setTimeout(r, 260)); }
-        const r = impEval2({ ...L, [e.k]: e.v }), d = r.m.map((x, j) => x[2] - B.m[j][2]), gains = d.map((x, j) => [B.m[j][1], x]).filter(x => x[1] > 2), loss = d.map((x, j) => [B.m[j][1], x]).filter(x => x[1] < -2), dT = r.tot - B.tot;
+        const r = impEval2(knobApply(L, e.k, e.v)), d = r.m.map((x, j) => x[2] - B.m[j][2]), gains = d.map((x, j) => [B.m[j][1], x]).filter(x => x[1] > 2), loss = d.map((x, j) => [B.m[j][1], x]).filter(x => x[1] < -2), dT = r.tot - B.tot;
         e.res = { r, dT, gains, loss, verdict: dT > 0.3 && !loss.length ? `<span class="okc">개선</span>` : dT > 0.3 ? `<span class="warn">trade-off</span>` : `<span class="badc">악화/무효</span>` }; }
       go("improve"); });
     if (done.length) {
       const pts = [[0, B.tot], ...I.exps.map((e, i) => e.res ? [i + 1, e.res.r.tot] : null).filter(Boolean)];
       $("#imp-cc").innerHTML = plot13({ id: "impcc", w: 420, h: 220, xr: [-0.5, I.exps.length + 0.5], yr: [Math.max(0, Math.min(...pts.map(p => p[1])) - 10), 100], xl: "Lot (0 = 기준)", yl: "종합 점수", lines: [{ pts, c: "#4cc9f0", w: 2 }, { pts: [[-0.5, B.tot], [I.exps.length + 0.5, B.tot]], c: "#8a97a5", d: "4 4", w: 1 }, { pts: [[-0.5, KPI_SPEC], [I.exps.length + 0.5, KPI_SPEC]], c: "#3fb950", d: "6 3", w: 1.2 }], dots: pts.map(p => ({ x: p[0], y: p[1], c: p[1] > B.tot + 0.3 ? "#3fb950" : p[0] ? "#f85149" : "#e3b341", t: p[0] ? "E" + p[0] : "기준" })), leg: [["기준선", "#8a97a5"], ["관리 기준", "#3fb950"]], legW: 90 });
       if (best) Chart.draw($("#imp-pe"), { h: 220, xlabel: "V (V)", ylabel: "P (µC/cm²)", series: [{ pts: peCurve(B.f), color: "#8a97a5", dash: "4 3", name: "기준" }, { pts: peCurve(best.res.r.f), color: "#4cc9f0", name: "E" + (I.exps.indexOf(best) + 1) }], bands: [{ y: [0.9, 3], color: "#e3b341", opacity: 0.1 }] });
-      $("#imp-ecn") && ($("#imp-ecn").onclick = () => { const no = "ECN-" + String(I.ecn.length + 1).padStart(3, "0"), nl = { ...L, [best.k]: best.v };
+      $("#imp-ecn") && ($("#imp-ecn").onclick = () => { const no = "ECN-" + String(I.ecn.length + 1).padStart(3, "0"), nl = knobApply(L, best.k, best.v);
         I.ecn.push({ no, ch: `${best.nm} ${best.from} → ${best.to}`, a: B.tot, b: best.res.r.tot, why: `개선: ${best.res.gains.map(x => x[0]).join(", ") || "종합"}` }); I.hist.push({ n: no, tot: best.res.r.tot });
         S.lot = nl; recompute(); log("ok", `${no} 승인: ${best.nm} ${best.from} → ${best.to}`); S.imp = { ecn: I.ecn, hist: I.hist }; go("improve"); });
       $("#imp-hold") && ($("#imp-hold").onclick = () => { log("warn", "레시피 변경 보류 · 추가 실험"); });
@@ -6048,15 +6061,15 @@ STATIONS.improve = {
 // ------------------------------------------------------------------ 문헌 벤치마크 · 신뢰성
 function benchTable(short) {
   const rows = short ? BENCH.slice(0, 4) : BENCH;
-  return `<div class="sk-scroll"><table class="plc sm"><tr><th>지표</th><th>문헌 범위</th><th>본 연구</th><th>해석</th></tr>${rows.map(b => `<tr><td>${b.nm}</td><td>${b.lo}–${b.hi} ${b.unit} ${cite(...b.src)}</td><td>${b.ours}</td><td>${b.note}</td></tr>`).join("")}</table></div>`;
+  return `<div class="sk-scroll"><table class="plc sm"><tr><th>지표</th><th>문헌 범위</th><th>본 연구</th><th>해석</th></tr>${rows.map(b => `<tr><td>${b.nm}</td><td>${b.lo === "" ? "최대 " + b.hi : b.lo + "–" + b.hi} ${b.unit} ${cite(...b.src)}</td><td>${b.ours}</td><td>${b.note}</td></tr>`).join("")}</table></div>`;
 }
 STATIONS.bench = {
   render(stage, side) {
     const f = PHY.solve({ ...S.lot }), checks = [
-      ["결정자 크기", `${fmt(f.grain, 1)} nm (모델) · 11.2 nm (XRD 실측)`, f.grain >= 10 ? "warn" : "bad", "문헌 범위 하한 근처. BaTiO₃는 결정립이 작아지면 정방정성과 강유전성이 줄어든다고 보고됨 → 분극은 PUND로 실측해야 함", ["frey", "arlt"]],
-      ["Ec 가정", "27 kV/cm (TCAD 입력)", "warn", "문헌 30–100 kV/cm보다 낮음 → 탈분극 상한 9.04 nm는 보수적 값, 문헌 Ec면 10–39 nm", ["hayashi", "setter", "tag"]],
-      ["εr 가정", "BTO 40 · TiO₂ 34", "warn", "Pt 위 졸-겔 BTO 문헌 εr(100–400)보다 낮음 → 실측 C–V로 교체 필요", ["stawski", "arlt"]],
-      ["Pr 가정", "2 µC/cm²", "ok", "졸-겔 BTO 문헌 범위(약 1–5) 안", ["hosokura", "hayashi"]],
+      ["결정자 크기", `${fmt(f.grain, 1)} nm (모델) · 11.2 nm (XRD 실측)`, "warn", "결정립이 작을수록 정방정성·Pr이 줄어든다는 보고 → 분극은 PUND로 실측해야 함", ["frey", "tan", "appleby"]],
+      ["Ec 가정", "27 kV/cm (TCAD 입력)", "ok", "졸-겔 BTO 문헌 25–120 kV/cm의 하한 근처 → 탈분극 상한 9.04 nm는 보수적 값, Ec가 더 크면 상한이 커짐", ["hayashi", "stawski", "tag"]],
+      ["εr 가정", "BTO 40 · TiO₂ 34", "warn", "Pt 위 졸-겔 BTO 문헌 εr(161–1000)보다 낮음 → 실측 C–V로 교체 필요", ["stawski", "hayashi"]],
+      ["Pr 가정", "2 µC/cm²", "warn", "Hayashi 8 µC/cm²(결정립 50 nm·0.5 µm)보다 낮게 둠 → 결정자 11.2 nm·두께 0.3 µm인 본 시편의 크기 효과를 반영한 보수적 가정", ["hayashi", "appleby", "tan"]],
       ["두께-신호 경향", "TiO₂ ↑ → 신호 ↓", "ok", "직렬 유전층·탈분극 이론과 같은 방향", ["tag", "dawber", "junq"]],
       ["스윕 전류", "+2 V에서 6.5–8.6 nA/cm²", "warn", "정상상태 누설이 아님(변위 전류 포함) → 문헌 누설값과 직접 비교 불가", ["scott88", "setter"]],
       ["메모리 신뢰성", "미측정", "bad", "산업 기준은 내구성·보존 시험을 표준 절차로 수행", ["jedec", "scott89"]],
@@ -6080,7 +6093,7 @@ STATIONS.bench = {
 
 // ------------------------------------------------------------------ 결과 분석 그래프 확대 + 설명
 const GEX = {
-  rpe: ["P–E 이력 곡선", "전압을 ±로 천천히 왕복하며, 단위 면적당 전하(분극)를 그린 곡선입니다.", ["0 V에서 위·아래 두 값의 차이 = <b>2Pr</b> (메모리가 기억하는 신호)", "곡선이 꺾여 뒤집히는 전압 = <b>항전압 Vc</b> (쓰기에 필요한 전압)", "고리가 넓고 각질수록 좋은 강유전체 · 납작하면 유전체에 가까움", "노란 띠 = 졸-겔 BTO 문헌 Pr 범위 0.9–3 µC/cm²"], ["hosokura", "damj"]],
+  rpe: ["P–E 이력 곡선", "전압을 ±로 천천히 왕복하며, 단위 면적당 전하(분극)를 그린 곡선입니다.", ["0 V에서 위·아래 두 값의 차이 = <b>2Pr</b> (메모리가 기억하는 신호)", "곡선이 꺾여 뒤집히는 전압 = <b>항전압 Vc</b> (쓰기에 필요한 전압)", "고리가 넓고 각질수록 좋은 강유전체 · 납작하면 유전체에 가까움", "노란 띠 = 앱이 쓰는 기준 범위 (문헌·가정)"], ["hayashi", "damj"]],
   rcv: ["C–V 나비 곡선 (10 kHz)", "직류 전압을 왕복하면서 작은 교류 신호로 정전용량을 잽니다.", ["분극이 뒤집히는 전압 근처에서 C가 최대 → <b>두 봉우리(나비 모양)</b>가 강유전성의 증거", "봉우리 위치 ≈ ±Vc · 좌우가 어긋나면 임프린트(한쪽 상태 선호)", "봉우리가 낮고 평평하면 스위칭이 약함", "회색 점선 = 표준 조건"], ["setter", "damj"]],
   rpu: ["PUND 펄스 응답", "같은 방향 펄스를 두 번 줍니다. 첫 펄스(P)는 분극 반전 + 충전, 두 번째(U)는 이미 반전되어 충전만 일어납니다.", ["<b>P − U</b> = 누설·유전 성분을 뺀 <b>순수 스위칭 전하</b>", "P와 U의 차이가 클수록 진짜 강유전 스위칭", "누설이 크면 P–E가 부풀어 보여도 P−U는 작음 → P–E만으로 판단하지 않는 이유"], ["scott88"]],
 };
@@ -6136,6 +6149,79 @@ async function presSeg(seg) {
 }
 presBar = (orig => function (txt) { orig(txt); const b = $("#presbar"); if (b && !$("#pb-1", b)) { b.querySelector("b").insertAdjacentHTML("beforebegin", `<button id="pb-1">① 공정 45초</button><button id="pb-2">② 결과 45초</button>`); $("#pb-1").onclick = () => presSeg(1); $("#pb-2").onclick = () => presSeg(2); } })(presBar);
 presMode = function (on) { if (on) { PT.on = true; PT.pause = false; document.body.classList.add("pres"); presBar("구간을 고르세요: ① 공정 순서 · ② 시뮬레이션 결과"); } else { window.SPD = 1; presStop(); } };
+
+// ------------------------------------------------------------------ UV · 열처리 변수 추가 + 공정 단계별 전체 검토
+AI_KNOBS.push(
+  ["uv", "UV 처리 여부", L => [!(L.uv !== false)], v => v === false ? "X (미처리)" : "O (처리)"],
+  ["annealPreset", "BTO 열처리 프로파일", L => [L.annealPreset === "초기" ? "개선" : "초기"], v => v === "초기" ? "700 °C 단일 램프" : "750 °C 3단 램프"]
+);
+AI_KNOBS.forEach(k => { if (k[0] === "uvMin") k[2] = L => L.uv === false ? [] : [Math.max(2, L.uvMin - 5), L.uvMin + 5, 20].filter((v, i, a) => a.indexOf(v) === i && v !== L.uvMin); if (k[0] === "holdMin") k[2] = L => [Math.max(30, L.holdMin - 30), L.holdMin + 30, 120].filter((v, i, a) => a.indexOf(v) === i && v !== L.holdMin); });
+Object.assign(KNOB_LIT, { uv: ["UV/오존 처리로 표면 유기물 제거 → 젖음·균일도·결함 개선 (본 연구 O/X 비교 수행)", ["vig"]], annealPreset: ["초기 700 °C 단일 → 750 °C 3단 램프로 결정자 9.6 → 11.2 nm (본 연구 XRD 실측)", ["gust", "kamal"]] });
+const knobApply = (L, k, v) => { const o = { ...L, [k]: v }; if (k === "annealPreset") Object.assign(o, ANNEAL_PRESET[v]); return o; };
+{ const _s = aiScore; aiScore = function (L) { if (L.annealPreset && ANNEAL_PRESET[L.annealPreset]) { const P = ANNEAL_PRESET[L.annealPreset]; if (L.annealPreset === "초기" ? L.annealT !== P.annealT || L.rampA !== P.rampA : L.annealT === 700 && L.rampA === 1) L = { ...L, ...P }; } return _s(L); }; }
+const KCAT = { uv: "UV 처리", uvMin: "UV 처리", annealPreset: "열처리", annealT: "열처리", holdMin: "열처리", hpT: "건조·하드베이크", coats: "BTO 코팅", rpm: "BTO 코팅", rh: "BTO 코팅", conc: "BTO 졸", tio2MeMl: "TiO₂ 버퍼", trpm: "TiO₂ 버퍼" };
+function knobReview(L, base) {
+  return AI_KNOBS.map(([k, nm, vals, u]) => { const opts = vals(L).map(v => { const r = aiScore(knobApply(L, k, v)); return { k, nm, v, from: u(L[k]), to: u(v), dT: r.tot - base.tot, d: r.m.map((x, i) => [base.m[i][1], x[2] - base.m[i][2]]) }; });
+    if (!opts.length) return null; const best = opts.reduce((a, b) => b.dT > a.dT ? b : a); return { k, nm, cat: KCAT[k] || "기타", cur: u(L[k]), opts, best }; }).filter(Boolean);
+}
+function knobReviewHtml(L, base, withAdd) {
+  const R = knobReview(L, base), cats = [...new Set(R.map(r => r.cat))];
+  return `<div class="krv">${cats.map(c => `<div class="krc"><h4>${c}</h4>${R.filter(r => r.cat === c).map(r => { const keep = r.best.dT <= 0.3, big = r.best.d.filter(x => Math.abs(x[1]) > 2).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 2);
+      return `<div class="krr ${keep ? "keep" : "imp"}"><div><b>${r.nm}</b><span>현재 ${r.cur}</span></div><div class="krv2">${keep ? `<em class="okc">현재 조건 유지가 최적</em><small>바꾸면 종합 ${r.best.dT.toFixed(1)} (${r.best.to})</small>` : `<em class="g">${r.best.to} 권장 · 종합 +${r.best.dT.toFixed(1)}</em><small>${big.map(x => `${x[0]} ${x[1] > 0 ? "+" : ""}${x[1].toFixed(0)}`).join(" · ")}</small>`}</div>
+        ${withAdd ? `<select class="krs" data-k="${r.k}">${r.opts.map((o, i) => `<option value="${i}" ${o === r.best ? "selected" : ""}>${o.to} (${o.dT >= 0 ? "+" : ""}${o.dT.toFixed(1)})</option>`).join("")}</select><button class="btn sm" data-kadd="${r.k}">실험 추가</button>` : ""}</div>`; }).join("")}</div>`).join("")}</div>
+    <p class="mut">모든 변수를 한 단계씩 바꿔 본 결과입니다. ‘현재 조건 유지가 최적’은 실험으로 정한 조건이 모델에서도 최적 근처라는 뜻입니다.</p>`;
+}
+{ const _r = STATIONS.improve.render; STATIONS.improve.render = function (stage, side) { _r.call(this, stage, side);
+  const I = impState(), grid = $$(".fagrid", stage)[0]; if (!grid) return;
+  const c = document.createElement("div"); c.className = "card"; c.innerHTML = `<h3>②-b 공정 단계별 전체 검토 (UV · 열처리 · 코팅 · 졸 · TiO₂)</h3>${knobReviewHtml(I.base, I.b, true)}`; grid.after(c);
+  $$("[data-kadd]", c).forEach(b => b.onclick = () => { const k = b.dataset.kadd, r = knobReview(I.base, I.b).find(x => x.k === k), o = r.opts[+c.querySelector(`.krs[data-k="${k}"]`).value]; if (!I.exps.some(e => e.k === k && e.v === o.v)) I.exps.push({ k, nm: o.nm, v: o.v, from: o.from, to: o.to }); go("improve"); });
+}; }
+{ const _r = STATIONS.ai.render; STATIONS.ai.render = function (stage, side) { _r.call(this, stage, side);
+  const L = { ...S.lot }, b = aiScore(L), c = document.createElement("div"); c.className = "card";
+  c.innerHTML = `<h3>3-b. 공정 단계별 전체 검토 (UV · 열처리 포함)</h3>${knobReviewHtml(L, b, false)}<button class="btn sm primary" id="krv-go">공정 개선에서 직접 실험하기 ▶</button>`;
+  const g = $$(".grid2", stage)[0]; g && g.after(c); $("#krv-go").onclick = () => { S.imp = { ecn: S.imp?.ecn, hist: S.imp?.hist }; go("improve"); };
+}; }
+
+// ------------------------------------------------------------------ 문헌 기반 검증: 변수 → 결과 방향 · 정량 비교
+Object.assign(KNOB_LIT, {
+  rh: ["코팅 중 상대습도가 졸-겔 막의 가수분해·결정화에 영향 → 습도 관리 필요", ["sathy", "brinker"]],
+  rpm: ["스핀 두께 ∝ 회전수^−1/2, 회전수·온도가 두께·균일도의 주요 인자", ["meyer", "vorot"]],
+  coats: ["두께가 늘면 정방정 비율·Pr 증가 보고, 너무 두꺼우면 크랙 위험", ["appleby", "dawber"]],
+  holdMin: ["750 °C에서 BTO 회절이 나타나기까지 약 20분 필요 → 유지 시간이 결정화를 좌우", ["gust", "tan"]],
+  annealT: ["BTO 결정화 약 735 °C, 다결정화에 750 °C 필요 보고 · 800 °C 이상은 Pt/Ti 전극 열화 위험(확인 필요)", ["gust", "kamal"]],
+  hpT: ["열분해 부족 시 약 600 °C에서 탄산염 중간상 형성 → 결정화 지연", ["gust", "hayashi"]],
+});
+const LIT_TREND = [
+  { nm: "결정화 온도 700 → 750 °C", a: { annealT: 700 }, b: { annealT: 750 }, m: f => f.grain, u: "결정자 nm", exp: +1, claim: "BTO 결정화 약 735 °C · 750 °C에서 다결정화", src: ["gust", "kamal"] },
+  { nm: "열처리 초기(700 단일) → 개선(750 3단)", a: { annealPreset: "초기" }, b: { annealPreset: "개선" }, m: f => f.grain, u: "결정자 nm", exp: +1, claim: "본 연구 XRD 실측 9.6 → 11.2 nm", src: [], meas: [9.6, 11.2] },
+  { nm: "유지 시간 30 → 90분", a: { holdMin: 30 }, b: { holdMin: 90 }, m: f => f.grain, u: "결정자 nm", exp: +1, claim: "750 °C에서 결정화에 약 20분 필요 · 유지↑ → 결정 성장", src: ["gust"] },
+  { nm: "결정 성장 → 분극", a: { annealPreset: "초기" }, b: { annealPreset: "개선" }, m: f => f.Pr, u: "Pr µC/cm²", exp: +1, claim: "결함 영향이 작으면 Pr은 결정립과 함께 증가", src: ["tan", "frey"] },
+  { nm: "UV 처리 O → X", a: { uv: true }, b: { uv: false }, m: f => f.nonUnif, u: "불균일 %", exp: +1, claim: "UV/오존 세정이 유기 오염을 제거 · 본 연구 O/X 비교", src: ["vig"] },
+  { nm: "상대습도 30 → 50%", a: { rh: 30 }, b: { rh: 50 }, m: f => 100 * f.Yfilm, u: "막 수율 %", exp: -1, claim: "습도가 가수분해·결정화에 영향", src: ["sathy", "brinker"] },
+  { nm: "BTO 졸 농도 0.20 → 0.35 M", a: { conc: 0.2 }, b: { conc: 0.35 }, m: f => f.tBTO, u: "BTO 두께 nm", exp: +1, claim: "농도↑ → 점도·고형분↑ → 층당 두께↑", src: ["brinker"] },
+  { nm: "코팅 2 → 6회", a: { coats: 2 }, b: { coats: 6 }, m: f => f.tBTO, u: "BTO 두께 nm", exp: +1, claim: "층 누적 → 두께 증가", src: ["appleby"] },
+  { nm: "TiO₂ 희석 3 → 8 mL", a: { structure: "MFBM", tio2MeMl: 3 }, b: { structure: "MFBM", tio2MeMl: 8 }, m: (f, L) => tioSweep2().at(f.tTiO2 || 0), u: "읽기 신호 %", exp: +1, claim: "계면 유전층이 얇을수록 탈분극 완화", src: ["tag", "zhang"] },
+];
+function litValidate(L0) {
+  const base = { ...DEFAULT_LOT, ...L0 }, run = o => { const L = knobApply(base, Object.keys(o)[0], Object.values(o)[0]); Object.assign(L, o); if (o.annealPreset) Object.assign(L, ANNEAL_PRESET[o.annealPreset]); return { f: PHY.solve(L), L }; };
+  const rows = LIT_TREND.map(t => { const A = run(t.a), B = run(t.b), va = t.m(A.f, A.L), vb = t.m(B.f, B.L), sg = Math.sign(vb - va); return { ...t, va, vb, ok: sg === t.exp }; });
+  // 스핀 지수 (두께 ∝ ω^n) — Meyerhofer n ≈ −0.5
+  const t1 = PHY.solve({ ...base, rpm: 3000 }).tBTO, t2 = PHY.solve({ ...base, rpm: 6000 }).tBTO, n = Math.log(t2 / t1) / Math.log(2);
+  return { rows, n, nOK: Math.abs(n + 0.5) < 0.15 };
+}
+function litValHtml() {
+  const V = litValidate(S.lot), okN = V.rows.filter(r => r.ok).length + (V.nOK ? 1 : 0), tot = V.rows.length + 1;
+  return `<div class="lvh"><b>${okN} / ${tot}</b><span>문헌 방향과 일치</span></div>
+    <div class="sk-scroll"><table class="plc sm"><tr><th>공정 변화</th><th>모델 결과</th><th>문헌·실측 근거</th><th>판정</th></tr>
+    ${V.rows.map(r => `<tr><td>${r.nm}</td><td>${r.u}: ${fmt(r.va, 2)} → <b>${fmt(r.vb, 2)}</b>${r.meas ? `<br><small>실측 ${r.meas[0]} → ${r.meas[1]}</small>` : ""}</td><td>${r.claim} ${r.src.length ? cite(...r.src) : "(본 연구)"}</td><td>${r.ok ? `<span class="okc">✓ 방향 일치</span>` : `<span class="badc">✗ 불일치</span>`}</td></tr>`).join("")}
+    <tr><td>스핀 회전수 3000 → 6000 rpm</td><td>두께 ∝ ω<sup>${V.n.toFixed(2)}</sup></td><td>이론·실험 ω<sup>−0.5</sup> 근처 ${cite("meyer", "vorot")}</td><td>${V.nOK ? `<span class="okc">✓ 지수 일치</span>` : `<span class="warn">지수 차이</span>`}</td></tr></table></div>
+    <p class="mut">‘방향 일치’는 변수를 바꿨을 때 모델 결과가 문헌이 보고한 방향으로 움직인다는 뜻입니다. 크기(정량)는 본 연구 실측(두께·결정자)에만 맞춰 보정했습니다.</p>`;
+}
+{ const _r = STATIONS.bench.render; STATIONS.bench.render = function (stage, side) { _r.call(this, stage, side);
+  const c = document.createElement("div"); c.className = "card"; c.innerHTML = `<h3>2-b. 공정 변수 반영의 문헌 검증 (모델 방향 점검)</h3>${litValHtml()}`; $$(".card", stage)[1]?.after(c); }; }
+{ const _r = STATIONS.improve.render; STATIONS.improve.render = function (stage, side) { _r.call(this, stage, side);
+  const V = litValidate(S.imp?.base || S.lot), okN = V.rows.filter(r => r.ok).length + (V.nOK ? 1 : 0);
+  const k = $(".card h3", stage); const card = k && k.closest(".card"); card && card.insertAdjacentHTML("afterend", `<div class="todo litok"><b>모델 신뢰성: 공정 변수 ${V.rows.length + 1}개 중 ${okN}개가 문헌 보고 방향과 일치</b><span>결정화 온도·유지 시간·UV·습도·농도·코팅·스핀·TiO₂ 두께 · 결정자는 본 연구 XRD(9.6 → 11.2 nm)로 보정 <button class="btn sm" onclick="go('bench')">검증 표 보기 ▶</button></span></div>`); }; }
 
 // ------------------------------------------------------------------ 첫 화면: 짧고 직관적으로
 STATIONS.home = {
