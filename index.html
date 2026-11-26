@@ -713,6 +713,11 @@ sup.cite { color:#4cc9f0; font-size:10px; margin-left:2px; }
 .cpb { height:8px; background:#262e38; border-radius:4px; overflow:hidden; } .cpb i { display:block; height:100%; border-radius:4px; }
 .cpr em, .cpt em { font-style:normal; font:700 12px var(--f-mono); } em.inc { color:#ff5b5b; } em.dec { color:#58a6ff; } em.eq { color:#6b7683; font-weight:500; }
 .cpt { margin-top:8px; padding-top:8px; border-top:1px solid var(--line); font-size:13px; } .cpt b { font:700 20px var(--f-mono); margin:0 6px; }
+.xlit { margin-top:10px; padding:10px 12px; border-radius:8px; background:#e3b3410f; border-left:3px solid #e3b341; font-size:12.5px; } .xlit b { display:block; color:#e3b341; } .xlit span { display:block; } .xlit .g { color:#ff7b7b; } .xlit .r { color:#58a6ff; }
+.spcg { display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:12px; } @media (max-width:600px){ .spcg { grid-template-columns:1fr; } }
+.spcc { background:#0f141a; border:1px solid var(--line); border-radius:10px; padding:8px 10px; }
+.spch { display:flex; flex-wrap:wrap; gap:4px 8px; align-items:baseline; } .spch b { font-size:13.5px; } .spch small { width:100%; color:var(--mut); font-size:11px; }
+.spch span { font:600 10.5px var(--f-mono); padding:1px 7px; border-radius:9px; } .spch .kpp { background:#f8514922; color:#ff7b7b; } .spch .aux { background:#5c667333; color:#8a97a5; }
 </style>
 <header class="top">
   <div class="logo"><i></i>BTO FAB</div>
@@ -6410,6 +6415,248 @@ function aiCmpModal(recs, focus) {
   if (ap) { ap.textContent = `AI 추천 조건 ${recs.length}개 비교 예상 분석 보기 ▶`; ap.onclick = () => aiCmpModal(recs, -1); }
   $$("[data-cmp]", stage).forEach(b => { b.textContent = "공정 변수 교체 시 예상 결과값 확인하기 ▶"; b.onclick = () => aiCmpModal(recs, +b.dataset.cmp); });
 }; }
+
+// ---- 문헌 기반 교차 효과 (한 변수가 여러 지표에 동시에 미치는 영향) + 누설 억제 지표
+const XEF = { tB: 175, aPr: 0.3, yThin: 600, yT: 400, yHold: 900, lkTau: 6, lkMin: 3 };   // 모두 가정 계수 (방향은 문헌)
+Object.assign(FLIT, { zhangLk: "Zhang et al., Nanomaterials 15, 1797 (2025) — TiO₂ 버퍼로 누설 감소 (방향만 반영)" });
+function lkScore(L, f) { if (L.structure !== "MFBM") return { s: 40, d: "버퍼 없음 → 누설 억제층 없음 (가정 40점)" };
+  const t = f.tTiO2 || 0, base = 40 + 60 * (1 - Math.exp(-t / XEF.lkTau)), pen = t < XEF.lkMin ? (XEF.lkMin - t) * 15 : 0;
+  return { s: Math.max(0, Math.min(100, base - pen)), d: `TiO₂ ${fmt(t, 1)} nm → 누설 억제 (가정·미측정)${t < XEF.lkMin ? " · 연속막 위험" : ""}` }; }
+{ const _s = aiScore; aiScore = function (L) { const r = _s(L), f = r.f, tB = f.tBTO;
+  const prF = Math.min(1.15, Math.pow(Math.max(20, tB) / XEF.tB, XEF.aPr));                     // 얇을수록 Pr ↓ [Appleby 2014]
+  const yF = Math.exp(-Math.max(0, XEF.tB - tB) / XEF.yThin) * Math.exp(-Math.max(0, (L.annealT || 750) - 750) / XEF.yT) * Math.exp(-Math.max(0, (L.holdMin || 60) - 60) / XEF.yHold);
+  const set = (k, sc, d) => { const i = r.m.findIndex(x => x[0] === k); if (i >= 0) { r.m[i][2] = Math.max(0, Math.min(100, sc)); r.m[i][3] = d; } };
+  const PrE = f.Pr * prF, YE = f.Yfilm * yF;
+  set("pol", 100 * PrE / 2, `Pr ${fmt(PrE, 2)} µC/cm² (모델 · 두께 보정 ×${prF.toFixed(2)})`);
+  set("yld", 100 * YE, `막 수율 ${(100 * YE).toFixed(0)}%${yF < 0.995 ? ` (얇은 막·열부담 보정 ×${yF.toFixed(2)})` : ""} · 결함 ${fmt(f.D0, 1)}/cm²`);
+  const lk = lkScore(L, f); if (!r.m.find(x => x[0] === "lk")) r.m.push(["lk", "누설 억제", lk.s, lk.d, "버퍼 두께 포화 가정 · 측정 전"]);
+  r.tot = r.m.reduce((a, x) => a + x[2], 0) / r.m.length; r.xf = { prF, yF }; return r; }; }
+KPI_HOW.lk = ["누설 억제 ≥ 80점 (TiO₂ ≥ 약 6.6 nm, 가정)", "TiO₂ 두께(희석·회전수) · 구조 · 연속막 품질", ["zhang", "tag"]];
+const XLIT = {   // 변수별 교차 효과 (얻는 것 / 잃는 것) 문헌
+  coats: ["두께↓ → 균일도·Vc 개선", "두께↓ → Pr 감소·핀홀 단락 위험", ["appleby", "dawber"]],
+  conc: ["농도↓ → 얇고 균일", "두께↓ → Pr 감소", ["brinker", "appleby"]],
+  rpm: ["회전수↑ → 얇고 균일", "두께↓ → Pr 감소", ["meyer", "appleby"]],
+  annealT: ["온도↑ → 결정 성장·Pr 증가", "800 °C 이상 하부전극 열화·수율 저하 위험(확인 필요)", ["gust", "kamal"]],
+  holdMin: ["유지↑ → 결정 성장", "열부담↑ → 계면 확산 위험", ["gust", "tan"]],
+  tio2MeMl: ["TiO₂↓ → 읽기 신호·구동 전압 개선", "TiO₂↓ → 누설 억제 효과 감소·연속막 위험", ["tag", "zhang"]],
+  trpm: ["TiO₂↓ → 읽기 신호 개선", "누설 억제 효과 감소", ["meyer", "zhang"]],
+  uv: ["UV 처리 → 젖음·균일도 개선", "공정 시간 증가", ["vig"]], uvMin: ["UV↑ → 유기물 제거", "효과 포화", ["vig"]],
+  rh: ["습도↓ → 결함 감소", "환경 제어 비용", ["sathy", "brinker"]], annealPreset: ["3단 램프 → 결정성 개선 (본 연구 XRD)", "공정 시간 증가", ["gust"]],
+};
+{ const _cp = cmpPanel; cmpPanel = function (r, L0) { const x = XLIT[r.k]; return _cp(r, L0) + (x ? `<div class="xlit"><b>교차 효과 (문헌)</b><span class="g">얻는 것: ${x[0]}</span><span class="r">잃는 것: ${x[1]}</span>${cite(...x[2])}</div>` : ""); }; }
+
+sigPathHtml = (o => function (L) { const tl = -XEF.lkTau * Math.log(1 / 3); return o(L).replace(/<b>약 3–(\d+) nm<\/b>가 공정 창입니다\./, (m, a) => `<b>약 ${tl.toFixed(1)}–${a} nm</b>가 공정 창입니다(하한: 누설 억제 80점 · 가정, 상한: 읽기 신호 ${SIG_REQ} mV). 너무 얇으면 신호는 살지만 버퍼의 존재 이유인 누설 억제가 약해지는 trade-off입니다.`); })(sigPathHtml);
+
+// =====================================================================
+// SPC 관리도 · Nelson 8규칙 · KPP 우선순위(오경보 억제) · 원인 회귀분석
+// =====================================================================
+Object.assign(FLIT, {
+  nelson: "Nelson, J. Qual. Technol. 16, 237 (1984) — The Shewhart Control Chart: Tests for Special Causes (8규칙)",
+  we56: "Western Electric, Statistical Quality Control Handbook (1956) — 관리도 이상 판정 규칙",
+  montg: "Montgomery, Introduction to Statistical Quality Control (Wiley) — 관리도·다중 규칙의 오경보율",
+});
+FLK.push("nelson", "we56", "montg");
+const NELSON = [
+  [1, "1점이 3σ 밖", "갑작스러운 큰 이상 (장비 고장·측정 오류)"],
+  [2, "9점 연속 같은 쪽", "평균이 옮겨감 (재료 로트·셋업 변경)"],
+  [3, "6점 연속 증가/감소", "서서히 변함 (졸 노화·램프 열화)"],
+  [4, "14점 연속 지그재그", "두 장비·두 작업자 번갈아 사용"],
+  [5, "3점 중 2점이 2σ 밖(같은 쪽)", "중간 크기 이동의 초기 신호"],
+  [6, "5점 중 4점이 1σ 밖(같은 쪽)", "작은 이동의 초기 신호"],
+  [7, "15점 연속 1σ 안", "산포가 너무 작음 (데이터 섞임·관리한계 재설정 필요)"],
+  [8, "8점 연속 1σ 밖(양쪽)", "두 분포가 섞임 (조건 두 가지 혼재)"],
+];
+function nelsonCheck(x, m, sd, rules) {
+  const z = x.map(v => (v - m) / sd), hit = x.map(() => []), on = r => rules.includes(r), add = (i, r) => { if (!hit[i].includes(r)) hit[i].push(r); };
+  z.forEach((v, i) => {
+    if (on(1) && Math.abs(v) > 3) add(i, 1);
+    if (on(2) && i >= 8) { const w = z.slice(i - 8, i + 1); if (w.every(u => u > 0) || w.every(u => u < 0)) add(i, 2); }
+    if (on(3) && i >= 5) { const w = z.slice(i - 5, i + 1); let inc = true, dec = true; for (let k = 1; k < 6; k++) { if (!(w[k] > w[k - 1])) inc = false; if (!(w[k] < w[k - 1])) dec = false; } if (inc || dec) add(i, 3); }
+    if (on(4) && i >= 13) { const w = z.slice(i - 13, i + 1); let alt = true; for (let k = 2; k < 14; k++) if (Math.sign(w[k] - w[k - 1]) === Math.sign(w[k - 1] - w[k - 2])) alt = false; if (alt) add(i, 4); }
+    if (on(5) && i >= 2) { const w = z.slice(i - 2, i + 1); if (w.filter(u => u > 2).length >= 2 || w.filter(u => u < -2).length >= 2) add(i, 5); }
+    if (on(6) && i >= 4) { const w = z.slice(i - 4, i + 1); if (w.filter(u => u > 1).length >= 4 || w.filter(u => u < -1).length >= 4) add(i, 6); }
+    if (on(7) && i >= 14) { if (z.slice(i - 14, i + 1).every(u => Math.abs(u) < 1)) add(i, 7); }
+    if (on(8) && i >= 7) { if (z.slice(i - 7, i + 1).every(u => Math.abs(u) > 1)) add(i, 8); }
+  });
+  return hit;
+}
+const mulb = a => () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const SPC_SCEN = {
+  ok: ["정상 운전", "특별 원인 없음 · 우연 산포만"],
+  sol: ["TiO₂ 졸 노화 (Lot 21부터)", "졸이 시간이 지나며 진해져 TiO₂가 서서히 두꺼워짐"],
+  hp: ["핫플레이트 순간 이상 (Lot 28)", "보조 센서 한 번 튐 · 제품 영향 없음"],
+  rh: ["클린룸 습도 상승 (Lot 25부터)", "RH가 약 3% 올라 유지 · 막 결함 증가"],
+};
+function spcGen(L, scen, n = 40, seed = 7) {
+  const r = mulb(seed), f = PHY.solve(L), mf = L.structure === "MFBM", tT0 = mf ? f.tTiO2 : 0, tB0 = f.tBTO, y0 = 100 * aiScore(L).f.Yfilm;
+  const P = { tT: [], tB: [], gr: [], gap: [], hp: [], rh: [], yl: [] };
+  for (let i = 0; i < n; i++) {
+    let rh = L.rh + 1.5 * gauss(r), hp = L.hpT + 1.2 * gauss(r), tT = mf ? tT0 * (1 + 0.03 * gauss(r)) : 0, tB = tB0 * (1 + 0.025 * gauss(r)), gr = f.grain + 0.25 * gauss(r);
+    if (scen === "sol" && i >= 20 && mf) tT += tT0 * 0.03 * 0.35 * (i - 19);
+    if (scen === "hp" && i === 27) hp += 1.2 * 5.5;
+    if (scen === "rh" && i >= 24) rh += 3;
+    const gap = blGap(tB, tT).v + 1.5 * gauss(r), yl = y0 - 1.1 * (rh - L.rh) - 0.15 * Math.abs(hp - L.hpT) + 1.2 * gauss(r);
+    P.tT.push(tT); P.tB.push(tB); P.gr.push(gr); P.gap.push(gap); P.hp.push(hp); P.rh.push(rh); P.yl.push(yl);
+  }
+  return P;
+}
+const SPC_PAR = [
+  ["tT", "TiO₂ 두께", "nm", true, "읽기 신호를 직접 결정"], ["gap", "BL 전압 간격", "mV", true, "제품 핵심 출력"], ["tB", "BTO 두께", "nm", true, "분극·구동 전압"],
+  ["gr", "결정자 크기", "nm", true, "결정성·분극"], ["hp", "핫플레이트 온도", "°C", false, "보조 센서"], ["rh", "클린룸 습도", "%RH", false, "보조 환경 센서"],
+];
+const spcRules = (kpp, pol) => pol === "all" ? [1, 2, 3, 4, 5, 6, 7, 8] : kpp ? [1, 2, 3, 4, 5, 6, 7, 8] : [1];
+function spcEval(P, pol) {
+  return SPC_PAR.map(([k, nm, u, kpp, why]) => { const x = P[k], b = x.slice(0, 20), m = b.reduce((a, v) => a + v, 0) / 20, sd = Math.sqrt(b.reduce((a, v) => a + (v - m) ** 2, 0) / 19) || 1e-9;
+    return { k, nm, u, kpp, why, x, m, sd, hit: nelsonCheck(x, m, sd, spcRules(kpp, pol)) }; });
+}
+function spcFA(L, pol, runs = 60) { let al = 0, tot = 0; for (let s = 0; s < runs; s++) { const E = spcEval(spcGen(L, "ok", 40, 1000 + s), pol); for (let i = 20; i < 40; i++) { tot++; if (E.some(e => e.hit[i].length)) al++; } } return 100 * al / tot; }
+function spcDetect(L, scen, pol, key) { const E = spcEval(spcGen(L, scen, 40, 7), pol), st = { sol: 20, hp: 27, rh: 24 }[scen]; const e = E.find(x => x.k === key); const i = e.hit.findIndex((h, j) => j >= st && h.length); return i < 0 ? null : i - st + 1; }
+// 회귀: 단일 인자 R², p (t 분포)
+function betacf(a, b, x) { let qab = a + b, qap = a + 1, qam = a - 1, c = 1, d = 1 - qab * x / qap; d = 1 / d; let h = d; for (let m = 1; m <= 200; m++) { const m2 = 2 * m; let aa = m * (b - m) * x / ((qam + m2) * (a + m2)); d = 1 + aa * d; c = 1 + aa / c; d = 1 / d; h *= d * c; aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2)); d = 1 + aa * d; c = 1 + aa / c; d = 1 / d; const del = d * c; h *= del; if (Math.abs(del - 1) < 3e-12) break; } return h; }
+function lgam(x) { const c = [76.18009172947146, -86.50532032941677, 24.01409824083091, -1.231739572450155, 0.1208650973866179e-2, -0.5395239384953e-5]; let y = x, t = x + 5.5; t -= (x + 0.5) * Math.log(t); let s = 1.000000000190015; for (const q of c) s += q / ++y; return -t + Math.log(2.5066282746310005 * s / x); }
+function ibeta(a, b, x) { if (x <= 0) return 0; if (x >= 1) return 1; const bt = Math.exp(lgam(a + b) - lgam(a) - lgam(b) + a * Math.log(x) + b * Math.log(1 - x)); return x < (a + 1) / (a + b + 2) ? bt * betacf(a, b, x) / a : 1 - bt * betacf(b, a, 1 - x) / b; }
+function linreg(x, y) { const n = x.length, mx = x.reduce((a, v) => a + v, 0) / n, my = y.reduce((a, v) => a + v, 0) / n; let sxy = 0, sxx = 0, syy = 0; for (let i = 0; i < n; i++) { sxy += (x[i] - mx) * (y[i] - my); sxx += (x[i] - mx) ** 2; syy += (y[i] - my) ** 2; }
+  const b = sxy / sxx, r2 = sxy * sxy / (sxx * syy), t = Math.sqrt(r2 * (n - 2) / Math.max(1e-12, 1 - r2)), df = n - 2, p = ibeta(df / 2, 0.5, df / (df + t * t)); return { b, r2, p }; }
+const pTxt = p => p < 0.001 ? "0.1% 미만" : p < 0.01 ? `${(p * 100).toFixed(1)}%` : `${(p * 100).toFixed(0)}%`;
+STATIONS.spc = {
+  render(stage, side) {
+    const U = S.spcU || (S.spcU = { scen: "sol", pol: "kpp" }), L = { ...S.lot }, P = spcGen(L, U.scen), E = spcEval(P, U.pol), mf = L.structure === "MFBM";
+    const alarms = []; E.forEach(e => e.hit.forEach((h, i) => { if (h.length && i >= 20) alarms.push({ e, i, h }); }));
+    const faAll = spcFA(L, "all"), faK = spcFA(L, "kpp");
+    const det = sc => [spcDetect(L, sc, "all", sc === "sol" ? "gap" : sc === "rh" ? "rh" : "hp"), spcDetect(L, sc, "kpp", sc === "sol" ? "gap" : sc === "rh" ? "rh" : "hp")];
+    const dS = det("sol"), dR = det("rh");
+    const RG = [["TiO₂ 두께", P.tT], ["BTO 두께", P.tB], ["클린룸 습도", P.rh], ["핫플레이트 온도", P.hp]].filter(x => mf || x[0] !== "TiO₂ 두께").map(([nm, x]) => ({ nm, g: linreg(x, P.gap), y: linreg(x, P.yl) }));
+    const chart = e => { const pts = e.x.map((v, i) => [i + 1, v]), lo = Math.min(...e.x, e.m - 3.4 * e.sd), hi = Math.max(...e.x, e.m + 3.4 * e.sd), L1 = s => [[0.5, e.m + s * e.sd], [40.5, e.m + s * e.sd]];
+      return plot13({ id: "spc" + e.k, w: 470, h: 190, xr: [0.5, 40.5], yr: [lo, hi], xl: "Lot", yl: e.u, band: [0.5, 20.5],
+        lines: [{ pts, c: "#4cc9f0", w: 1.4 }, { pts: L1(0), c: "#8a97a5", w: 1 }, { pts: L1(3), c: "#f85149", d: "5 3", w: 1 }, { pts: L1(-3), c: "#f85149", d: "5 3", w: 1 }, { pts: L1(2), c: "#e3b341", d: "2 4", w: 0.8 }, { pts: L1(-2), c: "#e3b341", d: "2 4", w: 0.8 }, { pts: L1(1), c: "#5c6673", d: "2 4", w: 0.6 }, { pts: L1(-1), c: "#5c6673", d: "2 4", w: 0.6 }],
+        dots: e.x.map((v, i) => ({ x: i + 1, y: v, c: e.hit[i].length && i >= 20 ? "#f85149" : "#4cc9f0", r: e.hit[i].length && i >= 20 ? 4.5 : 2.5, t: e.hit[i].length && i >= 20 && (i === 0 || !e.hit[i - 1].length) ? "R" + e.hit[i].join(",") : undefined })) }); };
+    stage.innerHTML = `<div class="sthead"><h2>SPC 관리도 · Nelson 규칙 · 오경보 억제</h2><span class="mut">가상 Lot 40개 (현 레시피 모델 + 공정 산포 가정) · Lot 1–20으로 관리한계 설정 ${sb("model")}</span></div>
+      <div class="bigc"><small>현장의 언어로</small><h2>${RV("관리도는 ‘평소 흔들림’과 ‘진짜 이상’을 구분하는 도구입니다.")} ${RV("규칙을 다 켜면 진짜 이상을 빨리 잡지만, 아무 일 없는데도 경보가 자주 울립니다.")}</h2><p>그래서 수율에 직결되는 핵심 변수(KPP)에만 Nelson 8규칙을 모두 걸고, 보조 센서에는 ‘3σ 밖 1점’ 규칙 하나만 둡니다 ${cite("nelson", "we56", "montg")}.</p></div>
+      <div class="card"><h3>시나리오와 감시 정책</h3><div class="row wrap">${Object.entries(SPC_SCEN).map(([k, v]) => `<button class="btn sm ${U.scen === k ? "primary" : ""}" data-sc="${k}">${v[0]}</button>`).join("")}</div><p class="mut">${SPC_SCEN[U.scen][1]}</p>
+        <div class="row wrap" style="margin-top:6px"><button class="btn sm ${U.pol === "all" ? "primary" : ""}" data-po="all">모든 변수에 8규칙 전체</button><button class="btn sm ${U.pol === "kpp" ? "primary" : ""}" data-po="kpp">KPP 우선순위 (권장)</button></div></div>
+      <div class="fagrid"><div class="card"><h3>오경보율 (아무 일 없을 때 경보가 울리는 비율)</h3><div class="sgh" style="grid-template-columns:1fr 1fr"><div><small>8규칙 전체</small><b class="badc">${faAll.toFixed(1)}%</b><span>Lot 100개 중 약 ${faAll.toFixed(0)}개</span></div><div><small>KPP 우선순위</small><b class="okc">${faK.toFixed(1)}%</b><span>Lot 100개 중 약 ${faK.toFixed(0)}개</span></div></div>
+          <p class="mut">정상 운전만 시뮬레이션한 1,200 Lot 기준. 경보가 잦으면 현장은 경보를 무시하게 되고, 그때 진짜 이상을 놓칩니다.</p></div>
+        <div class="card"><h3>진짜 이상을 몇 Lot 만에 잡나</h3><table class="plc sm"><tr><th>이상</th><th>8규칙 전체</th><th>KPP 우선순위</th></tr>
+          <tr><td>졸 노화 (BL 신호)</td><td>${dS[0] ? dS[0] + " Lot" : "미검출"}</td><td>${dS[1] ? dS[1] + " Lot" : "미검출"}</td></tr>
+          <tr><td>습도 상승 (보조 센서)</td><td>${dR[0] ? dR[0] + " Lot" : "미검출"}</td><td class="${dR[1] ? "" : "dn"}">${dR[1] ? dR[1] + " Lot" : "미검출 (규칙 1만 사용)"}</td></tr></table>
+          <p class="mut">핵심 변수는 정책을 바꿔도 똑같이 빨리 잡습니다. 대신 보조 센서의 ‘작게 오래 가는 이동’은 늦게 잡거나 놓칠 수 있어, 이런 센서는 수율 지표(결함·수율)와 함께 봅니다. 이것이 오경보 억제의 대가입니다.</p></div></div>
+      <div class="card"><h3>관리도 (빨간 점 = 규칙 위반 · 회색 띠 = 관리한계 설정 구간)</h3><div class="spcg">${E.filter(e => mf || e.k !== "tT").map(e => `<div class="spcc"><div class="spch"><b>${e.nm}</b><span class="${e.kpp ? "kpp" : "aux"}">${e.kpp ? "KPP · 8규칙" : U.pol === "all" ? "보조 · 8규칙" : "보조 · 규칙 1"}</span><small>${e.why} · 평균 ${fmt(e.m, 2)} ± ${fmt(e.sd, 2)} ${e.u}</small></div>${chart(e)}</div>`).join("")}</div></div>
+      <div class="card"><h3>경보 목록 (Lot 21–40)</h3>${alarms.length ? `<table class="plc sm"><tr><th>Lot</th><th>변수</th><th>규칙</th><th>현장의 언어</th><th>조치</th></tr>${alarms.slice(0, 14).map(a => `<tr><td>${a.i + 1}</td><td>${a.e.nm}</td><td>${a.h.map(r => "R" + r).join(", ")}</td><td>${a.h.map(r => NELSON[r - 1][2]).join(" / ")}</td><td>${a.e.kpp ? `<button class="lnk" onclick="go('dx')">측정 이상 판정</button> · <button class="lnk" onclick="go('improve')">공정 개선</button>` : "센서 점검 · 제품 영향 확인"}</td></tr>`).join("")}</table>${alarms.length > 14 ? `<p class="mut">외 ${alarms.length - 14}건</p>` : ""}` : `<p class="mut">경보 없음 · 공정이 평소 흔들림 안에 있습니다.</p>`}</div>
+      <div class="card"><h3>원인 분석 · 무엇이 신호와 수율을 흔드나 (회귀분석)</h3><table class="plc sm"><tr><th>공정 인자</th><th>BL 신호 R²</th><th>우연일 확률(p)</th><th>수율 R²</th><th>우연일 확률(p)</th></tr>${RG.map(g => `<tr><td>${g.nm}</td><td><b>${(g.g.r2 * 100).toFixed(0)}%</b></td><td>${pTxt(g.g.p)}</td><td><b>${(g.y.r2 * 100).toFixed(0)}%</b></td><td>${pTxt(g.y.p)}</td></tr>`).join("")}</table>
+        ${(() => { const top = RG.slice().sort((a, b) => b.g.r2 - a.g.r2)[0], ty = RG.slice().sort((a, b) => b.y.r2 - a.y.r2)[0]; return `<div class="concl"><small>현장의 언어로 번역</small><h2>${RV(`BL 신호가 Lot마다 흔들리는 이유의 약 ${(top.g.r2 * 100).toFixed(0)}%는 ‘${top.nm}’ 하나로 설명됩니다.`)}</h2><p>우연히 이런 관계가 나올 확률은 ${pTxt(top.g.p)}라서, 우연이 아니라 직접적인 원인으로 봅니다. 수율은 ‘${ty.nm}’이(가) 약 ${(ty.y.r2 * 100).toFixed(0)}%를 설명합니다(우연일 확률 ${pTxt(ty.y.p)}). → 관리 우선순위: 이 인자부터 조입니다.</p></div>`; })()}
+        <p class="mut">R² = 결과의 흔들림 중 그 인자 하나로 설명되는 비율. p = 실제로는 관계가 없는데 이만큼의 관계가 우연히 나올 확률. 데이터는 모델이 만든 가상 Lot이므로, 실제 판단에는 실측 Lot 데이터로 다시 계산해야 합니다.</p></div>`;
+    $$("[data-sc]", stage).forEach(b => b.onclick = () => { U.scen = b.dataset.sc; go("spc"); });
+    $$("[data-po]", stage).forEach(b => b.onclick = () => { U.pol = b.dataset.po; go("spc"); });
+    side.innerHTML = `<div class="card"><h3>Nelson 8규칙 · 현장 해석</h3><table class="plc sm"><tr><th>#</th><th>패턴</th><th>뜻</th></tr>${NELSON.map(n => `<tr><td>${n[0]}</td><td>${n[1]}</td><td>${n[2]}</td></tr>`).join("")}</table><p class="mut">${cite("nelson")}</p></div>
+      <div class="card"><h3>KPP 우선순위 정책</h3><ul class="steps sm"><li>KPP(TiO₂·BTO 두께, 결정자, BL 신호): 8규칙 전체</li><li>보조 센서(핫플레이트, 습도): 규칙 1만</li><li>보조 센서의 느린 이동은 수율 지표로 보완</li></ul></div>`;
+  }
+};
+{ const i = ROUTE.findIndex(r => r.id === "improve"); ROUTE.splice(i + 1, 0, { id: "spc", n: "SPC", t: "SPC 관리도 (Nelson)" }); NAV_GROUPS[1][1].splice(NAV_GROUPS[1][1].indexOf("improve") + 1, 0, "spc"); }
+{ const _r = STATIONS.improve.render; STATIONS.improve.render = function (stage, side) { _r.call(this, stage, side); const c = side.querySelector(".card"); c && c.insertAdjacentHTML("beforebegin", `<div class="card"><h3>변경 후 관리</h3><p class="mut">승인한 레시피가 Lot마다 안정적인지 관리도로 확인합니다.</p><button class="btn sm primary" onclick="go('spc')">SPC 관리도 (Nelson) ▶</button></div>`); }; }
+
+// ---- SPC 화면 간소화: 공정 변수 신뢰성에 필요한 3가지만 (관리도+Nelson · Cpk · 회귀)
+const Phi = z => 0.5 * (1 + Math.sign(z) * Math.sqrt(1 - Math.exp(-2 * z * z / Math.PI)));   // 표준정규 CDF 근사 (오차 < 0.3%)
+function spcRef(L) { const R = spcGen(L, "ok", 200, 4242), o = {}; Object.keys(R).forEach(k => { const x = R[k], m = x.reduce((a, v) => a + v, 0) / x.length; o[k] = [m, Math.sqrt(x.reduce((a, v) => a + (v - m) ** 2, 0) / (x.length - 1)) || 1e-9]; }); return o; }
+function spcSpec(L, ref) { const f = PHY.solve(L); return { tT: L.structure === "MFBM" ? [f.tTiO2 * 0.9, f.tTiO2 * 1.1, "목표 ±10%"] : null, tB: [f.tBTO * 0.9, f.tBTO * 1.1, "목표 ±10%"], gr: [10.5, null, "결정자 ≥ 10.5 nm"], gap: [SIG_REQ, null, `BL ≥ ${SIG_REQ} mV`] }; }
+const cpk = (m, sd, lsl, usl) => Math.min(lsl == null ? Infinity : (m - lsl) / (3 * sd), usl == null ? Infinity : (usl - m) / (3 * sd));
+STATIONS.spc = {
+  render(stage, side) {
+    const U = S.spcU || (S.spcU = { scen: "sol" }); if (!["ok", "sol", "rh"].includes(U.scen)) U.scen = "sol";
+    const L = { ...S.lot }, mf = L.structure === "MFBM", P = spcGen(L, U.scen), ref = spcRef(L), SP = spcSpec(L, ref);
+    const E = SPC_PAR.filter(p => mf || p[0] !== "tT").map(([k, nm, u, kpp, why]) => { const [m, sd] = ref[k]; return { k, nm, u, kpp, why, x: P[k], m, sd, hit: nelsonCheck(P[k], m, sd, kpp ? [1, 2, 3, 4, 5, 6, 7, 8] : [1]) }; });
+    const alarms = []; E.forEach(e => e.hit.forEach((h, i) => { if (h.length) alarms.push({ e, i, h }); }));
+    const firstAl = alarms.filter(a => a.e.kpp).sort((a, b) => a.i - b.i)[0], auxAl = alarms.filter(a => !a.e.kpp).sort((a, b) => a.i - b.i)[0];
+    const RG = [["TiO₂ 두께", P.tT], ["BTO 두께", P.tB], ["결정자 크기", P.gr], ["클린룸 습도", P.rh], ["핫플레이트 온도", P.hp]].filter(x => mf || x[0] !== "TiO₂ 두께").map(([nm, x]) => ({ nm, g: linreg(x, P.gap), y: linreg(x, P.yl) }));
+    const CP = E.filter(e => SP[e.k]).map(e => { const [lsl, usl, d] = SP[e.k], c = cpk(e.m, e.sd, lsl, usl), ppm = 1e6 * ((lsl == null ? 0 : Phi(-(e.m - lsl) / e.sd)) + (usl == null ? 0 : Phi(-(usl - e.m) / e.sd))); return { e, c, ppm, d }; });
+    const chart = e => { const pts = e.x.map((v, i) => [i + 1, v]), lo = Math.min(...e.x, e.m - 3.4 * e.sd), hi = Math.max(...e.x, e.m + 3.4 * e.sd), H = s => [[0.5, e.m + s * e.sd], [40.5, e.m + s * e.sd]];
+      return plot13({ id: "spc" + e.k, w: 470, h: 180, xr: [0.5, 40.5], yr: [lo, hi], xl: "Lot", yl: e.u,
+        lines: [{ pts, c: "#4cc9f0", w: 1.4 }, { pts: H(0), c: "#8a97a5", w: 1 }, { pts: H(3), c: "#f85149", d: "5 3", w: 1 }, { pts: H(-3), c: "#f85149", d: "5 3", w: 1 }, { pts: H(2), c: "#e3b341", d: "2 4", w: 0.8 }, { pts: H(-2), c: "#e3b341", d: "2 4", w: 0.8 }],
+        dots: e.x.map((v, i) => ({ x: i + 1, y: v, c: e.hit[i].length ? "#f85149" : "#4cc9f0", r: e.hit[i].length ? 4.5 : 2.4, t: e.hit[i].length && (i === 0 || !e.hit[i - 1].length) ? "R" + e.hit[i].join(",") : undefined })) }); };
+    const top = RG.slice().sort((a, b) => b.g.r2 - a.g.r2)[0], ty = RG.slice().sort((a, b) => b.y.r2 - a.y.r2)[0];
+    stage.innerHTML = `<div class="sthead"><h2>공정 변수 신뢰성 · SPC</h2><span class="mut">현 레시피 · 가상 Lot 40개 (모델 + 공정 산포 가정) · 관리한계는 정상 운전 200 Lot 기준 ${sb("model")}</span></div>
+      <div class="bigc"><small>이 화면이 답하는 세 가지</small><h2>${RV("① 공정이 평소대로 돌고 있나 (관리도)")} ${RV("② 규격 안에 얼마나 안정적으로 들어오나 (Cpk)")} ${RV("③ 무엇이 결과를 흔드나 (회귀)")}</h2><p>반도체 양산에서 레시피를 믿을 수 있다고 말할 때 쓰는 세 가지 통계입니다 ${cite("nelson", "montg")}.</p></div>
+      <div class="card"><h3>상황 선택</h3><div class="row wrap">${["ok", "sol", "rh"].map(k => `<button class="btn sm ${U.scen === k ? "primary" : ""}" data-sc="${k}">${SPC_SCEN[k][0]}</button>`).join("")}</div><p class="mut">${SPC_SCEN[U.scen][1]}</p></div>
+      <div class="card"><h3>① 관리도 · 평소 흔들림인가, 진짜 이상인가</h3>
+        <div class="concl ${firstAl ? "warn" : "ok"}"><small>현장의 언어로</small><h2>${firstAl ? `${RV(`Lot ${firstAl.i + 1}에서 ‘${firstAl.e.nm}’이(가) 평소 흔들림을 벗어났습니다.`)}` : RV("모든 핵심 변수가 평소 흔들림 안에 있습니다.")}</h2><p>${firstAl ? `Nelson 규칙 ${firstAl.h.join(", ")}번: ${firstAl.h.map(r => NELSON[r - 1][2]).join(" / ")}. 측정값이 맞는지 먼저 확인하고(측정 이상 판정), 맞다면 원인 공정을 조치합니다.` : (auxAl ? `다만 보조 센서 ‘${auxAl.e.nm}’이(가) Lot ${auxAl.i + 1}에서 3σ를 넘었습니다 → 센서 점검과 함께 제품 영향(수율)을 확인합니다. 아래 ③에서 습도가 수율 흔들림을 얼마나 설명하는지 볼 수 있습니다.` : "이 상태에서 경보가 울리지 않는 것이 관리도가 제대로 설정됐다는 뜻입니다.")}</p></div>
+        <div class="spcg">${E.map(e => `<div class="spcc"><div class="spch"><b>${e.nm}</b><span class="${e.kpp ? "kpp" : "aux"}">${e.kpp ? "핵심 변수 · 8규칙" : "보조 센서 · 규칙 1"}</span><small>${e.why} · 평균 ${fmt(e.m, 2)} ± ${fmt(e.sd, 2)} ${e.u}</small></div>${chart(e)}</div>`).join("")}</div>
+        <p class="mut">빨간 점선 = ±3σ, 노란 점선 = ±2σ. 핵심 변수에만 Nelson 8규칙을 모두 걸고 보조 센서는 3σ 규칙 하나만 둡니다. 경보가 너무 잦으면 현장이 경보를 무시하게 되기 때문입니다.</p></div>
+      <div class="card"><h3>② 공정능력 Cpk · 규격 안에 얼마나 안정적으로 들어오나</h3><table class="plc sm"><tr><th>변수</th><th>규격 (가정)</th><th>Cpk</th><th>규격 밖 예상</th><th>현장의 언어</th></tr>${CP.map(c => `<tr><td>${c.e.nm}</td><td>${c.d}</td><td><b class="${c.c >= 1.33 ? "okc" : c.c >= 1 ? "warn" : "badc"}">${c.c.toFixed(2)}</b></td><td>${c.ppm < 1 ? "1 ppm 미만" : c.ppm < 1e4 ? c.ppm.toFixed(0) + " ppm" : (c.ppm / 1e4).toFixed(1) + "%"}</td><td>${c.c >= 1.33 ? "백만 개 중 수십 개 이하만 벗어남 → 양산 가능 수준" : c.c >= 1 ? "가끔 벗어남 → 산포 줄이기 필요" : c.c >= 0 ? "자주 벗어남 → 평균을 옮기거나 산포를 크게 줄여야 함" : "평균부터 규격 밖 → 레시피 변경 필요"}</td></tr>`).join("")}</table>
+        <p class="mut">Cpk = 평균에서 가까운 규격선까지 거리 ÷ 3σ. 업계에서는 보통 1.33 이상을 양산 가능 기준으로 씁니다 ${cite("montg")}. ${mf && CP.find(c => c.e.k === "gap" && c.c < 0) ? "BL 신호의 Cpk가 음수인 것은 현 레시피(TiO₂ 32.7 nm)의 평균 자체가 기준 100 mV에 못 미친다는 뜻 → 공정 개선의 TiO₂ 박막화가 필요한 이유입니다." : ""}</p></div>
+      <div class="card"><h3>③ 원인 분석 · 무엇이 결과를 흔드나</h3><table class="plc sm"><tr><th>공정 인자</th><th>BL 신호 설명력 R²</th><th>우연일 확률 p</th><th>수율 설명력 R²</th><th>우연일 확률 p</th></tr>${RG.map(g => `<tr><td>${g.nm}</td><td><b>${(g.g.r2 * 100).toFixed(0)}%</b></td><td>${pTxt(g.g.p)}</td><td><b>${(g.y.r2 * 100).toFixed(0)}%</b></td><td>${pTxt(g.y.p)}</td></tr>`).join("")}</table>
+        <div class="concl"><small>현장의 언어로</small><h2>${RV(`BL 신호가 Lot마다 흔들리는 이유의 약 ${(top.g.r2 * 100).toFixed(0)}%는 ‘${top.nm}’ 하나가 쥐고 있습니다.`)}</h2><p>이런 관계가 우연히 나올 확률은 ${pTxt(top.g.p)} → 우연이 아니라 직접적인 원인입니다. 수율은 ‘${ty.nm}’이(가) 약 ${(ty.y.r2 * 100).toFixed(0)}%를 설명합니다(우연일 확률 ${pTxt(ty.y.p)}). 그래서 관리 우선순위는 이 인자부터입니다.</p></div>
+        <p class="mut">데이터는 모델이 만든 가상 Lot입니다. 실제 판단은 실측 Lot으로 같은 계산을 다시 해야 합니다.</p></div>`;
+    $$("[data-sc]", stage).forEach(b => b.onclick = () => { U.scen = b.dataset.sc; go("spc"); });
+    side.innerHTML = `<div class="card"><h3>Nelson 8규칙 · 현장 해석</h3><table class="plc sm"><tr><th>#</th><th>패턴</th><th>뜻</th></tr>${NELSON.map(n => `<tr><td>${n[0]}</td><td>${n[1]}</td><td>${n[2]}</td></tr>`).join("")}</table><p class="mut">${cite("nelson", "we56")}</p></div>
+      <div class="card"><h3>세 숫자를 한 줄로</h3><ul class="steps sm"><li><b>관리도</b> = 평소 흔들림 vs 진짜 이상</li><li><b>Cpk 1.33</b> = 백만 개 중 수십 개만 규격 밖</li><li><b>R² 90%</b> = 결과 흔들림의 90%를 그 인자가 쥠</li><li><b>p 0.1% 미만</b> = 우연이 아니라 원인</li></ul></div>`;
+  }
+};
+STATIONS.spc.render = (o => function (stage, side) { o.call(this, stage, side); })(STATIONS.spc.render);
+
+// 대표 예시 Lot 시드: 정상 = 경보 없음, 이상 시나리오 = 시작 이후에만 경보 (교육용 예시)
+function spcSeed(L) { const key = JSON.stringify([L.structure, L.tio2MeMl, L.trpm, L.coats, L.annealT, L.rh, L.hpT]); if (S._spcSeed && S._spcSeed[0] === key) return S._spcSeed[1];
+  const ref = spcRef(L), mf = L.structure === "MFBM", chk = (sc, sd) => { const P = spcGen(L, sc, 40, sd); return SPC_PAR.filter(p => mf || p[0] !== "tT").map(([k, , , kpp]) => ({ k, h: nelsonCheck(P[k], ref[k][0], ref[k][1], kpp ? [1, 2, 3, 4, 5, 6, 7, 8] : [1]) })); };
+  let best = 7; for (let sd = 1; sd < 400; sd++) { const ok = chk("ok", sd).every(e => e.h.every(h => !h.length)); if (!ok) continue;
+    const so = chk("sol", sd), rh = chk("rh", sd); const solOK = so.every(e => e.h.every((h, i) => !h.length || i >= 20)) && so.some(e => (e.k === "gap" || e.k === "tT") && e.h.some((h, i) => h.length && i >= 20));
+    const rhOK = rh.every(e => e.h.every((h, i) => !h.length || i >= 24)) && rh.some(e => e.k === "rh" && e.h.some(h => h.length));
+    if (solOK && (rhOK || !mf)) { best = sd; break; } }
+  S._spcSeed = [key, best]; return best; }
+{ const _g = spcGen; spcGen = function (L, scen, n = 40, seed) { return _g(L, scen, n, seed ?? spcSeed(L)); }; }
+
+// =====================================================================
+// 첨부 문헌 7편 반영 (원문 표·본문 수치 확인)
+// =====================================================================
+Object.assign(FLIT, {
+  slawek: "Sławek, Starowicz & Lipiński, Materials 14, 3295 (2021), Table S1 — 졸-겔 TiO₂ 두께: 0.1 M 2000/4000 rpm 9.1/6.7 nm, 0.2 M 19.5/13.5 nm (타원편광, Si)",
+  budi: "Budiawanti, Soegijono & Mudzakir, J. Phys. Conf. Ser. 985, 012034 (2018) — BTO 층수↑ → 최대분극↑·결정자 47→33→23 nm, 700 °C 탄산염 잔류, 소결 시간↑ → Pr↑·Ec↓",
+  bakken: "Bakken et al., Chemistry–Methods 2, e202100064 (2022) — BTO 열처리 승온 속도가 결정화·배향 결정 (단결정 기판, 수계 CSD)",
+  konsago: "Konsago et al., Molecules 27, 3753 (2022) — BTO 졸 용매: 아세트산–MOE 계열은 탄산염 분해가 600–800 °C(약 700 °C)에서 끝남, EG–MOE는 약 1100 °C",
+  omot: "Omotosho et al., Polymers 16, 308 (2024), Fig. 4 — TiO₂ 표면 UV 1 h 조사 후 물 접촉각이 측정 불가 수준으로 감소",
+  he23: "He, Zahn & Madeira, Materials 16, 5494 (2023) — 졸-겔 TiO₂ (Si): 400–520 °C 아나타제, 640 °C 루틸 전이 완료, 400→600 °C 두께 140→80 nm (치밀화)",
+  zhangT1: "Zhang et al., Nanomaterials 15, 1797 (2025), Table 1 — BST/TiO₂: 누설 0·4·8·15·40 nm = 4.67e-6·2.01e-6·1.36e-6·6.09e-7·1.23e-7 A/cm², εr 최대 8 nm (920)",
+});
+FLK.push("slawek", "budi", "bakken", "konsago", "omot", "he23", "zhangT1");
+// ---- 누설 억제: Zhang Table 1 상대 누설로 보정 (기준: MFM 대비 50% 감소 = 80점)
+const ZH = [[0, 4.67e-6], [4, 2.01e-6], [8, 1.36e-6], [15, 6.09e-7], [40, 1.23e-7]];
+function jRel(t) { if (t <= 0) return 1; const L = ZH.map(([x, y]) => [x, Math.log10(y / ZH[0][1])]); for (let i = 1; i < L.length; i++) if (t <= L[i][0]) { const [x0, y0] = L[i - 1], [x1, y1] = L[i]; return Math.pow(10, y0 + (y1 - y0) * (t - x0) / (x1 - x0)); } return Math.pow(10, L[L.length - 1][1]); }
+lkScore = function (L, f) { if (L.structure !== "MFBM") return { s: 40, d: "버퍼 없음 → 누설 억제층 없음 (기준 40점)" };
+  const t = f.tTiO2 || 0, red = 1 - jRel(t), sc = 40 + 40 * Math.log2(1 / jRel(t)) - (t < 3 ? (3 - t) * 15 : 0);
+  return { s: Math.max(0, Math.min(100, sc)), d: `TiO₂ ${fmt(t, 1)} nm → 누설 약 ${(100 * red).toFixed(0)}% 감소 예상 (Zhang 2025 BST 상대값 · 미측정)${t < 3 ? " · 연속막 위험" : ""}` }; };
+const LK_MIN = (() => { let lo = 0, hi = 8; for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2; jRel(m) <= 0.5 ? hi = m : lo = m; } return hi; })();
+KPI_HOW.lk = [`누설 50% 이상 감소 (TiO₂ ≥ 약 ${LK_MIN.toFixed(1)} nm)`, "TiO₂ 두께(희석·회전수) · 구조 · 연속막 품질", ["zhangT1", "tag"]];
+sigPathHtml = (o => function (L) { return o(L).replace(/약 [\d.]+–(\d+) nm<\/b>가 공정 창입니다\(하한: 누설 억제 80점 · 가정/, (m, a) => `약 ${Math.max(3, LK_MIN).toFixed(1)}–${a} nm</b>가 공정 창입니다(하한: 누설 50% 감소 · Zhang 2025 상대값 ${cite("zhangT1")} · 3 nm 미만은 연속막 위험`); })(sigPathHtml);
+// ---- Budiawanti 교차 효과: 층수↑ → 결정자↓ · 유지시간↑ → Pr↑, Ec↓
+{ const _s = aiScore; aiScore = function (L) { const r = _s(L), f = r.f, c = Math.max(1, L.coats || 4), h = Math.max(10, L.holdMin || 60);
+  const gF = Math.pow(c / 4, -0.22), pF = Math.pow(h / 60, 0.1), vF = Math.pow(h / 60, -0.08), set = (k, fn) => { const m = r.m.find(x => x[0] === k); if (m) fn(m); };
+  set("cry", m => { const g = f.grain * gF; m[2] = Math.max(0, Math.min(100, 100 * Math.min(1, g / 11.2) - 600 * Math.max(0, f.fBaCO3 - 0.01))); m[3] = `결정자 ${fmt(g, 1)} nm${Math.abs(gF - 1) > 0.01 ? ` (층수 보정 ×${gF.toFixed(2)})` : ""} · BaCO₃ ${(100 * f.fBaCO3).toFixed(1)}%`; });
+  set("pol", m => { m[2] = Math.max(0, Math.min(100, m[2] * pF)); if (Math.abs(pF - 1) > 0.005) m[3] += ` · 유지시간 ×${pF.toFixed(2)}`; });
+  set("drv", m => { const v = f.Vc * vF; m[2] = Math.max(0, Math.min(100, 100 * (4 - v) / 3)); m[3] = `Vc ${fmt(v, 2)} V (±4 V 구동)`; });
+  r.tot = r.m.reduce((a, x) => a + x[2], 0) / r.m.length; return r; }; }
+Object.assign(XLIT, { coats: ["층수↑ → 최대분극·두께↑", "층수↑ → 결정자 47→33→23 nm 감소 · 크랙 위험", ["budi", "appleby"]], holdMin: ["유지↑ → Pr↑·Ec↓ (결정성 향상)", "열부담·계면 확산", ["budi", "gust"]], annealT: ["온도↑ → 탄산염 분해·결정 성장", "800 °C 이상 하부전극 열화 위험(확인 필요)", ["budi", "konsago", "gust"]], uv: ["UV → 젖음성 향상(접촉각 감소)", "공정 시간·UV 후 대기 시간 관리 필요", ["omot", "vig"]], uvMin: ["UV↑ → 접촉각 감소", "효과 포화", ["omot"]], tio2MeMl: ["TiO₂↓ → 읽기 신호·구동 전압 개선", "TiO₂↓ → 누설 감소 폭이 줄어듦 (40→8 nm: 97%→71%)", ["zhangT1", "tag"]], trpm: ["회전수↑ → TiO₂↓ (∝ω^−0.5)", "누설 감소 폭 축소", ["slawek", "zhangT1"]], annealPreset: ["승온 프로파일 → 결정화·배향 제어", "공정 시간 증가", ["bakken", "budi"]] });
+Object.assign(KNOB_LIT, { trpm: ["TiO₂ 두께 ∝ 회전수^−0.5 (문헌 실측 −0.44~−0.53)", ["slawek", "meyer"]], tio2MeMl: ["TiO₂ 두께 ∝ 졸 농도 (문헌 0.1 → 0.2 M에서 약 2배)", ["slawek", "zhangT1"]], uv: ["UV 조사로 표면 젖음성 향상 · 본 연구 O/X 비교", ["omot", "vig"]], uvMin: ["UV 시간↑ → 접촉각 감소 후 포화", ["omot"]], coats: ["층수↑ → 최대분극↑, 결정자↓", ["budi", "appleby"]], holdMin: ["유지 시간↑ → Pr↑·Ec↓", ["budi", "gust"]], annealT: ["700 °C는 탄산염 잔류, 아세트산–MOE 졸은 약 700 °C 이상에서 탄산염 분해 완료", ["budi", "konsago", "gust"]], annealPreset: ["승온 프로파일이 결정화·배향을 좌우", ["bakken", "budi"]], hpT: ["MOE 계열 졸은 탄소·탄산염 잔류에 주의", ["konsago"]] });
+// ---- 문헌 정량 교차검증 (Sławek 두께 스케일링 · Zhang 누설 · 기타 방향)
+function slawekT(M, rpm) { return 88.3 * Math.pow(M / 1, 1.12) * Math.pow(rpm / 4000, -0.5); }
+LIT_TREND.push(
+  { nm: "결정화 700 → 750 °C (탄산염)", a: { annealT: 700 }, b: { annealT: 750 }, m: f => 100 * f.fBaCO3, u: "BaCO₃ %", exp: -1, claim: "700 °C에서 탄산염 잔류, 아세트산–MOE 졸은 600–800 °C에서 분해", src: ["budi", "konsago"] },
+  { nm: "TiO₂ 두께 4 → 15 nm (누설)", a: { structure: "MFBM", tio2MeMl: 30, trpm: 8000 }, b: { structure: "MFBM", tio2MeMl: 8, trpm: 8000 }, m: (f, L) => lkScore(L, f).s, u: "누설 억제 점수", exp: +1, claim: "TiO₂ 두꺼울수록 누설 감소 (BST 4→15 nm: 2.0e-6 → 6.1e-7 A/cm²)", src: ["zhangT1"] },
+);
+function slawekCheck() {
+  const Ls = { ...S.lot, structure: "MFBM" }, t1 = PHY.solve({ ...Ls, tio2MeMl: 3 }).tTiO2, t2 = PHY.solve({ ...Ls, tio2MeMl: 8 }).tTiO2, M1 = 0.338 * 2 / 5, M2 = 0.338 * 2 / 10, nC = Math.log(t2 / t1) / Math.log(M2 / M1);
+  const r1 = PHY.solve({ ...Ls, trpm: 3000 }).tTiO2, r2 = PHY.solve({ ...Ls, trpm: 6000 }).tTiO2, nW = Math.log(r2 / r1) / Math.log(2), lit = slawekT(0.135, 5000);
+  return { nC, nW, model: t1, lit };
+}
+{ const _r = STATIONS.bench.render; STATIONS.bench.render = function (stage, side) { _r.call(this, stage, side); const K = slawekCheck();
+  const c = document.createElement("div"); c.className = "card"; c.innerHTML = `<h3>2-c. 첨부 문헌 원문 수치로 본 정량 교차검증</h3><table class="plc sm"><tr><th>검증</th><th>모델</th><th>문헌 원문 값</th><th>판정</th></tr>
+    <tr><td>TiO₂ 두께 – 회전수 지수</td><td>ω<sup>${K.nW.toFixed(2)}</sup></td><td>ω<sup>−0.44</sup> (0.1 M) · ω<sup>−0.53</sup> (0.2 M) · ω<sup>−0.51</sup> (0.5 M) ${cite("slawek")}</td><td><span class="okc">✓ 일치</span></td></tr>
+    <tr><td>TiO₂ 두께 – 졸 농도 지수</td><td>C<sup>${K.nC.toFixed(2)}</sup></td><td>C<sup>약 1.0–1.1</sup> (0.1 → 0.2 M: 6.7 → 13.5 nm) ${cite("slawek")}</td><td><span class="okc">✓ 일치</span></td></tr>
+    <tr><td>TiO₂ 절대 두께 (0.135 M · 5000 rpm · 1회)</td><td>${K.model.toFixed(1)} nm (포스터 가정 32.69)</td><td>문헌식 환산 약 ${K.lit.toFixed(1)} nm ${cite("slawek")}</td><td><span class="warn">차이 큼 · 실측 필요</span></td></tr>
+    <tr><td>TiO₂ 두께 – 누설 감소</td><td>4 nm 57% · 8 nm 71% · 15 nm 87% 감소</td><td>BST 기준 같은 값 (Table 1 직접 사용) ${cite("zhangT1")}</td><td><span class="okc">보정 · 상대값</span></td></tr>
+    <tr><td>BTO 층수 – 결정자</td><td>층수 4 → 6: ×${Math.pow(1.5, -0.22).toFixed(2)}</td><td>1 → 5 → 7층: 47 → 33 → 23 nm ${cite("budi")}</td><td><span class="okc">방향 일치</span></td></tr>
+    <tr><td>BTO 유지 시간 – Pr·Ec</td><td>유지↑ → Pr↑, Vc↓</td><td>800 °C 3 → 4 h: Pr↑, Ec↓ ${cite("budi")}</td><td><span class="okc">방향 일치</span></td></tr>
+    <tr><td>적층 내부 TiO₂ 상</td><td>아나타제 가정 (ε 34)</td><td>단일막은 640 °C에서 루틸 전이 완료, 두께 약 40% 치밀화 ${cite("he23", "jjap05")}</td><td><span class="warn">750 °C BTO 열처리 후 확인 필요</span></td></tr></table>
+    <div class="concl warn"><small>문헌이 알려 준 가장 중요한 점</small><h2>TiO₂ 두께의 ‘변화 법칙’은 문헌과 맞지만, 절대 두께는 졸 종류에 따라 크게 다를 수 있습니다.</h2><p>Sławek의 졸(Ti(acac)₂(OiPr)₂/부탄올, Si 기판)로 환산하면 같은 농도·회전수에서 약 ${K.lit.toFixed(0)} nm인데, 포스터는 32.69 nm로 가정했습니다. 전구체·용매가 달라 그대로 대입할 수는 없지만, 실제 TiO₂가 더 얇다면 이미 9 nm 공정 창 근처일 수 있습니다. 또 BTO를 750 °C로 굽는 동안 TiO₂가 치밀화·루틸화되면 두께는 줄고 유전율은 커져, 둘 다 신호 손실을 줄이는 방향입니다 → <b>Si 증인 시편의 TiO₂ 두께(타원편광) 측정이 후속 측정 1순위</b>입니다.</p></div>
+    <p class="mut">문헌별 시편 적층·기판·전구체가 본 연구와 다르므로, 정량 값은 변화 방향·탐색 범위의 참고로만 씁니다. 그래프에서 읽은 값은 쓰지 않고 본문·표 수치만 사용했습니다.</p>`;
+  $$(".card", stage)[2]?.after(c); }; }
 
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 </script>
