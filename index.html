@@ -6750,7 +6750,7 @@ const DEMO_OPTS = [
   { id: "mfm", nm: "버퍼 제거 (MFM)", sub: "비교 기준", set: { structure: "MFM" }, cn: ["구조", "MFBM", "MFM"] },
   { id: "d20", nm: "★ 추천: TiO₂ 희석 20 mL", sub: "0.031 M", set: { tio2MeMl: 20 }, rec: true, cn: ["TiO₂ 졸 희석", "3 mL (0.135 M)", "20 mL (0.031 M)"] },
 ];
-function demoBase() { if (S.lot.structure !== "MFBM") labStart("mfbm", true); return { ...S.lot, tio2MeMl: 3, trpm: 5000 }; }
+function demoBase() { return { ...S.lot, structure: "MFBM", tio2MeMl: 3, trpm: 5000 }; }
 function demoEval(L0, o) { const L = o.set ? { ...L0, ...o.set } : L0, r = aiScore(L), t = L.structure === "MFBM" ? r.f.tTiO2 : 0; return { o, L, r, t, gap: r.gap.v, lkRed: L.structure === "MFBM" ? 100 * (1 - jRel(t)) : 0 }; }
 STATIONS.demo = {
   render(stage, side) {
@@ -6804,7 +6804,7 @@ presSeg = (orig => async function (seg) {
 // ---- 첫 화면: 발표용 자동 버튼을 바로 노출
 { const _r = STATIONS.home.render; STATIONS.home.render = function (stage, side) { _r.call(this, stage, side);
   const row = $(".hm-row", stage); if (!row) return;
-  row.insertAdjacentHTML("beforebegin", `<div class="hm-pres"><button class="hm-pb" data-seg="1"><em>▶ ①</em><b>공정 45초</b><span>MFBM 4회 전 공정 자동 진행</span></button><button class="hm-pb two" data-seg="2"><em>▶ ②</em><b>결과 45초</b><span>변수 바꿔 전후 비교 → 추천 조건</span></button></div>`);
+  row.insertAdjacentHTML("beforebegin", `<div class="hm-pres"><button class="hm-pb" data-seg="1"><em>▶ ①</em><b>공정 45초</b><span>MFBM 4회 전 공정 자동 진행</span></button><button class="hm-pb two" data-seg="2"><em>▶ ②</em><b>결과 45초</b><span>AI 리포트 → 변수별 전후 비교 → 추천</span></button></div>`);
   $$(".hm-pb", stage).forEach(b => b.onclick = () => { presMode(true); presSeg(+b.dataset.seg); });
   const hp = $("#hm-pres", stage); if (hp) hp.textContent = "발표 모드 (구간 선택)"; }; }
 
@@ -6878,6 +6878,37 @@ presSeg = (orig => async function (seg) {
     presBar("② 결과 시연 완료");
   } catch (e) { if (e !== "stop") console.error(e); }
 })(presSeg);
+
+// ---- 결과 45초 v3: 결과 분석 → 자동 분석 리포트(성능 평가 · 추천 변수 · 비교 창) → 변수별 시연
+presSeg = (orig => async function (seg) {
+  if (seg !== 2) return orig(seg);
+  const id = ++PT.run, W = ms => presWait(ms, id), sc = (el, b = "center") => el && el.scrollIntoView({ behavior: "smooth", block: b });
+  const click = async (k, msg, ms) => { presBar("② " + msg); const b = document.querySelector(`.dmc[data-dm="${k}"]`); if (b) { b.classList.remove("hid"); b.classList.add("clicking"); } await W(400); S.demo2.sel = k; if (!S.demo2.seen.includes(k)) S.demo2.seen.push(k); go("demo"); sc($(".dmheat"), "start"); await W(ms); };
+  try {
+    labStart("mfbm", true);
+    go("analysis"); window.scrollTo(0, 0); presBar("② 결과 분석 → 자동 분석 리포트"); await W(1500);
+    const rb = $$("#stage button").find(b => /리포트 보기/.test(b.textContent)); if (rb) { rb.classList.add("clicking"); await W(500); rb.click(); } else go("ai");
+    presBar("② 소자 성능 평가: 읽기 신호가 가장 약함"); sc($$("#stage .grid2 .card")[0], "start"); await W(4500);
+    presBar("② AI가 바꿔 볼 공정 변수를 민감도 순으로 추천"); sc($("#stage .airec")); await W(4500);
+    const ap = $("#ai-apply"); if (ap) { ap.classList.add("clicking"); sc(ap); await W(600); }
+    presBar("② 추천 조건 비교: 기존 소자 vs 변수 바꾼 소자"); aiCmpModal(aiAnalyze().rec, 0); await W(1500);
+    const ov = $(".cmpov"); if (ov) { const g = ov.querySelector(".cpg"); g && ov.scrollTo({ top: g.offsetTop - 40, behavior: "smooth" }); } await W(5000);
+    $(".cmpov")?.remove();
+    S.demo2 = { sel: "base", seen: ["base"], recShown: false }; go("demo"); window.scrollTo(0, 0); presBar("② 공정 단계별로 하나씩 바꿔 보기"); await W(1500);
+    await click("uvX", "UV 처리를 빼면? → 균일도 저하", 2200);
+    await click("ann700", "열처리를 700 °C 단일로? → 결정성 저하", 2200);
+    await click("coat6", "BTO 6회? → 수율·균일도 저하", 2200);
+    await click("conc23", "BTO 졸 0.23 M? → 손실 없이 수율 개선", 2200);
+    await click("d30", "TiO₂ 희석 30 mL? → 신호↑ · 누설 감소 폭↓", 2200);
+    await click("mfm", "버퍼 제거? → 신호 최대, 누설 억제 없음", 2000);
+    presBar("② 두 기준을 만족하는 조합 중 1위를 추천합니다"); S.demo2.recShown = true; await click("rec", "★ 추천 조합: 전후 비교 · trade-off · 전기적 특성", 2500);
+    sc($("#dm-map")); await W(2500);
+    sc($(".dmrec")); await presReveal(id, 600); await W(1500);
+    presBar("② 결과 시연 완료");
+  } catch (e) { if (e !== "stop") console.error(e); }
+})(presSeg);
+// ---- 첫 화면: 하단 설명 줄 제거
+{ const _r = STATIONS.home.render; STATIONS.home.render = function (stage, side) { _r.call(this, stage, side); const n = $(".hm-note", stage); if (n) n.innerHTML = "국민대학교 · 팀 분극곰"; }; }
 
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 </script>
